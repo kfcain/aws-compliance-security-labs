@@ -25,7 +25,7 @@ import re
 from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 __all__ = [
@@ -49,11 +49,11 @@ __all__ = [
 ]
 
 
-class Status(str, Enum):
+class Status(StrEnum):
     """Compliance verdicts a lab may emit. There is no placeholder state:
     work that was not performed is CONFIG_ERROR or NOT_APPLICABLE."""
 
-    PASS = "PASS"
+    PASS = "PASS"  # noqa: S105 - compliance verdict, not a credential
     FAIL = "FAIL"
     ERROR = "ERROR"
     CONFIG_ERROR = "CONFIG_ERROR"
