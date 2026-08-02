@@ -6,9 +6,8 @@ from __future__ import annotations
 
 import json
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-
 
 LAB_ID = "04-config-drift-compliance"
 EVIDENCE_BUCKET = os.environ.get("EVIDENCE_BUCKET", "")
@@ -16,7 +15,7 @@ EVIDENCE_BUCKET = os.environ.get("EVIDENCE_BUCKET", "")
 
 def handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
     """Process a scheduled or finding-driven compliance check."""
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     result = {
         "lab_id": LAB_ID,
         "checked_at": now,

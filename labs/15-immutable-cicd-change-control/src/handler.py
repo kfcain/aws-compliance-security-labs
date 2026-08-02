@@ -14,10 +14,9 @@ from __future__ import annotations
 
 import json
 import os
-from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from dataclasses import dataclass, field
+from datetime import UTC, datetime
 from typing import Any
-
 
 LAB_ID = "15-immutable-cicd-change-control"
 SCF_CONTROLS = ["CHG-01", "CHG-02", "CHG-03", "CHG-04", "CFG-01", "TDA-06"]
@@ -130,7 +129,7 @@ def demo_events() -> list[ChangeEvent]:
     return [
         ChangeEvent(
             event_name="AuthorizeSecurityGroupIngress",
-            event_time=datetime.now(timezone.utc).isoformat(),
+            event_time=datetime.now(UTC).isoformat(),
             principal="arn:aws:sts::111111111111:assumed-role/HumanAdmin/alice",
             source_ip="203.0.113.10",
             user_agent="console.amazonaws.com",
@@ -139,7 +138,7 @@ def demo_events() -> list[ChangeEvent]:
         ),
         ChangeEvent(
             event_name="UpdateFunctionCode20150331v2",
-            event_time=datetime.now(timezone.utc).isoformat(),
+            event_time=datetime.now(UTC).isoformat(),
             principal="arn:aws:iam::111111111111:role/CodePipelineServiceRole",
             source_ip=None,
             user_agent="codepipeline.amazonaws.com",
@@ -190,7 +189,7 @@ def handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
 
     evidence = {
         "lab_id": LAB_ID,
-        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "checked_at": datetime.now(UTC).isoformat(),
         "status": "FAIL" if failing else "PASS",
         "change_event_results": change_results,
         "pipeline_result": pipeline_result,

@@ -7,10 +7,8 @@ and records remediation evidence timestamps.
 from __future__ import annotations
 
 import json
-import os
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
-
 
 LAB_ID = "02-inspector-vdr"
 SCF_CONTROLS = ["VPM-01", "VPM-02", "MON-01", "THR-01"]
@@ -53,10 +51,10 @@ def normalize_finding(raw: dict[str, Any]) -> dict[str, Any]:
     if isinstance(observed, str):
         first = datetime.fromisoformat(observed.replace("Z", "+00:00"))
     else:
-        first = datetime.now(timezone.utc)
+        first = datetime.now(UTC)
     n_level = classify(str(severity))
     deadline = sla_deadline(first, n_level)
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     return {
         "finding_id": raw.get("Id") or raw.get("findingArn") or "unknown",
         "title": raw.get("Title") or raw.get("title") or "untitled",
@@ -78,7 +76,7 @@ def build_evidence(findings: list[dict[str, Any]]) -> dict[str, Any]:
     status = "FAIL" if breached else "PASS"
     return {
         "lab_id": LAB_ID,
-        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "checked_at": datetime.now(UTC).isoformat(),
         "status": status,
         "open_findings": len(findings),
         "sla_breaches": len(breached),
@@ -113,7 +111,7 @@ def handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
                 "Id": "demo-cve-2024",
                 "Title": "Demo critical package CVE",
                 "Severity": {"Label": "CRITICAL"},
-                "FirstObservedAt": (datetime.now(timezone.utc) - timedelta(days=3)).isoformat(),
+                "FirstObservedAt": (datetime.now(UTC) - timedelta(days=3)).isoformat(),
                 "Resources": [{"Id": "arn:aws:ec2:us-east-1:123:instance/i-demo"}],
             }
         ]

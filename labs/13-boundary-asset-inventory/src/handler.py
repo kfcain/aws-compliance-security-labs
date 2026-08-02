@@ -16,9 +16,8 @@ from __future__ import annotations
 import json
 import os
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-
 
 LAB_ID = "13-boundary-asset-inventory"
 SCF_CONTROLS = ["AST-01", "AST-02", "AST-04", "NET-03", "CPL-01", "GOV-01"]
@@ -201,7 +200,7 @@ def handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
 
     evidence = {
         "lab_id": LAB_ID,
-        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "checked_at": datetime.now(UTC).isoformat(),
         "status": "FAIL" if failing else "PASS",
         "boundary": asdict(boundary),
         "inventory_count": len(classified),

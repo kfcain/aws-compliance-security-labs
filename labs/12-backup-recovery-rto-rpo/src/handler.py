@@ -19,9 +19,8 @@ from __future__ import annotations
 import json
 import os
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-
 
 LAB_ID = "12-backup-recovery-rto-rpo"
 SCF_CONTROLS = ["BCD-01", "BCD-02", "BCD-11", "BCD-12", "CRY-05", "AST-02"]
@@ -70,7 +69,7 @@ def evaluate_asset(obj: RecoveryObjective) -> dict[str, Any]:
     # Staleness: mission-critical must test at least quarterly (lab default 90d)
     if obj.last_restore_test_at and obj.criticality == "mission_critical":
         last = datetime.fromisoformat(obj.last_restore_test_at.replace("Z", "+00:00"))
-        age_days = (datetime.now(timezone.utc) - last).total_seconds() / 86400.0
+        age_days = (datetime.now(UTC) - last).total_seconds() / 86400.0
         if age_days > 90:
             findings.append(f"restore test stale ({age_days:.0f}d > 90d) for mission_critical asset")
 
@@ -98,7 +97,7 @@ def demo_objectives() -> list[RecoveryObjective]:
             vault_name="federal-vault",
             vault_locked=True,
             encrypted_with_cmk=True,
-            last_restore_test_at=datetime.now(timezone.utc).isoformat(),
+            last_restore_test_at=datetime.now(UTC).isoformat(),
             last_restore_duration_minutes=42,
             last_restore_success=True,
         ),
@@ -169,7 +168,7 @@ def handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
     failed = [r for r in results if r["status"] == "FAIL"]
     evidence = {
         "lab_id": LAB_ID,
-        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "checked_at": datetime.now(UTC).isoformat(),
         "status": "PASS" if not failed and plan["aligned"] else "FAIL",
         "asset_count": len(results),
         "failing_assets": failed,

@@ -19,9 +19,8 @@ import json
 import os
 import re
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-
 
 LAB_ID = "11-federal-data-deletion-residual"
 SCF_CONTROLS = ["DCH-01", "DCH-09", "DCH-06", "BCD-11", "CRY-05", "CLD-01"]
@@ -69,7 +68,7 @@ class ResidualHit:
 
 
 def now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def validate_case(raw: dict[str, Any]) -> DeletionCase:
@@ -80,7 +79,7 @@ def validate_case(raw: dict[str, Any]) -> DeletionCase:
     if reason not in {"offboarding", "spill", "customer_request"}:
         raise ValueError("reason must be offboarding|spill|customer_request")
     return DeletionCase(
-        case_id=str(raw.get("case_id") or f"case-{tenant}-{int(datetime.now(timezone.utc).timestamp())}"),
+        case_id=str(raw.get("case_id") or f"case-{tenant}-{int(datetime.now(UTC).timestamp())}"),
         agency_id=str(raw.get("agency_id") or "unknown-agency"),
         tenant_id=tenant,
         reason=reason,
@@ -215,7 +214,7 @@ def build_evidence(
 def to_asff(evidence: dict[str, Any]) -> list[dict[str, Any]]:
     if evidence["status"] == "PASS":
         return []
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     return [
         {
             "SchemaVersion": "2018-10-08",

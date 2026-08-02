@@ -13,7 +13,9 @@ describe('scf-mapper', () => {
     assert.match(FEDRAMP_20X_KSI['KSI-IAM-MFA'], /multi-factor/i);
   });
 
-  it('maps IAC-06 MFA control from live SCF API', async () => {
+  // Live-network integration test: opt in with SCF_LIVE=1 (runs in the
+  // scheduled scf-refresh workflow; local/CI default suites stay offline).
+  it('maps IAC-06 MFA control from live SCF API', { skip: !process.env.SCF_LIVE }, async () => {
     const result = await mapControl('IAC-06', {
       frameworks: [
         TARGET_FRAMEWORKS.nist_800_53_r5,

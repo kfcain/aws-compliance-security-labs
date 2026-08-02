@@ -8,9 +8,8 @@ from __future__ import annotations
 
 import json
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-
 
 LAB_ID = "03-nhi-credential-rotation"
 SCF_CONTROLS = ["IAC-15", "IAC-21", "CRY-01", "CFG-02"]
@@ -20,7 +19,7 @@ MAX_KEY_AGE_DAYS = int(os.environ.get("MAX_KEY_AGE_DAYS", "90"))
 
 def age_days(iso_ts: str) -> float:
     created = datetime.fromisoformat(iso_ts.replace("Z", "+00:00"))
-    return (datetime.now(timezone.utc) - created).total_seconds() / 86400.0
+    return (datetime.now(UTC) - created).total_seconds() / 86400.0
 
 
 def evaluate_inventory(inventory: list[dict[str, Any]]) -> dict[str, Any]:
@@ -32,7 +31,7 @@ def evaluate_inventory(inventory: list[dict[str, Any]]) -> dict[str, Any]:
             stale.append({**item, "age_days": round(days, 1)})
     return {
         "lab_id": LAB_ID,
-        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "checked_at": datetime.now(UTC).isoformat(),
         "status": "PASS" if not stale else "FAIL",
         "policy_max_key_age_days": MAX_KEY_AGE_DAYS,
         "inventory_count": len(inventory),
@@ -61,7 +60,7 @@ def handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
             "type": "secretsmanager",
             "principal": "app/db/password",
             "credential_id": "secret-demo",
-            "created_at": datetime.now(timezone.utc).isoformat(),
+            "created_at": datetime.now(UTC).isoformat(),
             "rotation_enabled": True,
         },
     ]

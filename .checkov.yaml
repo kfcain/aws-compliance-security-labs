@@ -1,0 +1,9 @@
+directory:
+  - labs
+framework:
+  - cloudformation
+# Global skips are not allowed in this repo: suppress findings inline on the
+# resource via Metadata -> checkov -> skip with a written justification.
+compact: true
+quiet: true
+summary-position: bottom

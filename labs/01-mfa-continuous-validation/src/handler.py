@@ -15,9 +15,8 @@ import os
 import urllib.error
 import urllib.request
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-
 
 LAB_ID = "01-mfa-continuous-validation"
 SCF_CONTROLS = ["IAC-06", "IAC-15", "IAC-21", "MON-01"]
@@ -115,7 +114,7 @@ def evaluate(identities: list[IdentityMfaStatus]) -> dict[str, Any]:
     status = "PASS" if not failures else "FAIL"
     return {
         "lab_id": LAB_ID,
-        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "checked_at": datetime.now(UTC).isoformat(),
         "status": status,
         "idp_provider": IDP_PROVIDER,
         "checked_count": len(identities),
@@ -135,7 +134,7 @@ def to_asff_findings(report: dict[str, Any]) -> list[dict[str, Any]]:
     if report["status"] == "PASS":
         return []
     findings = []
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     for fail in report["failures"]:
         findings.append(
             {

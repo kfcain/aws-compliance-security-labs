@@ -15,9 +15,8 @@ from __future__ import annotations
 import json
 import os
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-
 
 LAB_ID = "14-privileged-suspend-lifecycle"
 SCF_CONTROLS = ["IAC-15", "IAC-16", "IAC-17", "IAC-21", "MON-01", "THR-03"]
@@ -229,7 +228,7 @@ def handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
 
     evidence = {
         "lab_id": LAB_ID,
-        "checked_at": datetime.now(timezone.utc).isoformat(),
+        "checked_at": datetime.now(UTC).isoformat(),
         "status": status,
         "mode": mode,
         "actions": [asdict(a) for a in actions],
