@@ -1,0 +1,643 @@
+{
+  "portfolio": "aws-compliance-security-labs",
+  "version": "2.0.0",
+  "description": "Combined monorepo of modular AWS labs for NIST 800-171/800-53, ISO 27001, PCI DSS, and FedRAMP 20x (CR26) KSI automation",
+  "scf_api": "https://grcengclub.github.io/scf-api/",
+  "architecture_pattern": "Data sources \u2192 GuardDuty/Config/Inspector \u2192 Security Hub \u2192 EventBridge \u2192 Lambda \u2192 Evidence & Alerts",
+  "source_repos_owner": "kfcain",
+  "labs": [
+    {
+      "id": "01-mfa-continuous-validation",
+      "title": "Persistent MFA Validation (Okta / Descope)",
+      "repo_name": "lab-mfa-continuous-validation",
+      "path": "labs/01-mfa-continuous-validation",
+      "summary": "Continuously validate phishing-resistant MFA enrollment and use for human identities via Okta or Descope, correlated with AWS IAM Identity Center and CloudTrail.",
+      "primary_risk": "Account takeover from missing or bypassed MFA",
+      "scf_controls": [
+        "IAC-06",
+        "IAC-15",
+        "IAC-21",
+        "MON-01"
+      ],
+      "ksi": [
+        "KSI-IAM-MFA",
+        "KSI-IAM-ELP",
+        "KSI-AFR-PVL"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "IAM Identity Center",
+        "CloudTrail",
+        "EventBridge",
+        "Lambda",
+        "Security Hub",
+        "SNS",
+        "DynamoDB"
+      ],
+      "external_services": [
+        "Okta",
+        "Descope"
+      ],
+      "source_repo": "https://github.com/kfcain/lab-mfa-continuous-validation",
+      "pages": "https://kfcain.github.io/lab-mfa-continuous-validation/"
+    },
+    {
+      "id": "02-inspector-vdr",
+      "title": "Vulnerability Detection & Response (Inspector VDR)",
+      "repo_name": "lab-inspector-vdr",
+      "path": "labs/02-inspector-vdr",
+      "summary": "Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1\u2013N5 severity SLAs, Security Hub aggregation, and remediation evidence.",
+      "primary_risk": "Unpatched CVEs leading to breach and failed authorization",
+      "scf_controls": [
+        "VPM-01",
+        "VPM-02",
+        "MON-01",
+        "THR-01"
+      ],
+      "ksi": [
+        "KSI-AFR-VDR",
+        "KSI-AFR-PVL",
+        "KSI-MLA-EVC"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "Inspector",
+        "Security Hub",
+        "EventBridge",
+        "Lambda",
+        "Systems Manager",
+        "S3",
+        "SNS"
+      ],
+      "external_services": [],
+      "source_repo": "https://github.com/kfcain/lab-inspector-vdr",
+      "pages": "https://kfcain.github.io/lab-inspector-vdr/"
+    },
+    {
+      "id": "03-nhi-credential-rotation",
+      "title": "Non-Human Identity Credential & Token Rotation",
+      "repo_name": "lab-nhi-credential-rotation",
+      "path": "labs/03-nhi-credential-rotation",
+      "summary": "Discover, inventory, and rotate service accounts, IAM access keys, API tokens, and workload identities on a policy cadence with break-glass evidence.",
+      "primary_risk": "Long-lived machine credentials enabling lateral movement",
+      "scf_controls": [
+        "IAC-15",
+        "IAC-21",
+        "CRY-01",
+        "CFG-02"
+      ],
+      "ksi": [
+        "KSI-IAM-ELP",
+        "KSI-IAM-JIT",
+        "KSI-SVC-SEC"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "IAM",
+        "Secrets Manager",
+        "KMS",
+        "EventBridge",
+        "Lambda",
+        "CloudTrail",
+        "DynamoDB",
+        "SNS"
+      ],
+      "external_services": [
+        "Okta Machine Auth",
+        "Descope M2M"
+      ],
+      "source_repo": "https://github.com/kfcain/lab-nhi-credential-rotation",
+      "pages": "https://kfcain.github.io/lab-nhi-credential-rotation/"
+    },
+    {
+      "id": "04-config-drift-compliance",
+      "title": "Continuous Config Drift & Control Status",
+      "repo_name": "lab-config-drift-compliance",
+      "path": "labs/04-config-drift-compliance",
+      "summary": "Use AWS Config + Security Hub to persistently evaluate resource posture against SCF-mapped rules and emit pass/fail evidence for auditors.",
+      "primary_risk": "Silent configuration drift breaking baseline controls",
+      "scf_controls": [
+        "CFG-01",
+        "CFG-02",
+        "CPL-01",
+        "CPL-02",
+        "MON-01"
+      ],
+      "ksi": [
+        "KSI-CNA-EIS",
+        "KSI-MLA-EVC",
+        "KSI-AFR-PVL"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "Config",
+        "Security Hub",
+        "EventBridge",
+        "Lambda",
+        "S3",
+        "SNS",
+        "Organizations"
+      ],
+      "external_services": [],
+      "source_repo": "https://github.com/kfcain/lab-config-drift-compliance",
+      "pages": "https://kfcain.github.io/lab-config-drift-compliance/"
+    },
+    {
+      "id": "05-guardduty-automated-response",
+      "title": "GuardDuty Threat Detection & Automated Response",
+      "repo_name": "lab-guardduty-automated-response",
+      "path": "labs/05-guardduty-automated-response",
+      "summary": "Ingest VPC Flow Logs and CloudTrail into GuardDuty, centralize in Security Hub, and auto-contain via EventBridge \u2192 Lambda playbooks.",
+      "primary_risk": "Delayed response to active compromise increases blast radius",
+      "scf_controls": [
+        "THR-01",
+        "THR-03",
+        "MON-01",
+        "MON-02",
+        "IRO-02"
+      ],
+      "ksi": [
+        "KSI-MLA-OSM",
+        "KSI-INR-PRC",
+        "KSI-CNA-MAT"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "VPC Flow Logs",
+        "CloudTrail",
+        "GuardDuty",
+        "Security Hub",
+        "EventBridge",
+        "Lambda",
+        "SNS",
+        "Step Functions"
+      ],
+      "external_services": [],
+      "source_repo": "https://github.com/kfcain/lab-guardduty-automated-response",
+      "pages": "https://kfcain.github.io/lab-guardduty-automated-response/"
+    },
+    {
+      "id": "06-kms-encryption-governance",
+      "title": "KMS Encryption & Secrets Governance",
+      "repo_name": "lab-kms-encryption-governance",
+      "path": "labs/06-kms-encryption-governance",
+      "summary": "Enforce encryption at rest/in transit with customer-managed KMS keys, FIPS endpoints, key rotation, and Secrets Manager policy gates.",
+      "primary_risk": "Unencrypted data exposure and cryptographic non-conformance",
+      "scf_controls": [
+        "CRY-01",
+        "CRY-03",
+        "CFG-02",
+        "CLD-01"
+      ],
+      "ksi": [
+        "KSI-SVC-ENC",
+        "KSI-SVC-SNT",
+        "KSI-SVC-SEC"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "KMS",
+        "Secrets Manager",
+        "Config",
+        "CloudTrail",
+        "Lambda",
+        "S3",
+        "ACM"
+      ],
+      "external_services": [],
+      "source_repo": "https://github.com/kfcain/lab-kms-encryption-governance",
+      "pages": "https://kfcain.github.io/lab-kms-encryption-governance/"
+    },
+    {
+      "id": "07-cloudtrail-evidence-pipeline",
+      "title": "Immutable Audit Evidence Pipeline",
+      "repo_name": "lab-cloudtrail-evidence-pipeline",
+      "path": "labs/07-cloudtrail-evidence-pipeline",
+      "summary": "Build an org-wide CloudTrail \u2192 S3 (Object Lock) \u2192 Athena/Security Lake pipeline that packages machine-readable evidence for FedRAMP 20x persistent validation.",
+      "primary_risk": "Inability to prove who did what \u2014 audit failure and legal exposure",
+      "scf_controls": [
+        "MON-01",
+        "MON-02",
+        "CPL-02",
+        "CHG-01"
+      ],
+      "ksi": [
+        "KSI-MLA-OSM",
+        "KSI-AFR-PVL",
+        "KSI-CMT-CHG"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "CloudTrail",
+        "S3 Object Lock",
+        "EventBridge",
+        "Lambda",
+        "Athena",
+        "Security Lake",
+        "Glue"
+      ],
+      "external_services": [],
+      "source_repo": "https://github.com/kfcain/lab-cloudtrail-evidence-pipeline",
+      "pages": "https://kfcain.github.io/lab-cloudtrail-evidence-pipeline/"
+    },
+    {
+      "id": "08-vpc-network-segmentation",
+      "title": "VPC Network Segmentation & Flow Visibility",
+      "repo_name": "lab-vpc-network-segmentation",
+      "path": "labs/08-vpc-network-segmentation",
+      "summary": "Implement least-privilege network paths with Security Groups, NACLs, Network Firewall, and Flow Log analytics aligned to PCI DSS and FedRAMP CNA KSIs.",
+      "primary_risk": "Flat networks enable lateral movement and PCI scope expansion",
+      "scf_controls": [
+        "NET-01",
+        "NET-04",
+        "AST-04",
+        "CLD-06"
+      ],
+      "ksi": [
+        "KSI-CNA-RNT",
+        "KSI-CNA-MAT",
+        "KSI-SVC-SNT"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "VPC",
+        "Security Groups",
+        "Network Firewall",
+        "VPC Flow Logs",
+        "Config",
+        "GuardDuty",
+        "Lambda"
+      ],
+      "external_services": [],
+      "source_repo": "https://github.com/kfcain/lab-vpc-network-segmentation",
+      "pages": "https://kfcain.github.io/lab-vpc-network-segmentation/"
+    },
+    {
+      "id": "09-incident-response-automation",
+      "title": "Incident Response Automation Playbooks",
+      "repo_name": "lab-incident-response-automation",
+      "path": "labs/09-incident-response-automation",
+      "summary": "Codify IR playbooks as Step Functions + Lambda: detect, contain, notify stakeholders, preserve evidence, and produce after-action artifacts.",
+      "primary_risk": "Ad-hoc IR increases dwell time, cost, and regulatory penalties",
+      "scf_controls": [
+        "IRO-01",
+        "IRO-02",
+        "IRO-04",
+        "IRO-10",
+        "MON-02"
+      ],
+      "ksi": [
+        "KSI-INR-IRP",
+        "KSI-INR-PRC",
+        "KSI-MLA-OSM"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "Security Hub",
+        "EventBridge",
+        "Step Functions",
+        "Lambda",
+        "SNS",
+        "SSM",
+        "S3",
+        "CloudWatch"
+      ],
+      "external_services": [
+        "PagerDuty / Slack (optional)"
+      ],
+      "source_repo": "https://github.com/kfcain/lab-incident-response-automation",
+      "pages": "https://kfcain.github.io/lab-incident-response-automation/"
+    },
+    {
+      "id": "10-supply-chain-sbom",
+      "title": "Supply Chain Risk, SBOM & Third-Party Monitoring",
+      "repo_name": "lab-supply-chain-sbom",
+      "path": "labs/10-supply-chain-sbom",
+      "summary": "Generate and store SBOMs, scan container/images with Inspector, track third-party SaaS risk, and feed continuous evidence for FedRAMP KSI-SCR.",
+      "primary_risk": "Compromised dependencies or vendors introduce undetected risk",
+      "scf_controls": [
+        "TPM-01",
+        "TPM-03",
+        "TPM-04",
+        "VPM-01",
+        "AST-02"
+      ],
+      "ksi": [
+        "KSI-SCR-SRA",
+        "KSI-SCR-TPM",
+        "KSI-AFR-VDR"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "Inspector",
+        "ECR",
+        "CodePipeline",
+        "S3",
+        "EventBridge",
+        "Lambda",
+        "Security Hub",
+        "DynamoDB"
+      ],
+      "external_services": [
+        "Vendor risk questionnaire / GRC"
+      ],
+      "source_repo": "https://github.com/kfcain/lab-supply-chain-sbom",
+      "pages": "https://kfcain.github.io/lab-supply-chain-sbom/"
+    },
+    {
+      "id": "11-federal-data-deletion-residual",
+      "title": "Federal Data Deletion & Residual-Data Proof (Class C)",
+      "repo_name": "lab-federal-data-deletion-residual",
+      "path": "labs/11-federal-data-deletion-residual",
+      "summary": "Orchestrate agency-requested removal of federal customer data from live stores and backups, then persistently prove no residual copies remain (FedRAMP KSI-SVC-RUD / KSI-SVC-PRR).",
+      "primary_risk": "Federal customer data remains after offboarding or spill cleanup",
+      "scf_controls": [
+        "DCH-01",
+        "DCH-09",
+        "DCH-06",
+        "BCD-11",
+        "CRY-05",
+        "CLD-01"
+      ],
+      "ksi": [
+        "KSI-SVC-RUD",
+        "KSI-SVC-PRR",
+        "KSI-SVC-SIN",
+        "KSI-AFR-PVL"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "S3",
+        "DynamoDB",
+        "RDS",
+        "AWS Backup",
+        "KMS",
+        "Step Functions",
+        "Lambda",
+        "EventBridge",
+        "Security Hub",
+        "SNS",
+        "Athena"
+      ],
+      "external_services": [
+        "Agency deletion ticket / GRC case"
+      ],
+      "source_repo": "https://github.com/kfcain/lab-federal-data-deletion-residual",
+      "pages": "https://kfcain.github.io/lab-federal-data-deletion-residual/"
+    },
+    {
+      "id": "12-backup-recovery-rto-rpo",
+      "title": "Backup Alignment & Recovery Testing (RTO/RPO)",
+      "repo_name": "lab-backup-recovery-rto-rpo",
+      "path": "labs/12-backup-recovery-rto-rpo",
+      "summary": "Define RTO/RPO per critical federal workload, align AWS Backup plans and vault policy, run restore drills, and emit machine-readable evidence for KSI-RPL-* and KSI-CNA-OFA.",
+      "primary_risk": "Unproven backups leave federal missions unrestorable after ransomware or outage",
+      "scf_controls": [
+        "BCD-01",
+        "BCD-02",
+        "BCD-11",
+        "BCD-12",
+        "CRY-05",
+        "AST-02"
+      ],
+      "ksi": [
+        "KSI-RPL-RRO",
+        "KSI-RPL-ARP",
+        "KSI-RPL-ABO",
+        "KSI-RPL-TRC",
+        "KSI-CNA-OFA"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "AWS Backup",
+        "Backup Vault Lock",
+        "KMS",
+        "EC2",
+        "RDS",
+        "DynamoDB",
+        "EventBridge",
+        "Lambda",
+        "Step Functions",
+        "S3",
+        "CloudWatch"
+      ],
+      "external_services": [],
+      "source_repo": "https://github.com/kfcain/lab-backup-recovery-rto-rpo",
+      "pages": "https://kfcain.github.io/lab-backup-recovery-rto-rpo/"
+    },
+    {
+      "id": "13-boundary-asset-inventory",
+      "title": "Authorization Boundary & Real-Time Asset Inventory",
+      "repo_name": "lab-boundary-asset-inventory",
+      "path": "labs/13-boundary-asset-inventory",
+      "summary": "Persistently generate authoritative inventories of in-boundary information resources, map federal data flows, and flag shadow resources outside the Minimum Assessment Scope.",
+      "primary_risk": "Unknown or out-of-scope resources silently process federal data",
+      "scf_controls": [
+        "AST-01",
+        "AST-02",
+        "AST-04",
+        "NET-03",
+        "CPL-01",
+        "GOV-01"
+      ],
+      "ksi": [
+        "KSI-PIY-GIV",
+        "KSI-AFR-MAS",
+        "KSI-CNA-DFP",
+        "KSI-MLA-LET"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "Config Aggregator",
+        "Resource Explorer",
+        "Security Hub",
+        "Organizations",
+        "Lambda",
+        "EventBridge",
+        "DynamoDB",
+        "S3",
+        "Athena",
+        "Tag Editor"
+      ],
+      "external_services": [
+        "SSP / MAS document"
+      ],
+      "source_repo": "https://github.com/kfcain/lab-boundary-asset-inventory",
+      "pages": "https://kfcain.github.io/lab-boundary-asset-inventory/"
+    },
+    {
+      "id": "14-privileged-suspend-lifecycle",
+      "title": "Privileged Suspend & Account Lifecycle Automation",
+      "repo_name": "lab-privileged-suspend-lifecycle",
+      "path": "labs/14-privileged-suspend-lifecycle",
+      "summary": "Automate joiner/mover/leaver for human and privileged identities, and auto-disable or contain privileged access on suspicious activity (KSI-IAM-SUS / KSI-IAM-AAM).",
+      "primary_risk": "Orphaned or compromised privileged access to federal systems",
+      "scf_controls": [
+        "IAC-15",
+        "IAC-16",
+        "IAC-17",
+        "IAC-21",
+        "MON-01",
+        "THR-03"
+      ],
+      "ksi": [
+        "KSI-IAM-SUS",
+        "KSI-IAM-AAM",
+        "KSI-IAM-ELP",
+        "KSI-IAM-JIT",
+        "KSI-IAM-APM"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "IAM",
+        "IAM Identity Center",
+        "CloudTrail",
+        "GuardDuty",
+        "EventBridge",
+        "Lambda",
+        "Step Functions",
+        "Security Hub",
+        "SNS",
+        "DynamoDB"
+      ],
+      "external_services": [
+        "Okta",
+        "Descope"
+      ],
+      "source_repo": "https://github.com/kfcain/lab-privileged-suspend-lifecycle",
+      "pages": "https://kfcain.github.io/lab-privileged-suspend-lifecycle/"
+    },
+    {
+      "id": "15-immutable-cicd-change-control",
+      "title": "Immutable CI/CD Change Control & Deployment Validation",
+      "repo_name": "lab-immutable-cicd-change-control",
+      "path": "labs/15-immutable-cicd-change-control",
+      "summary": "Enforce redeploy-from-version-control over in-place modification, automate deployment validation gates, and log all CSO changes for KSI-CMT-RMV / KSI-CMT-VTD / KSI-CMT-LMC.",
+      "primary_risk": "Untracked production changes bypass review and corrupt federal workloads",
+      "scf_controls": [
+        "CHG-01",
+        "CHG-02",
+        "CHG-03",
+        "CHG-04",
+        "CFG-01",
+        "TDA-06"
+      ],
+      "ksi": [
+        "KSI-CMT-RMV",
+        "KSI-CMT-VTD",
+        "KSI-CMT-LMC",
+        "KSI-CMT-RVP",
+        "KSI-AFR-SCN"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod"
+      ],
+      "aws_services": [
+        "CodePipeline",
+        "CodeBuild",
+        "CloudFormation / CDK",
+        "SCPs",
+        "CloudTrail",
+        "Config",
+        "EventBridge",
+        "Lambda",
+        "Security Hub",
+        "SNS",
+        "ECR"
+      ],
+      "external_services": [
+        "GitHub / GitLab"
+      ],
+      "source_repo": "https://github.com/kfcain/lab-immutable-cicd-change-control",
+      "pages": "https://kfcain.github.io/lab-immutable-cicd-change-control/"
+    }
+  ]
+}

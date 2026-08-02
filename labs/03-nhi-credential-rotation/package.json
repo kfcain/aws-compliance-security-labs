@@ -1,0 +1,9 @@
+{
+  "name": "lab-nhi-credential-rotation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Discover, inventory, and rotate service accounts, IAM access keys, API tokens, and workload identities on a policy cadence with break-glass evidence.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

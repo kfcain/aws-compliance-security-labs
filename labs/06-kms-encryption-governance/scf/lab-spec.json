@@ -1,0 +1,22 @@
+{
+  "lab_id": "06-kms-encryption-governance",
+  "title": "KMS Encryption & Secrets Governance",
+  "scf_controls": [
+    "CRY-01",
+    "CRY-03",
+    "CFG-02",
+    "CLD-01"
+  ],
+  "ksi": [
+    "KSI-SVC-ENC",
+    "KSI-SVC-SNT",
+    "KSI-SVC-SEC"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

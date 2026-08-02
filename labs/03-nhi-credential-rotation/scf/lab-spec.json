@@ -1,0 +1,22 @@
+{
+  "lab_id": "03-nhi-credential-rotation",
+  "title": "Non-Human Identity Credential & Token Rotation",
+  "scf_controls": [
+    "IAC-15",
+    "IAC-21",
+    "CRY-01",
+    "CFG-02"
+  ],
+  "ksi": [
+    "KSI-IAM-ELP",
+    "KSI-IAM-JIT",
+    "KSI-SVC-SEC"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

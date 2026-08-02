@@ -1,0 +1,22 @@
+{
+  "lab_id": "02-inspector-vdr",
+  "title": "Vulnerability Detection & Response (Inspector VDR)",
+  "scf_controls": [
+    "VPM-01",
+    "VPM-02",
+    "MON-01",
+    "THR-01"
+  ],
+  "ksi": [
+    "KSI-AFR-VDR",
+    "KSI-AFR-PVL",
+    "KSI-MLA-EVC"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

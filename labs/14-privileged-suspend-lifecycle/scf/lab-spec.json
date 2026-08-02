@@ -1,0 +1,26 @@
+{
+  "lab_id": "14-privileged-suspend-lifecycle",
+  "title": "Privileged Suspend & Account Lifecycle Automation",
+  "scf_controls": [
+    "IAC-15",
+    "IAC-16",
+    "IAC-17",
+    "IAC-21",
+    "MON-01",
+    "THR-03"
+  ],
+  "ksi": [
+    "KSI-IAM-SUS",
+    "KSI-IAM-AAM",
+    "KSI-IAM-ELP",
+    "KSI-IAM-JIT",
+    "KSI-IAM-APM"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

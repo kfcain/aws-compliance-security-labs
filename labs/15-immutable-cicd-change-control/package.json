@@ -1,0 +1,9 @@
+{
+  "name": "lab-immutable-cicd-change-control",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Enforce redeploy-from-version-control over in-place modification, automate deployment validation gates, and log all CSO changes for KSI-CMT-RMV / KSI-CMT-VTD / KSI-CMT-LMC.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

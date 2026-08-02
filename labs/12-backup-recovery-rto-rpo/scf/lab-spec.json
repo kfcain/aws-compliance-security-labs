@@ -1,0 +1,26 @@
+{
+  "lab_id": "12-backup-recovery-rto-rpo",
+  "title": "Backup Alignment & Recovery Testing (RTO/RPO)",
+  "scf_controls": [
+    "BCD-01",
+    "BCD-02",
+    "BCD-11",
+    "BCD-12",
+    "CRY-05",
+    "AST-02"
+  ],
+  "ksi": [
+    "KSI-RPL-RRO",
+    "KSI-RPL-ARP",
+    "KSI-RPL-ABO",
+    "KSI-RPL-TRC",
+    "KSI-CNA-OFA"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "lab-incident-response-automation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Codify IR playbooks as Step Functions + Lambda: detect, contain, notify stakeholders, preserve evidence, and produce after-action artifacts.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

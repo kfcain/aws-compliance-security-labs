@@ -1,0 +1,179 @@
+{
+  "lab_id": "02-inspector-vdr",
+  "generated_at": "2026-08-01T19:09:53.386Z",
+  "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "controls": [
+    {
+      "scf_control_id": "VPM-01",
+      "title": "Vulnerability & Patch Management Program (VPMP)",
+      "family": "VPM",
+      "description": "Mechanisms exist to facilitate the implementation and monitoring of vulnerability management controls.",
+      "evidence_requests": [
+        "E-MNT-03",
+        "E-THR-05",
+        "E-VPM-01"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "SI-02",
+          "SI-03"
+        ],
+        "general-nist-800-171-r3": [
+          "03.11.02.a",
+          "03.14.01.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "6.3",
+          "6.3.1",
+          "6.3.3",
+          "11.3"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "SI-02",
+          "SI-03"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs",
+        "KSI-AFR-PVL": "Persistent validation cadence",
+        "KSI-MLA-EVC": "Evaluating configurations"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-01.json"
+    },
+    {
+      "scf_control_id": "VPM-02",
+      "title": "Vulnerability Remediation Process",
+      "family": "VPM",
+      "description": "Mechanisms exist to ensure that vulnerabilities are properly identified, tracked and remediated.",
+      "evidence_requests": [
+        "E-RSK-03",
+        "E-RSK-04",
+        "E-VPM-01",
+        "E-VPM-09"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "PM-04",
+          "SC-18(01)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.11.02.b",
+          "03.12.02.a.02",
+          "03.14.01.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "11.3",
+          "11.3.1",
+          "11.3.1.1",
+          "11.3.1.2",
+          "11.3.1.3",
+          "11.3.2",
+          "11.3.2.1",
+          "A3.3.1.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "PM-04",
+          "SC-18(01)"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs",
+        "KSI-AFR-PVL": "Persistent validation cadence",
+        "KSI-MLA-EVC": "Evaluating configurations"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-02.json"
+    },
+    {
+      "scf_control_id": "MON-01",
+      "title": "Continuous Monitoring",
+      "family": "MON",
+      "description": "Mechanisms exist to facilitate the implementation of enterprise-wide monitoring controls.",
+      "evidence_requests": [
+        "E-MON-01",
+        "E-MON-06",
+        "E-MON-07"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "AU-01",
+          "PM-31",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.01.a",
+          "03.12.03",
+          "03.14.06.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "10.1",
+          "10.4.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "A3.3.1",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-01",
+          "SI-04"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs",
+        "KSI-AFR-PVL": "Persistent validation cadence",
+        "KSI-MLA-EVC": "Evaluating configurations"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json"
+    },
+    {
+      "scf_control_id": "THR-01",
+      "title": "Threat Intelligence Program",
+      "family": "THR",
+      "description": "Mechanisms exist to implement a threat intelligence program that includes a cross-organization information-sharing capability that can influence the development of the system and security architectures, selection of security solutions, monitoring, threat hunting, response and recovery activities.",
+      "evidence_requests": [
+        "E-THR-04"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 8,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "PM-15",
+          "PM-16"
+        ],
+        "general-nist-800-171-r3": [
+          "03.11.02.a",
+          "03.14.03.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "6.3",
+          "A3.5.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "PM-15"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs",
+        "KSI-AFR-PVL": "Persistent validation cadence",
+        "KSI-MLA-EVC": "Evaluating configurations"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/THR-01.json"
+    }
+  ],
+  "coverage_summary": {
+    "control_count": 4,
+    "frameworks_with_hits": {
+      "general-nist-800-53-r5-2": 4,
+      "general-nist-800-171-r3": 4,
+      "general-pci-dss-4-0-1": 4,
+      "usa-federal-gsa-fedramp-5-mod": 4
+    }
+  }
+}

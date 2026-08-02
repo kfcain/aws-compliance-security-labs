@@ -1,0 +1,9 @@
+{
+  "name": "lab-config-drift-compliance",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Use AWS Config + Security Hub to persistently evaluate resource posture against SCF-mapped rules and emit pass/fail evidence for auditors.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

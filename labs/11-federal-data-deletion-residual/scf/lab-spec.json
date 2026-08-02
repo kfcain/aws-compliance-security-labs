@@ -1,0 +1,25 @@
+{
+  "lab_id": "11-federal-data-deletion-residual",
+  "title": "Federal Data Deletion & Residual-Data Proof (Class C)",
+  "scf_controls": [
+    "DCH-01",
+    "DCH-09",
+    "DCH-06",
+    "BCD-11",
+    "CRY-05",
+    "CLD-01"
+  ],
+  "ksi": [
+    "KSI-SVC-RUD",
+    "KSI-SVC-PRR",
+    "KSI-SVC-SIN",
+    "KSI-AFR-PVL"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

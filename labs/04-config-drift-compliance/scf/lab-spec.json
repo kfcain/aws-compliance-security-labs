@@ -1,0 +1,23 @@
+{
+  "lab_id": "04-config-drift-compliance",
+  "title": "Continuous Config Drift & Control Status",
+  "scf_controls": [
+    "CFG-01",
+    "CFG-02",
+    "CPL-01",
+    "CPL-02",
+    "MON-01"
+  ],
+  "ksi": [
+    "KSI-CNA-EIS",
+    "KSI-MLA-EVC",
+    "KSI-AFR-PVL"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

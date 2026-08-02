@@ -1,0 +1,186 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Lab 11 — Federal data deletion & residual-data proof (Class C KSI-SVC-RUD/PRR).
+  Step Functions orchestrates live purge → backup purge → residual scan → evidence.
+
+Parameters:
+  EvidenceBucketName:
+    Type: String
+  AlertEmail:
+    Type: String
+    Default: ''
+  TenantTagKey:
+    Type: String
+    Default: federal_tenant_id
+
+Resources:
+  EvidenceTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub '${AWS::StackName}-federal-deletion-alerts'
+      DisplayName: Federal data deletion alerts
+
+  DeletionCaseTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: case_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: case_id
+          KeyType: HASH
+      SSESpecification:
+        SSEEnabled: true
+
+  LabFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: DeletionLab
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: [s3:PutObject, s3:GetObject, s3:ListBucket]
+                Resource:
+                  - !Sub 'arn:aws:s3:::${EvidenceBucketName}'
+                  - !Sub 'arn:aws:s3:::${EvidenceBucketName}/*'
+              - Effect: Allow
+                Action: [sns:Publish]
+                Resource: !Ref EvidenceTopic
+              - Effect: Allow
+                Action: [securityhub:BatchImportFindings]
+                Resource: '*'
+              - Effect: Allow
+                Action: [dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:GetItem]
+                Resource: !GetAtt DeletionCaseTable.Arn
+              # Production: tighten to tagged resources only
+              - Effect: Allow
+                Action:
+                  - s3:DeleteObject
+                  - s3:DeleteObjectVersion
+                  - dynamodb:Query
+                  - dynamodb:BatchWriteItem
+                  - backup:ListRecoveryPointsByBackupVault
+                  - backup:DeleteRecoveryPoint
+                Resource: '*'
+                Condition:
+                  StringEquals:
+                    'aws:ResourceTag/federal_data_lab': 'true'
+
+  LabFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-deletion-worker'
+      Runtime: python3.12
+      Handler: handler.handler
+      Role: !GetAtt LabFunctionRole.Arn
+      Timeout: 300
+      Environment:
+        Variables:
+          EVIDENCE_BUCKET: !Ref EvidenceBucketName
+          LAB_ID: 11-federal-data-deletion-residual
+          SNS_TOPIC_ARN: !Ref EvidenceTopic
+          TENANT_TAG_KEY: !Ref TenantTagKey
+          REQUIRE_BACKUP_PURGE: 'true'
+          CASE_TABLE: !Ref DeletionCaseTable
+      Code:
+        ZipFile: |
+          def handler(event, context):
+              return {"ok": True, "note": "Replace with packaged src/handler.py"}
+
+  StateMachineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: states.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: InvokeDeletionLambda
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: lambda:InvokeFunction
+                Resource: !GetAtt LabFunction.Arn
+
+  DeletionStateMachine:
+    Type: AWS::StepFunctions::StateMachine
+    Properties:
+      StateMachineName: !Sub '${AWS::StackName}-federal-deletion'
+      RoleArn: !GetAtt StateMachineRole.Arn
+      DefinitionString: !Sub |
+        {
+          "Comment": "Federal data deletion: validate → purge live → purge backups → residual scan",
+          "StartAt": "ValidateAndPurge",
+          "States": {
+            "ValidateAndPurge": {
+              "Type": "Task",
+              "Resource": "${LabFunction.Arn}",
+              "ResultPath": "$.evidence",
+              "Next": "CheckStatus"
+            },
+            "CheckStatus": {
+              "Type": "Choice",
+              "Choices": [
+                {
+                  "Variable": "$.evidence.statusCode",
+                  "NumericEquals": 200,
+                  "Next": "NotifyComplete"
+                }
+              ],
+              "Default": "NotifyFailure"
+            },
+            "NotifyComplete": {
+              "Type": "Succeed"
+            },
+            "NotifyFailure": {
+              "Type": "Fail",
+              "Error": "ResidualDataOrPurgeFailure",
+              "Cause": "Federal data deletion case failed residual or backup checks"
+            }
+          }
+        }
+
+  ScheduleRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Persistent re-scan for open deletion cases (Class C residual review)
+      ScheduleExpression: rate(1 day)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt LabFunction.Arn
+          Id: ResidualRescan
+          Input: '{"mode":"residual_rescan"}'
+
+  PermissionForEvents:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref LabFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt ScheduleRule.Arn
+
+Outputs:
+  StateMachineArn:
+    Value: !Ref DeletionStateMachine
+  FunctionArn:
+    Value: !GetAtt LabFunction.Arn
+  CaseTableName:
+    Value: !Ref DeletionCaseTable
+  TopicArn:
+    Value: !Ref EvidenceTopic

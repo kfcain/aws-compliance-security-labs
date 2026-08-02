@@ -1,0 +1,23 @@
+{
+  "lab_id": "10-supply-chain-sbom",
+  "title": "Supply Chain Risk, SBOM & Third-Party Monitoring",
+  "scf_controls": [
+    "TPM-01",
+    "TPM-03",
+    "TPM-04",
+    "VPM-01",
+    "AST-02"
+  ],
+  "ksi": [
+    "KSI-SCR-SRA",
+    "KSI-SCR-TPM",
+    "KSI-AFR-VDR"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

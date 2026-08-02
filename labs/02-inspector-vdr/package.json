@@ -1,0 +1,9 @@
+{
+  "name": "lab-inspector-vdr",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1\u2013N5 severity SLAs, Security Hub aggregation, and remediation evidence.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

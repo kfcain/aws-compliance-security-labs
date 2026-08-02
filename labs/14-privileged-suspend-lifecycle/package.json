@@ -1,0 +1,9 @@
+{
+  "name": "lab-privileged-suspend-lifecycle",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Automate joiner/mover/leaver for human and privileged identities, and auto-disable or contain privileged access on suspicious activity (KSI-IAM-SUS / KSI-IAM-AAM).",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

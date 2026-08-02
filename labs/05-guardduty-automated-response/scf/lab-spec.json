@@ -1,0 +1,23 @@
+{
+  "lab_id": "05-guardduty-automated-response",
+  "title": "GuardDuty Threat Detection & Automated Response",
+  "scf_controls": [
+    "THR-01",
+    "THR-03",
+    "MON-01",
+    "MON-02",
+    "IRO-02"
+  ],
+  "ksi": [
+    "KSI-MLA-OSM",
+    "KSI-INR-PRC",
+    "KSI-CNA-MAT"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

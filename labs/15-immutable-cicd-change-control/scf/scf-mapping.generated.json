@@ -1,0 +1,253 @@
+{
+  "lab_id": "15-immutable-cicd-change-control",
+  "generated_at": "2026-08-01T19:09:54.211Z",
+  "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "controls": [
+    {
+      "scf_control_id": "CHG-01",
+      "title": "Change Management Program",
+      "family": "CHG",
+      "description": "Mechanisms exist to facilitate the implementation of a change management program.",
+      "evidence_requests": [
+        "E-CHG-02"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CM-03"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.02.b",
+          "03.04.03.a"
+        ],
+        "general-iso-27001-2022": [
+          "6.3"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.2.2",
+          "6.5",
+          "6.5.1",
+          "6.5.2",
+          "6.5.3",
+          "12.4.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-03"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-CMT-RMV": "Redeploying version-controlled resources vs direct modification",
+        "KSI-CMT-VTD": "Validating throughout deployment (automated)",
+        "KSI-CMT-LMC": "Logging modifications to the CSO",
+        "KSI-CMT-RVP": "Reviewing change procedures",
+        "KSI-AFR-SCN": "Significant change notification"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-01.json"
+    },
+    {
+      "scf_control_id": "CHG-02",
+      "title": "Configuration Change Control",
+      "family": "CHG",
+      "description": "Mechanisms exist to govern the technical configuration change control processes.",
+      "evidence_requests": [
+        "E-CHG-02",
+        "E-CHG-05"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 8,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CM-03",
+          "SA-08(31)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.02.b",
+          "03.04.03.a",
+          "03.04.03.b",
+          "03.04.03.c"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.2.2",
+          "6.5",
+          "6.5.1",
+          "6.5.6",
+          "12.4.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-03",
+          "SA-08(31)"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-CMT-RMV": "Redeploying version-controlled resources vs direct modification",
+        "KSI-CMT-VTD": "Validating throughout deployment (automated)",
+        "KSI-CMT-LMC": "Logging modifications to the CSO",
+        "KSI-CMT-RVP": "Reviewing change procedures",
+        "KSI-AFR-SCN": "Significant change notification"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-02.json"
+    },
+    {
+      "scf_control_id": "CHG-03",
+      "title": "Security Impact Analysis for Changes",
+      "family": "CHG",
+      "description": "Mechanisms exist to analyze proposed changes for potential security impacts, prior to the implementation of the change.",
+      "evidence_requests": [
+        "E-CHG-04"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CM-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.03.b",
+          "03.04.04.a",
+          "03.04.11.b"
+        ],
+        "general-pci-dss-4-0-1": [
+          "6.5.2",
+          "6.5.6",
+          "A3.2.2",
+          "A3.2.3"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-04"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-CMT-RMV": "Redeploying version-controlled resources vs direct modification",
+        "KSI-CMT-VTD": "Validating throughout deployment (automated)",
+        "KSI-CMT-LMC": "Logging modifications to the CSO",
+        "KSI-CMT-RVP": "Reviewing change procedures",
+        "KSI-AFR-SCN": "Significant change notification"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-03.json"
+    },
+    {
+      "scf_control_id": "CHG-04",
+      "title": "Access Restriction For Change",
+      "family": "CHG",
+      "description": "Mechanisms exist to enforce configuration restrictions in an effort to restrict the ability of users to conduct unauthorized changes.",
+      "evidence_requests": [
+        "E-HRS-13",
+        "E-IAM-02"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 8,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CM-05"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.02.b",
+          "03.04.05"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.2.8"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-05"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-CMT-RMV": "Redeploying version-controlled resources vs direct modification",
+        "KSI-CMT-VTD": "Validating throughout deployment (automated)",
+        "KSI-CMT-LMC": "Logging modifications to the CSO",
+        "KSI-CMT-RVP": "Reviewing change procedures",
+        "KSI-AFR-SCN": "Significant change notification"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-04.json"
+    },
+    {
+      "scf_control_id": "CFG-01",
+      "title": "Configuration Management Program",
+      "family": "CFG",
+      "description": "Mechanisms exist to facilitate the implementation of configuration management controls.",
+      "evidence_requests": [
+        "E-AST-01",
+        "E-AST-27"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CM-01",
+          "CM-09"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.01.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "2.1",
+          "2.2",
+          "8.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-01",
+          "CM-09"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-CMT-RMV": "Redeploying version-controlled resources vs direct modification",
+        "KSI-CMT-VTD": "Validating throughout deployment (automated)",
+        "KSI-CMT-LMC": "Logging modifications to the CSO",
+        "KSI-CMT-RVP": "Reviewing change procedures",
+        "KSI-AFR-SCN": "Significant change notification"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-01.json"
+    },
+    {
+      "scf_control_id": "TDA-06",
+      "title": "Secure Software Development Practices (SSDP)",
+      "family": "TDA",
+      "description": "Mechanisms exist to develop applications based on Secure Software Development Practices (SSDP).",
+      "evidence_requests": [
+        "E-TDA-08",
+        "E-TDA-11"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "SA-01",
+          "SA-04(03)",
+          "SA-15"
+        ],
+        "general-nist-800-171-r3": [
+          "03.16.01"
+        ],
+        "general-pci-dss-4-0-1": [
+          "6.2",
+          "6.2.1",
+          "6.2.4"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "SA-01",
+          "SA-04(03)",
+          "SA-15"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-CMT-RMV": "Redeploying version-controlled resources vs direct modification",
+        "KSI-CMT-VTD": "Validating throughout deployment (automated)",
+        "KSI-CMT-LMC": "Logging modifications to the CSO",
+        "KSI-CMT-RVP": "Reviewing change procedures",
+        "KSI-AFR-SCN": "Significant change notification"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/TDA-06.json"
+    }
+  ],
+  "coverage_summary": {
+    "control_count": 6,
+    "frameworks_with_hits": {
+      "general-nist-800-53-r5-2": 6,
+      "general-nist-800-171-r3": 6,
+      "general-iso-27001-2022": 1,
+      "general-pci-dss-4-0-1": 6,
+      "usa-federal-gsa-fedramp-5-mod": 6
+    }
+  }
+}

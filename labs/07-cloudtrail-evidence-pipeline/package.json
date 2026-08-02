@@ -1,0 +1,9 @@
+{
+  "name": "lab-cloudtrail-evidence-pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Build an org-wide CloudTrail \u2192 S3 (Object Lock) \u2192 Athena/Security Lake pipeline that packages machine-readable evidence for FedRAMP 20x persistent validation.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

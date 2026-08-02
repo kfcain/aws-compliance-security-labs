@@ -1,0 +1,9 @@
+{
+  "name": "lab-backup-recovery-rto-rpo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Define RTO/RPO per critical federal workload, align AWS Backup plans and vault policy, run restore drills, and emit machine-readable evidence for KSI-RPL-* and KSI-CNA-OFA.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "lab_id": "07-cloudtrail-evidence-pipeline",
+  "title": "Immutable Audit Evidence Pipeline",
+  "scf_controls": [
+    "MON-01",
+    "MON-02",
+    "CPL-02",
+    "CHG-01"
+  ],
+  "ksi": [
+    "KSI-MLA-OSM",
+    "KSI-AFR-PVL",
+    "KSI-CMT-CHG"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

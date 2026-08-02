@@ -1,0 +1,9 @@
+{
+  "name": "lab-boundary-asset-inventory",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Persistently generate authoritative inventories of in-boundary information resources, map federal data flows, and flag shadow resources outside the Minimum Assessment Scope.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

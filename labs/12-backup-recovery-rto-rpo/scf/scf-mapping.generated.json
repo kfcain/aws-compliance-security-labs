@@ -1,0 +1,233 @@
+{
+  "lab_id": "12-backup-recovery-rto-rpo",
+  "generated_at": "2026-08-01T19:09:53.983Z",
+  "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "controls": [
+    {
+      "scf_control_id": "BCD-01",
+      "title": "Business Continuity Management System (BCMS)",
+      "family": "BCD",
+      "description": "Mechanisms exist to facilitate the implementation of contingency planning controls to help ensure resilient Technology Assets, Applications and/or Services (TAAS) (e.g., Continuity of Operations Plan (COOP) or Business Continuity & Disaster Recovery (BC/DR) playbooks).",
+      "evidence_requests": [
+        "E-BCM-01"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CP-01",
+          "CP-02",
+          "CP-10",
+          "IR-04(03)",
+          "PM-08"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CP-01",
+          "CP-02",
+          "CP-10",
+          "IR-04(03)",
+          "PM-08"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
+        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
+        "KSI-RPL-ABO": "Aligning backups with objectives",
+        "KSI-RPL-TRC": "Testing recovery capabilities",
+        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-01.json"
+    },
+    {
+      "scf_control_id": "BCD-02",
+      "title": "Identify Critical Assets",
+      "family": "BCD",
+      "description": "Mechanisms exist to identify and document the critical Technology Assets, Applications, Services and/or Data (TAASD) that support essential missions and business functions.",
+      "evidence_requests": [
+        "E-BCM-08"
+      ],
+      "nist_csf_function": "Recover",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CP-02(08)"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CP-02(08)"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
+        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
+        "KSI-RPL-ABO": "Aligning backups with objectives",
+        "KSI-RPL-TRC": "Testing recovery capabilities",
+        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-02.json"
+    },
+    {
+      "scf_control_id": "BCD-11",
+      "title": "Data Backups",
+      "family": "BCD",
+      "description": "Mechanisms exist to create recurring backups of data, software and/or system images, as well as verify the integrity of these backups, to ensure the availability of the data to satisfy Recovery Time Objectives (RTOs) and Recovery Point Objectives (RPOs).",
+      "evidence_requests": [
+        "E-BCM-10",
+        "E-BCM-11",
+        "E-BCM-12",
+        "E-BCM-13"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CP-09",
+          "SC-28(02)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.08.09.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "9.4.1.1",
+          "9.4.1.2",
+          "12.10.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CP-09",
+          "SC-28(02)"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
+        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
+        "KSI-RPL-ABO": "Aligning backups with objectives",
+        "KSI-RPL-TRC": "Testing recovery capabilities",
+        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-11.json"
+    },
+    {
+      "scf_control_id": "BCD-12",
+      "title": "Technology Assets, Applications and/or Services (TAAS) Recovery & Reconstitution",
+      "family": "BCD",
+      "description": "Mechanisms exist to ensure the secure recovery and reconstitution of Technology Assets, Applications and/or Services (TAAS) to a known state after a disruption, compromise or failure.",
+      "evidence_requests": [
+        "E-BCM-15"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CP-10"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CP-10"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
+        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
+        "KSI-RPL-ABO": "Aligning backups with objectives",
+        "KSI-RPL-TRC": "Testing recovery capabilities",
+        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-12.json"
+    },
+    {
+      "scf_control_id": "CRY-05",
+      "title": "Encrypting Data At Rest",
+      "family": "CRY",
+      "description": "Cryptographic mechanisms exist to prevent unauthorized disclosure of data at rest.",
+      "evidence_requests": [
+        "E-CRY-01"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "SC-13",
+          "SC-28",
+          "SC-28(01)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.13.08"
+        ],
+        "general-pci-dss-4-0-1": [
+          "3.3.2",
+          "3.5",
+          "3.5.1.2",
+          "3.5.1.3",
+          "8.3.2",
+          "9.4"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "SC-13",
+          "SC-28",
+          "SC-28(01)"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
+        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
+        "KSI-RPL-ABO": "Aligning backups with objectives",
+        "KSI-RPL-TRC": "Testing recovery capabilities",
+        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-05.json"
+    },
+    {
+      "scf_control_id": "AST-02",
+      "title": "Asset Inventories",
+      "family": "AST",
+      "description": "Mechanisms exist to perform inventories of Technology Assets, Applications, Services and/or Data (TAASD) that:\n(1) Accurately reflects the current TAASD in use; \n(2) Identifies authorized software products, including business justification details;\n(3) Is at the level of granularity deemed necessary for tracking and reporting;\n(4) Includes organization-defined information deemed necessary to achieve effective property accountability; and\n(5) Is available for review and audit by designated organizational personnel.",
+      "evidence_requests": [
+        "E-AST-04",
+        "E-AST-05",
+        "E-AST-07",
+        "E-AST-28"
+      ],
+      "nist_csf_function": "Identify",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CM-08",
+          "PM-05"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.08.a",
+          "03.04.08.c",
+          "03.04.10.a",
+          "03.04.10.b",
+          "03.04.11.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "6.3.2",
+          "9.5.1",
+          "9.5.1.1",
+          "11.2",
+          "11.2.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-08",
+          "PM-05"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
+        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
+        "KSI-RPL-ABO": "Aligning backups with objectives",
+        "KSI-RPL-TRC": "Testing recovery capabilities",
+        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-02.json"
+    }
+  ],
+  "coverage_summary": {
+    "control_count": 6,
+    "frameworks_with_hits": {
+      "general-nist-800-53-r5-2": 6,
+      "usa-federal-gsa-fedramp-5-mod": 6,
+      "general-nist-800-171-r3": 3,
+      "general-pci-dss-4-0-1": 3
+    }
+  }
+}

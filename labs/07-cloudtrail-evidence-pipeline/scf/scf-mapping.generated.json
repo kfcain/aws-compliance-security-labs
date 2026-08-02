@@ -1,0 +1,193 @@
+{
+  "lab_id": "07-cloudtrail-evidence-pipeline",
+  "generated_at": "2026-08-01T19:09:53.616Z",
+  "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "controls": [
+    {
+      "scf_control_id": "MON-01",
+      "title": "Continuous Monitoring",
+      "family": "MON",
+      "description": "Mechanisms exist to facilitate the implementation of enterprise-wide monitoring controls.",
+      "evidence_requests": [
+        "E-MON-01",
+        "E-MON-06",
+        "E-MON-07"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "AU-01",
+          "PM-31",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.01.a",
+          "03.12.03",
+          "03.14.06.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "10.1",
+          "10.4.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "A3.3.1",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-01",
+          "SI-04"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-MLA-OSM": "Operating SIEM capability",
+        "KSI-AFR-PVL": "Persistent validation cadence",
+        "KSI-CMT-CHG": "Change control (alias)"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json"
+    },
+    {
+      "scf_control_id": "MON-02",
+      "title": "Centralized Collection of Security Event Logs",
+      "family": "MON",
+      "description": "Mechanisms exist to utilize a Security Incident Event Manager (SIEM), or similar automated tool, to support the centralized collection of security-related event logs.",
+      "evidence_requests": [
+        "E-MON-01",
+        "E-MON-05"
+      ],
+      "nist_csf_function": "Detect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "AU-02",
+          "AU-06",
+          "IR-04(04)",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.05.a",
+          "03.03.05.c"
+        ],
+        "general-pci-dss-4-0-1": [
+          "10.3.3",
+          "10.4",
+          "10.4.1",
+          "10.4.1.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-02",
+          "AU-06",
+          "IR-04(04)",
+          "SI-04"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-MLA-OSM": "Operating SIEM capability",
+        "KSI-AFR-PVL": "Persistent validation cadence",
+        "KSI-CMT-CHG": "Change control (alias)"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-02.json"
+    },
+    {
+      "scf_control_id": "CPL-02",
+      "title": "Security, Compliance & Resilience Controls Oversight",
+      "family": "CPL",
+      "description": "Mechanisms exist to provide a security, compliance and resilience controls oversight function that reports to the organization's executive leadership.",
+      "evidence_requests": [
+        "E-CPL-07",
+        "E-CPL-09",
+        "E-GOV-04",
+        "E-GOV-05",
+        "E-GOV-06",
+        "E-GOV-13",
+        "E-RSK-03"
+      ],
+      "nist_csf_function": "Detect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CA-07",
+          "CA-07(01)",
+          "PM-14"
+        ],
+        "general-nist-800-171-r3": [
+          "03.12.01",
+          "03.12.03"
+        ],
+        "general-iso-27001-2022": [
+          "8.1",
+          "10.1"
+        ],
+        "general-pci-dss-4-0-1": [
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CA-07",
+          "CA-07(01)",
+          "PM-14"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-MLA-OSM": "Operating SIEM capability",
+        "KSI-AFR-PVL": "Persistent validation cadence",
+        "KSI-CMT-CHG": "Change control (alias)"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CPL-02.json"
+    },
+    {
+      "scf_control_id": "CHG-01",
+      "title": "Change Management Program",
+      "family": "CHG",
+      "description": "Mechanisms exist to facilitate the implementation of a change management program.",
+      "evidence_requests": [
+        "E-CHG-02"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CM-03"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.02.b",
+          "03.04.03.a"
+        ],
+        "general-iso-27001-2022": [
+          "6.3"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.2.2",
+          "6.5",
+          "6.5.1",
+          "6.5.2",
+          "6.5.3",
+          "12.4.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-03"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-MLA-OSM": "Operating SIEM capability",
+        "KSI-AFR-PVL": "Persistent validation cadence",
+        "KSI-CMT-CHG": "Change control (alias)"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-01.json"
+    }
+  ],
+  "coverage_summary": {
+    "control_count": 4,
+    "frameworks_with_hits": {
+      "general-nist-800-53-r5-2": 4,
+      "general-nist-800-171-r3": 4,
+      "general-pci-dss-4-0-1": 4,
+      "usa-federal-gsa-fedramp-5-mod": 4,
+      "general-iso-27001-2022": 2
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "lab-guardduty-automated-response",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ingest VPC Flow Logs and CloudTrail into GuardDuty, centralize in Security Hub, and auto-contain via EventBridge \u2192 Lambda playbooks.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

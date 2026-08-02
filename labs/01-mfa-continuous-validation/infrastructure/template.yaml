@@ -1,0 +1,93 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Persistent MFA Validation (Okta / Descope) — starter SAM/CloudFormation skeleton.
+  Pattern: findings/schedules → EventBridge → Lambda → Evidence + Alerts.
+
+Parameters:
+  EvidenceBucketName:
+    Type: String
+    Description: S3 bucket for auditor evidence packages
+  AlertEmail:
+    Type: String
+    Default: ''
+    Description: Optional SNS subscription email
+
+Resources:
+  EvidenceTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub '${AWS::StackName}-alerts'
+      DisplayName: lab-mfa-continuous-validation alerts
+
+  LabFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: LabMinimal
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                Resource: !Sub 'arn:aws:s3:::${EvidenceBucketName}/*'
+              - Effect: Allow
+                Action:
+                  - sns:Publish
+                Resource: !Ref EvidenceTopic
+              - Effect: Allow
+                Action:
+                  - securityhub:BatchImportFindings
+                Resource: '*'
+
+  LabFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-worker'
+      Runtime: python3.12
+      Handler: handler.handler
+      Role: !GetAtt LabFunctionRole.Arn
+      Timeout: 60
+      Environment:
+        Variables:
+          EVIDENCE_BUCKET: !Ref EvidenceBucketName
+          LAB_ID: 01-mfa-continuous-validation
+          SNS_TOPIC_ARN: !Ref EvidenceTopic
+      Code:
+        ZipFile: |
+          def handler(event, context):
+              return {"ok": True, "lab": "01-mfa-continuous-validation"}
+
+  ScheduleRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Persistent validation schedule (FedRAMP 20x cadence hint: <= 3 days)
+      ScheduleExpression: rate(1 day)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt LabFunction.Arn
+          Id: LabLambdaTarget
+
+  PermissionForEvents:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref LabFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt ScheduleRule.Arn
+
+Outputs:
+  FunctionArn:
+    Value: !GetAtt LabFunction.Arn
+  TopicArn:
+    Value: !Ref EvidenceTopic

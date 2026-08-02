@@ -1,0 +1,22 @@
+{
+  "lab_id": "08-vpc-network-segmentation",
+  "title": "VPC Network Segmentation & Flow Visibility",
+  "scf_controls": [
+    "NET-01",
+    "NET-04",
+    "AST-04",
+    "CLD-06"
+  ],
+  "ksi": [
+    "KSI-CNA-RNT",
+    "KSI-CNA-MAT",
+    "KSI-SVC-SNT"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "lab_id": "13-boundary-asset-inventory",
+  "title": "Authorization Boundary & Real-Time Asset Inventory",
+  "scf_controls": [
+    "AST-01",
+    "AST-02",
+    "AST-04",
+    "NET-03",
+    "CPL-01",
+    "GOV-01"
+  ],
+  "ksi": [
+    "KSI-PIY-GIV",
+    "KSI-AFR-MAS",
+    "KSI-CNA-DFP",
+    "KSI-MLA-LET"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

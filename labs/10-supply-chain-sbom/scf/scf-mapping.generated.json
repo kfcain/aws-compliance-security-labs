@@ -1,0 +1,217 @@
+{
+  "lab_id": "10-supply-chain-sbom",
+  "generated_at": "2026-08-01T19:09:53.815Z",
+  "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "controls": [
+    {
+      "scf_control_id": "TPM-01",
+      "title": "Third-Party Management",
+      "family": "TPM",
+      "description": "Mechanisms exist to facilitate the implementation of third-party management controls.",
+      "evidence_requests": [
+        "E-TPM-03",
+        "E-TPM-06"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "SA-04",
+          "SR-01"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.20.a",
+          "03.01.20.b",
+          "03.01.20.c.01",
+          "03.07.06.a",
+          "03.16.01",
+          "03.16.03.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "8.2.3",
+          "12.8",
+          "12.8.1",
+          "12.9",
+          "12.9.1",
+          "12.9.2",
+          "A2.1.3"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "SA-04",
+          "SR-01"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-SCR-SRA": "Supply chain risk assessment (alias)",
+        "KSI-SCR-TPM": "Third-party monitoring (alias)",
+        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/TPM-01.json"
+    },
+    {
+      "scf_control_id": "TPM-03",
+      "title": "Supply Chain Risk Management (SCRM)",
+      "family": "TPM",
+      "description": "Mechanisms exist to:\n(1) Evaluate security risks and threats associated with Technology Assets, Applications and/or Services (TAAS) supply chains; and\n(2) Take appropriate remediation actions to minimize the organization's exposure to those risks and threats, as necessary.",
+      "evidence_requests": [
+        "E-RSK-02"
+      ],
+      "nist_csf_function": "Identify",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "SA-09(03)",
+          "SR-02",
+          "SR-02(01)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.11.01.a",
+          "03.17.01.a",
+          "03.17.03.a",
+          "03.17.03.b"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "SR-02",
+          "SR-02(01)"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-SCR-SRA": "Supply chain risk assessment (alias)",
+        "KSI-SCR-TPM": "Third-party monitoring (alias)",
+        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/TPM-03.json"
+    },
+    {
+      "scf_control_id": "TPM-04",
+      "title": "Third-Party Services",
+      "family": "TPM",
+      "description": "Mechanisms exist to mitigate the risks associated with third-party access to the organization's Technology Assets, Applications, Services and/or Data (TAASD).",
+      "evidence_requests": [
+        "E-CPL-06"
+      ],
+      "nist_csf_function": "Identify",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "SA-09"
+        ],
+        "general-nist-800-171-r3": [
+          "03.16.03.a",
+          "03.16.03.c",
+          "03.17.02",
+          "03.17.03.a",
+          "03.17.03.b"
+        ],
+        "general-pci-dss-4-0-1": [
+          "8.2.3",
+          "12.8.2",
+          "12.9",
+          "12.9.1",
+          "12.9.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "SA-09"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-SCR-SRA": "Supply chain risk assessment (alias)",
+        "KSI-SCR-TPM": "Third-party monitoring (alias)",
+        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/TPM-04.json"
+    },
+    {
+      "scf_control_id": "VPM-01",
+      "title": "Vulnerability & Patch Management Program (VPMP)",
+      "family": "VPM",
+      "description": "Mechanisms exist to facilitate the implementation and monitoring of vulnerability management controls.",
+      "evidence_requests": [
+        "E-MNT-03",
+        "E-THR-05",
+        "E-VPM-01"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "SI-02",
+          "SI-03"
+        ],
+        "general-nist-800-171-r3": [
+          "03.11.02.a",
+          "03.14.01.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "6.3",
+          "6.3.1",
+          "6.3.3",
+          "11.3"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "SI-02",
+          "SI-03"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-SCR-SRA": "Supply chain risk assessment (alias)",
+        "KSI-SCR-TPM": "Third-party monitoring (alias)",
+        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-01.json"
+    },
+    {
+      "scf_control_id": "AST-02",
+      "title": "Asset Inventories",
+      "family": "AST",
+      "description": "Mechanisms exist to perform inventories of Technology Assets, Applications, Services and/or Data (TAASD) that:\n(1) Accurately reflects the current TAASD in use; \n(2) Identifies authorized software products, including business justification details;\n(3) Is at the level of granularity deemed necessary for tracking and reporting;\n(4) Includes organization-defined information deemed necessary to achieve effective property accountability; and\n(5) Is available for review and audit by designated organizational personnel.",
+      "evidence_requests": [
+        "E-AST-04",
+        "E-AST-05",
+        "E-AST-07",
+        "E-AST-28"
+      ],
+      "nist_csf_function": "Identify",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CM-08",
+          "PM-05"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.08.a",
+          "03.04.08.c",
+          "03.04.10.a",
+          "03.04.10.b",
+          "03.04.11.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "6.3.2",
+          "9.5.1",
+          "9.5.1.1",
+          "11.2",
+          "11.2.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-08",
+          "PM-05"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-SCR-SRA": "Supply chain risk assessment (alias)",
+        "KSI-SCR-TPM": "Third-party monitoring (alias)",
+        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-02.json"
+    }
+  ],
+  "coverage_summary": {
+    "control_count": 5,
+    "frameworks_with_hits": {
+      "general-nist-800-53-r5-2": 5,
+      "general-nist-800-171-r3": 5,
+      "general-pci-dss-4-0-1": 4,
+      "usa-federal-gsa-fedramp-5-mod": 5
+    }
+  }
+}

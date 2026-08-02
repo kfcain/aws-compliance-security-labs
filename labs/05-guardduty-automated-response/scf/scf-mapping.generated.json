@@ -1,0 +1,221 @@
+{
+  "lab_id": "05-guardduty-automated-response",
+  "generated_at": "2026-08-01T19:09:53.563Z",
+  "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "controls": [
+    {
+      "scf_control_id": "THR-01",
+      "title": "Threat Intelligence Program",
+      "family": "THR",
+      "description": "Mechanisms exist to implement a threat intelligence program that includes a cross-organization information-sharing capability that can influence the development of the system and security architectures, selection of security solutions, monitoring, threat hunting, response and recovery activities.",
+      "evidence_requests": [
+        "E-THR-04"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 8,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "PM-15",
+          "PM-16"
+        ],
+        "general-nist-800-171-r3": [
+          "03.11.02.a",
+          "03.14.03.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "6.3",
+          "A3.5.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "PM-15"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-MLA-OSM": "Operating SIEM capability",
+        "KSI-INR-PRC": "Incident response procedures (alias)",
+        "KSI-CNA-MAT": "Minimizing attack surface"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/THR-01.json"
+    },
+    {
+      "scf_control_id": "THR-03",
+      "title": "Threat Intelligence Feeds",
+      "family": "THR",
+      "description": "Mechanisms exist to maintain situational awareness of vulnerabilities and evolving threats by leveraging the knowledge of attacker tactics, techniques and procedures to facilitate the implementation of preventative and compensating controls.",
+      "evidence_requests": [
+        "E-THR-03"
+      ],
+      "nist_csf_function": "Identify",
+      "relative_weight": 8,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "PM-16(01)",
+          "SI-05",
+          "SI-05(01)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.02.01.a.02",
+          "03.02.01.a.03",
+          "03.02.01.b",
+          "03.02.02.b",
+          "03.11.02.a",
+          "03.14.03.a"
+        ],
+        "general-iso-27001-2022": [
+          "7.4",
+          "7.4(a)",
+          "7.4(b)",
+          "7.4(c)",
+          "7.4(d)"
+        ],
+        "general-pci-dss-4-0-1": [
+          "6.3.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "SI-05"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-MLA-OSM": "Operating SIEM capability",
+        "KSI-INR-PRC": "Incident response procedures (alias)",
+        "KSI-CNA-MAT": "Minimizing attack surface"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/THR-03.json"
+    },
+    {
+      "scf_control_id": "MON-01",
+      "title": "Continuous Monitoring",
+      "family": "MON",
+      "description": "Mechanisms exist to facilitate the implementation of enterprise-wide monitoring controls.",
+      "evidence_requests": [
+        "E-MON-01",
+        "E-MON-06",
+        "E-MON-07"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "AU-01",
+          "PM-31",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.01.a",
+          "03.12.03",
+          "03.14.06.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "10.1",
+          "10.4.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "A3.3.1",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-01",
+          "SI-04"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-MLA-OSM": "Operating SIEM capability",
+        "KSI-INR-PRC": "Incident response procedures (alias)",
+        "KSI-CNA-MAT": "Minimizing attack surface"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json"
+    },
+    {
+      "scf_control_id": "MON-02",
+      "title": "Centralized Collection of Security Event Logs",
+      "family": "MON",
+      "description": "Mechanisms exist to utilize a Security Incident Event Manager (SIEM), or similar automated tool, to support the centralized collection of security-related event logs.",
+      "evidence_requests": [
+        "E-MON-01",
+        "E-MON-05"
+      ],
+      "nist_csf_function": "Detect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "AU-02",
+          "AU-06",
+          "IR-04(04)",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.05.a",
+          "03.03.05.c"
+        ],
+        "general-pci-dss-4-0-1": [
+          "10.3.3",
+          "10.4",
+          "10.4.1",
+          "10.4.1.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-02",
+          "AU-06",
+          "IR-04(04)",
+          "SI-04"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-MLA-OSM": "Operating SIEM capability",
+        "KSI-INR-PRC": "Incident response procedures (alias)",
+        "KSI-CNA-MAT": "Minimizing attack surface"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-02.json"
+    },
+    {
+      "scf_control_id": "IRO-02",
+      "title": "Incident Handling",
+      "family": "IRO",
+      "description": "Mechanisms exist to cover:\n(1) Preparation;\n(2) Automated event detection or manual incident report intake;\n(3) Analysis;\n(4) Containment;\n(5) Eradication; and\n(6) Recovery.",
+      "evidence_requests": [
+        "E-IRO-03"
+      ],
+      "nist_csf_function": "Respond",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "IR-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.04.b",
+          "03.06.01",
+          "03.06.02.a",
+          "03.06.02.b",
+          "03.06.02.c",
+          "03.06.02.d"
+        ],
+        "general-pci-dss-4-0-1": [
+          "12.10",
+          "12.10.5",
+          "A3.3.1.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "IR-04"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-MLA-OSM": "Operating SIEM capability",
+        "KSI-INR-PRC": "Incident response procedures (alias)",
+        "KSI-CNA-MAT": "Minimizing attack surface"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IRO-02.json"
+    }
+  ],
+  "coverage_summary": {
+    "control_count": 5,
+    "frameworks_with_hits": {
+      "general-nist-800-53-r5-2": 5,
+      "general-nist-800-171-r3": 5,
+      "general-pci-dss-4-0-1": 5,
+      "usa-federal-gsa-fedramp-5-mod": 5,
+      "general-iso-27001-2022": 1
+    }
+  }
+}

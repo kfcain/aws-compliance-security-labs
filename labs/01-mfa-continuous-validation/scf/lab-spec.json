@@ -1,0 +1,22 @@
+{
+  "lab_id": "01-mfa-continuous-validation",
+  "title": "Persistent MFA Validation (Okta / Descope)",
+  "scf_controls": [
+    "IAC-06",
+    "IAC-15",
+    "IAC-21",
+    "MON-01"
+  ],
+  "ksi": [
+    "KSI-IAM-MFA",
+    "KSI-IAM-ELP",
+    "KSI-AFR-PVL"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

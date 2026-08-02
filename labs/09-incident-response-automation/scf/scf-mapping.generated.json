@@ -1,0 +1,210 @@
+{
+  "lab_id": "09-incident-response-automation",
+  "generated_at": "2026-08-01T19:09:53.739Z",
+  "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "controls": [
+    {
+      "scf_control_id": "IRO-01",
+      "title": "Incident Response Operations",
+      "family": "IRO",
+      "description": "Mechanisms exist to implement and govern processes and documentation to facilitate an organization-wide response capability for cybersecurity and data protection-related incidents.",
+      "evidence_requests": [
+        "E-IRO-01"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "IR-01"
+        ],
+        "general-nist-800-171-r3": [
+          "03.06.01"
+        ],
+        "general-pci-dss-4-0-1": [
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "12.10",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "IR-01"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-INR-IRP": "Incident response plan (alias)",
+        "KSI-INR-PRC": "Incident response procedures (alias)",
+        "KSI-MLA-OSM": "Operating SIEM capability"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IRO-01.json"
+    },
+    {
+      "scf_control_id": "IRO-02",
+      "title": "Incident Handling",
+      "family": "IRO",
+      "description": "Mechanisms exist to cover:\n(1) Preparation;\n(2) Automated event detection or manual incident report intake;\n(3) Analysis;\n(4) Containment;\n(5) Eradication; and\n(6) Recovery.",
+      "evidence_requests": [
+        "E-IRO-03"
+      ],
+      "nist_csf_function": "Respond",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "IR-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.04.b",
+          "03.06.01",
+          "03.06.02.a",
+          "03.06.02.b",
+          "03.06.02.c",
+          "03.06.02.d"
+        ],
+        "general-pci-dss-4-0-1": [
+          "12.10",
+          "12.10.5",
+          "A3.3.1.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "IR-04"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-INR-IRP": "Incident response plan (alias)",
+        "KSI-INR-PRC": "Incident response procedures (alias)",
+        "KSI-MLA-OSM": "Operating SIEM capability"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IRO-02.json"
+    },
+    {
+      "scf_control_id": "IRO-04",
+      "title": "Incident Response Plan (IRP)",
+      "family": "IRO",
+      "description": "Mechanisms exist to maintain and make available a current and viable Incident Response Plan (IRP) to all stakeholders.",
+      "evidence_requests": [
+        "E-IRO-01"
+      ],
+      "nist_csf_function": "Respond",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "IR-08"
+        ],
+        "general-nist-800-171-r3": [
+          "03.06.01",
+          "03.06.05.a",
+          "03.06.05.a.01",
+          "03.06.05.a.02",
+          "03.06.05.a.03",
+          "03.06.05.a.04",
+          "03.06.05.a.05",
+          "03.06.05.a.06",
+          "03.06.05.b"
+        ],
+        "general-pci-dss-4-0-1": [
+          "12.10",
+          "12.10.1",
+          "12.10.5",
+          "12.10.7"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "IR-08"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-INR-IRP": "Incident response plan (alias)",
+        "KSI-INR-PRC": "Incident response procedures (alias)",
+        "KSI-MLA-OSM": "Operating SIEM capability"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IRO-04.json"
+    },
+    {
+      "scf_control_id": "IRO-10",
+      "title": "Incident Stakeholder Reporting",
+      "family": "IRO",
+      "description": "Mechanisms exist to timely-report incidents to applicable:\n(1) Internal stakeholders; \n(2) Affected clients & third-parties; and\n(3) Regulatory authorities.",
+      "evidence_requests": [
+        "E-IRO-01",
+        "E-IRO-11",
+        "E-IRO-13"
+      ],
+      "nist_csf_function": "Respond",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "IR-06"
+        ],
+        "general-nist-800-171-r3": [
+          "03.06.02.b",
+          "03.06.02.c"
+        ],
+        "general-pci-dss-4-0-1": [
+          "12.1.4",
+          "12.10.1",
+          "A1.2.3"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "IR-06"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-INR-IRP": "Incident response plan (alias)",
+        "KSI-INR-PRC": "Incident response procedures (alias)",
+        "KSI-MLA-OSM": "Operating SIEM capability"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IRO-10.json"
+    },
+    {
+      "scf_control_id": "MON-02",
+      "title": "Centralized Collection of Security Event Logs",
+      "family": "MON",
+      "description": "Mechanisms exist to utilize a Security Incident Event Manager (SIEM), or similar automated tool, to support the centralized collection of security-related event logs.",
+      "evidence_requests": [
+        "E-MON-01",
+        "E-MON-05"
+      ],
+      "nist_csf_function": "Detect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "AU-02",
+          "AU-06",
+          "IR-04(04)",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.05.a",
+          "03.03.05.c"
+        ],
+        "general-pci-dss-4-0-1": [
+          "10.3.3",
+          "10.4",
+          "10.4.1",
+          "10.4.1.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-02",
+          "AU-06",
+          "IR-04(04)",
+          "SI-04"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-INR-IRP": "Incident response plan (alias)",
+        "KSI-INR-PRC": "Incident response procedures (alias)",
+        "KSI-MLA-OSM": "Operating SIEM capability"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-02.json"
+    }
+  ],
+  "coverage_summary": {
+    "control_count": 5,
+    "frameworks_with_hits": {
+      "general-nist-800-53-r5-2": 5,
+      "general-nist-800-171-r3": 5,
+      "general-pci-dss-4-0-1": 5,
+      "usa-federal-gsa-fedramp-5-mod": 5
+    }
+  }
+}

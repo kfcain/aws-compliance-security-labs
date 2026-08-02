@@ -1,0 +1,9 @@
+{
+  "name": "lab-vpc-network-segmentation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Implement least-privilege network paths with Security Groups, NACLs, Network Firewall, and Flow Log analytics aligned to PCI DSS and FedRAMP CNA KSIs.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "lab-kms-encryption-governance",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Enforce encryption at rest/in transit with customer-managed KMS keys, FIPS endpoints, key rotation, and Secrets Manager policy gates.",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

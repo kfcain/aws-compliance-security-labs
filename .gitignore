@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+*.pyc
+__pycache__/
+.aws-sam/
+samconfig.toml
+.venv/
+dist/
+coverage/

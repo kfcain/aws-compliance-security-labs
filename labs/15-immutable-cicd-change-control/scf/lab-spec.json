@@ -1,0 +1,26 @@
+{
+  "lab_id": "15-immutable-cicd-change-control",
+  "title": "Immutable CI/CD Change Control & Deployment Validation",
+  "scf_controls": [
+    "CHG-01",
+    "CHG-02",
+    "CHG-03",
+    "CHG-04",
+    "CFG-01",
+    "TDA-06"
+  ],
+  "ksi": [
+    "KSI-CMT-RMV",
+    "KSI-CMT-VTD",
+    "KSI-CMT-LMC",
+    "KSI-CMT-RVP",
+    "KSI-AFR-SCN"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod"
+  ]
+}

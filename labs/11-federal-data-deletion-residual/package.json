@@ -1,0 +1,9 @@
+{
+  "name": "lab-federal-data-deletion-residual",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Orchestrate agency-requested removal of federal customer data from live stores and backups, then persistently prove no residual copies remain (FedRAMP KSI-SVC-RUD / KSI-SVC-PRR).",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  }
+}

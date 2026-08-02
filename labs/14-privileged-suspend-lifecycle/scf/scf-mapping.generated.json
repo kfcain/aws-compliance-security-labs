@@ -1,0 +1,295 @@
+{
+  "lab_id": "14-privileged-suspend-lifecycle",
+  "generated_at": "2026-08-01T19:09:54.126Z",
+  "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "controls": [
+    {
+      "scf_control_id": "IAC-15",
+      "title": "Account Management",
+      "family": "IAC",
+      "description": "Mechanisms exist to proactively govern account management of individual, group, system, service, application, guest and temporary accounts.",
+      "evidence_requests": [
+        "E-IAM-07",
+        "E-IAM-08"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "AC-02"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.01.a",
+          "03.01.01.b",
+          "03.01.01.c.01",
+          "03.01.01.c.02",
+          "03.01.01.d.01",
+          "03.01.01.d.02",
+          "03.01.01.e",
+          "03.01.01.f.01",
+          "03.01.01.f.03",
+          "03.01.01.f.04",
+          "03.01.01.f.05",
+          "03.01.01.g.01",
+          "03.01.01.g.02",
+          "03.01.01.g.03",
+          "03.01.02",
+          "03.01.05.b",
+          "03.01.05.c",
+          "03.01.05.d"
+        ],
+        "general-pci-dss-4-0-1": [
+          "8.2.4",
+          "8.3.10",
+          "8.6",
+          "8.6.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AC-02"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-IAM-SUS": "Responding to suspicious activity on privileged accounts",
+        "KSI-IAM-AAM": "Automating account management lifecycle and privileges",
+        "KSI-IAM-ELP": "Ensure least privilege",
+        "KSI-IAM-JIT": "Authorizing just-in-time",
+        "KSI-IAM-APM": "Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-15.json"
+    },
+    {
+      "scf_control_id": "IAC-16",
+      "title": "Privileged Account Management (PAM)",
+      "family": "IAC",
+      "description": "Mechanisms exist to restrict and control privileged access rights for users and Technology Assets, Applications and/or Services (TAAS).",
+      "evidence_requests": [
+        "E-IAM-03"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-171-r3": [
+          "03.01.06.a",
+          "03.01.07.a",
+          "03.01.07.b"
+        ],
+        "general-pci-dss-4-0-1": [
+          "7.2.3",
+          "7.2.5"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-IAM-SUS": "Responding to suspicious activity on privileged accounts",
+        "KSI-IAM-AAM": "Automating account management lifecycle and privileges",
+        "KSI-IAM-ELP": "Ensure least privilege",
+        "KSI-IAM-JIT": "Authorizing just-in-time",
+        "KSI-IAM-APM": "Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-16.json"
+    },
+    {
+      "scf_control_id": "IAC-17",
+      "title": "Periodic Review of Account Privileges",
+      "family": "IAC",
+      "description": "Mechanisms exist to periodically-review the privileges assigned to individuals and service accounts to validate the need for such privileges and reassign or remove unnecessary privileges, as necessary.",
+      "evidence_requests": [
+        "E-HRS-12",
+        "E-HRS-14",
+        "E-IAM-01"
+      ],
+      "nist_csf_function": "Detect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "AC-06(07)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.01.g.03",
+          "03.01.05.c",
+          "03.01.05.d",
+          "03.10.01.c",
+          "03.10.01.d"
+        ],
+        "general-pci-dss-4-0-1": [
+          "7.2.4",
+          "7.2.5.1",
+          "A3.4.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AC-06(07)"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-IAM-SUS": "Responding to suspicious activity on privileged accounts",
+        "KSI-IAM-AAM": "Automating account management lifecycle and privileges",
+        "KSI-IAM-ELP": "Ensure least privilege",
+        "KSI-IAM-JIT": "Authorizing just-in-time",
+        "KSI-IAM-APM": "Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-17.json"
+    },
+    {
+      "scf_control_id": "IAC-21",
+      "title": "Least Privilege",
+      "family": "IAC",
+      "description": "Mechanisms exist to utilize the concept of least privilege, allowing only authorized access to processes necessary to accomplish assigned tasks in accordance with organizational business functions.",
+      "evidence_requests": [
+        "E-IAM-02",
+        "E-IAM-05",
+        "E-IAM-06"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "AC-06",
+          "SA-08(14)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.01.c.03",
+          "03.01.01.d.01",
+          "03.01.01.d.02",
+          "03.01.04.b",
+          "03.01.05.a",
+          "03.01.05.b",
+          "03.01.06.a",
+          "03.01.07.a",
+          "03.03.08.a",
+          "03.03.08.b",
+          "03.04.05"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.3",
+          "3.4",
+          "3.4.2",
+          "7.1",
+          "7.2",
+          "7.2.1",
+          "7.2.2",
+          "7.2.6",
+          "7.3",
+          "7.3.1",
+          "7.3.2",
+          "7.3.3",
+          "8.6",
+          "8.6.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AC-06"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-IAM-SUS": "Responding to suspicious activity on privileged accounts",
+        "KSI-IAM-AAM": "Automating account management lifecycle and privileges",
+        "KSI-IAM-ELP": "Ensure least privilege",
+        "KSI-IAM-JIT": "Authorizing just-in-time",
+        "KSI-IAM-APM": "Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-21.json"
+    },
+    {
+      "scf_control_id": "MON-01",
+      "title": "Continuous Monitoring",
+      "family": "MON",
+      "description": "Mechanisms exist to facilitate the implementation of enterprise-wide monitoring controls.",
+      "evidence_requests": [
+        "E-MON-01",
+        "E-MON-06",
+        "E-MON-07"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "AU-01",
+          "PM-31",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.01.a",
+          "03.12.03",
+          "03.14.06.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "10.1",
+          "10.4.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "A3.3.1",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-01",
+          "SI-04"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-IAM-SUS": "Responding to suspicious activity on privileged accounts",
+        "KSI-IAM-AAM": "Automating account management lifecycle and privileges",
+        "KSI-IAM-ELP": "Ensure least privilege",
+        "KSI-IAM-JIT": "Authorizing just-in-time",
+        "KSI-IAM-APM": "Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json"
+    },
+    {
+      "scf_control_id": "THR-03",
+      "title": "Threat Intelligence Feeds",
+      "family": "THR",
+      "description": "Mechanisms exist to maintain situational awareness of vulnerabilities and evolving threats by leveraging the knowledge of attacker tactics, techniques and procedures to facilitate the implementation of preventative and compensating controls.",
+      "evidence_requests": [
+        "E-THR-03"
+      ],
+      "nist_csf_function": "Identify",
+      "relative_weight": 8,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "PM-16(01)",
+          "SI-05",
+          "SI-05(01)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.02.01.a.02",
+          "03.02.01.a.03",
+          "03.02.01.b",
+          "03.02.02.b",
+          "03.11.02.a",
+          "03.14.03.a"
+        ],
+        "general-iso-27001-2022": [
+          "7.4",
+          "7.4(a)",
+          "7.4(b)",
+          "7.4(c)",
+          "7.4(d)"
+        ],
+        "general-pci-dss-4-0-1": [
+          "6.3.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "SI-05"
+        ]
+      },
+      "fedramp_20x_ksi": {
+        "KSI-IAM-SUS": "Responding to suspicious activity on privileged accounts",
+        "KSI-IAM-AAM": "Automating account management lifecycle and privileges",
+        "KSI-IAM-ELP": "Ensure least privilege",
+        "KSI-IAM-JIT": "Authorizing just-in-time",
+        "KSI-IAM-APM": "Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA"
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/THR-03.json"
+    }
+  ],
+  "coverage_summary": {
+    "control_count": 6,
+    "frameworks_with_hits": {
+      "general-nist-800-53-r5-2": 5,
+      "general-nist-800-171-r3": 6,
+      "general-pci-dss-4-0-1": 6,
+      "usa-federal-gsa-fedramp-5-mod": 5,
+      "general-iso-27001-2022": 1
+    }
+  }
+}
