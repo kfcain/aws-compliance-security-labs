@@ -53,7 +53,7 @@ jobs:
           node-version: '22'
       # Hermetic: the live SCF test only runs when SCF_LIVE=1 (scf-refresh workflow).
       - run: npm run scf:test
-      - run: node --test scripts/
+      - run: node --test 'scripts/*.test.mjs'
 
   validate-data:
     runs-on: ubuntu-latest
