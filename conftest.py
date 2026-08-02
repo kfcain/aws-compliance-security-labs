@@ -50,6 +50,20 @@ class FakePaginator:
         yield from self._pages
 
 
+class _SequencedPages:
+    """Wraps a list of page-sets: each get_paginator().paginate() run consumes
+    the next page-set (the last one repeats). Configure by passing a list of
+    LISTS as a `pages` value."""
+
+    def __init__(self, page_sets: list[list[dict[str, Any]]]):
+        self._sets = list(page_sets)
+
+    def next_set(self) -> list[dict[str, Any]]:
+        if len(self._sets) > 1:
+            return self._sets.pop(0)
+        return self._sets[0]
+
+
 class FakeClient:
     """Recorder-style boto3 client fake.
 
@@ -77,7 +91,14 @@ class FakeClient:
     def get_paginator(self, operation_name: str) -> FakePaginator:
         if operation_name not in self.pages:
             raise ValueError(f"no fake pages configured for {operation_name}")
-        return FakePaginator(self.pages[operation_name])
+        configured = self.pages[operation_name]
+        if isinstance(configured, _SequencedPages):
+            return FakePaginator(configured.next_set())
+        if configured and isinstance(configured[0], list):
+            wrapped = _SequencedPages(configured)
+            self.pages[operation_name] = wrapped
+            return FakePaginator(wrapped.next_set())
+        return FakePaginator(configured)
 
     def __getattr__(self, name: str):
         if name.startswith("_"):
