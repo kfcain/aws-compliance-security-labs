@@ -40,4 +40,4 @@ python3 -c "import json,sys; sys.path.insert(0,'labs/03-nhi-credential-rotation/
 - **Determination source:** `compliance_status` in the handler response and
   the persisted evidence object; `FAIL` also raises a Security Hub ASFF
   finding and an SNS alert.
-- **Framework coverage note:** ISO 27001:2022, general-nist-800-171-r2, usa-federal-dow-cmmc-2-level-2 currently have no SCF crosswalk hits for this lab's controls (tracked in [COVERAGE.md](../../COVERAGE.md); resolved by the scheduled scf-refresh regeneration).
+- **Framework coverage note:** ISO 27001:2022 currently have no SCF crosswalk hits for this lab's controls (tracked in [COVERAGE.md](../../COVERAGE.md); resolved by the scheduled scf-refresh regeneration).

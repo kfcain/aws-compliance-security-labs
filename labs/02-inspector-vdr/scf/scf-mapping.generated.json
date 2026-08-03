@@ -1,7 +1,8 @@
 {
   "lab_id": "02-inspector-vdr",
-  "generated_at": "2026-08-01T19:09:53.386Z",
+  "generated_at": "2026-08-03T10:04:54.485Z",
   "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "ksi_overlay_version": "2026-08.1",
   "controls": [
     {
       "scf_control_id": "VPM-01",
@@ -33,18 +34,24 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "SI-02",
           "SI-03"
+        ],
+        "general-nist-800-171-r2": [
+          "3.14.1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "SIL2.-3.14.1"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-AFR-VDR": {
           "description": "Vulnerability detection and response with N1–N5 severity SLAs",
           "legacy": true
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-01.json"
     },
     {
       "scf_control_id": "VPM-02",
@@ -82,18 +89,24 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "PM-04",
           "SC-18(01)"
+        ],
+        "general-nist-800-171-r2": [
+          "3.14.1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "SIL2.-3.14.1"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-02.json",
       "fedramp_20x_ksi_detail": {
         "KSI-AFR-VDR": {
           "description": "Vulnerability detection and response with N1–N5 severity SLAs",
           "legacy": true
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-02.json"
     },
     {
       "scf_control_id": "MON-01",
@@ -131,13 +144,21 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "AU-01",
           "SI-04"
+        ],
+        "general-nist-800-171-r2": [
+          "3.3.3",
+          "3.14.6",
+          "NFO - AU-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "AUL2.-3.3.3",
+          "SIL2.-3.14.6"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-AFR-PVL": "Persistent validation cadence",
         "KSI-MLA-EVC": "Evaluating configurations"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-AFR-PVL": {
           "description": "Persistent validation cadence",
@@ -146,7 +167,8 @@
         "KSI-MLA-EVC": {
           "description": "Evaluating configurations"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json"
     },
     {
       "scf_control_id": "THR-01",
@@ -173,11 +195,19 @@
         ],
         "usa-federal-gsa-fedramp-5-mod": [
           "PM-15"
+        ],
+        "general-nist-800-171-r2": [
+          "3.12.3",
+          "3.14.3"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CAL2.-3.12.3",
+          "SIL2.-3.14.3"
         ]
       },
       "fedramp_20x_ksi": {},
-      "source": "https://grcengclub.github.io/scf-api/api/controls/THR-01.json",
-      "fedramp_20x_ksi_detail": {}
+      "fedramp_20x_ksi_detail": {},
+      "source": "https://grcengclub.github.io/scf-api/api/controls/THR-01.json"
     }
   ],
   "coverage_summary": {
@@ -186,19 +216,13 @@
       "general-nist-800-53-r5-2": 4,
       "general-nist-800-171-r3": 4,
       "general-pci-dss-4-0-1": 4,
-      "usa-federal-gsa-fedramp-5-mod": 4
+      "usa-federal-gsa-fedramp-5-mod": 4,
+      "general-nist-800-171-r2": 4,
+      "usa-federal-dow-cmmc-2-level-2": 4
     },
     "frameworks_requested_without_hits": [
       {
         "framework": "general-iso-27001-2022",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "general-nist-800-171-r2",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "usa-federal-dow-cmmc-2-level-2",
         "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
       }
     ],
@@ -211,6 +235,5 @@
       "general-nist-800-171-r2",
       "usa-federal-dow-cmmc-2-level-2"
     ]
-  },
-  "ksi_overlay_version": "2026-08.1"
+  }
 }

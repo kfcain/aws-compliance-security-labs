@@ -1,7 +1,8 @@
 {
   "lab_id": "10-supply-chain-sbom",
-  "generated_at": "2026-08-01T19:09:53.815Z",
+  "generated_at": "2026-08-03T10:04:56.224Z",
   "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "ksi_overlay_version": "2026-08.1",
   "controls": [
     {
       "scf_control_id": "TPM-01",
@@ -39,18 +40,25 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "SA-04",
           "SR-01"
+        ],
+        "general-nist-800-171-r2": [
+          "3.1.1",
+          "NFO - SA-4"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.1"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-SCR-SRA": "Supply chain risk assessment (alias)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/TPM-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SCR-SRA": {
           "description": "Supply chain risk assessment (alias)",
           "legacy": true
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/TPM-01.json"
     },
     {
       "scf_control_id": "TPM-03",
@@ -82,13 +90,13 @@
       "fedramp_20x_ksi": {
         "KSI-SCR-TPM": "Third-party monitoring (alias)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/TPM-03.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SCR-TPM": {
           "description": "Third-party monitoring (alias)",
           "legacy": true
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/TPM-03.json"
     },
     {
       "scf_control_id": "TPM-04",
@@ -120,18 +128,21 @@
         ],
         "usa-federal-gsa-fedramp-5-mod": [
           "SA-09"
+        ],
+        "general-nist-800-171-r2": [
+          "NFO - SA-9"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-SCR-TPM": "Third-party monitoring (alias)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/TPM-04.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SCR-TPM": {
           "description": "Third-party monitoring (alias)",
           "legacy": true
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/TPM-04.json"
     },
     {
       "scf_control_id": "VPM-01",
@@ -163,18 +174,24 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "SI-02",
           "SI-03"
+        ],
+        "general-nist-800-171-r2": [
+          "3.14.1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "SIL2.-3.14.1"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-AFR-VDR": {
           "description": "Vulnerability detection and response with N1–N5 severity SLAs",
           "legacy": true
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-01.json"
     },
     {
       "scf_control_id": "AST-02",
@@ -211,11 +228,17 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "CM-08",
           "PM-05"
+        ],
+        "general-nist-800-171-r2": [
+          "3.4.1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CML2.-3.4.1"
         ]
       },
       "fedramp_20x_ksi": {},
-      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-02.json",
-      "fedramp_20x_ksi_detail": {}
+      "fedramp_20x_ksi_detail": {},
+      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-02.json"
     }
   ],
   "coverage_summary": {
@@ -224,19 +247,13 @@
       "general-nist-800-53-r5-2": 5,
       "general-nist-800-171-r3": 5,
       "general-pci-dss-4-0-1": 4,
-      "usa-federal-gsa-fedramp-5-mod": 5
+      "usa-federal-gsa-fedramp-5-mod": 5,
+      "general-nist-800-171-r2": 4,
+      "usa-federal-dow-cmmc-2-level-2": 3
     },
     "frameworks_requested_without_hits": [
       {
         "framework": "general-iso-27001-2022",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "general-nist-800-171-r2",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "usa-federal-dow-cmmc-2-level-2",
         "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
       }
     ],
@@ -249,6 +266,5 @@
       "general-nist-800-171-r2",
       "usa-federal-dow-cmmc-2-level-2"
     ]
-  },
-  "ksi_overlay_version": "2026-08.1"
+  }
 }
