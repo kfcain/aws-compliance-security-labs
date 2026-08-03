@@ -1,0 +1,34 @@
+{
+  "lab_id": "17-terraform-dr-readiness",
+  "title": "Terraform DR Readiness & State-Backend Resilience",
+  "scf_controls": [
+    "BCD-01",
+    "BCD-02",
+    "BCD-11",
+    "BCD-12",
+    "CFG-01"
+  ],
+  "ksi_by_control": {
+    "BCD-01": ["KSI-CNA-OFA"],
+    "BCD-02": ["KSI-RPL-RRO"],
+    "BCD-11": ["KSI-RPL-ABO"],
+    "BCD-12": ["KSI-RPL-ARP"],
+    "CFG-01": ["KSI-CNA-EIS"]
+  },
+  "ksi": [
+    "KSI-CNA-EIS",
+    "KSI-CNA-OFA",
+    "KSI-RPL-ABO",
+    "KSI-RPL-ARP",
+    "KSI-RPL-RRO"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
+  ]
+}

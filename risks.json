@@ -1,8 +1,8 @@
 {
-  "risk_count": 16,
+  "risk_count": 17,
   "band_summary": {
     "Major": 3,
-    "Moderate": 10,
+    "Moderate": 11,
     "Minor": 3
   },
   "risks": [
@@ -304,6 +304,30 @@
         "T1578",
         "T1562.007",
         "T1098"
+      ]
+    },
+    {
+      "risk_id": "RISK-17-01",
+      "lab": "17-terraform-dr-readiness",
+      "owner": "Resilience Engineering Lead",
+      "statement": "A disaster is unrecoverable because the Terraform state backend or the declared architecture is not DR-ready",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "Critical",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Low",
+        "impact": "High",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1490",
+        "T1485",
+        "T1486"
       ]
     },
     {

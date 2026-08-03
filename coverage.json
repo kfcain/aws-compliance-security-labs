@@ -1,6 +1,6 @@
 {
   "ksi_overlay_version": "2026-08.1",
-  "lab_count": 16,
+  "lab_count": 17,
   "frameworks": [
     "general-nist-800-53-r5-2",
     "general-nist-800-171-r3",
@@ -2066,6 +2066,98 @@
         ]
       },
       "generated_at": "2026-08-01T19:09:53.496Z"
+    },
+    {
+      "lab_id": "17-terraform-dr-readiness",
+      "scf_controls": [
+        "BCD-01",
+        "BCD-02",
+        "BCD-11",
+        "BCD-12",
+        "CFG-01"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 5,
+        "general-nist-800-171-r3": 2,
+        "general-iso-27001-2022": 0,
+        "general-pci-dss-4-0-1": 2,
+        "usa-federal-gsa-fedramp-5-mod": 5,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "CM-01",
+          "CM-09",
+          "CP-01",
+          "CP-02",
+          "CP-02(08)",
+          "CP-09",
+          "CP-10",
+          "IR-04(03)",
+          "PM-08",
+          "SC-28(02)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.01.a",
+          "03.08.09.a"
+        ],
+        "general-iso-27001-2022": [],
+        "general-pci-dss-4-0-1": [
+          "12.10.1",
+          "2.1",
+          "2.2",
+          "8.5",
+          "9.4.1.1",
+          "9.4.1.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-01",
+          "CM-09",
+          "CP-01",
+          "CP-02",
+          "CP-02(08)",
+          "CP-09",
+          "CP-10",
+          "IR-04(03)",
+          "PM-08",
+          "SC-28(02)"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-iso-27001-2022",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "BCD-01": [
+          "KSI-CNA-OFA"
+        ],
+        "BCD-02": [
+          "KSI-RPL-RRO"
+        ],
+        "BCD-11": [
+          "KSI-RPL-ABO"
+        ],
+        "BCD-12": [
+          "KSI-RPL-ARP"
+        ],
+        "CFG-01": [
+          "KSI-CNA-EIS"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:53.983Z"
     }
   ],
   "portfolio": {
@@ -2131,22 +2223,27 @@
         "13-boundary-asset-inventory"
       ],
       "BCD-01": [
-        "12-backup-recovery-rto-rpo"
+        "12-backup-recovery-rto-rpo",
+        "17-terraform-dr-readiness"
       ],
       "BCD-02": [
-        "12-backup-recovery-rto-rpo"
+        "12-backup-recovery-rto-rpo",
+        "17-terraform-dr-readiness"
       ],
       "BCD-11": [
         "11-federal-data-deletion-residual",
-        "12-backup-recovery-rto-rpo"
+        "12-backup-recovery-rto-rpo",
+        "17-terraform-dr-readiness"
       ],
       "BCD-12": [
-        "12-backup-recovery-rto-rpo"
+        "12-backup-recovery-rto-rpo",
+        "17-terraform-dr-readiness"
       ],
       "CFG-01": [
         "04-config-drift-compliance",
         "15-immutable-cicd-change-control",
-        "16-terraform-drift-detection"
+        "16-terraform-drift-detection",
+        "17-terraform-dr-readiness"
       ],
       "CFG-02": [
         "03-nhi-credential-rotation",

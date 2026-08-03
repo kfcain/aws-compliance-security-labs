@@ -729,6 +729,52 @@
       ],
       "source_repo": "https://github.com/kfcain/aws-compliance-security-labs",
       "status": "hardened"
+    },
+    {
+      "id": "17-terraform-dr-readiness",
+      "title": "Terraform DR Readiness & State-Backend Resilience",
+      "repo_name": "lab-terraform-dr-readiness",
+      "path": "labs/17-terraform-dr-readiness",
+      "summary": "Evaluate a DR-readiness descriptor derived from Terraform to prove recovery is possible: state-backend resilience (versioned/encrypted/replicated/locking) and DR architecture parity (recovery region, cross-region durable data, failover routing) against RTO/RPO targets, with an assessor-ready assurance case.",
+      "primary_risk": "A disaster is unrecoverable because the Terraform state backend or the declared architecture is not DR-ready",
+      "scf_controls": [
+        "BCD-01",
+        "BCD-02",
+        "BCD-11",
+        "BCD-12",
+        "CFG-01"
+      ],
+      "ksi": [
+        "KSI-CNA-EIS",
+        "KSI-CNA-OFA",
+        "KSI-RPL-ABO",
+        "KSI-RPL-ARP",
+        "KSI-RPL-RRO"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "aws_services": [
+        "Lambda",
+        "EventBridge",
+        "S3",
+        "KMS",
+        "SNS",
+        "Security Hub",
+        "CloudWatch Logs"
+      ],
+      "external_services": [
+        "Terraform",
+        "CI runner"
+      ],
+      "source_repo": "https://github.com/kfcain/aws-compliance-security-labs",
+      "status": "hardened"
     }
   ]
 }

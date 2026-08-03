@@ -58,6 +58,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   (pre-deploy on the plan, post-deploy on the evidence). Full lab set: hardened
   SAM stack, 22 handler tests, SCF crosswalk, OSCAL, assessment, and
   risk-register entry.
+- **Lab 17 — Terraform DR Readiness & State-Backend Resilience** (new):
+  evaluates a DR-readiness descriptor derived from Terraform to prove a disaster
+  is recoverable — state-backend resilience (remote+versioned+KMS+cross-region-
+  replicated+locking; a local backend is critical) and DR architecture parity
+  (designated recovery region, cross-region durable critical stores, failover
+  routing) against RTO/RPO targets. Complements lab 12 (runtime AWS Backup
+  restore evidence) from the IaC side. Emits the same assessor-ready assurance
+  case (provenance, SHA-256 manifest, NIST CP-family objective mapping) and
+  ships a DR-plan/ODP register, a read-only descriptor deriver, and an
+  OPA/Conftest gate. Full lab set: hardened SAM stack, 16 handler tests, SCF
+  crosswalk, OSCAL, assessment, and risk-register entry.
 - Real `boto3` validation logic in labs 04–10 (previously `PASS_PLACEHOLDER`
   stubs): AWS Config compliance, GuardDuty posture and findings, KMS/Secrets
   rotation governance, CloudTrail + evidence immutability, VPC flow-log and
