@@ -1,0 +1,15 @@
+{
+  "control_id": "MON-01",
+  "title": "Continuous Monitoring",
+  "family": "MON",
+  "description": "Mechanisms exist to facilitate the implementation of enterprise-wide monitoring controls.",
+  "evidence_requests": ["E-MON-01"],
+  "nist_csf_function": "Detect",
+  "relative_weight": 10,
+  "crosswalks": {
+    "general-nist-800-53-r5-2": ["CA-7", "SI-4"],
+    "general-nist-800-171-r3": ["03.12.03"],
+    "general-pci-dss-4-0-1": ["10.4.1"],
+    "usa-federal-gsa-fedramp-5-mod": ["CA-7"]
+  }
+}
