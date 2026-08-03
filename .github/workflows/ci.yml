@@ -43,6 +43,7 @@ jobs:
           python-version: '3.13'
       - run: pip install -r requirements-dev.txt
       - run: cfn-lint
+      - run: checkov --config-file .checkov.yaml
 
   test-node:
     runs-on: ubuntu-latest

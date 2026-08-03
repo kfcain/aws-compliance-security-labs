@@ -49,14 +49,28 @@ Each lab includes `README.md`, `RISK.md`, `SPEC.md`, `scf/`, `diagrams/`, `infra
 ## Quick start
 
 ```bash
-# Install nothing required for SCF mapping beyond Node 18+
-npm run scf:test
-npm run scf:map:all
+# Verify everything offline (Node 18+; Python dev tools from requirements-dev.txt)
+pip install -r requirements-dev.txt
+make lint test iac check     # ruff, pytest, node --test, cfn-lint, checkov, drift gates
 
-# Deploy one lab (example)
-cd labs/01-mfa-continuous-validation
-sam build -t infrastructure/template.yaml   # or aws cloudformation deploy
+# Deploy one lab (packages the real handler in src/ — python3.13 runtime)
+cd labs/04-config-drift-compliance
+sam build -t infrastructure/template.yaml
+sam deploy --guided          # parameters gate optional/singleton resources
+
+# Regenerate SCF crosswalks (live network; otherwise the scheduled
+# scf-refresh workflow does this in CI)
+SCF_LIVE=1 npm run scf:map:all
 ```
+
+Every stack creates and hardens its own evidence bucket (SSE-KMS CMK,
+versioning, TLS-only policy, optional Object Lock), encrypts SNS/SQS/logs
+with the lab CMK, sets explicit log retention, wires `AlertEmail` to an SNS
+subscription, and scopes IAM to named resources with partition-agnostic ARNs
+(GovCloud-deployable). Destructive or account-singleton resources (GuardDuty
+detectors, CloudTrail trails, Config rules/aggregators, purge permissions,
+IAM suspend actions, Backup vault lock) are gated behind parameters that
+default **off**.
 
 Open each lab `diagrams/architecture.tldr` in [tldraw.com](https://www.tldraw.com/) (File → Open).
 

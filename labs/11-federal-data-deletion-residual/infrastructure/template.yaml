@@ -1,25 +1,368 @@
 AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
 Description: >
-  Lab 11 — Federal data deletion & residual-data proof (Class C KSI-SVC-RUD/PRR).
-  Step Functions orchestrates live purge → backup purge → residual scan → evidence.
+  Federal Data Deletion & Residual-Data Proof (Class C KSI-SVC-RUD/PRR) —
+  hardened SAM stack. Step Functions orchestrates purge -> residual scan ->
+  evidence with execution logging, retries, and real SNS notifications.
+  Destructive permissions are scoped to the in-stack federal data bucket, the
+  federal_data_lab=true resource-tag marker, and are gated behind
+  EnablePurgeActions (default off = dry run). The deletion case never runs on
+  a schedule — cases are event-driven by design.
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label: { default: Alerting }
+        Parameters: [AlertEmail]
+      - Label: { default: Evidence retention & immutability }
+        Parameters: [LogRetentionDays, EnableObjectLock, ObjectLockRetentionDays]
+      - Label: { default: Governance }
+        Parameters: [PermissionsBoundaryArn, EnvironmentName, OwnerTag]
+      - Label: { default: Deletion policy }
+        Parameters: [TenantTagKey, EnablePurgeActions, RequireBackupPurge]
 
 Parameters:
-  EvidenceBucketName:
-    Type: String
   AlertEmail:
     Type: String
     Default: ''
+    Description: Optional email for SNS alert subscription (empty = no subscription)
+    AllowedPattern: '^$|^[^@\s]+@[^@\s]+\.[^@\s]+$'
+    ConstraintDescription: must be empty or a valid email address
+  LogRetentionDays:
+    Type: Number
+    Default: 365
+    AllowedValues: [30, 90, 180, 365, 731, 1827, 3653]
+    Description: CloudWatch Logs retention for the worker function and state machine
+  EnableObjectLock:
+    Type: String
+    Default: 'false'
+    AllowedValues: ['true', 'false']
+    Description: >-
+      Create the evidence bucket with S3 Object Lock (WORM). Object Lock can
+      only be enabled at bucket creation; enabling later requires a new bucket.
+  ObjectLockRetentionDays:
+    Type: Number
+    Default: 365
+    MinValue: 1
+    Description: Default GOVERNANCE-mode retention for evidence objects (when Object Lock enabled)
+  PermissionsBoundaryArn:
+    Type: String
+    Default: ''
+    Description: Optional IAM permissions boundary applied to the function and state machine roles
+  EnvironmentName:
+    Type: String
+    Default: sandbox
+    AllowedPattern: '^[a-z0-9-]{2,32}$'
+    Description: Environment tag applied to all resources
+  OwnerTag:
+    Type: String
+    Default: security-engineering
+    AllowedPattern: '^[A-Za-z0-9._-]{2,64}$'
+    Description: Owner tag applied to all resources
   TenantTagKey:
     Type: String
     Default: federal_tenant_id
+    AllowedPattern: '^[A-Za-z0-9_.:+=@-]{1,128}$'
+    Description: >-
+      Tag key whose value identifies the tenant on data stores and recovery
+      points. Used by the handler for tenant resolution; the IAM guardrail for
+      destructive actions uses the static federal_data_lab=true marker tag.
+  EnablePurgeActions:
+    Type: String
+    Default: 'false'
+    AllowedValues: ['true', 'false']
+    Description: >-
+      Grant the destructive purge permissions AND set ENABLE_PURGE for the
+      handler. Default false = dry run: purges are reported, nothing is
+      deleted, and the residual scan still tells the truth.
+  RequireBackupPurge:
+    Type: String
+    Default: 'true'
+    AllowedValues: ['true', 'false']
+    Description: Policy floor — a deletion case cannot opt out of backup purging when true
+
+Conditions:
+  HasAlertEmail: !Not [!Equals [!Ref AlertEmail, '']]
+  ObjectLockEnabled: !Equals [!Ref EnableObjectLock, 'true']
+  HasPermissionsBoundary: !Not [!Equals [!Ref PermissionsBoundaryArn, '']]
+  PurgeActionsEnabled: !Equals [!Ref EnablePurgeActions, 'true']
 
 Resources:
-  EvidenceTopic:
-    Type: AWS::SNS::Topic
+  # ---------------------------------------------------------------- KMS ----
+  LabKmsKey:
+    Type: AWS::KMS::Key
     Properties:
-      TopicName: !Sub '${AWS::StackName}-federal-deletion-alerts'
-      DisplayName: Federal data deletion alerts
+      Description: !Sub 'CMK for ${AWS::StackName} evidence, logs, alerts, queues, and case table'
+      EnableKeyRotation: true
+      KeyPolicy:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: EnableIamPolicies
+            Effect: Allow
+            Principal:
+              AWS: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:root'
+            Action: 'kms:*'
+            Resource: '*'
+          - Sid: AllowCloudWatchLogs
+            Effect: Allow
+            Principal:
+              Service: !Sub 'logs.${AWS::Region}.amazonaws.com'
+            Action:
+              - kms:Encrypt
+              - kms:Decrypt
+              - kms:ReEncrypt*
+              - kms:GenerateDataKey*
+              - kms:DescribeKey
+            Resource: '*'
+            Condition:
+              ArnLike:
+                kms:EncryptionContext:aws:logs:arn:
+                  - !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${AWS::StackName}-worker'
+                  - !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/vendedlogs/states/${AWS::StackName}-deletion'
+          - Sid: AllowEventBridgeDlqDelivery
+            Effect: Allow
+            Principal:
+              Service: events.amazonaws.com
+            Action:
+              - kms:GenerateDataKey*
+              - kms:Decrypt
+            Resource: '*'
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
 
+  LabKmsAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: !Sub 'alias/${AWS::StackName}-lab'
+      TargetKeyId: !Ref LabKmsKey
+
+  # ----------------------------------------------------------------- S3 ----
+  AccessLogsBucket:
+    Type: AWS::S3::Bucket
+    Metadata:
+      checkov:
+        skip:
+          - id: CKV_AWS_145
+            comment: S3 server-access-log delivery does not support SSE-KMS targets; SSE-S3 is the supported encryption for log buckets.
+          - id: CKV_AWS_18
+            comment: Access-log bucket does not log to itself (delivery loop); it is the log target for the evidence and federal-data buckets.
+          - id: CKV_AWS_144
+            comment: Cross-region replication is out of scope for lab evidence; retention is handled by lifecycle rules.
+          - id: CKV2_AWS_62
+            comment: No event-driven consumers for access logs in this lab.
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      VersioningConfiguration:
+        Status: Enabled
+      LifecycleConfiguration:
+        Rules:
+          - Id: expire-access-logs
+            Status: Enabled
+            ExpirationInDays: 365
+            NoncurrentVersionExpiration:
+              NoncurrentDays: 30
+            AbortIncompleteMultipartUpload:
+              DaysAfterInitiation: 7
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  AccessLogsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref AccessLogsBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - !GetAtt AccessLogsBucket.Arn
+              - !Sub '${AccessLogsBucket.Arn}/*'
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+          - Sid: AllowS3ServerAccessLogsDelivery
+            Effect: Allow
+            Principal:
+              Service: logging.s3.amazonaws.com
+            Action: s3:PutObject
+            Resource: !Sub '${AccessLogsBucket.Arn}/*'
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+
+  EvidenceBucket:
+    Type: AWS::S3::Bucket
+    Metadata:
+      checkov:
+        skip:
+          - id: CKV_AWS_144
+            comment: Cross-region replication is out of scope for lab evidence; versioning + optional Object Lock provide integrity.
+          - id: CKV2_AWS_62
+            comment: Evidence objects are pulled by auditors/pipelines; no event notifications needed in this lab.
+    Properties:
+      ObjectLockEnabled: !If [ObjectLockEnabled, true, !Ref AWS::NoValue]
+      ObjectLockConfiguration: !If
+        - ObjectLockEnabled
+        - ObjectLockEnabled: Enabled
+          Rule:
+            DefaultRetention:
+              Mode: GOVERNANCE
+              Days: !Ref ObjectLockRetentionDays
+        - !Ref AWS::NoValue
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: aws:kms
+              KMSMasterKeyID: !GetAtt LabKmsKey.Arn
+            BucketKeyEnabled: true
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      VersioningConfiguration:
+        Status: Enabled
+      LoggingConfiguration:
+        DestinationBucketName: !Ref AccessLogsBucket
+        LogFilePrefix: evidence-access/
+      LifecycleConfiguration:
+        Rules:
+          - Id: evidence-retention
+            Status: Enabled
+            Transitions:
+              - StorageClass: STANDARD_IA
+                TransitionInDays: 90
+            NoncurrentVersionExpiration:
+              NoncurrentDays: 400
+            AbortIncompleteMultipartUpload:
+              DaysAfterInitiation: 7
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  EvidenceBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref EvidenceBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - !GetAtt EvidenceBucket.Arn
+              - !Sub '${EvidenceBucket.Arn}/*'
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+          - Sid: DenyWrongEncryptionHeader
+            Effect: Deny
+            Principal: '*'
+            Action: s3:PutObject
+            Resource: !Sub '${EvidenceBucket.Arn}/*'
+            Condition:
+              'Null':
+                s3:x-amz-server-side-encryption: 'false'
+              StringNotEquals:
+                s3:x-amz-server-side-encryption: aws:kms
+
+  # Demo federal data store: the concrete target the destructive IAM scopes
+  # to. Carries both the tenant tag key (tenant resolution) and the static
+  # federal_data_lab marker (IAM guardrail).
+  FederalDataBucket:
+    Type: AWS::S3::Bucket
+    Metadata:
+      checkov:
+        skip:
+          - id: CKV_AWS_144
+            comment: Demo tenant-data bucket for deletion exercises; replication would defeat the residual-proof teaching point.
+          - id: CKV2_AWS_62
+            comment: No event-driven consumers; the deletion workflow reads it directly.
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: aws:kms
+              KMSMasterKeyID: !GetAtt LabKmsKey.Arn
+            BucketKeyEnabled: true
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      VersioningConfiguration:
+        Status: Enabled
+      LoggingConfiguration:
+        DestinationBucketName: !Ref AccessLogsBucket
+        LogFilePrefix: federal-data-access/
+      LifecycleConfiguration:
+        Rules:
+          - Id: hygiene
+            Status: Enabled
+            NoncurrentVersionExpiration:
+              NoncurrentDays: 400
+            AbortIncompleteMultipartUpload:
+              DaysAfterInitiation: 7
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+        - { Key: federal_data_lab, Value: 'true' }
+        - { Key: !Ref TenantTagKey, Value: multi-tenant }
+
+  FederalDataBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref FederalDataBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - !GetAtt FederalDataBucket.Arn
+              - !Sub '${FederalDataBucket.Arn}/*'
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+
+  # ---------------------------------------------------------- DynamoDB ----
   DeletionCaseTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -32,10 +375,124 @@ Resources:
           KeyType: HASH
       SSESpecification:
         SSEEnabled: true
+        SSEType: KMS
+        KMSMasterKeyId: !Ref LabKmsKey
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      DeletionProtectionEnabled: true
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
 
+  # ------------------------------------------------------------ Queues ----
+  DeadLetterQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub '${AWS::StackName}-dlq'
+      KmsMasterKeyId: !Ref LabKmsKey
+      MessageRetentionPeriod: 1209600
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  DeadLetterQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues: [!Ref DeadLetterQueue]
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 'sqs:*'
+            Resource: !GetAtt DeadLetterQueue.Arn
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+
+  # -------------------------------------------------------------- SNS -----
+  AlertsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub '${AWS::StackName}-alerts'
+      DisplayName: !Sub '${AWS::StackName} federal deletion alerts'
+      KmsMasterKeyId: !Ref LabKmsKey
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  AlertsTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics: [!Ref AlertsTopic]
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 'sns:Publish'
+            Resource: !Ref AlertsTopic
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+          - Sid: AllowAccountPublishViaIam
+            Effect: Allow
+            Principal:
+              AWS: '*'
+            Action: sns:Publish
+            Resource: !Ref AlertsTopic
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+
+  AlertsSubscription:
+    Type: AWS::SNS::Subscription
+    Condition: HasAlertEmail
+    Properties:
+      TopicArn: !Ref AlertsTopic
+      Protocol: email
+      Endpoint: !Ref AlertEmail
+
+  # ------------------------------------------------------------- Logs -----
+  FunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-worker'
+      RetentionInDays: !Ref LogRetentionDays
+      KmsKeyId: !GetAtt LabKmsKey.Arn
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  StateMachineLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/vendedlogs/states/${AWS::StackName}-deletion'
+      RetentionInDays: !Ref LogRetentionDays
+      KmsKeyId: !GetAtt LabKmsKey.Arn
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  # -------------------------------------------------------------- IAM -----
   LabFunctionRole:
     Type: AWS::IAM::Role
     Properties:
+      RoleName: !Sub '${AWS::StackName}-worker-role'
+      Path: /lab/
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref AWS::NoValue]
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -43,65 +500,128 @@ Resources:
             Principal:
               Service: lambda.amazonaws.com
             Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
       Policies:
-        - PolicyName: DeletionLab
+        - PolicyName: LabWorkerLeastPrivilege
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
-              - Effect: Allow
-                Action: [s3:PutObject, s3:GetObject, s3:ListBucket]
-                Resource:
-                  - !Sub 'arn:aws:s3:::${EvidenceBucketName}'
-                  - !Sub 'arn:aws:s3:::${EvidenceBucketName}/*'
-              - Effect: Allow
-                Action: [sns:Publish]
-                Resource: !Ref EvidenceTopic
-              - Effect: Allow
-                Action: [securityhub:BatchImportFindings]
-                Resource: '*'
-              - Effect: Allow
-                Action: [dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:GetItem]
-                Resource: !GetAtt DeletionCaseTable.Arn
-              # Production: tighten to tagged resources only
-              - Effect: Allow
+              - Sid: WriteOwnLogGroup
+                Effect: Allow
                 Action:
-                  - s3:DeleteObject
-                  - s3:DeleteObjectVersion
-                  - dynamodb:Query
-                  - dynamodb:BatchWriteItem
-                  - backup:ListRecoveryPointsByBackupVault
-                  - backup:DeleteRecoveryPoint
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: !Sub '${FunctionLogGroup.Arn}:*'
+              - Sid: XRayTracing
+                Effect: Allow
+                Action:
+                  - xray:PutTraceSegments
+                  - xray:PutTelemetryRecords
                 Resource: '*'
-                Condition:
-                  StringEquals:
-                    'aws:ResourceTag/federal_data_lab': 'true'
-
-  LabFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      FunctionName: !Sub '${AWS::StackName}-deletion-worker'
-      Runtime: python3.12
-      Handler: handler.handler
-      Role: !GetAtt LabFunctionRole.Arn
-      Timeout: 300
-      Environment:
-        Variables:
-          EVIDENCE_BUCKET: !Ref EvidenceBucketName
-          LAB_ID: 11-federal-data-deletion-residual
-          SNS_TOPIC_ARN: !Ref EvidenceTopic
-          TENANT_TAG_KEY: !Ref TenantTagKey
-          REQUIRE_BACKUP_PURGE: 'true'
-          CASE_TABLE: !Ref DeletionCaseTable
-      Code:
-        ZipFile: |
-          def handler(event, context):
-              return {"ok": True, "note": "Replace with packaged src/handler.py"}
+              - Sid: EvidenceReadWrite
+                Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                Resource: !Sub '${EvidenceBucket.Arn}/*'
+              - Sid: EvidenceList
+                Effect: Allow
+                Action:
+                  - s3:ListBucket
+                  - s3:GetBucketVersioning
+                Resource: !GetAtt EvidenceBucket.Arn
+              - Sid: ResidualScanFederalBucket
+                Effect: Allow
+                Action:
+                  - s3:ListBucket
+                  - s3:ListBucketVersions
+                Resource: !GetAtt FederalDataBucket.Arn
+              - Sid: UseLabKey
+                Effect: Allow
+                Action:
+                  - kms:GenerateDataKey
+                  - kms:Decrypt
+                Resource: !GetAtt LabKmsKey.Arn
+              - Sid: PublishAlerts
+                Effect: Allow
+                Action:
+                  - sns:Publish
+                Resource: !Ref AlertsTopic
+              - Sid: DeadLetter
+                Effect: Allow
+                Action:
+                  - sqs:SendMessage
+                Resource: !GetAtt DeadLetterQueue.Arn
+              - Sid: ImportFindingsOwnProductOnly
+                Effect: Allow
+                Action:
+                  - securityhub:BatchImportFindings
+                Resource: !Sub 'arn:${AWS::Partition}:securityhub:${AWS::Region}:${AWS::AccountId}:product/${AWS::AccountId}/default'
+              - Sid: CaseTableReadWrite
+                Effect: Allow
+                Action:
+                  - dynamodb:PutItem
+                  - dynamodb:GetItem
+                  - dynamodb:Query
+                  - dynamodb:DescribeTable
+                Resource: !GetAtt DeletionCaseTable.Arn
+              - Sid: ReadBackupInventory
+                Effect: Allow
+                Action:
+                  - backup:ListRecoveryPointsByBackupVault
+                  - backup:ListTags
+                Resource: '*'
+                # Backup list APIs support no resource-level scoping; deletion
+                # is separately gated and marker-tag-scoped below
+              # Destructive statements: only exist when EnablePurgeActions=true,
+              # scoped to the in-stack federal bucket and marker-tagged resources.
+              - !If
+                - PurgeActionsEnabled
+                - Sid: PurgeFederalBucketObjects
+                  Effect: Allow
+                  Action:
+                    - s3:DeleteObject
+                    - s3:DeleteObjectVersion
+                  Resource: !Sub '${FederalDataBucket.Arn}/*'
+                - !Ref AWS::NoValue
+              - !If
+                - PurgeActionsEnabled
+                - Sid: PurgeMarkerTaggedTables
+                  Effect: Allow
+                  Action:
+                    - dynamodb:Query
+                    - dynamodb:DescribeTable
+                    - dynamodb:BatchWriteItem
+                  Resource: !Sub 'arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/*'
+                  Condition:
+                    StringEquals:
+                      aws:ResourceTag/federal_data_lab: 'true'
+                - !Ref AWS::NoValue
+              - !If
+                - PurgeActionsEnabled
+                - Sid: PurgeMarkerTaggedRecoveryPoints
+                  Effect: Allow
+                  Action:
+                    - backup:DeleteRecoveryPoint
+                  Resource: !Sub 'arn:${AWS::Partition}:backup:${AWS::Region}:${AWS::AccountId}:recovery-point:*'
+                  Condition:
+                    StringEquals:
+                      aws:ResourceTag/federal_data_lab: 'true'
+                - !Ref AWS::NoValue
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
 
   StateMachineRole:
     Type: AWS::IAM::Role
     Properties:
+      RoleName: !Sub '${AWS::StackName}-sfn-role'
+      Path: /lab/
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref AWS::NoValue]
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -109,78 +629,215 @@ Resources:
             Principal:
               Service: states.amazonaws.com
             Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
       Policies:
-        - PolicyName: InvokeDeletionLambda
+        - PolicyName: DeletionOrchestration
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
-              - Effect: Allow
-                Action: lambda:InvokeFunction
+              - Sid: InvokeWorker
+                Effect: Allow
+                Action:
+                  - lambda:InvokeFunction
                 Resource: !GetAtt LabFunction.Arn
+              - Sid: NotifyOutcome
+                Effect: Allow
+                Action:
+                  - sns:Publish
+                Resource: !Ref AlertsTopic
+              - Sid: UseLabKeyForNotifications
+                Effect: Allow
+                Action:
+                  - kms:GenerateDataKey
+                  - kms:Decrypt
+                Resource: !GetAtt LabKmsKey.Arn
+              - Sid: VendedLogDelivery
+                Effect: Allow
+                Action:
+                  - logs:CreateLogDelivery
+                  - logs:GetLogDelivery
+                  - logs:UpdateLogDelivery
+                  - logs:DeleteLogDelivery
+                  - logs:ListLogDeliveries
+                  - logs:PutResourcePolicy
+                  - logs:DescribeResourcePolicies
+                  - logs:DescribeLogGroups
+                Resource: '*'
+                # CloudWatch vended-log delivery APIs support no resource-level scoping
+              - Sid: XRayTracing
+                Effect: Allow
+                Action:
+                  - xray:PutTraceSegments
+                  - xray:PutTelemetryRecords
+                Resource: '*'
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
 
+  # ------------------------------------------------------------ Lambda ----
+  LabFunction:
+    Type: AWS::Serverless::Function
+    DependsOn: FunctionLogGroup
+    Metadata:
+      checkov:
+        skip:
+          - id: CKV_AWS_117
+            comment: Lab functions call regional AWS APIs only; VPC attachment would add NAT cost with no data-path benefit here.
+          - id: CKV_AWS_272
+            comment: Code signing is out of scope for sandbox labs; change control is covered by lab 15's pipeline validation.
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-worker'
+      Description: Executes/validates federal data deletion cases and emits residual-proof evidence
+      CodeUri: ../src
+      Handler: handler.handler
+      Runtime: python3.13
+      MemorySize: 256
+      Timeout: 300
+      Tracing: Active
+      ReservedConcurrentExecutions: 1
+      Role: !GetAtt LabFunctionRole.Arn
+      KmsKeyArn: !GetAtt LabKmsKey.Arn
+      DeadLetterQueue:
+        Type: SQS
+        TargetArn: !GetAtt DeadLetterQueue.Arn
+      Environment:
+        Variables:
+          EVIDENCE_BUCKET: !Ref EvidenceBucket
+          SNS_TOPIC_ARN: !Ref AlertsTopic
+          LAB_ID: 11-federal-data-deletion-residual
+          LOG_LEVEL: INFO
+          CASE_TABLE: !Ref DeletionCaseTable
+          TENANT_TAG_KEY: !Ref TenantTagKey
+          ENABLE_PURGE: !Ref EnablePurgeActions
+          REQUIRE_BACKUP_PURGE: !Ref RequireBackupPurge
+      Tags:
+        project: aws-compliance-security-labs
+        lab_id: 11-federal-data-deletion-residual
+        environment: !Ref EnvironmentName
+        owner: !Ref OwnerTag
+
+  # ----------------------------------------------------- Step Functions ---
   DeletionStateMachine:
     Type: AWS::StepFunctions::StateMachine
     Properties:
-      StateMachineName: !Sub '${AWS::StackName}-federal-deletion'
+      StateMachineName: !Sub '${AWS::StackName}-deletion'
       RoleArn: !GetAtt StateMachineRole.Arn
+      TracingConfiguration:
+        Enabled: true
+      LoggingConfiguration:
+        Level: ALL
+        IncludeExecutionData: true
+        Destinations:
+          - CloudWatchLogsLogGroup:
+              LogGroupArn: !GetAtt StateMachineLogGroup.Arn
       DefinitionString: !Sub |
         {
-          "Comment": "Federal data deletion: validate → purge live → purge backups → residual scan",
+          "Comment": "Federal data deletion: validate/purge -> residual scan -> evidence -> notify",
           "StartAt": "ValidateAndPurge",
           "States": {
             "ValidateAndPurge": {
               "Type": "Task",
               "Resource": "${LabFunction.Arn}",
               "ResultPath": "$.evidence",
-              "Next": "CheckStatus"
+              "Retry": [
+                {
+                  "ErrorEquals": ["Lambda.TooManyRequestsException", "Lambda.ServiceException", "States.Timeout"],
+                  "IntervalSeconds": 5,
+                  "MaxAttempts": 3,
+                  "BackoffRate": 2.0
+                }
+              ],
+              "Catch": [
+                {
+                  "ErrorEquals": ["States.ALL"],
+                  "ResultPath": "$.error",
+                  "Next": "NotifyFailure"
+                }
+              ],
+              "Next": "EvaluateOutcome"
             },
-            "CheckStatus": {
+            "EvaluateOutcome": {
               "Type": "Choice",
               "Choices": [
                 {
-                  "Variable": "$.evidence.statusCode",
-                  "NumericEquals": 200,
+                  "Variable": "$.evidence.compliance_status",
+                  "StringEquals": "PASS",
                   "Next": "NotifyComplete"
                 }
               ],
               "Default": "NotifyFailure"
             },
             "NotifyComplete": {
-              "Type": "Succeed"
+              "Type": "Task",
+              "Resource": "arn:${AWS::Partition}:states:::sns:publish",
+              "Parameters": {
+                "TopicArn": "${AlertsTopic}",
+                "Subject": "Federal deletion case complete",
+                "Message.$": "States.JsonToString($.evidence)"
+              },
+              "Next": "Succeeded"
             },
             "NotifyFailure": {
+              "Type": "Task",
+              "Resource": "arn:${AWS::Partition}:states:::sns:publish",
+              "Parameters": {
+                "TopicArn": "${AlertsTopic}",
+                "Subject": "Federal deletion case FAILED or residual data found",
+                "Message.$": "States.JsonToString($)"
+              },
+              "Next": "Failed"
+            },
+            "Succeeded": { "Type": "Succeed" },
+            "Failed": {
               "Type": "Fail",
-              "Error": "ResidualDataOrPurgeFailure",
-              "Cause": "Federal data deletion case failed residual or backup checks"
+              "Error": "DeletionCaseFailed",
+              "Cause": "Residual data present, purge failure, or worker error - see evidence"
             }
           }
         }
-
-  ScheduleRule:
-    Type: AWS::Events::Rule
-    Properties:
-      Description: Persistent re-scan for open deletion cases (Class C residual review)
-      ScheduleExpression: rate(1 day)
-      State: ENABLED
-      Targets:
-        - Arn: !GetAtt LabFunction.Arn
-          Id: ResidualRescan
-          Input: '{"mode":"residual_rescan"}'
-
-  PermissionForEvents:
-    Type: AWS::Lambda::Permission
-    Properties:
-      FunctionName: !Ref LabFunction
-      Action: lambda:InvokeFunction
-      Principal: events.amazonaws.com
-      SourceArn: !GetAtt ScheduleRule.Arn
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 11-federal-data-deletion-residual }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
 
 Outputs:
-  StateMachineArn:
-    Value: !Ref DeletionStateMachine
   FunctionArn:
+    Description: Worker Lambda function ARN
     Value: !GetAtt LabFunction.Arn
-  CaseTableName:
-    Value: !Ref DeletionCaseTable
+    Export:
+      Name: !Sub '${AWS::StackName}-FunctionArn'
+  StateMachineArn:
+    Description: Deletion-case orchestrator (logged, traced, retried)
+    Value: !Ref DeletionStateMachine
+    Export:
+      Name: !Sub '${AWS::StackName}-StateMachineArn'
   TopicArn:
-    Value: !Ref EvidenceTopic
+    Description: Alerts SNS topic ARN (KMS-encrypted)
+    Value: !Ref AlertsTopic
+    Export:
+      Name: !Sub '${AWS::StackName}-TopicArn'
+  EvidenceBucketName:
+    Description: KMS-encrypted evidence bucket created by this stack
+    Value: !Ref EvidenceBucket
+    Export:
+      Name: !Sub '${AWS::StackName}-EvidenceBucket'
+  FederalDataBucketName:
+    Description: Demo federal tenant-data bucket (purge target, marker-tagged)
+    Value: !Ref FederalDataBucket
+    Export:
+      Name: !Sub '${AWS::StackName}-FederalDataBucket'
+  CaseTableName:
+    Description: Deletion case-of-record table (CMK, PITR, deletion-protected)
+    Value: !Ref DeletionCaseTable
+    Export:
+      Name: !Sub '${AWS::StackName}-CaseTable'
+  LabKmsKeyArn:
+    Description: CMK protecting evidence, logs, queues, alerts, and the case table
+    Value: !GetAtt LabKmsKey.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-KmsKeyArn'
