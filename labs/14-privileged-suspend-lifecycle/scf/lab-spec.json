@@ -9,6 +9,25 @@
     "MON-01",
     "THR-03"
   ],
+  "ksi_by_control": {
+    "IAC-15": [
+      "KSI-IAM-AAM"
+    ],
+    "IAC-16": [
+      "KSI-IAM-SUS",
+      "KSI-IAM-APM"
+    ],
+    "IAC-17": [
+      "KSI-IAM-JIT"
+    ],
+    "IAC-21": [
+      "KSI-IAM-ELP"
+    ],
+    "MON-01": [],
+    "THR-03": [
+      "KSI-IAM-SUS"
+    ]
+  },
   "ksi": [
     "KSI-IAM-SUS",
     "KSI-IAM-AAM",
@@ -21,6 +40,8 @@
     "general-nist-800-171-r3",
     "general-iso-27001-2022",
     "general-pci-dss-4-0-1",
-    "usa-federal-gsa-fedramp-5-mod"
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
   ]
 }

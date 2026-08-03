@@ -9,6 +9,25 @@
     "CRY-05",
     "AST-02"
   ],
+  "ksi_by_control": {
+    "BCD-01": [
+      "KSI-RPL-ARP",
+      "KSI-CNA-OFA"
+    ],
+    "BCD-02": [
+      "KSI-RPL-RRO"
+    ],
+    "BCD-11": [
+      "KSI-RPL-ABO"
+    ],
+    "BCD-12": [
+      "KSI-RPL-TRC"
+    ],
+    "CRY-05": [
+      "KSI-RPL-ABO"
+    ],
+    "AST-02": []
+  },
   "ksi": [
     "KSI-RPL-RRO",
     "KSI-RPL-ARP",
@@ -21,6 +40,8 @@
     "general-nist-800-171-r3",
     "general-iso-27001-2022",
     "general-pci-dss-4-0-1",
-    "usa-federal-gsa-fedramp-5-mod"
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
   ]
 }

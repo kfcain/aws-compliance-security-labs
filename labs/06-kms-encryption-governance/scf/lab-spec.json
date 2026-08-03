@@ -7,6 +7,19 @@
     "CFG-02",
     "CLD-01"
   ],
+  "ksi_by_control": {
+    "CRY-01": [
+      "KSI-SVC-ENC",
+      "KSI-SVC-SNT"
+    ],
+    "CRY-03": [
+      "KSI-SVC-ENC"
+    ],
+    "CFG-02": [
+      "KSI-SVC-SEC"
+    ],
+    "CLD-01": []
+  },
   "ksi": [
     "KSI-SVC-ENC",
     "KSI-SVC-SNT",
@@ -17,6 +30,8 @@
     "general-nist-800-171-r3",
     "general-iso-27001-2022",
     "general-pci-dss-4-0-1",
-    "usa-federal-gsa-fedramp-5-mod"
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
   ]
 }

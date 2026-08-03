@@ -8,6 +8,23 @@
     "IRO-10",
     "MON-02"
   ],
+  "ksi_by_control": {
+    "IRO-01": [
+      "KSI-INR-IRP"
+    ],
+    "IRO-02": [
+      "KSI-INR-PRC"
+    ],
+    "IRO-04": [
+      "KSI-INR-PRC"
+    ],
+    "IRO-10": [
+      "KSI-INR-IRP"
+    ],
+    "MON-02": [
+      "KSI-MLA-OSM"
+    ]
+  },
   "ksi": [
     "KSI-INR-IRP",
     "KSI-INR-PRC",
@@ -18,6 +35,8 @@
     "general-nist-800-171-r3",
     "general-iso-27001-2022",
     "general-pci-dss-4-0-1",
-    "usa-federal-gsa-fedramp-5-mod"
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
   ]
 }

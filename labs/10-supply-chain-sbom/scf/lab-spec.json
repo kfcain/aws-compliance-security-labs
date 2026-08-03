@@ -8,6 +8,21 @@
     "VPM-01",
     "AST-02"
   ],
+  "ksi_by_control": {
+    "TPM-01": [
+      "KSI-SCR-SRA"
+    ],
+    "TPM-03": [
+      "KSI-SCR-TPM"
+    ],
+    "TPM-04": [
+      "KSI-SCR-TPM"
+    ],
+    "VPM-01": [
+      "KSI-AFR-VDR"
+    ],
+    "AST-02": []
+  },
   "ksi": [
     "KSI-SCR-SRA",
     "KSI-SCR-TPM",
@@ -18,6 +33,8 @@
     "general-nist-800-171-r3",
     "general-iso-27001-2022",
     "general-pci-dss-4-0-1",
-    "usa-federal-gsa-fedramp-5-mod"
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
   ]
 }

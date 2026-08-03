@@ -9,6 +9,26 @@
     "CPL-01",
     "GOV-01"
   ],
+  "ksi_by_control": {
+    "AST-01": [
+      "KSI-PIY-GIV"
+    ],
+    "AST-02": [
+      "KSI-PIY-GIV"
+    ],
+    "AST-04": [
+      "KSI-AFR-MAS"
+    ],
+    "NET-03": [
+      "KSI-AFR-MAS"
+    ],
+    "CPL-01": [
+      "KSI-MLA-LET"
+    ],
+    "GOV-01": [
+      "KSI-CNA-DFP"
+    ]
+  },
   "ksi": [
     "KSI-PIY-GIV",
     "KSI-AFR-MAS",
@@ -20,6 +40,8 @@
     "general-nist-800-171-r3",
     "general-iso-27001-2022",
     "general-pci-dss-4-0-1",
-    "usa-federal-gsa-fedramp-5-mod"
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
   ]
 }

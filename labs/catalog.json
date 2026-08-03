@@ -1,4 +1,5 @@
 {
+  "$schema": "./catalog.schema.json",
   "portfolio": "aws-compliance-security-labs",
   "version": "2.0.0",
   "description": "Combined monorepo of modular AWS labs for NIST 800-171/800-53, ISO 27001, PCI DSS, and FedRAMP 20x (CR26) KSI automation",
@@ -29,7 +30,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "IAM Identity Center",
@@ -45,7 +48,8 @@
         "Descope"
       ],
       "source_repo": "https://github.com/kfcain/lab-mfa-continuous-validation",
-      "pages": "https://kfcain.github.io/lab-mfa-continuous-validation/"
+      "pages": "https://kfcain.github.io/lab-mfa-continuous-validation/",
+      "status": "hardened"
     },
     {
       "id": "02-inspector-vdr",
@@ -70,7 +74,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "Inspector",
@@ -83,7 +89,8 @@
       ],
       "external_services": [],
       "source_repo": "https://github.com/kfcain/lab-inspector-vdr",
-      "pages": "https://kfcain.github.io/lab-inspector-vdr/"
+      "pages": "https://kfcain.github.io/lab-inspector-vdr/",
+      "status": "hardened"
     },
     {
       "id": "03-nhi-credential-rotation",
@@ -108,7 +115,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "IAM",
@@ -125,7 +134,8 @@
         "Descope M2M"
       ],
       "source_repo": "https://github.com/kfcain/lab-nhi-credential-rotation",
-      "pages": "https://kfcain.github.io/lab-nhi-credential-rotation/"
+      "pages": "https://kfcain.github.io/lab-nhi-credential-rotation/",
+      "status": "hardened"
     },
     {
       "id": "04-config-drift-compliance",
@@ -151,7 +161,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "Config",
@@ -164,7 +176,8 @@
       ],
       "external_services": [],
       "source_repo": "https://github.com/kfcain/lab-config-drift-compliance",
-      "pages": "https://kfcain.github.io/lab-config-drift-compliance/"
+      "pages": "https://kfcain.github.io/lab-config-drift-compliance/",
+      "status": "hardened"
     },
     {
       "id": "05-guardduty-automated-response",
@@ -190,7 +203,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "VPC Flow Logs",
@@ -204,7 +219,8 @@
       ],
       "external_services": [],
       "source_repo": "https://github.com/kfcain/lab-guardduty-automated-response",
-      "pages": "https://kfcain.github.io/lab-guardduty-automated-response/"
+      "pages": "https://kfcain.github.io/lab-guardduty-automated-response/",
+      "status": "hardened"
     },
     {
       "id": "06-kms-encryption-governance",
@@ -229,7 +245,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "KMS",
@@ -242,7 +260,8 @@
       ],
       "external_services": [],
       "source_repo": "https://github.com/kfcain/lab-kms-encryption-governance",
-      "pages": "https://kfcain.github.io/lab-kms-encryption-governance/"
+      "pages": "https://kfcain.github.io/lab-kms-encryption-governance/",
+      "status": "hardened"
     },
     {
       "id": "07-cloudtrail-evidence-pipeline",
@@ -267,7 +286,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "CloudTrail",
@@ -280,7 +301,8 @@
       ],
       "external_services": [],
       "source_repo": "https://github.com/kfcain/lab-cloudtrail-evidence-pipeline",
-      "pages": "https://kfcain.github.io/lab-cloudtrail-evidence-pipeline/"
+      "pages": "https://kfcain.github.io/lab-cloudtrail-evidence-pipeline/",
+      "status": "hardened"
     },
     {
       "id": "08-vpc-network-segmentation",
@@ -305,7 +327,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "VPC",
@@ -318,7 +342,8 @@
       ],
       "external_services": [],
       "source_repo": "https://github.com/kfcain/lab-vpc-network-segmentation",
-      "pages": "https://kfcain.github.io/lab-vpc-network-segmentation/"
+      "pages": "https://kfcain.github.io/lab-vpc-network-segmentation/",
+      "status": "hardened"
     },
     {
       "id": "09-incident-response-automation",
@@ -344,7 +369,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "Security Hub",
@@ -360,7 +387,8 @@
         "PagerDuty / Slack (optional)"
       ],
       "source_repo": "https://github.com/kfcain/lab-incident-response-automation",
-      "pages": "https://kfcain.github.io/lab-incident-response-automation/"
+      "pages": "https://kfcain.github.io/lab-incident-response-automation/",
+      "status": "hardened"
     },
     {
       "id": "10-supply-chain-sbom",
@@ -386,7 +414,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "Inspector",
@@ -402,7 +432,8 @@
         "Vendor risk questionnaire / GRC"
       ],
       "source_repo": "https://github.com/kfcain/lab-supply-chain-sbom",
-      "pages": "https://kfcain.github.io/lab-supply-chain-sbom/"
+      "pages": "https://kfcain.github.io/lab-supply-chain-sbom/",
+      "status": "hardened"
     },
     {
       "id": "11-federal-data-deletion-residual",
@@ -430,7 +461,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "S3",
@@ -449,7 +482,8 @@
         "Agency deletion ticket / GRC case"
       ],
       "source_repo": "https://github.com/kfcain/lab-federal-data-deletion-residual",
-      "pages": "https://kfcain.github.io/lab-federal-data-deletion-residual/"
+      "pages": "https://kfcain.github.io/lab-federal-data-deletion-residual/",
+      "status": "hardened"
     },
     {
       "id": "12-backup-recovery-rto-rpo",
@@ -478,7 +512,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "AWS Backup",
@@ -495,7 +531,8 @@
       ],
       "external_services": [],
       "source_repo": "https://github.com/kfcain/lab-backup-recovery-rto-rpo",
-      "pages": "https://kfcain.github.io/lab-backup-recovery-rto-rpo/"
+      "pages": "https://kfcain.github.io/lab-backup-recovery-rto-rpo/",
+      "status": "hardened"
     },
     {
       "id": "13-boundary-asset-inventory",
@@ -523,7 +560,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "Config Aggregator",
@@ -541,7 +580,8 @@
         "SSP / MAS document"
       ],
       "source_repo": "https://github.com/kfcain/lab-boundary-asset-inventory",
-      "pages": "https://kfcain.github.io/lab-boundary-asset-inventory/"
+      "pages": "https://kfcain.github.io/lab-boundary-asset-inventory/",
+      "status": "hardened"
     },
     {
       "id": "14-privileged-suspend-lifecycle",
@@ -570,7 +610,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "IAM",
@@ -589,7 +631,8 @@
         "Descope"
       ],
       "source_repo": "https://github.com/kfcain/lab-privileged-suspend-lifecycle",
-      "pages": "https://kfcain.github.io/lab-privileged-suspend-lifecycle/"
+      "pages": "https://kfcain.github.io/lab-privileged-suspend-lifecycle/",
+      "status": "hardened"
     },
     {
       "id": "15-immutable-cicd-change-control",
@@ -618,7 +661,9 @@
         "general-nist-800-171-r3",
         "general-iso-27001-2022",
         "general-pci-dss-4-0-1",
-        "usa-federal-gsa-fedramp-5-mod"
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
       ],
       "aws_services": [
         "CodePipeline",
@@ -637,7 +682,8 @@
         "GitHub / GitLab"
       ],
       "source_repo": "https://github.com/kfcain/lab-immutable-cicd-change-control",
-      "pages": "https://kfcain.github.io/lab-immutable-cicd-change-control/"
+      "pages": "https://kfcain.github.io/lab-immutable-cicd-change-control/",
+      "status": "hardened"
     }
   ]
 }

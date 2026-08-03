@@ -1,0 +1,2651 @@
+{
+  "ksi_overlay_version": "2026-08.1",
+  "lab_count": 15,
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-nist-800-171-r2",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod",
+    "usa-federal-dow-cmmc-2-level-2"
+  ],
+  "labs": [
+    {
+      "lab_id": "01-mfa-continuous-validation",
+      "scf_controls": [
+        "IAC-06",
+        "IAC-15",
+        "IAC-21",
+        "MON-01"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 4,
+        "general-nist-800-171-r3": 4,
+        "general-iso-27001-2022": 0,
+        "general-pci-dss-4-0-1": 4,
+        "usa-federal-gsa-fedramp-5-mod": 4,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "AC-02",
+          "AC-06",
+          "AU-01",
+          "IA-02(01)",
+          "IA-02(02)",
+          "PM-31",
+          "SA-08(14)",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.01.a",
+          "03.01.01.b",
+          "03.01.01.c.01",
+          "03.01.01.c.02",
+          "03.01.01.c.03",
+          "03.01.01.d.01",
+          "03.01.01.d.02",
+          "03.01.01.e",
+          "03.01.01.f.01",
+          "03.01.01.f.03",
+          "03.01.01.f.04",
+          "03.01.01.f.05",
+          "03.01.01.g.01",
+          "03.01.01.g.02",
+          "03.01.01.g.03",
+          "03.01.02",
+          "03.01.04.b",
+          "03.01.05.a",
+          "03.01.05.b",
+          "03.01.05.c",
+          "03.01.05.d",
+          "03.01.06.a",
+          "03.01.07.a",
+          "03.03.01.a",
+          "03.03.08.a",
+          "03.03.08.b",
+          "03.04.05",
+          "03.05.03",
+          "03.07.05.b",
+          "03.12.03",
+          "03.14.06.a"
+        ],
+        "general-iso-27001-2022": [],
+        "general-pci-dss-4-0-1": [
+          "1.3",
+          "10.1",
+          "10.4.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "3.4",
+          "3.4.2",
+          "7.1",
+          "7.2",
+          "7.2.1",
+          "7.2.2",
+          "7.2.6",
+          "7.3",
+          "7.3.1",
+          "7.3.2",
+          "7.3.3",
+          "8.2.3",
+          "8.2.4",
+          "8.3.10",
+          "8.4",
+          "8.4.2",
+          "8.4.3",
+          "8.5.1",
+          "8.6",
+          "8.6.1",
+          "A3.3.1",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AC-02",
+          "AC-06",
+          "AU-01",
+          "IA-02(01)",
+          "IA-02(02)",
+          "SI-04"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-iso-27001-2022",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "IAC-06": [
+          "KSI-IAM-MFA"
+        ],
+        "IAC-15": [],
+        "IAC-21": [
+          "KSI-IAM-ELP"
+        ],
+        "MON-01": [
+          "KSI-AFR-PVL"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:53.312Z"
+    },
+    {
+      "lab_id": "02-inspector-vdr",
+      "scf_controls": [
+        "VPM-01",
+        "VPM-02",
+        "MON-01",
+        "THR-01"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 4,
+        "general-nist-800-171-r3": 4,
+        "general-iso-27001-2022": 0,
+        "general-pci-dss-4-0-1": 4,
+        "usa-federal-gsa-fedramp-5-mod": 4,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "AU-01",
+          "PM-04",
+          "PM-15",
+          "PM-16",
+          "PM-31",
+          "SC-18(01)",
+          "SI-02",
+          "SI-03",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.01.a",
+          "03.11.02.a",
+          "03.11.02.b",
+          "03.12.02.a.02",
+          "03.12.03",
+          "03.14.01.a",
+          "03.14.03.a",
+          "03.14.06.a"
+        ],
+        "general-iso-27001-2022": [],
+        "general-pci-dss-4-0-1": [
+          "10.1",
+          "10.4.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "11.3",
+          "11.3.1",
+          "11.3.1.1",
+          "11.3.1.2",
+          "11.3.1.3",
+          "11.3.2",
+          "11.3.2.1",
+          "6.3",
+          "6.3.1",
+          "6.3.3",
+          "A3.3.1",
+          "A3.3.1.2",
+          "A3.5",
+          "A3.5.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-01",
+          "PM-04",
+          "PM-15",
+          "SC-18(01)",
+          "SI-02",
+          "SI-03",
+          "SI-04"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-iso-27001-2022",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "VPM-01": [
+          "KSI-AFR-VDR"
+        ],
+        "VPM-02": [
+          "KSI-AFR-VDR"
+        ],
+        "MON-01": [
+          "KSI-AFR-PVL",
+          "KSI-MLA-EVC"
+        ],
+        "THR-01": []
+      },
+      "generated_at": "2026-08-01T19:09:53.386Z"
+    },
+    {
+      "lab_id": "03-nhi-credential-rotation",
+      "scf_controls": [
+        "IAC-15",
+        "IAC-21",
+        "CRY-01",
+        "CFG-02"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 4,
+        "general-nist-800-171-r3": 4,
+        "general-iso-27001-2022": 0,
+        "general-pci-dss-4-0-1": 4,
+        "usa-federal-gsa-fedramp-5-mod": 4,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "AC-02",
+          "AC-06",
+          "CM-02",
+          "CM-06",
+          "PL-10",
+          "SA-08",
+          "SA-08(14)",
+          "SA-15(05)",
+          "SC-08(01)",
+          "SC-08(02)",
+          "SC-13",
+          "SI-07(06)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.01.a",
+          "03.01.01.b",
+          "03.01.01.c.01",
+          "03.01.01.c.02",
+          "03.01.01.c.03",
+          "03.01.01.d.01",
+          "03.01.01.d.02",
+          "03.01.01.e",
+          "03.01.01.f.01",
+          "03.01.01.f.03",
+          "03.01.01.f.04",
+          "03.01.01.f.05",
+          "03.01.01.g.01",
+          "03.01.01.g.02",
+          "03.01.01.g.03",
+          "03.01.01.h",
+          "03.01.02",
+          "03.01.04.b",
+          "03.01.05.a",
+          "03.01.05.b",
+          "03.01.05.c",
+          "03.01.05.d",
+          "03.01.06.a",
+          "03.01.07.a",
+          "03.01.08.a",
+          "03.01.08.b",
+          "03.01.09",
+          "03.01.10.a",
+          "03.01.10.b",
+          "03.01.10.c",
+          "03.01.11",
+          "03.01.12.a",
+          "03.01.16.a",
+          "03.01.18.a",
+          "03.03.08.a",
+          "03.03.08.b",
+          "03.04.01.a",
+          "03.04.02.a",
+          "03.04.05",
+          "03.04.06.a",
+          "03.04.06.b",
+          "03.04.06.d",
+          "03.05.07.d",
+          "03.05.07.e",
+          "03.05.07.f",
+          "03.05.12.d",
+          "03.08.07.a",
+          "03.13.08",
+          "03.13.11",
+          "03.13.12.b"
+        ],
+        "general-iso-27001-2022": [],
+        "general-pci-dss-4-0-1": [
+          "1.1",
+          "1.2.1",
+          "1.2.6",
+          "1.3",
+          "10.2",
+          "10.2.1",
+          "10.2.1.1",
+          "10.2.1.2",
+          "10.2.1.3",
+          "10.2.1.4",
+          "10.2.1.5",
+          "10.2.1.6",
+          "10.2.1.7",
+          "10.2.2",
+          "10.6",
+          "10.6.1",
+          "10.6.2",
+          "10.6.3",
+          "11.2",
+          "12.3.3",
+          "2.2",
+          "2.2.1",
+          "2.2.7",
+          "3.3.2",
+          "3.4",
+          "3.4.2",
+          "7.1",
+          "7.2",
+          "7.2.1",
+          "7.2.2",
+          "7.2.6",
+          "7.3",
+          "7.3.1",
+          "7.3.2",
+          "7.3.3",
+          "8.2.4",
+          "8.3.10",
+          "8.3.2",
+          "8.5",
+          "8.6",
+          "8.6.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AC-02",
+          "AC-06",
+          "CM-02",
+          "CM-06",
+          "PL-10",
+          "SA-08",
+          "SA-15(05)",
+          "SC-08(01)",
+          "SC-08(02)",
+          "SC-13"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-iso-27001-2022",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "IAC-15": [
+          "KSI-IAM-JIT"
+        ],
+        "IAC-21": [
+          "KSI-IAM-ELP"
+        ],
+        "CRY-01": [
+          "KSI-SVC-SEC"
+        ],
+        "CFG-02": [
+          "KSI-SVC-SEC"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:53.437Z"
+    },
+    {
+      "lab_id": "04-config-drift-compliance",
+      "scf_controls": [
+        "CFG-01",
+        "CFG-02",
+        "CPL-01",
+        "CPL-02",
+        "MON-01"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 5,
+        "general-nist-800-171-r3": 5,
+        "general-iso-27001-2022": 2,
+        "general-pci-dss-4-0-1": 5,
+        "usa-federal-gsa-fedramp-5-mod": 5,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "AU-01",
+          "CA-07",
+          "CA-07(01)",
+          "CM-01",
+          "CM-02",
+          "CM-06",
+          "CM-09",
+          "PL-01",
+          "PL-10",
+          "PM-08",
+          "PM-14",
+          "PM-31",
+          "SA-08",
+          "SA-15(05)",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.01.h",
+          "03.01.08.a",
+          "03.01.08.b",
+          "03.01.09",
+          "03.01.10.a",
+          "03.01.10.b",
+          "03.01.10.c",
+          "03.01.11",
+          "03.01.12.a",
+          "03.01.16.a",
+          "03.01.18.a",
+          "03.03.01.a",
+          "03.04.01.a",
+          "03.04.02.a",
+          "03.04.06.a",
+          "03.04.06.b",
+          "03.04.06.d",
+          "03.04.11.a",
+          "03.05.07.d",
+          "03.05.07.e",
+          "03.05.07.f",
+          "03.05.12.d",
+          "03.08.07.a",
+          "03.12.01",
+          "03.12.03",
+          "03.13.12.b",
+          "03.14.06.a"
+        ],
+        "general-iso-27001-2022": [
+          "10.1",
+          "4.1",
+          "8.1",
+          "9.1",
+          "9.2.1",
+          "9.2.2"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.1",
+          "1.2.1",
+          "1.2.6",
+          "10.1",
+          "10.2",
+          "10.2.1",
+          "10.2.1.1",
+          "10.2.1.2",
+          "10.2.1.3",
+          "10.2.1.4",
+          "10.2.1.5",
+          "10.2.1.6",
+          "10.2.1.7",
+          "10.2.2",
+          "10.4.3",
+          "10.6",
+          "10.6.1",
+          "10.6.2",
+          "10.6.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "11.2",
+          "12.4",
+          "12.4.2",
+          "2.1",
+          "2.2",
+          "2.2.1",
+          "8.3.2",
+          "8.5",
+          "A3.1",
+          "A3.1.1",
+          "A3.3.1",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-01",
+          "CA-07",
+          "CA-07(01)",
+          "CM-01",
+          "CM-02",
+          "CM-06",
+          "CM-09",
+          "PL-01",
+          "PL-10",
+          "PM-08",
+          "PM-14",
+          "SA-08",
+          "SA-15(05)",
+          "SI-04"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "CFG-01": [
+          "KSI-CNA-EIS"
+        ],
+        "CFG-02": [
+          "KSI-CNA-EIS"
+        ],
+        "CPL-01": [
+          "KSI-MLA-EVC"
+        ],
+        "CPL-02": [
+          "KSI-MLA-EVC"
+        ],
+        "MON-01": [
+          "KSI-AFR-PVL"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:53.496Z"
+    },
+    {
+      "lab_id": "05-guardduty-automated-response",
+      "scf_controls": [
+        "THR-01",
+        "THR-03",
+        "MON-01",
+        "MON-02",
+        "IRO-02"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 5,
+        "general-nist-800-171-r3": 5,
+        "general-iso-27001-2022": 1,
+        "general-pci-dss-4-0-1": 5,
+        "usa-federal-gsa-fedramp-5-mod": 5,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "AU-01",
+          "AU-02",
+          "AU-06",
+          "IR-04",
+          "IR-04(04)",
+          "PM-15",
+          "PM-16",
+          "PM-16(01)",
+          "PM-31",
+          "SI-04",
+          "SI-05",
+          "SI-05(01)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.02.01.a.02",
+          "03.02.01.a.03",
+          "03.02.01.b",
+          "03.02.02.b",
+          "03.03.01.a",
+          "03.03.04.b",
+          "03.03.05.a",
+          "03.03.05.c",
+          "03.06.01",
+          "03.06.02.a",
+          "03.06.02.b",
+          "03.06.02.c",
+          "03.06.02.d",
+          "03.11.02.a",
+          "03.12.03",
+          "03.14.03.a",
+          "03.14.06.a"
+        ],
+        "general-iso-27001-2022": [
+          "7.4",
+          "7.4(a)",
+          "7.4(b)",
+          "7.4(c)",
+          "7.4(d)"
+        ],
+        "general-pci-dss-4-0-1": [
+          "10.1",
+          "10.3.3",
+          "10.4",
+          "10.4.1",
+          "10.4.1.1",
+          "10.4.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "12.10",
+          "12.10.5",
+          "6.3",
+          "6.3.1",
+          "A3.3.1",
+          "A3.3.1.2",
+          "A3.5",
+          "A3.5.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-01",
+          "AU-02",
+          "AU-06",
+          "IR-04",
+          "IR-04(04)",
+          "PM-15",
+          "SI-04",
+          "SI-05"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "THR-01": [
+          "KSI-CNA-MAT"
+        ],
+        "THR-03": [],
+        "MON-01": [
+          "KSI-MLA-OSM"
+        ],
+        "MON-02": [
+          "KSI-MLA-OSM"
+        ],
+        "IRO-02": [
+          "KSI-INR-PRC"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:53.563Z"
+    },
+    {
+      "lab_id": "06-kms-encryption-governance",
+      "scf_controls": [
+        "CRY-01",
+        "CRY-03",
+        "CFG-02",
+        "CLD-01"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 3,
+        "general-nist-800-171-r3": 3,
+        "general-iso-27001-2022": 0,
+        "general-pci-dss-4-0-1": 4,
+        "usa-federal-gsa-fedramp-5-mod": 3,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "CM-02",
+          "CM-06",
+          "PL-10",
+          "SA-08",
+          "SA-15(05)",
+          "SC-08",
+          "SC-08(01)",
+          "SC-08(02)",
+          "SC-13",
+          "SI-07(06)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.01.h",
+          "03.01.08.a",
+          "03.01.08.b",
+          "03.01.09",
+          "03.01.10.a",
+          "03.01.10.b",
+          "03.01.10.c",
+          "03.01.11",
+          "03.01.12.a",
+          "03.01.16.a",
+          "03.01.18.a",
+          "03.04.01.a",
+          "03.04.02.a",
+          "03.04.06.a",
+          "03.04.06.b",
+          "03.04.06.d",
+          "03.05.07.d",
+          "03.05.07.e",
+          "03.05.07.f",
+          "03.05.12.d",
+          "03.08.07.a",
+          "03.13.08",
+          "03.13.11",
+          "03.13.12.b"
+        ],
+        "general-iso-27001-2022": [],
+        "general-pci-dss-4-0-1": [
+          "1.1",
+          "1.2.1",
+          "1.2.6",
+          "10.2",
+          "10.2.1",
+          "10.2.1.1",
+          "10.2.1.2",
+          "10.2.1.3",
+          "10.2.1.4",
+          "10.2.1.5",
+          "10.2.1.6",
+          "10.2.1.7",
+          "10.2.2",
+          "10.6",
+          "10.6.1",
+          "10.6.2",
+          "10.6.3",
+          "11.2",
+          "12.3.3",
+          "12.8.1",
+          "2.2",
+          "2.2.1",
+          "2.2.7",
+          "3.3.2",
+          "4.2",
+          "4.2.1",
+          "4.2.1.2",
+          "8.3.2",
+          "8.5",
+          "A2.1",
+          "A2.1.1",
+          "A2.1.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-02",
+          "CM-06",
+          "PL-10",
+          "SA-08",
+          "SA-15(05)",
+          "SC-08",
+          "SC-08(01)",
+          "SC-08(02)",
+          "SC-13"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-iso-27001-2022",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "CRY-01": [
+          "KSI-SVC-ENC",
+          "KSI-SVC-SNT"
+        ],
+        "CRY-03": [
+          "KSI-SVC-ENC"
+        ],
+        "CFG-02": [
+          "KSI-SVC-SEC"
+        ],
+        "CLD-01": []
+      },
+      "generated_at": "2026-08-01T19:09:53.592Z"
+    },
+    {
+      "lab_id": "07-cloudtrail-evidence-pipeline",
+      "scf_controls": [
+        "MON-01",
+        "MON-02",
+        "CPL-02",
+        "CHG-01"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 4,
+        "general-nist-800-171-r3": 4,
+        "general-iso-27001-2022": 2,
+        "general-pci-dss-4-0-1": 4,
+        "usa-federal-gsa-fedramp-5-mod": 4,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "AU-01",
+          "AU-02",
+          "AU-06",
+          "CA-07",
+          "CA-07(01)",
+          "CM-03",
+          "IR-04(04)",
+          "PM-14",
+          "PM-31",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.01.a",
+          "03.03.05.a",
+          "03.03.05.c",
+          "03.04.02.b",
+          "03.04.03.a",
+          "03.12.01",
+          "03.12.03",
+          "03.14.06.a"
+        ],
+        "general-iso-27001-2022": [
+          "10.1",
+          "6.3",
+          "8.1"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.2.2",
+          "10.1",
+          "10.3.3",
+          "10.4",
+          "10.4.1",
+          "10.4.1.1",
+          "10.4.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "12.4.2",
+          "6.5",
+          "6.5.1",
+          "6.5.2",
+          "6.5.3",
+          "A3.3.1",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-01",
+          "AU-02",
+          "AU-06",
+          "CA-07",
+          "CA-07(01)",
+          "CM-03",
+          "IR-04(04)",
+          "PM-14",
+          "SI-04"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "MON-01": [
+          "KSI-MLA-OSM",
+          "KSI-AFR-PVL"
+        ],
+        "MON-02": [
+          "KSI-MLA-OSM"
+        ],
+        "CPL-02": [
+          "KSI-AFR-PVL"
+        ],
+        "CHG-01": [
+          "KSI-CMT-CHG"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:53.616Z"
+    },
+    {
+      "lab_id": "08-vpc-network-segmentation",
+      "scf_controls": [
+        "NET-01",
+        "NET-04",
+        "AST-04",
+        "CLD-06"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 3,
+        "general-nist-800-171-r3": 3,
+        "general-iso-27001-2022": 0,
+        "general-pci-dss-4-0-1": 4,
+        "usa-federal-gsa-fedramp-5-mod": 3,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "AC-04",
+          "PL-02",
+          "SA-04(01)",
+          "SA-04(02)",
+          "SC-01"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.03",
+          "03.01.12.a",
+          "03.01.16.a",
+          "03.01.16.b",
+          "03.01.18.a",
+          "03.04.11.a",
+          "03.04.11.b",
+          "03.13.01.a",
+          "03.13.01.c"
+        ],
+        "general-iso-27001-2022": [],
+        "general-pci-dss-4-0-1": [
+          "1.1",
+          "1.2",
+          "1.2.3",
+          "1.2.4",
+          "1.3",
+          "1.3.1",
+          "1.3.2",
+          "1.4.2",
+          "1.4.3",
+          "11.2.1",
+          "A1.1",
+          "A1.1.1",
+          "A1.1.2",
+          "A1.1.3",
+          "A1.1.4"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AC-04",
+          "PL-02",
+          "SA-04(01)",
+          "SA-04(02)",
+          "SC-01"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-iso-27001-2022",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "NET-01": [
+          "KSI-CNA-RNT"
+        ],
+        "NET-04": [
+          "KSI-CNA-RNT",
+          "KSI-CNA-MAT"
+        ],
+        "AST-04": [],
+        "CLD-06": [
+          "KSI-SVC-SNT"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:53.669Z"
+    },
+    {
+      "lab_id": "09-incident-response-automation",
+      "scf_controls": [
+        "IRO-01",
+        "IRO-02",
+        "IRO-04",
+        "IRO-10",
+        "MON-02"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 5,
+        "general-nist-800-171-r3": 5,
+        "general-iso-27001-2022": 0,
+        "general-pci-dss-4-0-1": 5,
+        "usa-federal-gsa-fedramp-5-mod": 5,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "AU-02",
+          "AU-06",
+          "IR-01",
+          "IR-04",
+          "IR-04(04)",
+          "IR-06",
+          "IR-08",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.03.04.b",
+          "03.03.05.a",
+          "03.03.05.c",
+          "03.06.01",
+          "03.06.02.a",
+          "03.06.02.b",
+          "03.06.02.c",
+          "03.06.02.d",
+          "03.06.05.a",
+          "03.06.05.a.01",
+          "03.06.05.a.02",
+          "03.06.05.a.03",
+          "03.06.05.a.04",
+          "03.06.05.a.05",
+          "03.06.05.a.06",
+          "03.06.05.b"
+        ],
+        "general-iso-27001-2022": [],
+        "general-pci-dss-4-0-1": [
+          "10.3.3",
+          "10.4",
+          "10.4.1",
+          "10.4.1.1",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "12.1.4",
+          "12.10",
+          "12.10.1",
+          "12.10.5",
+          "12.10.7",
+          "A1.2.3",
+          "A3.3.1.2",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-02",
+          "AU-06",
+          "IR-01",
+          "IR-04",
+          "IR-04(04)",
+          "IR-06",
+          "IR-08",
+          "SI-04"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-iso-27001-2022",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "IRO-01": [
+          "KSI-INR-IRP"
+        ],
+        "IRO-02": [
+          "KSI-INR-PRC"
+        ],
+        "IRO-04": [
+          "KSI-INR-PRC"
+        ],
+        "IRO-10": [
+          "KSI-INR-IRP"
+        ],
+        "MON-02": [
+          "KSI-MLA-OSM"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:53.739Z"
+    },
+    {
+      "lab_id": "10-supply-chain-sbom",
+      "scf_controls": [
+        "TPM-01",
+        "TPM-03",
+        "TPM-04",
+        "VPM-01",
+        "AST-02"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 5,
+        "general-nist-800-171-r3": 5,
+        "general-iso-27001-2022": 0,
+        "general-pci-dss-4-0-1": 4,
+        "usa-federal-gsa-fedramp-5-mod": 5,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "CM-08",
+          "PM-05",
+          "SA-04",
+          "SA-09",
+          "SA-09(03)",
+          "SI-02",
+          "SI-03",
+          "SR-01",
+          "SR-02",
+          "SR-02(01)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.20.a",
+          "03.01.20.b",
+          "03.01.20.c.01",
+          "03.04.08.a",
+          "03.04.08.c",
+          "03.04.10.a",
+          "03.04.10.b",
+          "03.04.11.a",
+          "03.07.06.a",
+          "03.11.01.a",
+          "03.11.02.a",
+          "03.14.01.a",
+          "03.16.01",
+          "03.16.03.a",
+          "03.16.03.c",
+          "03.17.01.a",
+          "03.17.02",
+          "03.17.03.a",
+          "03.17.03.b"
+        ],
+        "general-iso-27001-2022": [],
+        "general-pci-dss-4-0-1": [
+          "11.2",
+          "11.2.2",
+          "11.3",
+          "12.8",
+          "12.8.1",
+          "12.8.2",
+          "12.9",
+          "12.9.1",
+          "12.9.2",
+          "6.3",
+          "6.3.1",
+          "6.3.2",
+          "6.3.3",
+          "8.2.3",
+          "9.5.1",
+          "9.5.1.1",
+          "A2.1.3"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-08",
+          "PM-05",
+          "SA-04",
+          "SA-09",
+          "SI-02",
+          "SI-03",
+          "SR-01",
+          "SR-02",
+          "SR-02(01)"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-iso-27001-2022",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "TPM-01": [
+          "KSI-SCR-SRA"
+        ],
+        "TPM-03": [
+          "KSI-SCR-TPM"
+        ],
+        "TPM-04": [
+          "KSI-SCR-TPM"
+        ],
+        "VPM-01": [
+          "KSI-AFR-VDR"
+        ],
+        "AST-02": []
+      },
+      "generated_at": "2026-08-01T19:09:53.815Z"
+    },
+    {
+      "lab_id": "11-federal-data-deletion-residual",
+      "scf_controls": [
+        "DCH-01",
+        "DCH-09",
+        "DCH-06",
+        "BCD-11",
+        "CRY-05",
+        "CLD-01"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 5,
+        "general-nist-800-171-r3": 5,
+        "general-iso-27001-2022": 0,
+        "general-pci-dss-4-0-1": 6,
+        "usa-federal-gsa-fedramp-5-mod": 5,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "CP-09",
+          "MP-01",
+          "MP-04",
+          "MP-06",
+          "MP-06(03)",
+          "SC-13",
+          "SC-28",
+          "SC-28(01)",
+          "SC-28(02)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.01.d.01",
+          "03.01.01.d.02",
+          "03.07.04.c",
+          "03.08.01",
+          "03.08.03",
+          "03.08.09.a",
+          "03.13.08"
+        ],
+        "general-iso-27001-2022": [],
+        "general-pci-dss-4-0-1": [
+          "1.2.1",
+          "12.10.1",
+          "12.8.1",
+          "3.3.2",
+          "3.5",
+          "3.5.1.2",
+          "3.5.1.3",
+          "8.3.2",
+          "9.1",
+          "9.4",
+          "9.4.1",
+          "9.4.1.1",
+          "9.4.1.2",
+          "9.4.7"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CP-09",
+          "MP-01",
+          "MP-04",
+          "MP-06",
+          "MP-06(03)",
+          "SC-13",
+          "SC-28",
+          "SC-28(01)",
+          "SC-28(02)"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-iso-27001-2022",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "DCH-01": [
+          "KSI-SVC-SIN"
+        ],
+        "DCH-09": [
+          "KSI-SVC-RUD",
+          "KSI-SVC-PRR"
+        ],
+        "DCH-06": [
+          "KSI-SVC-SIN"
+        ],
+        "BCD-11": [
+          "KSI-SVC-RUD"
+        ],
+        "CRY-05": [
+          "KSI-SVC-SIN"
+        ],
+        "CLD-01": [
+          "KSI-AFR-PVL"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:53.923Z"
+    },
+    {
+      "lab_id": "12-backup-recovery-rto-rpo",
+      "scf_controls": [
+        "BCD-01",
+        "BCD-02",
+        "BCD-11",
+        "BCD-12",
+        "CRY-05",
+        "AST-02"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 6,
+        "general-nist-800-171-r3": 3,
+        "general-iso-27001-2022": 0,
+        "general-pci-dss-4-0-1": 3,
+        "usa-federal-gsa-fedramp-5-mod": 6,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "CM-08",
+          "CP-01",
+          "CP-02",
+          "CP-02(08)",
+          "CP-09",
+          "CP-10",
+          "IR-04(03)",
+          "PM-05",
+          "PM-08",
+          "SC-13",
+          "SC-28",
+          "SC-28(01)",
+          "SC-28(02)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.08.a",
+          "03.04.08.c",
+          "03.04.10.a",
+          "03.04.10.b",
+          "03.04.11.a",
+          "03.08.09.a",
+          "03.13.08"
+        ],
+        "general-iso-27001-2022": [],
+        "general-pci-dss-4-0-1": [
+          "11.2",
+          "11.2.2",
+          "12.10.1",
+          "3.3.2",
+          "3.5",
+          "3.5.1.2",
+          "3.5.1.3",
+          "6.3.2",
+          "8.3.2",
+          "9.4",
+          "9.4.1.1",
+          "9.4.1.2",
+          "9.5.1",
+          "9.5.1.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-08",
+          "CP-01",
+          "CP-02",
+          "CP-02(08)",
+          "CP-09",
+          "CP-10",
+          "IR-04(03)",
+          "PM-05",
+          "PM-08",
+          "SC-13",
+          "SC-28",
+          "SC-28(01)",
+          "SC-28(02)"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-iso-27001-2022",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "BCD-01": [
+          "KSI-RPL-ARP",
+          "KSI-CNA-OFA"
+        ],
+        "BCD-02": [
+          "KSI-RPL-RRO"
+        ],
+        "BCD-11": [
+          "KSI-RPL-ABO"
+        ],
+        "BCD-12": [
+          "KSI-RPL-TRC"
+        ],
+        "CRY-05": [
+          "KSI-RPL-ABO"
+        ],
+        "AST-02": []
+      },
+      "generated_at": "2026-08-01T19:09:53.983Z"
+    },
+    {
+      "lab_id": "13-boundary-asset-inventory",
+      "scf_controls": [
+        "AST-01",
+        "AST-02",
+        "AST-04",
+        "NET-03",
+        "CPL-01",
+        "GOV-01"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 6,
+        "general-nist-800-171-r3": 6,
+        "general-iso-27001-2022": 2,
+        "general-pci-dss-4-0-1": 6,
+        "usa-federal-gsa-fedramp-5-mod": 6,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "CM-08",
+          "PL-01",
+          "PL-02",
+          "PM-01",
+          "PM-05",
+          "PM-08",
+          "SA-04(01)",
+          "SA-04(02)",
+          "SC-07",
+          "SC-07(09)",
+          "SC-07(11)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.03",
+          "03.01.12.a",
+          "03.01.18.a",
+          "03.04.08.a",
+          "03.04.08.c",
+          "03.04.10.a",
+          "03.04.10.b",
+          "03.04.11.a",
+          "03.04.11.b",
+          "03.07.04.a",
+          "03.12.01",
+          "03.13.01.a",
+          "03.13.01.b",
+          "03.13.01.c",
+          "03.15.01.a"
+        ],
+        "general-iso-27001-2022": [
+          "10.1",
+          "4.1",
+          "4.4",
+          "5.1",
+          "5.1(a)",
+          "5.1(b)",
+          "5.1(c)",
+          "5.1(d)",
+          "5.1(e)",
+          "5.1(f)",
+          "5.1(g)",
+          "5.1(h)",
+          "6.1.1",
+          "6.1.1(a)",
+          "6.1.1(b)",
+          "6.1.1(c)",
+          "6.1.1(d)",
+          "6.1.1(e)(1)",
+          "6.1.1(e)(2)",
+          "8.1",
+          "9.1",
+          "9.2.1",
+          "9.2.2"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.2.3",
+          "1.2.4",
+          "1.3.3",
+          "1.4",
+          "1.4.1",
+          "1.4.2",
+          "11.2",
+          "11.2.2",
+          "11.5.1",
+          "12.4",
+          "12.4.2",
+          "6.3.2",
+          "9.5.1",
+          "9.5.1.1",
+          "A3.1",
+          "A3.1.1",
+          "A3.1.2"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-08",
+          "PL-01",
+          "PL-02",
+          "PM-01",
+          "PM-05",
+          "PM-08",
+          "SA-04(01)",
+          "SA-04(02)",
+          "SC-07",
+          "SC-07(09)",
+          "SC-07(11)"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "AST-01": [
+          "KSI-PIY-GIV"
+        ],
+        "AST-02": [
+          "KSI-PIY-GIV"
+        ],
+        "AST-04": [
+          "KSI-AFR-MAS"
+        ],
+        "NET-03": [
+          "KSI-AFR-MAS"
+        ],
+        "CPL-01": [
+          "KSI-MLA-LET"
+        ],
+        "GOV-01": [
+          "KSI-CNA-DFP"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:54.062Z"
+    },
+    {
+      "lab_id": "14-privileged-suspend-lifecycle",
+      "scf_controls": [
+        "IAC-15",
+        "IAC-16",
+        "IAC-17",
+        "IAC-21",
+        "MON-01",
+        "THR-03"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 5,
+        "general-nist-800-171-r3": 6,
+        "general-iso-27001-2022": 1,
+        "general-pci-dss-4-0-1": 6,
+        "usa-federal-gsa-fedramp-5-mod": 5,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "AC-02",
+          "AC-06",
+          "AC-06(07)",
+          "AU-01",
+          "PM-16(01)",
+          "PM-31",
+          "SA-08(14)",
+          "SI-04",
+          "SI-05",
+          "SI-05(01)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.01.a",
+          "03.01.01.b",
+          "03.01.01.c.01",
+          "03.01.01.c.02",
+          "03.01.01.c.03",
+          "03.01.01.d.01",
+          "03.01.01.d.02",
+          "03.01.01.e",
+          "03.01.01.f.01",
+          "03.01.01.f.03",
+          "03.01.01.f.04",
+          "03.01.01.f.05",
+          "03.01.01.g.01",
+          "03.01.01.g.02",
+          "03.01.01.g.03",
+          "03.01.02",
+          "03.01.04.b",
+          "03.01.05.a",
+          "03.01.05.b",
+          "03.01.05.c",
+          "03.01.05.d",
+          "03.01.06.a",
+          "03.01.07.a",
+          "03.01.07.b",
+          "03.02.01.a.02",
+          "03.02.01.a.03",
+          "03.02.01.b",
+          "03.02.02.b",
+          "03.03.01.a",
+          "03.03.08.a",
+          "03.03.08.b",
+          "03.04.05",
+          "03.10.01.c",
+          "03.10.01.d",
+          "03.11.02.a",
+          "03.12.03",
+          "03.14.03.a",
+          "03.14.06.a"
+        ],
+        "general-iso-27001-2022": [
+          "7.4",
+          "7.4(a)",
+          "7.4(b)",
+          "7.4(c)",
+          "7.4(d)"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.3",
+          "10.1",
+          "10.4.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "3.4",
+          "3.4.2",
+          "6.3.1",
+          "7.1",
+          "7.2",
+          "7.2.1",
+          "7.2.2",
+          "7.2.3",
+          "7.2.4",
+          "7.2.5",
+          "7.2.5.1",
+          "7.2.6",
+          "7.3",
+          "7.3.1",
+          "7.3.2",
+          "7.3.3",
+          "8.2.4",
+          "8.3.10",
+          "8.6",
+          "8.6.1",
+          "A3.3.1",
+          "A3.4.1",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AC-02",
+          "AC-06",
+          "AC-06(07)",
+          "AU-01",
+          "SI-04",
+          "SI-05"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "IAC-15": [
+          "KSI-IAM-AAM"
+        ],
+        "IAC-16": [
+          "KSI-IAM-SUS",
+          "KSI-IAM-APM"
+        ],
+        "IAC-17": [
+          "KSI-IAM-JIT"
+        ],
+        "IAC-21": [
+          "KSI-IAM-ELP"
+        ],
+        "MON-01": [],
+        "THR-03": [
+          "KSI-IAM-SUS"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:54.126Z"
+    },
+    {
+      "lab_id": "15-immutable-cicd-change-control",
+      "scf_controls": [
+        "CHG-01",
+        "CHG-02",
+        "CHG-03",
+        "CHG-04",
+        "CFG-01",
+        "TDA-06"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 6,
+        "general-nist-800-171-r3": 6,
+        "general-iso-27001-2022": 1,
+        "general-pci-dss-4-0-1": 6,
+        "usa-federal-gsa-fedramp-5-mod": 6,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "CM-01",
+          "CM-03",
+          "CM-04",
+          "CM-05",
+          "CM-09",
+          "SA-01",
+          "SA-04(03)",
+          "SA-08(31)",
+          "SA-15"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.01.a",
+          "03.04.02.b",
+          "03.04.03.a",
+          "03.04.03.b",
+          "03.04.03.c",
+          "03.04.04.a",
+          "03.04.05",
+          "03.04.11.b",
+          "03.16.01"
+        ],
+        "general-iso-27001-2022": [
+          "6.3"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.2.2",
+          "1.2.8",
+          "12.4.2",
+          "2.1",
+          "2.2",
+          "6.2",
+          "6.2.1",
+          "6.2.4",
+          "6.5",
+          "6.5.1",
+          "6.5.2",
+          "6.5.3",
+          "6.5.6",
+          "8.5",
+          "A3.2.2",
+          "A3.2.3"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-01",
+          "CM-03",
+          "CM-04",
+          "CM-05",
+          "CM-09",
+          "SA-01",
+          "SA-04(03)",
+          "SA-08(31)",
+          "SA-15"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "CHG-01": [
+          "KSI-CMT-LMC"
+        ],
+        "CHG-02": [
+          "KSI-CMT-RVP"
+        ],
+        "CHG-03": [
+          "KSI-CMT-RMV"
+        ],
+        "CHG-04": [
+          "KSI-AFR-SCN"
+        ],
+        "CFG-01": [
+          "KSI-CMT-RMV"
+        ],
+        "TDA-06": [
+          "KSI-CMT-VTD"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:54.211Z"
+    }
+  ],
+  "portfolio": {
+    "unique_scf_controls": [
+      "AST-01",
+      "AST-02",
+      "AST-04",
+      "BCD-01",
+      "BCD-02",
+      "BCD-11",
+      "BCD-12",
+      "CFG-01",
+      "CFG-02",
+      "CHG-01",
+      "CHG-02",
+      "CHG-03",
+      "CHG-04",
+      "CLD-01",
+      "CLD-06",
+      "CPL-01",
+      "CPL-02",
+      "CRY-01",
+      "CRY-03",
+      "CRY-05",
+      "DCH-01",
+      "DCH-06",
+      "DCH-09",
+      "GOV-01",
+      "IAC-06",
+      "IAC-15",
+      "IAC-16",
+      "IAC-17",
+      "IAC-21",
+      "IRO-01",
+      "IRO-02",
+      "IRO-04",
+      "IRO-10",
+      "MON-01",
+      "MON-02",
+      "NET-01",
+      "NET-03",
+      "NET-04",
+      "TDA-06",
+      "THR-01",
+      "THR-03",
+      "TPM-01",
+      "TPM-03",
+      "TPM-04",
+      "VPM-01",
+      "VPM-02"
+    ],
+    "scf_control_labs": {
+      "AST-01": [
+        "13-boundary-asset-inventory"
+      ],
+      "AST-02": [
+        "10-supply-chain-sbom",
+        "12-backup-recovery-rto-rpo",
+        "13-boundary-asset-inventory"
+      ],
+      "AST-04": [
+        "08-vpc-network-segmentation",
+        "13-boundary-asset-inventory"
+      ],
+      "BCD-01": [
+        "12-backup-recovery-rto-rpo"
+      ],
+      "BCD-02": [
+        "12-backup-recovery-rto-rpo"
+      ],
+      "BCD-11": [
+        "11-federal-data-deletion-residual",
+        "12-backup-recovery-rto-rpo"
+      ],
+      "BCD-12": [
+        "12-backup-recovery-rto-rpo"
+      ],
+      "CFG-01": [
+        "04-config-drift-compliance",
+        "15-immutable-cicd-change-control"
+      ],
+      "CFG-02": [
+        "03-nhi-credential-rotation",
+        "04-config-drift-compliance",
+        "06-kms-encryption-governance"
+      ],
+      "CHG-01": [
+        "07-cloudtrail-evidence-pipeline",
+        "15-immutable-cicd-change-control"
+      ],
+      "CHG-02": [
+        "15-immutable-cicd-change-control"
+      ],
+      "CHG-03": [
+        "15-immutable-cicd-change-control"
+      ],
+      "CHG-04": [
+        "15-immutable-cicd-change-control"
+      ],
+      "CLD-01": [
+        "06-kms-encryption-governance",
+        "11-federal-data-deletion-residual"
+      ],
+      "CLD-06": [
+        "08-vpc-network-segmentation"
+      ],
+      "CPL-01": [
+        "04-config-drift-compliance",
+        "13-boundary-asset-inventory"
+      ],
+      "CPL-02": [
+        "04-config-drift-compliance",
+        "07-cloudtrail-evidence-pipeline"
+      ],
+      "CRY-01": [
+        "03-nhi-credential-rotation",
+        "06-kms-encryption-governance"
+      ],
+      "CRY-03": [
+        "06-kms-encryption-governance"
+      ],
+      "CRY-05": [
+        "11-federal-data-deletion-residual",
+        "12-backup-recovery-rto-rpo"
+      ],
+      "DCH-01": [
+        "11-federal-data-deletion-residual"
+      ],
+      "DCH-06": [
+        "11-federal-data-deletion-residual"
+      ],
+      "DCH-09": [
+        "11-federal-data-deletion-residual"
+      ],
+      "GOV-01": [
+        "13-boundary-asset-inventory"
+      ],
+      "IAC-06": [
+        "01-mfa-continuous-validation"
+      ],
+      "IAC-15": [
+        "01-mfa-continuous-validation",
+        "03-nhi-credential-rotation",
+        "14-privileged-suspend-lifecycle"
+      ],
+      "IAC-16": [
+        "14-privileged-suspend-lifecycle"
+      ],
+      "IAC-17": [
+        "14-privileged-suspend-lifecycle"
+      ],
+      "IAC-21": [
+        "01-mfa-continuous-validation",
+        "03-nhi-credential-rotation",
+        "14-privileged-suspend-lifecycle"
+      ],
+      "IRO-01": [
+        "09-incident-response-automation"
+      ],
+      "IRO-02": [
+        "05-guardduty-automated-response",
+        "09-incident-response-automation"
+      ],
+      "IRO-04": [
+        "09-incident-response-automation"
+      ],
+      "IRO-10": [
+        "09-incident-response-automation"
+      ],
+      "MON-01": [
+        "01-mfa-continuous-validation",
+        "02-inspector-vdr",
+        "04-config-drift-compliance",
+        "05-guardduty-automated-response",
+        "07-cloudtrail-evidence-pipeline",
+        "14-privileged-suspend-lifecycle"
+      ],
+      "MON-02": [
+        "05-guardduty-automated-response",
+        "07-cloudtrail-evidence-pipeline",
+        "09-incident-response-automation"
+      ],
+      "NET-01": [
+        "08-vpc-network-segmentation"
+      ],
+      "NET-03": [
+        "13-boundary-asset-inventory"
+      ],
+      "NET-04": [
+        "08-vpc-network-segmentation"
+      ],
+      "TDA-06": [
+        "15-immutable-cicd-change-control"
+      ],
+      "THR-01": [
+        "02-inspector-vdr",
+        "05-guardduty-automated-response"
+      ],
+      "THR-03": [
+        "05-guardduty-automated-response",
+        "14-privileged-suspend-lifecycle"
+      ],
+      "TPM-01": [
+        "10-supply-chain-sbom"
+      ],
+      "TPM-03": [
+        "10-supply-chain-sbom"
+      ],
+      "TPM-04": [
+        "10-supply-chain-sbom"
+      ],
+      "VPM-01": [
+        "02-inspector-vdr",
+        "10-supply-chain-sbom"
+      ],
+      "VPM-02": [
+        "02-inspector-vdr"
+      ]
+    },
+    "unique_framework_controls": {
+      "general-nist-800-53-r5-2": 79,
+      "general-nist-800-171-r3": 118,
+      "general-nist-800-171-r2": 0,
+      "general-iso-27001-2022": 29,
+      "general-pci-dss-4-0-1": 142,
+      "usa-federal-gsa-fedramp-5-mod": 72,
+      "usa-federal-dow-cmmc-2-level-2": 0
+    },
+    "framework_control_ids": {
+      "general-nist-800-53-r5-2": [
+        "AC-02",
+        "AC-04",
+        "AC-06",
+        "AC-06(07)",
+        "AU-01",
+        "AU-02",
+        "AU-06",
+        "CA-07",
+        "CA-07(01)",
+        "CM-01",
+        "CM-02",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "CM-06",
+        "CM-08",
+        "CM-09",
+        "CP-01",
+        "CP-02",
+        "CP-02(08)",
+        "CP-09",
+        "CP-10",
+        "IA-02(01)",
+        "IA-02(02)",
+        "IR-01",
+        "IR-04",
+        "IR-04(03)",
+        "IR-04(04)",
+        "IR-06",
+        "IR-08",
+        "MP-01",
+        "MP-04",
+        "MP-06",
+        "MP-06(03)",
+        "PL-01",
+        "PL-02",
+        "PL-10",
+        "PM-01",
+        "PM-04",
+        "PM-05",
+        "PM-08",
+        "PM-14",
+        "PM-15",
+        "PM-16",
+        "PM-16(01)",
+        "PM-31",
+        "SA-01",
+        "SA-04",
+        "SA-04(01)",
+        "SA-04(02)",
+        "SA-04(03)",
+        "SA-08",
+        "SA-08(14)",
+        "SA-08(31)",
+        "SA-09",
+        "SA-09(03)",
+        "SA-15",
+        "SA-15(05)",
+        "SC-01",
+        "SC-07",
+        "SC-07(09)",
+        "SC-07(11)",
+        "SC-08",
+        "SC-08(01)",
+        "SC-08(02)",
+        "SC-13",
+        "SC-18(01)",
+        "SC-28",
+        "SC-28(01)",
+        "SC-28(02)",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-05",
+        "SI-05(01)",
+        "SI-07(06)",
+        "SR-01",
+        "SR-02",
+        "SR-02(01)"
+      ],
+      "general-nist-800-171-r3": [
+        "03.01.01.a",
+        "03.01.01.b",
+        "03.01.01.c.01",
+        "03.01.01.c.02",
+        "03.01.01.c.03",
+        "03.01.01.d.01",
+        "03.01.01.d.02",
+        "03.01.01.e",
+        "03.01.01.f.01",
+        "03.01.01.f.03",
+        "03.01.01.f.04",
+        "03.01.01.f.05",
+        "03.01.01.g.01",
+        "03.01.01.g.02",
+        "03.01.01.g.03",
+        "03.01.01.h",
+        "03.01.02",
+        "03.01.03",
+        "03.01.04.b",
+        "03.01.05.a",
+        "03.01.05.b",
+        "03.01.05.c",
+        "03.01.05.d",
+        "03.01.06.a",
+        "03.01.07.a",
+        "03.01.07.b",
+        "03.01.08.a",
+        "03.01.08.b",
+        "03.01.09",
+        "03.01.10.a",
+        "03.01.10.b",
+        "03.01.10.c",
+        "03.01.11",
+        "03.01.12.a",
+        "03.01.16.a",
+        "03.01.16.b",
+        "03.01.18.a",
+        "03.01.20.a",
+        "03.01.20.b",
+        "03.01.20.c.01",
+        "03.02.01.a.02",
+        "03.02.01.a.03",
+        "03.02.01.b",
+        "03.02.02.b",
+        "03.03.01.a",
+        "03.03.04.b",
+        "03.03.05.a",
+        "03.03.05.c",
+        "03.03.08.a",
+        "03.03.08.b",
+        "03.04.01.a",
+        "03.04.02.a",
+        "03.04.02.b",
+        "03.04.03.a",
+        "03.04.03.b",
+        "03.04.03.c",
+        "03.04.04.a",
+        "03.04.05",
+        "03.04.06.a",
+        "03.04.06.b",
+        "03.04.06.d",
+        "03.04.08.a",
+        "03.04.08.c",
+        "03.04.10.a",
+        "03.04.10.b",
+        "03.04.11.a",
+        "03.04.11.b",
+        "03.05.03",
+        "03.05.07.d",
+        "03.05.07.e",
+        "03.05.07.f",
+        "03.05.12.d",
+        "03.06.01",
+        "03.06.02.a",
+        "03.06.02.b",
+        "03.06.02.c",
+        "03.06.02.d",
+        "03.06.05.a",
+        "03.06.05.a.01",
+        "03.06.05.a.02",
+        "03.06.05.a.03",
+        "03.06.05.a.04",
+        "03.06.05.a.05",
+        "03.06.05.a.06",
+        "03.06.05.b",
+        "03.07.04.a",
+        "03.07.04.c",
+        "03.07.05.b",
+        "03.07.06.a",
+        "03.08.01",
+        "03.08.03",
+        "03.08.07.a",
+        "03.08.09.a",
+        "03.10.01.c",
+        "03.10.01.d",
+        "03.11.01.a",
+        "03.11.02.a",
+        "03.11.02.b",
+        "03.12.01",
+        "03.12.02.a.02",
+        "03.12.03",
+        "03.13.01.a",
+        "03.13.01.b",
+        "03.13.01.c",
+        "03.13.08",
+        "03.13.11",
+        "03.13.12.b",
+        "03.14.01.a",
+        "03.14.03.a",
+        "03.14.06.a",
+        "03.15.01.a",
+        "03.16.01",
+        "03.16.03.a",
+        "03.16.03.c",
+        "03.17.01.a",
+        "03.17.02",
+        "03.17.03.a",
+        "03.17.03.b"
+      ],
+      "general-nist-800-171-r2": [],
+      "general-iso-27001-2022": [
+        "10.1",
+        "4.1",
+        "4.4",
+        "5.1",
+        "5.1(a)",
+        "5.1(b)",
+        "5.1(c)",
+        "5.1(d)",
+        "5.1(e)",
+        "5.1(f)",
+        "5.1(g)",
+        "5.1(h)",
+        "6.1.1",
+        "6.1.1(a)",
+        "6.1.1(b)",
+        "6.1.1(c)",
+        "6.1.1(d)",
+        "6.1.1(e)(1)",
+        "6.1.1(e)(2)",
+        "6.3",
+        "7.4",
+        "7.4(a)",
+        "7.4(b)",
+        "7.4(c)",
+        "7.4(d)",
+        "8.1",
+        "9.1",
+        "9.2.1",
+        "9.2.2"
+      ],
+      "general-pci-dss-4-0-1": [
+        "1.1",
+        "1.2",
+        "1.2.1",
+        "1.2.2",
+        "1.2.3",
+        "1.2.4",
+        "1.2.6",
+        "1.2.8",
+        "1.3",
+        "1.3.1",
+        "1.3.2",
+        "1.3.3",
+        "1.4",
+        "1.4.1",
+        "1.4.2",
+        "1.4.3",
+        "10.1",
+        "10.2",
+        "10.2.1",
+        "10.2.1.1",
+        "10.2.1.2",
+        "10.2.1.3",
+        "10.2.1.4",
+        "10.2.1.5",
+        "10.2.1.6",
+        "10.2.1.7",
+        "10.2.2",
+        "10.3.3",
+        "10.4",
+        "10.4.1",
+        "10.4.1.1",
+        "10.4.3",
+        "10.6",
+        "10.6.1",
+        "10.6.2",
+        "10.6.3",
+        "10.7",
+        "10.7.1",
+        "10.7.2",
+        "10.7.3",
+        "11.2",
+        "11.2.1",
+        "11.2.2",
+        "11.3",
+        "11.3.1",
+        "11.3.1.1",
+        "11.3.1.2",
+        "11.3.1.3",
+        "11.3.2",
+        "11.3.2.1",
+        "11.5.1",
+        "12.1.4",
+        "12.10",
+        "12.10.1",
+        "12.10.5",
+        "12.10.7",
+        "12.3.3",
+        "12.4",
+        "12.4.2",
+        "12.8",
+        "12.8.1",
+        "12.8.2",
+        "12.9",
+        "12.9.1",
+        "12.9.2",
+        "2.1",
+        "2.2",
+        "2.2.1",
+        "2.2.7",
+        "3.3.2",
+        "3.4",
+        "3.4.2",
+        "3.5",
+        "3.5.1.2",
+        "3.5.1.3",
+        "4.2",
+        "4.2.1",
+        "4.2.1.2",
+        "6.2",
+        "6.2.1",
+        "6.2.4",
+        "6.3",
+        "6.3.1",
+        "6.3.2",
+        "6.3.3",
+        "6.5",
+        "6.5.1",
+        "6.5.2",
+        "6.5.3",
+        "6.5.6",
+        "7.1",
+        "7.2",
+        "7.2.1",
+        "7.2.2",
+        "7.2.3",
+        "7.2.4",
+        "7.2.5",
+        "7.2.5.1",
+        "7.2.6",
+        "7.3",
+        "7.3.1",
+        "7.3.2",
+        "7.3.3",
+        "8.2.3",
+        "8.2.4",
+        "8.3.10",
+        "8.3.2",
+        "8.4",
+        "8.4.2",
+        "8.4.3",
+        "8.5",
+        "8.5.1",
+        "8.6",
+        "8.6.1",
+        "9.1",
+        "9.4",
+        "9.4.1",
+        "9.4.1.1",
+        "9.4.1.2",
+        "9.4.7",
+        "9.5.1",
+        "9.5.1.1",
+        "A1.1",
+        "A1.1.1",
+        "A1.1.2",
+        "A1.1.3",
+        "A1.1.4",
+        "A1.2.3",
+        "A2.1",
+        "A2.1.1",
+        "A2.1.2",
+        "A2.1.3",
+        "A3.1",
+        "A3.1.1",
+        "A3.1.2",
+        "A3.2.2",
+        "A3.2.3",
+        "A3.3.1",
+        "A3.3.1.2",
+        "A3.4.1",
+        "A3.5",
+        "A3.5.1"
+      ],
+      "usa-federal-gsa-fedramp-5-mod": [
+        "AC-02",
+        "AC-04",
+        "AC-06",
+        "AC-06(07)",
+        "AU-01",
+        "AU-02",
+        "AU-06",
+        "CA-07",
+        "CA-07(01)",
+        "CM-01",
+        "CM-02",
+        "CM-03",
+        "CM-04",
+        "CM-05",
+        "CM-06",
+        "CM-08",
+        "CM-09",
+        "CP-01",
+        "CP-02",
+        "CP-02(08)",
+        "CP-09",
+        "CP-10",
+        "IA-02(01)",
+        "IA-02(02)",
+        "IR-01",
+        "IR-04",
+        "IR-04(03)",
+        "IR-04(04)",
+        "IR-06",
+        "IR-08",
+        "MP-01",
+        "MP-04",
+        "MP-06",
+        "MP-06(03)",
+        "PL-01",
+        "PL-02",
+        "PL-10",
+        "PM-01",
+        "PM-04",
+        "PM-05",
+        "PM-08",
+        "PM-14",
+        "PM-15",
+        "SA-01",
+        "SA-04",
+        "SA-04(01)",
+        "SA-04(02)",
+        "SA-04(03)",
+        "SA-08",
+        "SA-08(31)",
+        "SA-09",
+        "SA-15",
+        "SA-15(05)",
+        "SC-01",
+        "SC-07",
+        "SC-07(09)",
+        "SC-07(11)",
+        "SC-08",
+        "SC-08(01)",
+        "SC-08(02)",
+        "SC-13",
+        "SC-18(01)",
+        "SC-28",
+        "SC-28(01)",
+        "SC-28(02)",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "SI-05",
+        "SR-01",
+        "SR-02",
+        "SR-02(01)"
+      ],
+      "usa-federal-dow-cmmc-2-level-2": []
+    },
+    "ksi_in_use": [
+      "KSI-AFR-MAS",
+      "KSI-AFR-PVL",
+      "KSI-AFR-SCN",
+      "KSI-AFR-VDR",
+      "KSI-CMT-CHG",
+      "KSI-CMT-LMC",
+      "KSI-CMT-RMV",
+      "KSI-CMT-RVP",
+      "KSI-CMT-VTD",
+      "KSI-CNA-DFP",
+      "KSI-CNA-EIS",
+      "KSI-CNA-MAT",
+      "KSI-CNA-OFA",
+      "KSI-CNA-RNT",
+      "KSI-IAM-AAM",
+      "KSI-IAM-APM",
+      "KSI-IAM-ELP",
+      "KSI-IAM-JIT",
+      "KSI-IAM-MFA",
+      "KSI-IAM-SUS",
+      "KSI-INR-IRP",
+      "KSI-INR-PRC",
+      "KSI-MLA-EVC",
+      "KSI-MLA-LET",
+      "KSI-MLA-OSM",
+      "KSI-PIY-GIV",
+      "KSI-RPL-ABO",
+      "KSI-RPL-ARP",
+      "KSI-RPL-RRO",
+      "KSI-RPL-TRC",
+      "KSI-SCR-SRA",
+      "KSI-SCR-TPM",
+      "KSI-SVC-ENC",
+      "KSI-SVC-PRR",
+      "KSI-SVC-RUD",
+      "KSI-SVC-SEC",
+      "KSI-SVC-SIN",
+      "KSI-SVC-SNT"
+    ],
+    "ksi_defined_but_unused": [
+      "KSI-CED-RAT",
+      "KSI-CNA-IBP",
+      "KSI-CNA-RVP",
+      "KSI-CNA-ULN",
+      "KSI-IAM-SNU",
+      "KSI-INR-AAR",
+      "KSI-INR-RIR",
+      "KSI-INR-RPI",
+      "KSI-MLA-ALA",
+      "KSI-MLA-RVL",
+      "KSI-PIY-RES",
+      "KSI-PIY-RIS",
+      "KSI-PIY-RSD",
+      "KSI-PIY-RVD",
+      "KSI-RPL-BKP",
+      "KSI-SCR-MIT",
+      "KSI-SCR-MON",
+      "KSI-SVC-ACM",
+      "KSI-SVC-ASM",
+      "KSI-SVC-EIS",
+      "KSI-SVC-VCM",
+      "KSI-SVC-VRI"
+    ]
+  }
+}

@@ -34,11 +34,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CNA-RNT": "Restricting network traffic",
-        "KSI-CNA-MAT": "Minimizing attack surface",
-        "KSI-SVC-SNT": "Secure network traffic / encryption in transit (alias)"
+        "KSI-CNA-RNT": "Restricting network traffic"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/NET-01.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/NET-01.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-CNA-RNT": {
+          "description": "Restricting network traffic"
+        }
+      }
     },
     {
       "scf_control_id": "NET-04",
@@ -77,10 +80,17 @@
       },
       "fedramp_20x_ksi": {
         "KSI-CNA-RNT": "Restricting network traffic",
-        "KSI-CNA-MAT": "Minimizing attack surface",
-        "KSI-SVC-SNT": "Secure network traffic / encryption in transit (alias)"
+        "KSI-CNA-MAT": "Minimizing attack surface"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/NET-04.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/NET-04.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-CNA-RNT": {
+          "description": "Restricting network traffic"
+        },
+        "KSI-CNA-MAT": {
+          "description": "Minimizing attack surface"
+        }
+      }
     },
     {
       "scf_control_id": "AST-04",
@@ -115,12 +125,9 @@
           "SA-04(02)"
         ]
       },
-      "fedramp_20x_ksi": {
-        "KSI-CNA-RNT": "Restricting network traffic",
-        "KSI-CNA-MAT": "Minimizing attack surface",
-        "KSI-SVC-SNT": "Secure network traffic / encryption in transit (alias)"
-      },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-04.json"
+      "fedramp_20x_ksi": {},
+      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-04.json",
+      "fedramp_20x_ksi_detail": {}
     },
     {
       "scf_control_id": "CLD-06",
@@ -140,11 +147,16 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CNA-RNT": "Restricting network traffic",
-        "KSI-CNA-MAT": "Minimizing attack surface",
         "KSI-SVC-SNT": "Secure network traffic / encryption in transit (alias)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CLD-06.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CLD-06.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-SVC-SNT": {
+          "description": "Secure network traffic / encryption in transit (alias)",
+          "legacy": true,
+          "alias_of": "KSI-SVC-SIN"
+        }
+      }
     }
   ],
   "coverage_summary": {
@@ -154,6 +166,30 @@
       "general-nist-800-171-r3": 3,
       "general-pci-dss-4-0-1": 4,
       "usa-federal-gsa-fedramp-5-mod": 3
-    }
-  }
+    },
+    "frameworks_requested_without_hits": [
+      {
+        "framework": "general-iso-27001-2022",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "general-nist-800-171-r2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "usa-federal-dow-cmmc-2-level-2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      }
+    ],
+    "frameworks_requested": [
+      "general-nist-800-53-r5-2",
+      "general-nist-800-171-r3",
+      "general-iso-27001-2022",
+      "general-pci-dss-4-0-1",
+      "usa-federal-gsa-fedramp-5-mod",
+      "general-nist-800-171-r2",
+      "usa-federal-dow-cmmc-2-level-2"
+    ]
+  },
+  "ksi_overlay_version": "2026-08.1"
 }

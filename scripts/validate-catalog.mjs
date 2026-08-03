@@ -21,7 +21,9 @@ const err = (msg) => errors.push(msg);
 const REQUIRED_LAB_KEYS = [
   'id', 'title', 'repo_name', 'path', 'summary', 'primary_risk',
   'scf_controls', 'ksi', 'frameworks', 'aws_services', 'source_repo',
+  'status',
 ];
+const VALID_STATUSES = new Set(['skeleton', 'functional', 'hardened']);
 const ID_RE = /^\d{2}-[a-z0-9-]+$/;
 const REPO_RE = /^[a-z0-9][a-z0-9-]{1,62}$/;
 
@@ -36,6 +38,7 @@ for (const lab of catalog.labs ?? []) {
     if (!(key in lab)) err(`${id}: missing key "${key}"`);
   }
   if (lab.id && !ID_RE.test(lab.id)) err(`${id}: id does not match ${ID_RE}`);
+  if (lab.status && !VALID_STATUSES.has(lab.status)) err(`${id}: invalid status "${lab.status}"`);
   if (lab.repo_name && !REPO_RE.test(lab.repo_name)) err(`${id}: invalid repo_name "${lab.repo_name}"`);
   if (seenIds.has(lab.id)) err(`${id}: duplicate id`);
   seenIds.add(lab.id);

@@ -7,6 +7,19 @@
     "MON-01",
     "THR-01"
   ],
+  "ksi_by_control": {
+    "VPM-01": [
+      "KSI-AFR-VDR"
+    ],
+    "VPM-02": [
+      "KSI-AFR-VDR"
+    ],
+    "MON-01": [
+      "KSI-AFR-PVL",
+      "KSI-MLA-EVC"
+    ],
+    "THR-01": []
+  },
   "ksi": [
     "KSI-AFR-VDR",
     "KSI-AFR-PVL",
@@ -17,6 +30,8 @@
     "general-nist-800-171-r3",
     "general-iso-27001-2022",
     "general-pci-dss-4-0-1",
-    "usa-federal-gsa-fedramp-5-mod"
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
   ]
 }

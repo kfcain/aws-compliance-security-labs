@@ -7,6 +7,21 @@
     "CPL-02",
     "CHG-01"
   ],
+  "ksi_by_control": {
+    "MON-01": [
+      "KSI-MLA-OSM",
+      "KSI-AFR-PVL"
+    ],
+    "MON-02": [
+      "KSI-MLA-OSM"
+    ],
+    "CPL-02": [
+      "KSI-AFR-PVL"
+    ],
+    "CHG-01": [
+      "KSI-CMT-CHG"
+    ]
+  },
   "ksi": [
     "KSI-MLA-OSM",
     "KSI-AFR-PVL",
@@ -17,6 +32,8 @@
     "general-nist-800-171-r3",
     "general-iso-27001-2022",
     "general-pci-dss-4-0-1",
-    "usa-federal-gsa-fedramp-5-mod"
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
   ]
 }

@@ -49,11 +49,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-ELP": "Ensure least privilege",
-        "KSI-IAM-JIT": "Authorizing just-in-time",
-        "KSI-SVC-SEC": "Secrets management (alias)"
+        "KSI-IAM-JIT": "Authorizing just-in-time"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-15.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-15.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-IAM-JIT": {
+          "description": "Authorizing just-in-time"
+        }
+      }
     },
     {
       "scf_control_id": "IAC-21",
@@ -106,11 +109,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-ELP": "Ensure least privilege",
-        "KSI-IAM-JIT": "Authorizing just-in-time",
-        "KSI-SVC-SEC": "Secrets management (alias)"
+        "KSI-IAM-ELP": "Ensure least privilege"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-21.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-21.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-IAM-ELP": {
+          "description": "Ensure least privilege"
+        }
+      }
     },
     {
       "scf_control_id": "CRY-01",
@@ -146,11 +152,16 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-ELP": "Ensure least privilege",
-        "KSI-IAM-JIT": "Authorizing just-in-time",
         "KSI-SVC-SEC": "Secrets management (alias)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-01.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-01.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-SVC-SEC": {
+          "description": "Secrets management (alias)",
+          "legacy": true,
+          "alias_of": "KSI-SVC-ASM"
+        }
+      }
     },
     {
       "scf_control_id": "CFG-02",
@@ -236,11 +247,16 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-ELP": "Ensure least privilege",
-        "KSI-IAM-JIT": "Authorizing just-in-time",
         "KSI-SVC-SEC": "Secrets management (alias)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-02.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-02.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-SVC-SEC": {
+          "description": "Secrets management (alias)",
+          "legacy": true,
+          "alias_of": "KSI-SVC-ASM"
+        }
+      }
     }
   ],
   "coverage_summary": {
@@ -250,6 +266,30 @@
       "general-nist-800-171-r3": 4,
       "general-pci-dss-4-0-1": 4,
       "usa-federal-gsa-fedramp-5-mod": 4
-    }
-  }
+    },
+    "frameworks_requested_without_hits": [
+      {
+        "framework": "general-iso-27001-2022",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "general-nist-800-171-r2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "usa-federal-dow-cmmc-2-level-2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      }
+    ],
+    "frameworks_requested": [
+      "general-nist-800-53-r5-2",
+      "general-nist-800-171-r3",
+      "general-iso-27001-2022",
+      "general-pci-dss-4-0-1",
+      "usa-federal-gsa-fedramp-5-mod",
+      "general-nist-800-171-r2",
+      "usa-federal-dow-cmmc-2-level-2"
+    ]
+  },
+  "ksi_overlay_version": "2026-08.1"
 }
