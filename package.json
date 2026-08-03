@@ -1,12 +1,15 @@
 {
   "name": "aws-compliance-security-labs",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
-  "description": "Giant monorepo combining all AWS compliance & security lab-* projects",
+  "description": "Combined monorepo of AWS compliance & security labs (NIST 800-53/171, ISO 27001, PCI DSS, FedRAMP 20x KSIs)",
+  "type": "module",
   "scripts": {
-    "scf:test": "node --test shared/scf-mapper/src/mapper.test.js",
+    "scf:test": "node --test 'scripts/*.test.mjs' shared/scf-mapper/src/mapper.test.js",
     "scf:map:all": "node scripts/map-all-labs.mjs",
-    "list-labs": "node -e \"console.log(require('./labs/catalog.json').labs.map(l=>l.id).join('\\n'))\""
+    "grc:build": "node scripts/postprocess-mappings.mjs && node scripts/build-coverage.mjs && node scripts/build-oscal.mjs && node scripts/build-assessment.mjs && node scripts/build-risk-register.mjs",
+    "grc:check": "node scripts/validate-catalog.mjs && node scripts/check-common-sync.mjs && node scripts/postprocess-mappings.mjs --check && node scripts/build-coverage.mjs --check && node scripts/build-oscal.mjs --check && node scripts/build-assessment.mjs --check && node scripts/build-risk-register.mjs --check",
+    "list-labs": "node -e \"import('node:fs').then(fs=>console.log(JSON.parse(fs.readFileSync('./labs/catalog.json')).labs.map(l=>l.id).join('\\n')))\""
   },
   "engines": {
     "node": ">=18"

@@ -66,6 +66,10 @@ node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapp
 4. Run the SCF mapper and attach `scf-mapping.generated.json` to your evidence package.
 5. Keep the EventBridge schedule at least every 3 days for FedRAMP 20x *persistent* machine validation.
 
+> **Note:** the crosswalk tables embedded in `index.html` are a static
+> 2026-08-01 snapshot for the walkthrough page. `scf/scf-mapping.generated.json`
+> is the canonical crosswalk; regenerate the page from it rather than editing HTML.
+
 ## Related labs
 
 See [`../catalog.json`](../catalog.json) and the portfolio root README.

@@ -1,4 +1,19 @@
-# Risk statement — Privileged Suspend & Account Lifecycle Automation
+# Risk Register Entry — Privileged Suspend & Account Lifecycle Automation
+
+| Field | Value |
+|-------|-------|
+| Risk ID | RISK-14-01 |
+| Lab | `14-privileged-suspend-lifecycle` |
+| Owner (role) | Identity Engineering Lead |
+| Treatment decision | Mitigate — automated by this lab's continuous validation |
+| Inherent likelihood / impact | High / Critical |
+| Residual likelihood / impact | Low / High |
+| Reviewed | 2026-08-03 |
+| Next review | 2027-02-03 |
+
+Ratings use the 5×5 scales defined in
+[docs/RISK-METHODOLOGY.md](../../docs/RISK-METHODOLOGY.md). Residual assumes
+this lab's controls are deployed and kept healthy by CI.
 
 ## Statement
 
@@ -7,6 +22,13 @@
 ## Threat narrative
 
 Orphaned admins, standing privileged roles, or delayed response to suspicious privileged activity enable federal data exfiltration.
+
+## MITRE ATT&CK techniques
+
+| Technique | Name | Relevance |
+|-----------|------|-----------|
+| T1098 | Account Manipulation | Compromised or orphaned privileged accounts are re-provisioned or retained |
+| T1078.004 | Valid Accounts: Cloud Accounts | Standing privileged access abused after credential theft |
 
 ## Security program impact
 
@@ -20,15 +42,11 @@ FedRAMP KSI-IAM-SUS, KSI-IAM-AAM, KSI-IAM-ELP/JIT/APM; SCF IAC-15/16/17/21; NIST
 
 Privileged misuse drives the highest-impact breaches. Automation cuts MTTC and reduces standing-privilege audit findings that block deals.
 
-## Rating
+## Treatment & residual rationale
 
-| Factor | Value |
-|--------|-------|
-| Likelihood | High |
-| Impact | Critical |
-| Suggested treatment | Automate detection + evidence; escalate residual risk to GRC risk register |
+Detection-driven suspend (caller hints cannot de-escalate) with honest dry-run FAILs cuts privileged-abuse dwell time; a fast attacker inside the detection window remains High impact.
 
-## Residual risk if untreated
+## Consequences if untreated
 
 - Repeat audit findings and delayed ATO / customer questionnaires
 - Higher cyber-insurance premiums and possible coverage exclusions

@@ -43,12 +43,12 @@ Orchestrate deletion cases end-to-end and prove residual-free state.
 
 ## Acceptance criteria
 
-- [ ] Case validation rejects empty/unsafe `tenant_id`
-- [ ] Demo catalog path produces structured purge actions for s3/dynamodb/rds/backup
-- [ ] `simulate_residual_hits` forces FAIL + ASFF finding
-- [ ] Evidence includes `acceptance.zero_residual_hits` and `backup_path_executed`
-- [ ] SCF mapper output attached under `scf/`
-- [ ] Dark tldraw diagram opens
+- [ ] `sam build && sam deploy` provisions the stack; `cfn-lint` and `checkov` pass
+- [ ] Handler returns `compliance_status` from real posture; unconfigured input yields `CONFIG_ERROR` (never `PASS`)
+- [ ] A known-bad fixture drives `FAIL` with a Security Hub finding and SNS alert; a clean fixture drives `PASS`
+- [ ] Evidence JSON is written to the KMS-encrypted evidence bucket with `data_source` stamped
+- [ ] `pytest labs/11-federal-data-deletion-residual` passes (regression + behavior tests)
+- [ ] Crosswalk, coverage, OSCAL, and assessment artifacts regenerate without drift
 
 ## Threat model (abridged)
 
@@ -78,3 +78,14 @@ python3 -c "from src.handler import handler; r=handler({'case':{'tenant_id':'age
 - **13** inventory/boundary supplies the catalog
 - **12** backup vaults must support tenant-tagged recovery points
 - **06** CMKs encrypt data at rest during residual windows
+
+## Security requirements
+
+- Least-privilege Lambda role scoped to named resources (no wildcard resources
+  outside the justified allowlist); partition-agnostic ARNs (GovCloud-safe)
+- Evidence bucket, SNS, SQS, logs, and Lambda env encrypted with the lab CMK
+- No long-lived secrets in code or plaintext env vars — use Secrets Manager
+- Fail closed: unconfigured or partial inputs return `CONFIG_ERROR`, never `PASS`;
+  simulated data only via `{"mode": "simulation"}`, stamped in the evidence
+- Destructive or account-modifying actions gated behind a stack parameter
+  defaulting off (dry run)

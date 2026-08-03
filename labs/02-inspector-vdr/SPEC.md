@@ -20,11 +20,12 @@ Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1â
 
 ## Acceptance criteria
 
-- [ ] Infrastructure deploys via `infrastructure/template.yaml`
-- [ ] Lambda returns structured JSON with `lab_id`, `scf_controls`, `fedramp_20x_ksi`
-- [ ] SCF mapper produces crosswalk file for target frameworks
-- [ ] Architecture diagram opens in tldraw (dark background)
-- [ ] RISK.md reviewed by security owner
+- [ ] `sam build && sam deploy` provisions the stack; `cfn-lint` and `checkov` pass
+- [ ] Handler returns `compliance_status` from real posture; unconfigured input yields `CONFIG_ERROR` (never `PASS`)
+- [ ] A known-bad fixture drives `FAIL` with a Security Hub finding and SNS alert; a clean fixture drives `PASS`
+- [ ] Evidence JSON is written to the KMS-encrypted evidence bucket with `data_source` stamped
+- [ ] `pytest labs/02-inspector-vdr` passes (regression + behavior tests)
+- [ ] Crosswalk, coverage, OSCAL, and assessment artifacts regenerate without drift
 
 ## Evidence schema (minimum)
 
@@ -32,7 +33,7 @@ Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1â
 {
   "lab_id": "02-inspector-vdr",
   "checked_at": "ISO-8601",
-  "status": "PASS|FAIL|ERROR",
+  "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["VPM-01","VPM-02","MON-01","THR-01"],
   "fedramp_20x_ksi": ["KSI-AFR-VDR","KSI-AFR-PVL","KSI-MLA-EVC"],
   "artifacts": []
@@ -45,3 +46,16 @@ Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1â
 - Encrypt evidence bucket with CMK
 - No long-lived secrets in code â€” use Secrets Manager
 - CloudTrail enabled on the account under test
+
+## Threat model
+
+Primary adversary objective and the technique this lab detects/mitigates are
+enumerated with MITRE ATT&CK IDs in [RISK.md](./RISK.md). The control's
+detection logic (`src/handler.py`) is the mitigation; the assessment
+procedure in [ASSESSMENT.md](./ASSESSMENT.md) is how an assessor confirms it
+operates. Primary technique: **T1190**.
+
+Trust boundary: the worker runs with a least-privilege role in the account
+under test, reads posture via AWS APIs (or the IdP API for lab 01), and writes
+only to its own KMS-encrypted evidence bucket and SNS topic. Event input is
+validated; caller-supplied fields never override a control decision.

@@ -54,7 +54,6 @@ jobs:
           node-version: '22'
       # Hermetic: the live SCF test only runs when SCF_LIVE=1 (scf-refresh workflow).
       - run: npm run scf:test
-      - run: node --test 'scripts/*.test.mjs'
 
   validate-data:
     runs-on: ubuntu-latest
@@ -63,4 +62,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node scripts/validate-catalog.mjs
+      # Catalog/spec/filesystem consistency, vendored-runtime sync, and
+      # generated-artifact drift (crosswalk KSI blocks, coverage matrix, OSCAL,
+      # assessment procedures, risk register). Offline.
+      - run: npm run grc:check

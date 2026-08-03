@@ -1,0 +1,55 @@
+name: scf-refresh
+
+# Live SCF crosswalk regeneration — the ONLY place the repo hits the SCF API.
+# Runs the live mapper tests, regenerates all 15 crosswalks, rebuilds every
+# derived artifact, and opens a PR if anything drifted (including the pending
+# CMMC / 800-171 r2 backfill).
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'   # Mondays 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Live mapper tests
+        env:
+          SCF_LIVE: '1'
+        run: node --test shared/scf-mapper/src/mapper.test.js
+
+      - name: Regenerate crosswalks and derived artifacts
+        env:
+          SCF_LIVE: '1'
+        run: |
+          npm run scf:map:all
+          npm run grc:build
+
+      - name: Open PR on drift
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No crosswalk drift."
+            exit 0
+          fi
+          branch="scf-refresh/$(date -u +%Y%m%d)"
+          git config user.name "scf-refresh"
+          git config user.email "scf-refresh@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -A
+          git commit -m "chore(scf): refresh crosswalks and derived artifacts"
+          git push -u origin "$branch"
+          gh pr create --fill --base main --head "$branch" \
+            --title "SCF crosswalk refresh" \
+            --body "Automated live SCF regeneration. Review coverage/OSCAL/KSI changes before merge."
