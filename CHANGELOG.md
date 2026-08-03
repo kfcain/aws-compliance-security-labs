@@ -47,8 +47,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   model and ignore/plan-parsing approach are adapted from the
   [tfdrift](https://github.com/sudarshan8417/tfdrift) tool into the portfolio's
   Lambda-evidence contract (terraform runs in CI; the function only reads plan
-  JSON from a hardened plan-artifact bucket and writes evidence). Full lab set:
-  hardened SAM stack, 14 handler tests, SCF crosswalk, OSCAL, assessment, and
+  JSON from a hardened plan-artifact bucket and writes evidence). Each run emits
+  an assessor-ready **assurance case**, not just a verdict: provenance binding
+  the evidence to the Terraform commit / workspace / collector role, a
+  recomputable SHA-256 integrity manifest, and a per-control
+  objective→claim→status mapping to the real NIST 800-171 rev 3 and 800-53 rev 5
+  assessment objectives with ODP references. Ships an ODP register, a read-only
+  producer-side evidence collector (S3/KMS/CloudTrail/Config + refresh-only
+  drift plan + git provenance + SHA-256 manifest), and an OPA/Conftest gate
+  (pre-deploy on the plan, post-deploy on the evidence). Full lab set: hardened
+  SAM stack, 22 handler tests, SCF crosswalk, OSCAL, assessment, and
   risk-register entry.
 - Real `boto3` validation logic in labs 04–10 (previously `PASS_PLACEHOLDER`
   stubs): AWS Config compliance, GuardDuty posture and findings, KMS/Secrets
