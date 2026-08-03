@@ -30,13 +30,18 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
         "KSI-RPL-ARP": "Aligning recovery plan with objectives",
-        "KSI-RPL-ABO": "Aligning backups with objectives",
-        "KSI-RPL-TRC": "Testing recovery capabilities",
         "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-01.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-01.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-RPL-ARP": {
+          "description": "Aligning recovery plan with objectives"
+        },
+        "KSI-CNA-OFA": {
+          "description": "Optimizing for availability and rapid recovery"
+        }
+      }
     },
     {
       "scf_control_id": "BCD-02",
@@ -57,13 +62,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
-        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
-        "KSI-RPL-ABO": "Aligning backups with objectives",
-        "KSI-RPL-TRC": "Testing recovery capabilities",
-        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-02.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-02.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-RPL-RRO": {
+          "description": "Reviewing recovery objectives (RTO/RPO)"
+        }
+      }
     },
     {
       "scf_control_id": "BCD-11",
@@ -97,13 +103,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
-        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
-        "KSI-RPL-ABO": "Aligning backups with objectives",
-        "KSI-RPL-TRC": "Testing recovery capabilities",
-        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+        "KSI-RPL-ABO": "Aligning backups with objectives"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-11.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-11.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-RPL-ABO": {
+          "description": "Aligning backups with objectives"
+        }
+      }
     },
     {
       "scf_control_id": "BCD-12",
@@ -124,13 +131,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
-        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
-        "KSI-RPL-ABO": "Aligning backups with objectives",
-        "KSI-RPL-TRC": "Testing recovery capabilities",
-        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+        "KSI-RPL-TRC": "Testing recovery capabilities"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-12.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-12.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-RPL-TRC": {
+          "description": "Testing recovery capabilities"
+        }
+      }
     },
     {
       "scf_control_id": "CRY-05",
@@ -166,13 +174,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
-        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
-        "KSI-RPL-ABO": "Aligning backups with objectives",
-        "KSI-RPL-TRC": "Testing recovery capabilities",
-        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+        "KSI-RPL-ABO": "Aligning backups with objectives"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-05.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-05.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-RPL-ABO": {
+          "description": "Aligning backups with objectives"
+        }
+      }
     },
     {
       "scf_control_id": "AST-02",
@@ -211,14 +220,9 @@
           "PM-05"
         ]
       },
-      "fedramp_20x_ksi": {
-        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)",
-        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
-        "KSI-RPL-ABO": "Aligning backups with objectives",
-        "KSI-RPL-TRC": "Testing recovery capabilities",
-        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
-      },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-02.json"
+      "fedramp_20x_ksi": {},
+      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-02.json",
+      "fedramp_20x_ksi_detail": {}
     }
   ],
   "coverage_summary": {
@@ -228,6 +232,30 @@
       "usa-federal-gsa-fedramp-5-mod": 6,
       "general-nist-800-171-r3": 3,
       "general-pci-dss-4-0-1": 3
-    }
-  }
+    },
+    "frameworks_requested_without_hits": [
+      {
+        "framework": "general-iso-27001-2022",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "general-nist-800-171-r2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "usa-federal-dow-cmmc-2-level-2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      }
+    ],
+    "frameworks_requested": [
+      "general-nist-800-53-r5-2",
+      "general-nist-800-171-r3",
+      "general-iso-27001-2022",
+      "general-pci-dss-4-0-1",
+      "usa-federal-gsa-fedramp-5-mod",
+      "general-nist-800-171-r2",
+      "usa-federal-dow-cmmc-2-level-2"
+    ]
+  },
+  "ksi_overlay_version": "2026-08.1"
 }

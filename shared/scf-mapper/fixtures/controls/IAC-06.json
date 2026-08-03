@@ -1,0 +1,16 @@
+{
+  "control_id": "IAC-06",
+  "title": "Multi-Factor Authentication (MFA)",
+  "family": "IAC",
+  "description": "Mechanisms exist to enforce Multi-Factor Authentication (MFA) for authenticating to systems and applications.",
+  "evidence_requests": ["E-IAC-06"],
+  "nist_csf_function": "Protect",
+  "relative_weight": 9,
+  "crosswalks": {
+    "general-nist-800-53-r5-2": ["IA-02(01)", "IA-02(02)"],
+    "general-nist-800-171-r3": ["03.05.03"],
+    "general-pci-dss-4-0-1": ["8.4.1", "8.4.2"],
+    "usa-federal-gsa-fedramp-5-mod": ["IA-2(1)", "IA-2(2)"],
+    "general-iso-27001-2022": []
+  }
+}

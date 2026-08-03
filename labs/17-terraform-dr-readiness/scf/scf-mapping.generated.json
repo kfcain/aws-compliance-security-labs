@@ -1,0 +1,212 @@
+{
+  "lab_id": "17-terraform-dr-readiness",
+  "generated_at": "2026-08-01T19:09:53.983Z",
+  "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "controls": [
+    {
+      "scf_control_id": "BCD-01",
+      "title": "Business Continuity Management System (BCMS)",
+      "family": "BCD",
+      "description": "Mechanisms exist to facilitate the implementation of contingency planning controls to help ensure resilient Technology Assets, Applications and/or Services (TAAS) (e.g., Continuity of Operations Plan (COOP) or Business Continuity & Disaster Recovery (BC/DR) playbooks).",
+      "evidence_requests": [
+        "E-BCM-01"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CP-01",
+          "CP-02",
+          "CP-10",
+          "IR-04(03)",
+          "PM-08"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CP-01",
+          "CP-02",
+          "CP-10",
+          "IR-04(03)",
+          "PM-08"
+        ]
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-01.json",
+      "fedramp_20x_ksi": {
+        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+      },
+      "fedramp_20x_ksi_detail": {
+        "KSI-CNA-OFA": {
+          "description": "Optimizing for availability and rapid recovery"
+        }
+      }
+    },
+    {
+      "scf_control_id": "BCD-02",
+      "title": "Identify Critical Assets",
+      "family": "BCD",
+      "description": "Mechanisms exist to identify and document the critical Technology Assets, Applications, Services and/or Data (TAASD) that support essential missions and business functions.",
+      "evidence_requests": [
+        "E-BCM-08"
+      ],
+      "nist_csf_function": "Recover",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CP-02(08)"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CP-02(08)"
+        ]
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-02.json",
+      "fedramp_20x_ksi": {
+        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)"
+      },
+      "fedramp_20x_ksi_detail": {
+        "KSI-RPL-RRO": {
+          "description": "Reviewing recovery objectives (RTO/RPO)"
+        }
+      }
+    },
+    {
+      "scf_control_id": "BCD-11",
+      "title": "Data Backups",
+      "family": "BCD",
+      "description": "Mechanisms exist to create recurring backups of data, software and/or system images, as well as verify the integrity of these backups, to ensure the availability of the data to satisfy Recovery Time Objectives (RTOs) and Recovery Point Objectives (RPOs).",
+      "evidence_requests": [
+        "E-BCM-10",
+        "E-BCM-11",
+        "E-BCM-12",
+        "E-BCM-13"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 10,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CP-09",
+          "SC-28(02)"
+        ],
+        "general-nist-800-171-r3": [
+          "03.08.09.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "9.4.1.1",
+          "9.4.1.2",
+          "12.10.1"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CP-09",
+          "SC-28(02)"
+        ]
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-11.json",
+      "fedramp_20x_ksi": {
+        "KSI-RPL-ABO": "Aligning backups with objectives"
+      },
+      "fedramp_20x_ksi_detail": {
+        "KSI-RPL-ABO": {
+          "description": "Aligning backups with objectives"
+        }
+      }
+    },
+    {
+      "scf_control_id": "BCD-12",
+      "title": "Technology Assets, Applications and/or Services (TAAS) Recovery & Reconstitution",
+      "family": "BCD",
+      "description": "Mechanisms exist to ensure the secure recovery and reconstitution of Technology Assets, Applications and/or Services (TAAS) to a known state after a disruption, compromise or failure.",
+      "evidence_requests": [
+        "E-BCM-15"
+      ],
+      "nist_csf_function": "Protect",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CP-10"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CP-10"
+        ]
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-12.json",
+      "fedramp_20x_ksi": {
+        "KSI-RPL-ARP": "Aligning recovery plan with objectives"
+      },
+      "fedramp_20x_ksi_detail": {
+        "KSI-RPL-ARP": {
+          "description": "Aligning recovery plan with objectives"
+        }
+      }
+    },
+    {
+      "scf_control_id": "CFG-01",
+      "title": "Configuration Management Program",
+      "family": "CFG",
+      "description": "Mechanisms exist to facilitate the implementation of configuration management controls.",
+      "evidence_requests": [
+        "E-AST-01",
+        "E-AST-27"
+      ],
+      "nist_csf_function": "Govern",
+      "relative_weight": 9,
+      "framework_mappings": {
+        "general-nist-800-53-r5-2": [
+          "CM-01",
+          "CM-09"
+        ],
+        "general-nist-800-171-r3": [
+          "03.04.01.a"
+        ],
+        "general-pci-dss-4-0-1": [
+          "2.1",
+          "2.2",
+          "8.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "CM-01",
+          "CM-09"
+        ]
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-01.json",
+      "fedramp_20x_ksi": {
+        "KSI-CNA-EIS": "Enforcing intended state"
+      },
+      "fedramp_20x_ksi_detail": {
+        "KSI-CNA-EIS": {
+          "description": "Enforcing intended state"
+        }
+      }
+    }
+  ],
+  "coverage_summary": {
+    "control_count": 5,
+    "frameworks_with_hits": {
+      "general-nist-800-53-r5-2": 5,
+      "usa-federal-gsa-fedramp-5-mod": 5,
+      "general-nist-800-171-r3": 2,
+      "general-pci-dss-4-0-1": 2
+    },
+    "frameworks_requested_without_hits": [
+      {
+        "framework": "general-iso-27001-2022",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "general-nist-800-171-r2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "usa-federal-dow-cmmc-2-level-2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      }
+    ],
+    "frameworks_requested": [
+      "general-nist-800-53-r5-2",
+      "general-nist-800-171-r3",
+      "general-iso-27001-2022",
+      "general-pci-dss-4-0-1",
+      "usa-federal-gsa-fedramp-5-mod",
+      "general-nist-800-171-r2",
+      "usa-federal-dow-cmmc-2-level-2"
+    ]
+  },
+  "ksi_overlay_version": "2026-08.1"
+}

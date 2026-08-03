@@ -1,6 +1,6 @@
 # AWS Compliance & Security Labs
 
-Combined monorepo for all `15` AWS compliance and security labs previously published as separate `lab-*` repositories under [`kfcain`](https://github.com/kfcain).
+Combined monorepo for `17` AWS compliance and security labs. Labs `01`–`15` were previously published as separate `lab-*` repositories under [`kfcain`](https://github.com/kfcain); labs `16`–`17` are new to this monorepo.
 
 Target frameworks: **NIST SP 800-171**, **NIST SP 800-53**, **ISO 27001**, **PCI DSS**, and **FedRAMP 20x / CR26 Key Security Indicators (KSIs)**.
 
@@ -18,13 +18,14 @@ Data sources (Flow Logs, CloudTrail, Config, Inspector, IdP)
 ## Repository layout
 
 ```
-labs/                 # One folder per lab (01–15)
+labs/                 # One folder per lab (01–17)
   catalog.json        # Machine-readable portfolio index
 shared/scf-mapper/    # Shared SCF crosswalk CLI
-scripts/              # Portfolio helpers (map-all, etc.)
+shared/lambda-common/ # Vendored Lambda runtime (lab_common.py)
+scripts/              # Portfolio + GRC generators (map-all, coverage, oscal, …)
 ```
 
-Each lab includes `README.md`, `RISK.md`, `SPEC.md`, `scf/`, `diagrams/`, `infrastructure/template.yaml`, `src/handler.py`, and a walkthrough `index.html`.
+Each lab includes `README.md`, `RISK.md`, `SPEC.md`, `ASSESSMENT.md`, `scf/`, `infrastructure/template.yaml`, `src/handler.py`, and `tests/`. Labs `01`–`15` also ship `diagrams/architecture.tldr` and a walkthrough `index.html`; labs `16`–`17` use an inline mermaid diagram in their README instead.
 
 ## Labs
 
@@ -45,20 +46,36 @@ Each lab includes `README.md`, `RISK.md`, `SPEC.md`, `scf/`, `diagrams/`, `infra
 | `13-boundary-asset-inventory` | [Authorization Boundary & Real-Time Asset Inventory](./labs/13-boundary-asset-inventory/) | Unknown or out-of-scope resources silently process federal data | [`lab-boundary-asset-inventory`](https://github.com/kfcain/lab-boundary-asset-inventory) |
 | `14-privileged-suspend-lifecycle` | [Privileged Suspend & Account Lifecycle Automation](./labs/14-privileged-suspend-lifecycle/) | Orphaned or compromised privileged access to federal systems | [`lab-privileged-suspend-lifecycle`](https://github.com/kfcain/lab-privileged-suspend-lifecycle) |
 | `15-immutable-cicd-change-control` | [Immutable CI/CD Change Control & Deployment Validation](./labs/15-immutable-cicd-change-control/) | Untracked production changes bypass review and corrupt federal workloads | [`lab-immutable-cicd-change-control`](https://github.com/kfcain/lab-immutable-cicd-change-control) |
+| `16-terraform-drift-detection` | [Terraform State Drift Detection & Remediation Governance](./labs/16-terraform-drift-detection/) | Out-of-band changes drift Terraform-managed infrastructure away from its declared baseline | — (new; drift model adapted from [`tfdrift`](https://github.com/sudarshan8417/tfdrift)) |
+| `17-terraform-dr-readiness` | [Terraform DR Readiness & State-Backend Resilience](./labs/17-terraform-dr-readiness/) | A disaster is unrecoverable because the Terraform state backend or declared architecture is not DR-ready | — (new) |
 
 ## Quick start
 
 ```bash
-# Install nothing required for SCF mapping beyond Node 18+
-npm run scf:test
-npm run scf:map:all
+# Verify everything offline (Node 18+; Python dev tools from requirements-dev.txt)
+pip install -r requirements-dev.txt
+make lint test iac check     # ruff, pytest, node --test, cfn-lint, checkov, drift gates
 
-# Deploy one lab (example)
-cd labs/01-mfa-continuous-validation
-sam build -t infrastructure/template.yaml   # or aws cloudformation deploy
+# Deploy one lab (packages the real handler in src/ — python3.13 runtime)
+cd labs/04-config-drift-compliance
+sam build -t infrastructure/template.yaml
+sam deploy --guided          # parameters gate optional/singleton resources
+
+# Regenerate SCF crosswalks (live network; otherwise the scheduled
+# scf-refresh workflow does this in CI)
+SCF_LIVE=1 npm run scf:map:all
 ```
 
-Open each lab `diagrams/architecture.tldr` in [tldraw.com](https://www.tldraw.com/) (File → Open).
+Every stack creates and hardens its own evidence bucket (SSE-KMS CMK,
+versioning, TLS-only policy, optional Object Lock), encrypts SNS/SQS/logs
+with the lab CMK, sets explicit log retention, wires `AlertEmail` to an SNS
+subscription, and scopes IAM to named resources with partition-agnostic ARNs
+(GovCloud-deployable). Destructive or account-singleton resources (GuardDuty
+detectors, CloudTrail trails, Config rules/aggregators, purge permissions,
+IAM suspend actions, Backup vault lock) are gated behind parameters that
+default **off**.
+
+Open a lab's `diagrams/architecture.tldr` (labs 01–15) in [tldraw.com](https://www.tldraw.com/) (File → Open); labs 16–17 render their architecture inline in the README.
 
 ## Original split repos
 

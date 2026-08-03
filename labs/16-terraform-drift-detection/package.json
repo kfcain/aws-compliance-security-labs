@@ -1,0 +1,11 @@
+{
+  "name": "lab-terraform-drift-detection",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Terraform State Drift Detection & Remediation Governance lab",
+  "type": "module",
+  "scripts": {
+    "scf:map": "node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapping.generated.json"
+  },
+  "license": "MIT"
+}

@@ -1,4 +1,19 @@
-# Risk statement — Backup Alignment & Recovery Testing (RTO/RPO)
+# Risk Register Entry — Backup Alignment & Recovery Testing (RTO/RPO)
+
+| Field | Value |
+|-------|-------|
+| Risk ID | RISK-12-01 |
+| Lab | `12-backup-recovery-rto-rpo` |
+| Owner (role) | Resilience Lead |
+| Treatment decision | Mitigate — automated by this lab's continuous validation |
+| Inherent likelihood / impact | Medium / Critical |
+| Residual likelihood / impact | Low / High |
+| Reviewed | 2026-08-03 |
+| Next review | 2027-02-03 |
+
+Ratings use the 5×5 scales defined in
+[docs/RISK-METHODOLOGY.md](../../docs/RISK-METHODOLOGY.md). Residual assumes
+this lab's controls are deployed and kept healthy by CI.
 
 ## Statement
 
@@ -7,6 +22,13 @@
 ## Threat narrative
 
 Backups exist on paper but are unencrypted, misaligned to RPO, or never restore-tested—so ransomware or region loss destroys federal mission availability.
+
+## MITRE ATT&CK techniques
+
+| Technique | Name | Relevance |
+|-----------|------|-----------|
+| T1490 | Inhibit System Recovery | Ransomware targets backups first; untested restores fail when needed |
+| T1486 | Data Encrypted for Impact | Recovery objectives unmet turns encryption events into mission loss |
 
 ## Security program impact
 
@@ -20,15 +42,11 @@ FedRAMP KSI-RPL-RRO/ARP/ABO/TRC and KSI-CNA-OFA; SCF BCD-01/02/11/12; NIST CP fa
 
 Unplanned downtime and ransom payments dominate incident cost. Failed recovery tests delay FedRAMP authorization and raise cyber-insurance premiums.
 
-## Rating
+## Treatment & residual rationale
 
-| Factor | Value |
-|--------|-------|
-| Likelihood | Medium |
-| Impact | Critical |
-| Suggested treatment | Automate detection + evidence; escalate residual risk to GRC risk register |
+Objective-vs-drill evaluation with strict result coercion surfaces unproven backups before they are needed; a regional event still carries High impact.
 
-## Residual risk if untreated
+## Consequences if untreated
 
 - Repeat audit findings and delayed ATO / customer questionnaires
 - Higher cyber-insurance premiums and possible coverage exclusions

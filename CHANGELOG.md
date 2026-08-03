@@ -1,0 +1,130 @@
+# Changelog
+
+All notable changes to this repository are documented in this file.
+Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+## [Unreleased]
+
+### Security
+
+- **Lab 11:** removed account-wide destructive IAM (`s3:DeleteObjectVersion`,
+  `backup:DeleteRecoveryPoint` on `Resource: '*'` behind a broken tag
+  condition). Destructive S3 actions now scope to concrete in-stack bucket
+  ARNs, Backup deletion scopes to a vault ARN parameter with the
+  parameterized tenant tag key, and all purge statements sit behind
+  `EnablePurgeActions` (default off → dry run).
+- **Lab 11:** the handler no longer fabricates deletion evidence. Placeholder
+  purge results now yield `FAIL`; the residual scan performs real S3 / DynamoDB
+  / AWS Backup checks; simulated residual hits are only honored in explicit
+  simulation mode and stamped in the evidence artifact.
+- **Lab 15:** change-control validation no longer trusts the caller-supplied
+  `via_pipeline` flag and matches pipeline actors by normalized exact role ARN
+  (account-aware) instead of substrings — closing verified same-account and
+  cross-account bypasses.
+- **Lab 14:** suspend decisions no longer honor a caller-supplied `privileged`
+  override, and the reported status now reflects whether suspension actually
+  succeeded.
+- **Lab 01:** Okta API calls are percent-encoded (fixes a crash on every
+  configured run), paginate via `Link` headers, no longer follow redirects
+  (which re-sent the `SSWS` token cross-host), and read the IdP token from
+  Secrets Manager. Unconfigured deployments report `CONFIG_ERROR` instead of a
+  demo `PASS`.
+- **scripts/export-lab-repos.sh:** fixed a command injection (unquoted heredoc
+  interpolating `$1`) and a path traversal that could `rmtree` outside the
+  output directory.
+- All 15 templates: IAM scoped to named resources (Security Hub import scoped
+  to the account's default product ARN), partition-agnostic ARNs
+  (GovCloud-deployable), KMS CMK encryption for evidence buckets / SNS / SQS /
+  logs / Lambda env, TLS-only bucket and topic policies, S3 public access
+  blocks, versioning, lifecycle, access logging, optional Object Lock.
+
+### Added
+
+- **Lab 16 — Terraform State Drift Detection & Remediation Governance** (new):
+  evaluates a `terraform show -json` plan artifact, classifies out-of-band
+  drift by severity, honors a `.tfdriftignore`-style ignore list, and emits
+  fail-closed evidence with Security Hub findings and SNS alerts. The severity
+  model and ignore/plan-parsing approach are adapted from the
+  [tfdrift](https://github.com/sudarshan8417/tfdrift) tool into the portfolio's
+  Lambda-evidence contract (terraform runs in CI; the function only reads plan
+  JSON from a hardened plan-artifact bucket and writes evidence). Each run emits
+  an assessor-ready **assurance case**, not just a verdict: provenance binding
+  the evidence to the Terraform commit / workspace / collector role, a
+  recomputable SHA-256 integrity manifest, and a per-control
+  objective→claim→status mapping to the real NIST 800-171 rev 3 and 800-53 rev 5
+  assessment objectives with ODP references. Ships an ODP register, a read-only
+  producer-side evidence collector (S3/KMS/CloudTrail/Config + refresh-only
+  drift plan + git provenance + SHA-256 manifest), and an OPA/Conftest gate
+  (pre-deploy on the plan, post-deploy on the evidence). Full lab set: hardened
+  SAM stack, 22 handler tests, SCF crosswalk, OSCAL, assessment, and
+  risk-register entry.
+- **Lab 17 — Terraform DR Readiness & State-Backend Resilience** (new):
+  evaluates a DR-readiness descriptor derived from Terraform to prove a disaster
+  is recoverable — state-backend resilience (remote+versioned+KMS+cross-region-
+  replicated+locking; a local backend is critical) and DR architecture parity
+  (designated recovery region, cross-region durable critical stores, failover
+  routing) against RTO/RPO targets. Complements lab 12 (runtime AWS Backup
+  restore evidence) from the IaC side. Emits the same assessor-ready assurance
+  case (provenance, SHA-256 manifest, NIST CP-family objective mapping) and
+  ships a DR-plan/ODP register, a read-only descriptor deriver, and an
+  OPA/Conftest gate. Full lab set: hardened SAM stack, 16 handler tests, SCF
+  crosswalk, OSCAL, assessment, and risk-register entry.
+- Real `boto3` validation logic in labs 04–10 (previously `PASS_PLACEHOLDER`
+  stubs): AWS Config compliance, GuardDuty posture and findings, KMS/Secrets
+  rotation governance, CloudTrail + evidence immutability, VPC flow-log and
+  security-group posture, IR runbook readiness, Inspector/ECR supply-chain
+  posture.
+- Shared vendored Lambda runtime (`lab_common.py`): fail-closed status
+  contract, JSON logging, partition/account resolution from the function ARN,
+  S3 evidence writer, chunked ASFF emitter, SNS alerting.
+- Full SAM packaging: `sam build` now deploys the real handlers (previously an
+  inline two-line stub with a mismatched handler string that could never
+  invoke).
+- Lab-specific infrastructure: Config rules (04), GuardDuty wiring (05), KMS
+  governance targets + Secrets Manager (06), Object-Lock trail bucket +
+  CloudTrail + Athena workgroup (07), VPC with flow logs (08), SSM IR runbook
+  (09), hardened ECR repository (10), AWS Backup vault/plan/selection (12),
+  Config aggregator + Resource Explorer (13), GuardDuty→suspend wiring (14),
+  CloudTrail-API change-detection rule (15).
+- Per-control FedRAMP 20x KSI traceability (`ksi_by_control` in lab specs;
+  crosswalks no longer stamp the lab-level KSI list onto every control).
+- Loud framework-gap reporting: `coverage_summary.frameworks_requested_without_hits`
+  (surfaces the 9 labs with no ISO 27001 crosswalk hits and the pending CMMC
+  / 800-171 r2 backfill).
+- Portfolio artifacts: `COVERAGE.md` + `coverage.json` control-coverage
+  matrix, OSCAL 1.1.2 component definitions per lab, `RISKS.md` risk register,
+  `docs/RISK-METHODOLOGY.md`, per-lab `ASSESSMENT.md` assessment procedures.
+- Risk register rework: risk IDs, owners, inherent vs residual ratings,
+  treatment decisions, MITRE ATT&CK technique mappings in every lab RISK.md.
+- Governance: `LICENSE` (MIT — previously claimed but missing), `SECURITY.md`,
+  `CONTRIBUTING.md`, CODEOWNERS.
+- CI: ruff, pytest, cfn-lint, checkov, hermetic Node tests, generated-artifact
+  drift checks; scheduled `scf-refresh` workflow for live SCF regeneration.
+- Python test suite: regression tests for every verified bug plus
+  positive-path coverage for all 15 handlers.
+
+### Changed
+
+- Lambda runtime upgraded to `python3.13`; explicit log groups with retention;
+  DLQs, X-Ray tracing, reserved concurrency, memory sizing on all functions.
+- `AlertEmail` parameter is now wired to a conditional SNS subscription
+  (previously declared and unused in all 15 templates).
+- Evidence buckets are created and hardened by each stack (previously an
+  unmanaged name parameter).
+- Status contract: handlers return `compliance_status ∈ {PASS, FAIL, ERROR,
+  CONFIG_ERROR, NOT_APPLICABLE}`; transport `statusCode` is no longer
+  overloaded as a compliance signal (lab 11's state machine now branches on
+  `compliance_status`).
+
+### Removed
+
+- `labs/*/docs/index.html` byte-duplicates of each lab's walkthrough page and
+  stale per-lab `docs/PUBLISH.md` files (the monorepo publishes from
+  `labs/<id>/index.html`; crosswalk tables in those pages are a 2026-08-01
+  static snapshot — `scf/scf-mapping.generated.json` is canonical).
+- Dangling `scripts/generate-labs.mjs` references in all 15 diagram READMEs.
+
+## [2.0.0] — 2026-08-02
+
+- Consolidated 15 standalone `lab-*` repositories into this monorepo.
+- Added the shared SCF mapper CLI and portfolio catalog.

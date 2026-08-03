@@ -20,11 +20,12 @@ Generate and store SBOMs, scan container/images with Inspector, track third-part
 
 ## Acceptance criteria
 
-- [ ] Infrastructure deploys via `infrastructure/template.yaml`
-- [ ] Lambda returns structured JSON with `lab_id`, `scf_controls`, `fedramp_20x_ksi`
-- [ ] SCF mapper produces crosswalk file for target frameworks
-- [ ] Architecture diagram opens in tldraw (dark background)
-- [ ] RISK.md reviewed by security owner
+- [ ] `sam build && sam deploy` provisions the stack; `cfn-lint` and `checkov` pass
+- [ ] Handler returns `compliance_status` from real posture; unconfigured input yields `CONFIG_ERROR` (never `PASS`)
+- [ ] A known-bad fixture drives `FAIL` with a Security Hub finding and SNS alert; a clean fixture drives `PASS`
+- [ ] Evidence JSON is written to the KMS-encrypted evidence bucket with `data_source` stamped
+- [ ] `pytest labs/10-supply-chain-sbom` passes (regression + behavior tests)
+- [ ] Crosswalk, coverage, OSCAL, and assessment artifacts regenerate without drift
 
 ## Evidence schema (minimum)
 
@@ -32,7 +33,7 @@ Generate and store SBOMs, scan container/images with Inspector, track third-part
 {
   "lab_id": "10-supply-chain-sbom",
   "checked_at": "ISO-8601",
-  "status": "PASS|FAIL|ERROR",
+  "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["TPM-01","TPM-03","TPM-04","VPM-01","AST-02"],
   "fedramp_20x_ksi": ["KSI-SCR-SRA","KSI-SCR-TPM","KSI-AFR-VDR"],
   "artifacts": []
@@ -45,3 +46,16 @@ Generate and store SBOMs, scan container/images with Inspector, track third-part
 - Encrypt evidence bucket with CMK
 - No long-lived secrets in code — use Secrets Manager
 - CloudTrail enabled on the account under test
+
+## Threat model
+
+Primary adversary objective and the technique this lab detects/mitigates are
+enumerated with MITRE ATT&CK IDs in [RISK.md](./RISK.md). The control's
+detection logic (`src/handler.py`) is the mitigation; the assessment
+procedure in [ASSESSMENT.md](./ASSESSMENT.md) is how an assessor confirms it
+operates. Primary technique: **T1195.002**.
+
+Trust boundary: the worker runs with a least-privilege role in the account
+under test, reads posture via AWS APIs (or the IdP API for lab 01), and writes
+only to its own KMS-encrypted evidence bucket and SNS topic. Event input is
+validated; caller-supplied fields never override a control decision.

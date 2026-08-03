@@ -1,0 +1,33 @@
+{
+  "lab_id": "16-terraform-drift-detection",
+  "title": "Terraform State Drift Detection & Remediation Governance",
+  "scf_controls": [
+    "CFG-01",
+    "CFG-02",
+    "CPL-01",
+    "MON-01",
+    "CHG-02"
+  ],
+  "ksi_by_control": {
+    "CFG-01": ["KSI-CNA-EIS"],
+    "CFG-02": ["KSI-CNA-EIS"],
+    "CPL-01": ["KSI-MLA-EVC"],
+    "MON-01": ["KSI-AFR-PVL"],
+    "CHG-02": ["KSI-CMT-RMV"]
+  },
+  "ksi": [
+    "KSI-AFR-PVL",
+    "KSI-CNA-EIS",
+    "KSI-CMT-RMV",
+    "KSI-MLA-EVC"
+  ],
+  "frameworks": [
+    "general-nist-800-53-r5-2",
+    "general-nist-800-171-r3",
+    "general-iso-27001-2022",
+    "general-pci-dss-4-0-1",
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
+  ]
+}

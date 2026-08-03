@@ -1,0 +1,645 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Terraform DR Readiness & State-Backend Resilience — hardened SAM stack.
+  Pattern: CI derives a DR-readiness descriptor from `terraform show -json` +
+  the backend config -> descriptor bucket -> EventBridge -> Lambda evaluates
+  state-backend resilience and DR architecture parity -> Evidence + Alerts.
+  The descriptor bucket is a hardened, KMS-encrypted, versioned input.
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label: { default: Alerting }
+        Parameters: [AlertEmail]
+      - Label: { default: Scheduling }
+        Parameters: [ScheduleExpression]
+      - Label: { default: Evidence retention & immutability }
+        Parameters: [LogRetentionDays, EnableObjectLock, ObjectLockRetentionDays]
+      - Label: { default: Governance }
+        Parameters: [PermissionsBoundaryArn, EnvironmentName, OwnerTag]
+      - Label: { default: Lab-specific }
+        Parameters: [FailSeverity, RtoTargetMinutes, RpoTargetMinutes]
+
+Parameters:
+  AlertEmail:
+    Type: String
+    Default: ''
+    Description: Optional email for SNS alert subscription (empty = no subscription)
+    AllowedPattern: '^$|^[^@\s]+@[^@\s]+\.[^@\s]+$'
+    ConstraintDescription: must be empty or a valid email address
+  ScheduleExpression:
+    Type: String
+    Default: rate(1 day)
+    Description: Validation cadence (FedRAMP 20x hint - at most rate(3 days))
+  LogRetentionDays:
+    Type: Number
+    Default: 365
+    AllowedValues: [30, 90, 180, 365, 731, 1827, 3653]
+    Description: CloudWatch Logs retention for the worker function
+  EnableObjectLock:
+    Type: String
+    Default: 'false'
+    AllowedValues: ['true', 'false']
+    Description: >-
+      Create the evidence bucket with S3 Object Lock (WORM). Object Lock can
+      only be enabled at bucket creation; enabling later requires a new bucket.
+  ObjectLockRetentionDays:
+    Type: Number
+    Default: 365
+    MinValue: 1
+    Description: Default GOVERNANCE-mode retention for evidence objects (when Object Lock enabled)
+  PermissionsBoundaryArn:
+    Type: String
+    Default: ''
+    Description: Optional IAM permissions boundary applied to the function role
+  EnvironmentName:
+    Type: String
+    Default: sandbox
+    AllowedPattern: '^[a-z0-9-]{2,32}$'
+    Description: Environment tag applied to all resources
+  OwnerTag:
+    Type: String
+    Default: security-engineering
+    AllowedPattern: '^[A-Za-z0-9._-]{2,64}$'
+    Description: Owner tag applied to all resources
+  FailSeverity:
+    Type: String
+    Default: high
+    AllowedValues: [critical, high, medium, low]
+    Description: Drift at or above this severity fails the check
+  RtoTargetMinutes:
+    Type: Number
+    Default: 60
+    MinValue: 0
+    Description: DR-plan Recovery Time Objective in minutes (0 = not compared)
+  RpoTargetMinutes:
+    Type: Number
+    Default: 15
+    MinValue: 0
+    Description: DR-plan Recovery Point Objective in minutes (0 = not compared)
+
+Conditions:
+  HasAlertEmail: !Not [!Equals [!Ref AlertEmail, '']]
+  ObjectLockEnabled: !Equals [!Ref EnableObjectLock, 'true']
+  HasPermissionsBoundary: !Not [!Equals [!Ref PermissionsBoundaryArn, '']]
+
+Resources:
+  # ---------------------------------------------------------------- KMS ----
+  LabKmsKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: !Sub 'CMK for ${AWS::StackName} evidence, logs, alerts, and queues'
+      EnableKeyRotation: true
+      KeyPolicy:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: EnableIamPolicies
+            Effect: Allow
+            Principal:
+              AWS: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:root'
+            Action: 'kms:*'
+            Resource: '*'
+          - Sid: AllowCloudWatchLogs
+            Effect: Allow
+            Principal:
+              Service: !Sub 'logs.${AWS::Region}.amazonaws.com'
+            Action:
+              - kms:Encrypt
+              - kms:Decrypt
+              - kms:ReEncrypt*
+              - kms:GenerateDataKey*
+              - kms:DescribeKey
+            Resource: '*'
+            Condition:
+              ArnLike:
+                kms:EncryptionContext:aws:logs:arn: !Sub 'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${AWS::StackName}-worker'
+          - Sid: AllowEventBridgeDlqDelivery
+            Effect: Allow
+            Principal:
+              Service: events.amazonaws.com
+            Action:
+              - kms:GenerateDataKey*
+              - kms:Decrypt
+            Resource: '*'
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 17-terraform-dr-readiness }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  LabKmsAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: !Sub 'alias/${AWS::StackName}-lab'
+      TargetKeyId: !Ref LabKmsKey
+
+  # ----------------------------------------------------------------- S3 ----
+  AccessLogsBucket:
+    Type: AWS::S3::Bucket
+    Metadata:
+      checkov:
+        skip:
+          - id: CKV_AWS_145
+            comment: S3 server-access-log delivery does not support SSE-KMS targets; SSE-S3 is the supported encryption for log buckets.
+          - id: CKV_AWS_18
+            comment: Access-log bucket does not log to itself (delivery loop); it is the log target for the evidence bucket.
+          - id: CKV_AWS_144
+            comment: Cross-region replication is out of scope for lab evidence; retention is handled by lifecycle rules.
+          - id: CKV2_AWS_62
+            comment: No event-driven consumers for access logs in this lab.
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      VersioningConfiguration:
+        Status: Enabled
+      LifecycleConfiguration:
+        Rules:
+          - Id: expire-access-logs
+            Status: Enabled
+            ExpirationInDays: 365
+            NoncurrentVersionExpiration:
+              NoncurrentDays: 30
+            AbortIncompleteMultipartUpload:
+              DaysAfterInitiation: 7
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 17-terraform-dr-readiness }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  AccessLogsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref AccessLogsBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - !GetAtt AccessLogsBucket.Arn
+              - !Sub '${AccessLogsBucket.Arn}/*'
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+          - Sid: AllowS3ServerAccessLogsDelivery
+            Effect: Allow
+            Principal:
+              Service: logging.s3.amazonaws.com
+            Action: s3:PutObject
+            Resource: !Sub '${AccessLogsBucket.Arn}/*'
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+
+  EvidenceBucket:
+    Type: AWS::S3::Bucket
+    Metadata:
+      checkov:
+        skip:
+          - id: CKV_AWS_144
+            comment: Cross-region replication is out of scope for lab evidence; versioning + optional Object Lock provide integrity.
+          - id: CKV2_AWS_62
+            comment: Evidence objects are pulled by auditors/pipelines; no event notifications needed in this lab.
+    Properties:
+      ObjectLockEnabled: !If [ObjectLockEnabled, true, !Ref AWS::NoValue]
+      ObjectLockConfiguration: !If
+        - ObjectLockEnabled
+        - ObjectLockEnabled: Enabled
+          Rule:
+            DefaultRetention:
+              Mode: GOVERNANCE
+              Days: !Ref ObjectLockRetentionDays
+        - !Ref AWS::NoValue
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: aws:kms
+              KMSMasterKeyID: !GetAtt LabKmsKey.Arn
+            BucketKeyEnabled: true
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      VersioningConfiguration:
+        Status: Enabled
+      LoggingConfiguration:
+        DestinationBucketName: !Ref AccessLogsBucket
+        LogFilePrefix: evidence-access/
+      LifecycleConfiguration:
+        Rules:
+          - Id: evidence-retention
+            Status: Enabled
+            Transitions:
+              - StorageClass: STANDARD_IA
+                TransitionInDays: 90
+            NoncurrentVersionExpiration:
+              NoncurrentDays: 400
+            AbortIncompleteMultipartUpload:
+              DaysAfterInitiation: 7
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 17-terraform-dr-readiness }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  EvidenceBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref EvidenceBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - !GetAtt EvidenceBucket.Arn
+              - !Sub '${EvidenceBucket.Arn}/*'
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+          - Sid: DenyWrongEncryptionHeader
+            Effect: Deny
+            Principal: '*'
+            Action: s3:PutObject
+            Resource: !Sub '${EvidenceBucket.Arn}/*'
+            Condition:
+              'Null':
+                s3:x-amz-server-side-encryption: 'false'
+              StringNotEquals:
+                s3:x-amz-server-side-encryption: aws:kms
+
+  # ------------------------------------------------------------ Queues ----
+  DeadLetterQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub '${AWS::StackName}-dlq'
+      KmsMasterKeyId: !Ref LabKmsKey
+      MessageRetentionPeriod: 1209600
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 17-terraform-dr-readiness }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  DeadLetterQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues: [!Ref DeadLetterQueue]
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 'sqs:*'
+            Resource: !GetAtt DeadLetterQueue.Arn
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+          - Sid: AllowEventBridgeDeadLetters
+            Effect: Allow
+            Principal:
+              Service: events.amazonaws.com
+            Action: sqs:SendMessage
+            Resource: !GetAtt DeadLetterQueue.Arn
+            Condition:
+              ArnEquals:
+                aws:SourceArn: !GetAtt ScheduleRule.Arn
+
+  # -------------------------------------------------------------- SNS -----
+  AlertsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub '${AWS::StackName}-alerts'
+      DisplayName: !Sub '${AWS::StackName} compliance alerts'
+      KmsMasterKeyId: !Ref LabKmsKey
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 17-terraform-dr-readiness }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  AlertsTopicPolicy:
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics: [!Ref AlertsTopic]
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 'sns:Publish'
+            Resource: !Ref AlertsTopic
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+          - Sid: AllowAccountPublishViaIam
+            Effect: Allow
+            Principal:
+              AWS: '*'
+            Action: sns:Publish
+            Resource: !Ref AlertsTopic
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+
+  AlertsSubscription:
+    Type: AWS::SNS::Subscription
+    Condition: HasAlertEmail
+    Properties:
+      TopicArn: !Ref AlertsTopic
+      Protocol: email
+      Endpoint: !Ref AlertEmail
+
+  # ------------------------------------------------------------- Logs -----
+  FunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-worker'
+      RetentionInDays: !Ref LogRetentionDays
+      KmsKeyId: !GetAtt LabKmsKey.Arn
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 17-terraform-dr-readiness }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  # -------------------------------------------------------------- IAM -----
+  LabFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${AWS::StackName}-worker-role'
+      Path: /lab/
+      PermissionsBoundary: !If [HasPermissionsBoundary, !Ref PermissionsBoundaryArn, !Ref AWS::NoValue]
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+      Policies:
+        - PolicyName: LabWorkerLeastPrivilege
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: WriteOwnLogGroup
+                Effect: Allow
+                Action:
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: !Sub '${FunctionLogGroup.Arn}:*'
+              - Sid: XRayTracing
+                Effect: Allow
+                Action:
+                  - xray:PutTraceSegments
+                  - xray:PutTelemetryRecords
+                Resource: '*'
+              - Sid: EvidenceReadWrite
+                Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                Resource: !Sub '${EvidenceBucket.Arn}/*'
+              - Sid: EvidenceList
+                Effect: Allow
+                Action:
+                  - s3:ListBucket
+                  - s3:GetBucketVersioning
+                Resource: !GetAtt EvidenceBucket.Arn
+              - Sid: UseLabKey
+                Effect: Allow
+                Action:
+                  - kms:GenerateDataKey
+                  - kms:Decrypt
+                Resource: !GetAtt LabKmsKey.Arn
+              - Sid: PublishAlerts
+                Effect: Allow
+                Action:
+                  - sns:Publish
+                Resource: !Ref AlertsTopic
+              - Sid: DeadLetter
+                Effect: Allow
+                Action:
+                  - sqs:SendMessage
+                Resource: !GetAtt DeadLetterQueue.Arn
+              - Sid: ImportFindingsOwnProductOnly
+                Effect: Allow
+                Action:
+                  - securityhub:BatchImportFindings
+                Resource: !Sub 'arn:${AWS::Partition}:securityhub:${AWS::Region}:${AWS::AccountId}:product/${AWS::AccountId}/default'
+              - Sid: ReadDrDescriptors
+                Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub '${DescriptorBucket.Arn}/*'
+              - Sid: ListDrDescriptors
+                Effect: Allow
+                Action:
+                  - s3:ListBucket
+                Resource: !GetAtt DescriptorBucket.Arn
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 17-terraform-dr-readiness }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  # ------------------------------------------------------------ Lambda ----
+  LabFunction:
+    Type: AWS::Serverless::Function
+    DependsOn: FunctionLogGroup
+    Metadata:
+      checkov:
+        skip:
+          - id: CKV_AWS_117
+            comment: Lab functions call regional AWS APIs only; VPC attachment would add NAT cost with no data-path benefit here.
+          - id: CKV_AWS_272
+            comment: Code signing is out of scope for sandbox labs; change control is covered by lab 15's pipeline validation.
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-worker'
+      Description: Evaluates Terraform DR readiness (state backend + architecture) and emits evidence
+      CodeUri: ../src
+      Handler: handler.handler
+      Runtime: python3.13
+      MemorySize: 256
+      Timeout: 120
+      Tracing: Active
+      ReservedConcurrentExecutions: 1
+      Role: !GetAtt LabFunctionRole.Arn
+      KmsKeyArn: !GetAtt LabKmsKey.Arn
+      DeadLetterQueue:
+        Type: SQS
+        TargetArn: !GetAtt DeadLetterQueue.Arn
+      Environment:
+        Variables:
+          EVIDENCE_BUCKET: !Ref EvidenceBucket
+          SNS_TOPIC_ARN: !Ref AlertsTopic
+          LAB_ID: 17-terraform-dr-readiness
+          LOG_LEVEL: INFO
+          DESCRIPTOR_BUCKET: !Ref DescriptorBucket
+          FAIL_SEVERITY: !Ref FailSeverity
+          RTO_TARGET_MINUTES: !Sub '${RtoTargetMinutes}'
+          RPO_TARGET_MINUTES: !Sub '${RpoTargetMinutes}'
+      Tags:
+        project: aws-compliance-security-labs
+        lab_id: 17-terraform-dr-readiness
+        environment: !Ref EnvironmentName
+        owner: !Ref OwnerTag
+
+  # -------------------------------------------------------- Scheduling ----
+  ScheduleRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: !Sub '${AWS::StackName}-schedule'
+      Description: !Sub 'Persistent validation schedule (${ScheduleExpression})'
+      ScheduleExpression: !Ref ScheduleExpression
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt LabFunction.Arn
+          Id: LabLambdaTarget
+          Input: '{"source": "scheduled-sweep"}'
+          RetryPolicy:
+            MaximumRetryAttempts: 4
+            MaximumEventAgeInSeconds: 3600
+          DeadLetterConfig:
+            Arn: !GetAtt DeadLetterQueue.Arn
+
+  PermissionForEvents:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref LabFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt ScheduleRule.Arn
+      SourceAccount: !Ref AWS::AccountId
+
+  # ------------------- Lab-specific: DR-readiness descriptor bucket -------
+  DescriptorBucket:
+    Type: AWS::S3::Bucket
+    Metadata:
+      checkov:
+        skip:
+          - id: CKV_AWS_144
+            comment: Cross-region replication is out of scope for CI DR descriptors; versioning provides history.
+          - id: CKV2_AWS_62
+            comment: Descriptors are pulled by the worker on schedule; no event notifications needed.
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: aws:kms
+              KMSMasterKeyID: !GetAtt LabKmsKey.Arn
+            BucketKeyEnabled: true
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      VersioningConfiguration:
+        Status: Enabled
+      LoggingConfiguration:
+        DestinationBucketName: !Ref AccessLogsBucket
+        LogFilePrefix: dr-descriptor-access/
+      LifecycleConfiguration:
+        Rules:
+          - Id: expire-old-descriptors
+            Status: Enabled
+            NoncurrentVersionExpiration:
+              NoncurrentDays: 90
+            AbortIncompleteMultipartUpload:
+              DaysAfterInitiation: 7
+      Tags:
+        - { Key: project, Value: aws-compliance-security-labs }
+        - { Key: lab_id, Value: 17-terraform-dr-readiness }
+        - { Key: environment, Value: !Ref EnvironmentName }
+        - { Key: owner, Value: !Ref OwnerTag }
+
+  DescriptorBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref DescriptorBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - !GetAtt DescriptorBucket.Arn
+              - !Sub '${DescriptorBucket.Arn}/*'
+            Condition:
+              Bool:
+                aws:SecureTransport: 'false'
+          - Sid: DenyWrongEncryptionHeader
+            Effect: Deny
+            Principal: '*'
+            Action: s3:PutObject
+            Resource: !Sub '${DescriptorBucket.Arn}/*'
+            Condition:
+              'Null':
+                s3:x-amz-server-side-encryption: 'false'
+              StringNotEquals:
+                s3:x-amz-server-side-encryption: aws:kms
+
+Outputs:
+  FunctionArn:
+    Description: Worker Lambda function ARN
+    Value: !GetAtt LabFunction.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-FunctionArn'
+  TopicArn:
+    Description: Alerts SNS topic ARN (KMS-encrypted)
+    Value: !Ref AlertsTopic
+    Export:
+      Name: !Sub '${AWS::StackName}-TopicArn'
+  EvidenceBucketName:
+    Description: KMS-encrypted evidence bucket created by this stack
+    Value: !Ref EvidenceBucket
+    Export:
+      Name: !Sub '${AWS::StackName}-EvidenceBucket'
+  LabKmsKeyArn:
+    Description: CMK protecting evidence, logs, queues, and alerts
+    Value: !GetAtt LabKmsKey.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-KmsKeyArn'
+  DeadLetterQueueArn:
+    Description: DLQ receiving failed invocations and undeliverable events
+    Value: !GetAtt DeadLetterQueue.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-DlqArn'
+  DescriptorBucketName:
+    Description: KMS-encrypted bucket where CI drops the DR-readiness descriptor JSON
+    Value: !Ref DescriptorBucket
+    Export:
+      Name: !Sub '${AWS::StackName}-DescriptorBucket'

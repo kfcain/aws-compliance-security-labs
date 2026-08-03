@@ -12,8 +12,6 @@ Dark-mode architecture flow for this lab (tldraw JSON).
 
 ### Edit
 
-Re-run the portfolio generator after changing `labs/catalog.json`:
-
-```bash
-node scripts/generate-labs.mjs
-```
+The diagram is maintained by hand: open `architecture.tldr` in
+[tldraw.com](https://www.tldraw.com), edit, and re-export the `.tldr` file
+over this one. Keep the dark background panel so it matches the other labs.

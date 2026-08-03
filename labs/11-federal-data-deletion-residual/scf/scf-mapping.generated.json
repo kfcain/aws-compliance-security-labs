@@ -31,12 +31,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-RUD": "Removing unwanted federal customer data including backups (Class C)",
-        "KSI-SVC-PRR": "Preventing residual risk after changes (Class C; federal customer data)",
-        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)",
-        "KSI-AFR-PVL": "Persistent validation cadence"
+        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/DCH-01.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/DCH-01.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-SVC-SIN": {
+          "description": "Securing information (encrypt or otherwise protect)"
+        }
+      }
     },
     {
       "scf_control_id": "DCH-09",
@@ -68,11 +70,17 @@
       },
       "fedramp_20x_ksi": {
         "KSI-SVC-RUD": "Removing unwanted federal customer data including backups (Class C)",
-        "KSI-SVC-PRR": "Preventing residual risk after changes (Class C; federal customer data)",
-        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)",
-        "KSI-AFR-PVL": "Persistent validation cadence"
+        "KSI-SVC-PRR": "Preventing residual risk after changes (Class C; federal customer data)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/DCH-09.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/DCH-09.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-SVC-RUD": {
+          "description": "Removing unwanted federal customer data including backups (Class C)"
+        },
+        "KSI-SVC-PRR": {
+          "description": "Preventing residual risk after changes (Class C; federal customer data)"
+        }
+      }
     },
     {
       "scf_control_id": "DCH-06",
@@ -103,12 +111,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-RUD": "Removing unwanted federal customer data including backups (Class C)",
-        "KSI-SVC-PRR": "Preventing residual risk after changes (Class C; federal customer data)",
-        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)",
-        "KSI-AFR-PVL": "Persistent validation cadence"
+        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/DCH-06.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/DCH-06.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-SVC-SIN": {
+          "description": "Securing information (encrypt or otherwise protect)"
+        }
+      }
     },
     {
       "scf_control_id": "BCD-11",
@@ -142,12 +152,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-RUD": "Removing unwanted federal customer data including backups (Class C)",
-        "KSI-SVC-PRR": "Preventing residual risk after changes (Class C; federal customer data)",
-        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)",
-        "KSI-AFR-PVL": "Persistent validation cadence"
+        "KSI-SVC-RUD": "Removing unwanted federal customer data including backups (Class C)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-11.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-11.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-SVC-RUD": {
+          "description": "Removing unwanted federal customer data including backups (Class C)"
+        }
+      }
     },
     {
       "scf_control_id": "CRY-05",
@@ -183,12 +195,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-RUD": "Removing unwanted federal customer data including backups (Class C)",
-        "KSI-SVC-PRR": "Preventing residual risk after changes (Class C; federal customer data)",
-        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)",
-        "KSI-AFR-PVL": "Persistent validation cadence"
+        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-05.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-05.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-SVC-SIN": {
+          "description": "Securing information (encrypt or otherwise protect)"
+        }
+      }
     },
     {
       "scf_control_id": "CLD-01",
@@ -207,12 +221,15 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-RUD": "Removing unwanted federal customer data including backups (Class C)",
-        "KSI-SVC-PRR": "Preventing residual risk after changes (Class C; federal customer data)",
-        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)",
         "KSI-AFR-PVL": "Persistent validation cadence"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CLD-01.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CLD-01.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-AFR-PVL": {
+          "description": "Persistent validation cadence",
+          "legacy": true
+        }
+      }
     }
   ],
   "coverage_summary": {
@@ -222,6 +239,30 @@
       "general-nist-800-171-r3": 5,
       "general-pci-dss-4-0-1": 6,
       "usa-federal-gsa-fedramp-5-mod": 5
-    }
-  }
+    },
+    "frameworks_requested_without_hits": [
+      {
+        "framework": "general-iso-27001-2022",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "general-nist-800-171-r2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "usa-federal-dow-cmmc-2-level-2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      }
+    ],
+    "frameworks_requested": [
+      "general-nist-800-53-r5-2",
+      "general-nist-800-171-r3",
+      "general-iso-27001-2022",
+      "general-pci-dss-4-0-1",
+      "usa-federal-gsa-fedramp-5-mod",
+      "general-nist-800-171-r2",
+      "usa-federal-dow-cmmc-2-level-2"
+    ]
+  },
+  "ksi_overlay_version": "2026-08.1"
 }

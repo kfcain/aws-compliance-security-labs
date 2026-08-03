@@ -1,0 +1,403 @@
+{
+  "risk_count": 17,
+  "band_summary": {
+    "Major": 3,
+    "Moderate": 11,
+    "Minor": 3
+  },
+  "risks": [
+    {
+      "risk_id": "RISK-02-01",
+      "lab": "02-inspector-vdr",
+      "owner": "Vulnerability Management Lead",
+      "statement": "Unpatched CVEs leading to breach and failed authorization",
+      "inherent": {
+        "likelihood": "High",
+        "impact": "Critical",
+        "band": "Severe"
+      },
+      "residual": {
+        "likelihood": "Medium",
+        "impact": "High",
+        "band": "Major"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1190",
+        "T1195"
+      ]
+    },
+    {
+      "risk_id": "RISK-05-01",
+      "lab": "05-guardduty-automated-response",
+      "owner": "SOC Lead",
+      "statement": "Delayed response to active compromise increases blast radius",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "Critical",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Medium",
+        "impact": "High",
+        "band": "Major"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1562.001",
+        "T1046"
+      ]
+    },
+    {
+      "risk_id": "RISK-13-01",
+      "lab": "13-boundary-asset-inventory",
+      "owner": "GRC Engineering Lead",
+      "statement": "Unknown or out-of-scope resources silently process federal data",
+      "inherent": {
+        "likelihood": "High",
+        "impact": "Critical",
+        "band": "Severe"
+      },
+      "residual": {
+        "likelihood": "Medium",
+        "impact": "High",
+        "band": "Major"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1526",
+        "T1538"
+      ]
+    },
+    {
+      "risk_id": "RISK-01-01",
+      "lab": "01-mfa-continuous-validation",
+      "owner": "Identity Engineering Lead",
+      "statement": "Account takeover from missing or bypassed MFA",
+      "inherent": {
+        "likelihood": "High",
+        "impact": "Critical",
+        "band": "Severe"
+      },
+      "residual": {
+        "likelihood": "Low",
+        "impact": "High",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1556.006",
+        "T1621",
+        "T1078.004"
+      ]
+    },
+    {
+      "risk_id": "RISK-03-01",
+      "lab": "03-nhi-credential-rotation",
+      "owner": "Platform Security Lead",
+      "statement": "Long-lived machine credentials enabling lateral movement",
+      "inherent": {
+        "likelihood": "High",
+        "impact": "High",
+        "band": "Severe"
+      },
+      "residual": {
+        "likelihood": "Medium",
+        "impact": "Medium",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1552.001",
+        "T1078.004"
+      ]
+    },
+    {
+      "risk_id": "RISK-06-01",
+      "lab": "06-kms-encryption-governance",
+      "owner": "Key Management Lead",
+      "statement": "Unencrypted data exposure and cryptographic non-conformance",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "Critical",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Low",
+        "impact": "High",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1552",
+        "T1486"
+      ]
+    },
+    {
+      "risk_id": "RISK-09-01",
+      "lab": "09-incident-response-automation",
+      "owner": "IR Program Lead",
+      "statement": "Ad-hoc IR increases dwell time, cost, and regulatory penalties",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "High",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Medium",
+        "impact": "Medium",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1486",
+        "T1490"
+      ]
+    },
+    {
+      "risk_id": "RISK-10-01",
+      "lab": "10-supply-chain-sbom",
+      "owner": "Supply Chain Risk Lead",
+      "statement": "Compromised dependencies or vendors introduce undetected risk",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "High",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Medium",
+        "impact": "Medium",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1195.002",
+        "T1525"
+      ]
+    },
+    {
+      "risk_id": "RISK-11-01",
+      "lab": "11-federal-data-deletion-residual",
+      "owner": "Data Governance Lead",
+      "statement": "Federal customer data remains after offboarding or spill cleanup",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "Critical",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Low",
+        "impact": "High",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1530"
+      ]
+    },
+    {
+      "risk_id": "RISK-12-01",
+      "lab": "12-backup-recovery-rto-rpo",
+      "owner": "Resilience Lead",
+      "statement": "Unproven backups leave federal missions unrestorable after ransomware or outage",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "Critical",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Low",
+        "impact": "High",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1490",
+        "T1486"
+      ]
+    },
+    {
+      "risk_id": "RISK-14-01",
+      "lab": "14-privileged-suspend-lifecycle",
+      "owner": "Identity Engineering Lead",
+      "statement": "Orphaned or compromised privileged access to federal systems",
+      "inherent": {
+        "likelihood": "High",
+        "impact": "Critical",
+        "band": "Severe"
+      },
+      "residual": {
+        "likelihood": "Low",
+        "impact": "High",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1098",
+        "T1078.004"
+      ]
+    },
+    {
+      "risk_id": "RISK-15-01",
+      "lab": "15-immutable-cicd-change-control",
+      "owner": "DevSecOps Lead",
+      "statement": "Untracked production changes bypass review and corrupt federal workloads",
+      "inherent": {
+        "likelihood": "High",
+        "impact": "High",
+        "band": "Severe"
+      },
+      "residual": {
+        "likelihood": "Medium",
+        "impact": "Medium",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1195.002",
+        "T1578"
+      ]
+    },
+    {
+      "risk_id": "RISK-16-01",
+      "lab": "16-terraform-drift-detection",
+      "owner": "Platform Engineering Lead",
+      "statement": "Out-of-band changes drift Terraform-managed infrastructure away from its declared baseline and evade change control",
+      "inherent": {
+        "likelihood": "High",
+        "impact": "High",
+        "band": "Severe"
+      },
+      "residual": {
+        "likelihood": "Medium",
+        "impact": "Medium",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1578",
+        "T1562.007",
+        "T1098"
+      ]
+    },
+    {
+      "risk_id": "RISK-17-01",
+      "lab": "17-terraform-dr-readiness",
+      "owner": "Resilience Engineering Lead",
+      "statement": "A disaster is unrecoverable because the Terraform state backend or the declared architecture is not DR-ready",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "Critical",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Low",
+        "impact": "High",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1490",
+        "T1485",
+        "T1486"
+      ]
+    },
+    {
+      "risk_id": "RISK-04-01",
+      "lab": "04-config-drift-compliance",
+      "owner": "Cloud Compliance Lead",
+      "statement": "Silent configuration drift breaking baseline controls",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "High",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Low",
+        "impact": "Medium",
+        "band": "Minor"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1578",
+        "T1562.007"
+      ]
+    },
+    {
+      "risk_id": "RISK-07-01",
+      "lab": "07-cloudtrail-evidence-pipeline",
+      "owner": "Security Operations Lead",
+      "statement": "Inability to prove who did what — audit failure and legal exposure",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "High",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Low",
+        "impact": "Medium",
+        "band": "Minor"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1562.008",
+        "T1070"
+      ]
+    },
+    {
+      "risk_id": "RISK-08-01",
+      "lab": "08-vpc-network-segmentation",
+      "owner": "Network Security Lead",
+      "statement": "Flat networks enable lateral movement and PCI scope expansion",
+      "inherent": {
+        "likelihood": "Medium",
+        "impact": "High",
+        "band": "Major"
+      },
+      "residual": {
+        "likelihood": "Low",
+        "impact": "Medium",
+        "band": "Minor"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1021",
+        "T1046"
+      ]
+    }
+  ]
+}

@@ -1,4 +1,19 @@
-# Risk statement — Federal Data Deletion & Residual-Data Proof (Class C)
+# Risk Register Entry — Federal Data Deletion & Residual-Data Proof (Class C)
+
+| Field | Value |
+|-------|-------|
+| Risk ID | RISK-11-01 |
+| Lab | `11-federal-data-deletion-residual` |
+| Owner (role) | Data Governance Lead |
+| Treatment decision | Mitigate — automated by this lab's continuous validation |
+| Inherent likelihood / impact | Medium / Critical |
+| Residual likelihood / impact | Low / High |
+| Reviewed | 2026-08-03 |
+| Next review | 2027-02-03 |
+
+Ratings use the 5×5 scales defined in
+[docs/RISK-METHODOLOGY.md](../../docs/RISK-METHODOLOGY.md). Residual assumes
+this lab's controls are deployed and kept healthy by CI.
 
 ## Statement
 
@@ -7,6 +22,12 @@
 ## Threat narrative
 
 Agency offboarding or spill-cleanup leaves federal customer data in live stores, snapshots, replicas, or backups.
+
+## MITRE ATT&CK techniques
+
+| Technique | Name | Relevance |
+|-----------|------|-----------|
+| T1530 | Data from Cloud Storage | Residual federal data in stores, versions, and backups remains stealable after "deletion" |
 
 ## Security program impact
 
@@ -20,15 +41,11 @@ FedRAMP CR26 Class C KSI-SVC-RUD and KSI-SVC-PRR explicitly require prompt remov
 
 Failure to delete federal data drives contract breach, agency exit, breach-notification exposure, and ATO suspension risk. Manual hunt-and-delete burns high-cost engineering and GRC time.
 
-## Rating
+## Treatment & residual rationale
 
-| Factor | Value |
-|--------|-------|
-| Likelihood | Medium |
-| Impact | Critical |
-| Suggested treatment | Automate detection + evidence; escalate residual risk to GRC risk register |
+Real residual scans across versions, tables, and recovery points with fail-closed verdicts make incomplete deletion visible; impact stays High given the federal-data stakes.
 
-## Residual risk if untreated
+## Consequences if untreated
 
 - Repeat audit findings and delayed ATO / customer questionnaires
 - Higher cyber-insurance premiums and possible coverage exclusions

@@ -9,6 +9,26 @@
     "CFG-01",
     "TDA-06"
   ],
+  "ksi_by_control": {
+    "CHG-01": [
+      "KSI-CMT-LMC"
+    ],
+    "CHG-02": [
+      "KSI-CMT-RVP"
+    ],
+    "CHG-03": [
+      "KSI-CMT-RMV"
+    ],
+    "CHG-04": [
+      "KSI-AFR-SCN"
+    ],
+    "CFG-01": [
+      "KSI-CMT-RMV"
+    ],
+    "TDA-06": [
+      "KSI-CMT-VTD"
+    ]
+  },
   "ksi": [
     "KSI-CMT-RMV",
     "KSI-CMT-VTD",
@@ -21,6 +41,8 @@
     "general-nist-800-171-r3",
     "general-iso-27001-2022",
     "general-pci-dss-4-0-1",
-    "usa-federal-gsa-fedramp-5-mod"
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
   ]
 }

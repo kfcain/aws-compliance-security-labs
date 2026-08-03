@@ -43,10 +43,18 @@
       },
       "fedramp_20x_ksi": {
         "KSI-MLA-OSM": "Operating SIEM capability",
-        "KSI-AFR-PVL": "Persistent validation cadence",
-        "KSI-CMT-CHG": "Change control (alias)"
+        "KSI-AFR-PVL": "Persistent validation cadence"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-MLA-OSM": {
+          "description": "Operating SIEM capability"
+        },
+        "KSI-AFR-PVL": {
+          "description": "Persistent validation cadence",
+          "legacy": true
+        }
+      }
     },
     {
       "scf_control_id": "MON-02",
@@ -84,11 +92,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-MLA-OSM": "Operating SIEM capability",
-        "KSI-AFR-PVL": "Persistent validation cadence",
-        "KSI-CMT-CHG": "Change control (alias)"
+        "KSI-MLA-OSM": "Operating SIEM capability"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-02.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-02.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-MLA-OSM": {
+          "description": "Operating SIEM capability"
+        }
+      }
     },
     {
       "scf_control_id": "CPL-02",
@@ -133,11 +144,15 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-MLA-OSM": "Operating SIEM capability",
-        "KSI-AFR-PVL": "Persistent validation cadence",
-        "KSI-CMT-CHG": "Change control (alias)"
+        "KSI-AFR-PVL": "Persistent validation cadence"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CPL-02.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CPL-02.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-AFR-PVL": {
+          "description": "Persistent validation cadence",
+          "legacy": true
+        }
+      }
     },
     {
       "scf_control_id": "CHG-01",
@@ -173,11 +188,15 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-MLA-OSM": "Operating SIEM capability",
-        "KSI-AFR-PVL": "Persistent validation cadence",
         "KSI-CMT-CHG": "Change control (alias)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-01.json"
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-01.json",
+      "fedramp_20x_ksi_detail": {
+        "KSI-CMT-CHG": {
+          "description": "Change control (alias)",
+          "legacy": true
+        }
+      }
     }
   ],
   "coverage_summary": {
@@ -188,6 +207,26 @@
       "general-pci-dss-4-0-1": 4,
       "usa-federal-gsa-fedramp-5-mod": 4,
       "general-iso-27001-2022": 2
-    }
-  }
+    },
+    "frameworks_requested_without_hits": [
+      {
+        "framework": "general-nist-800-171-r2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      },
+      {
+        "framework": "usa-federal-dow-cmmc-2-level-2",
+        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
+      }
+    ],
+    "frameworks_requested": [
+      "general-nist-800-53-r5-2",
+      "general-nist-800-171-r3",
+      "general-iso-27001-2022",
+      "general-pci-dss-4-0-1",
+      "usa-federal-gsa-fedramp-5-mod",
+      "general-nist-800-171-r2",
+      "usa-federal-dow-cmmc-2-level-2"
+    ]
+  },
+  "ksi_overlay_version": "2026-08.1"
 }

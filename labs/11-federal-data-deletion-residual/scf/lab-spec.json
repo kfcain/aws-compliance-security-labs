@@ -9,6 +9,27 @@
     "CRY-05",
     "CLD-01"
   ],
+  "ksi_by_control": {
+    "DCH-01": [
+      "KSI-SVC-SIN"
+    ],
+    "DCH-09": [
+      "KSI-SVC-RUD",
+      "KSI-SVC-PRR"
+    ],
+    "DCH-06": [
+      "KSI-SVC-SIN"
+    ],
+    "BCD-11": [
+      "KSI-SVC-RUD"
+    ],
+    "CRY-05": [
+      "KSI-SVC-SIN"
+    ],
+    "CLD-01": [
+      "KSI-AFR-PVL"
+    ]
+  },
   "ksi": [
     "KSI-SVC-RUD",
     "KSI-SVC-PRR",
@@ -20,6 +41,8 @@
     "general-nist-800-171-r3",
     "general-iso-27001-2022",
     "general-pci-dss-4-0-1",
-    "usa-federal-gsa-fedramp-5-mod"
+    "usa-federal-gsa-fedramp-5-mod",
+    "general-nist-800-171-r2",
+    "usa-federal-dow-cmmc-2-level-2"
   ]
 }

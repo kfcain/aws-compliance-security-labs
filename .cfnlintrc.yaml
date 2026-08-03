@@ -1,0 +1,6 @@
+templates:
+  - labs/*/infrastructure/template.yaml
+ignore_checks:
+  # W3002: CodeUri as a local path requires `sam build`/`package` before raw
+  # CloudFormation deploy — that is the documented workflow for these labs.
+  - W3002
