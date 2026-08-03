@@ -1,0 +1,32 @@
+# Organization-Defined Parameter (ODP) register — lab 16 example.
+#
+# This is an APPROVED GOVERNANCE ARTIFACT, not Terraform variables. The
+# handler's assurance case references these ODP ids (A.03.04.xx.ODP[nn]); a
+# downstream assessment tool resolves the ids to the values below. Replace the
+# example values and approvals with your organization's real register.
+system_id: grc-cloud-lab
+version: "1.0"
+effective_date: "2026-08-02"
+approved_by: "System Owner and CISO"
+parameters:
+  - requirement: "03.04.01"
+    assessment_id: "A.03.04.01.ODP[01]"
+    value: "Quarterly and following significant system changes"
+    authority: "Configuration Management Standard CM-01"
+    notes: "Baseline review cadence; drift evaluation runs at least daily between reviews."
+  - requirement: "03.04.02"
+    assessment_id: "A.03.04.02.ODP[01]"
+    value: "AWS-TF-CUI-BASELINE v1.0"
+    authority: "Cloud Security Standard CS-02"
+    notes: "The approved secure baseline Terraform is measured against."
+  - requirement: "03.04.03"
+    assessment_id: "A.03.04.03.ODP[01]"
+    value: >
+      Changes only via reviewed pull request + CI policy gate + approved
+      Terraform apply role; out-of-band console/API change is prohibited and
+      flagged as drift.
+    authority: "Change Management Standard CHG-01"
+  - requirement: "03.12.03"
+    assessment_id: "A.03.12.03.ODP[01]"
+    value: "Continuous (daily EventBridge drift evaluation), formally reconciled quarterly"
+    authority: "Continuous Monitoring Standard MON-01"

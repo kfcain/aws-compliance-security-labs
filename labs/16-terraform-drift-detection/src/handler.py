@@ -33,7 +33,9 @@ REMEDIATION_MODE (report|dry_run, default report), LOG_LEVEL.
 from __future__ import annotations
 
 import fnmatch
+import hashlib
 import json
+import os
 from typing import Any
 
 from lab_common import (
@@ -54,6 +56,49 @@ from lab_common import (
 LAB_ID = "16-terraform-drift-detection"
 SCF_CONTROLS = ["CFG-01", "CFG-02", "CPL-01", "MON-01", "CHG-02"]
 FEDRAMP_KSI = ["KSI-AFR-PVL", "KSI-CNA-EIS", "KSI-CMT-RMV", "KSI-MLA-EVC"]
+
+# Assessment mapping for the assessor-ready assurance case. Objective IDs are
+# the real NIST 800-171 rev 3 (800-171A) and 800-53 rev 5 assessment
+# objectives this lab's SCF controls crosswalk to (see scf-mapping.generated.json);
+# ODP references point at the shipped governance/odp-register.yaml. Embedded so
+# the handler stays self-contained (the lab exports standalone).
+CONTROL_ASSESSMENT = {
+    "CFG-01": {
+        "title": "Configuration Management Program",
+        "claim": "A Terraform baseline configuration is defined, reviewed, and enforced.",
+        "nist_800_171_r3": ["03.04.01.a"],
+        "nist_800_53_r5": ["CM-01", "CM-09"],
+        "odp_references": ["A.03.04.01.ODP[01]"],
+    },
+    "CFG-02": {
+        "title": "Secure Baseline Configurations",
+        "claim": "Deployed resources conform to the approved secure baseline; drift is detected.",
+        "nist_800_171_r3": ["03.04.01.a", "03.04.02.a"],
+        "nist_800_53_r5": ["CM-02", "CM-06"],
+        "odp_references": ["A.03.04.02.ODP[01]"],
+    },
+    "CPL-01": {
+        "title": "Statutory, Regulatory & Contractual Compliance",
+        "claim": "Configuration state is continuously evaluated against compliance requirements.",
+        "nist_800_171_r3": ["03.04.11.a", "03.12.01"],
+        "nist_800_53_r5": ["PL-01", "PM-08"],
+        "odp_references": [],
+    },
+    "MON-01": {
+        "title": "Continuous Monitoring",
+        "claim": "Drift is monitored on a defined cadence with recorded evidence.",
+        "nist_800_171_r3": ["03.03.01.a", "03.12.03", "03.14.06.a"],
+        "nist_800_53_r5": ["AU-01", "PM-31", "SI-04"],
+        "odp_references": ["A.03.12.03.ODP[01]"],
+    },
+    "CHG-02": {
+        "title": "Configuration Change Control",
+        "claim": "Managed infrastructure changes only through the controlled Terraform workflow; out-of-band change is flagged.",
+        "nist_800_171_r3": ["03.04.02.b", "03.04.03.a", "03.04.03.b", "03.04.03.c"],
+        "nist_800_53_r5": ["CM-03", "SA-08(31)"],
+        "odp_references": ["A.03.04.03.ODP[01]"],
+    },
+}
 
 logger = get_logger(LAB_ID)
 
@@ -243,6 +288,89 @@ def build_evidence(
     }
 
 
+def build_provenance(
+    context: Any,
+    runtime: RuntimeContext,
+    event: dict[str, Any],
+    plan_ref: str,
+) -> dict[str, Any]:
+    """Provenance that binds the evidence to the exact change and collector.
+
+    The Terraform commit and workspace come from the CI producer (event or
+    env); without them the assurance case is honestly marked 'unknown'.
+    """
+    collector_role = (
+        os.environ.get("COLLECTOR_ROLE_ARN", "").strip()
+        or f"arn:{runtime.partition}:lambda:{runtime.region}:{runtime.account_id}:function:{LAB_ID}"
+    )
+    return {
+        "collected_at": utc_now().isoformat(),
+        "collector_role": collector_role,
+        "account_id": runtime.account_id,
+        "region": runtime.region,
+        "partition": runtime.partition,
+        "aws_request_id": getattr(context, "aws_request_id", None),
+        "terraform_commit": str(
+            event.get("terraform_commit") or os.environ.get("TERRAFORM_COMMIT", "") or "unknown"
+        ),
+        "terraform_workspace": str(
+            event.get("terraform_workspace") or os.environ.get("TERRAFORM_WORKSPACE", "") or "default"
+        ),
+        "plan_reference": plan_ref,
+        "evidence_manifest_sha256": None,  # filled after the package is assembled
+    }
+
+
+def build_assurance_case(evidence: dict[str, Any]) -> list[dict[str, Any]]:
+    """Assessor-facing objective -> claim -> status -> evidence mapping.
+
+    Status is OTHER-THAN-SATISFIED when actionable drift exists (the baseline
+    is not being enforced), SATISFIED when the evaluated plan is clean.
+    """
+    overall = Status(evidence["status"])
+    satisfied = overall is Status.PASS
+    status_label = "SATISFIED" if satisfied else "OTHER-THAN-SATISFIED"
+    drift_summary = {
+        "drifted_resource_count": evidence["drifted_resource_count"],
+        "actionable_drift_count": evidence["actionable_drift_count"],
+        "drift_by_severity": evidence["drift_by_severity"],
+    }
+    case = []
+    for control in SCF_CONTROLS:
+        meta = CONTROL_ASSESSMENT[control]
+        case.append({
+            "scf_control": control,
+            "title": meta["title"],
+            "claim": meta["claim"],
+            "status": status_label,
+            "nist_800_171_r3_objectives": meta["nist_800_171_r3"],
+            "nist_800_53_r5_objectives": meta["nist_800_53_r5"],
+            "odp_references": meta["odp_references"],
+            "evidence": {
+                "plan_reference": evidence["plan_reference"],
+                "drift_summary": drift_summary,
+                "artifact": "self (this evidence object)",
+            },
+        })
+    return case
+
+
+def evidence_manifest_sha256(evidence: dict[str, Any]) -> str:
+    """Deterministic integrity hash over the assembled package (excluding the
+    manifest field and the post-hoc S3 URI). Binds this specific package so
+    tampering is detectable."""
+    payload = {
+        k: v for k, v in evidence.items()
+        if k not in ("evidence_uri",)
+    }
+    payload = json.loads(json.dumps(payload, default=str))
+    if payload.get("provenance", {}).get("evidence_manifest_sha256") is not None:
+        payload["provenance"] = dict(payload["provenance"])
+        payload["provenance"]["evidence_manifest_sha256"] = None
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
 def load_plan(
     event: dict[str, Any],
     s3_client: Any,
@@ -251,8 +379,6 @@ def load_plan(
 
     Priority: event-embedded plan, then the plan-artifact S3 object.
     """
-    import os
-
     if isinstance(event.get("plan"), dict):
         return event["plan"], "event", "event.plan"
     bucket = os.environ.get("PLAN_BUCKET", "").strip()
@@ -314,8 +440,6 @@ def handler(
     sns_client: Any = None,
     securityhub_client: Any = None,
 ) -> dict[str, Any]:
-    import os
-
     run_id = new_run_id(context)
     try:
         runtime = RuntimeContext.from_lambda(context)
@@ -344,6 +468,13 @@ def handler(
             plan_ref=plan_ref,
         )
         status = Status(evidence["status"])
+
+        # Assessor-ready assurance case: bind evidence to the change and the
+        # collector, map to NIST assessment objectives + ODPs, and seal the
+        # package with an integrity manifest hash.
+        evidence["provenance"] = build_provenance(context, runtime, event, plan_ref)
+        evidence["assurance_case"] = build_assurance_case(evidence)
+        evidence["provenance"]["evidence_manifest_sha256"] = evidence_manifest_sha256(evidence)
 
         evidence["evidence_uri"] = EvidenceWriter(LAB_ID, s3_client=s3_client).write(
             evidence, run_id

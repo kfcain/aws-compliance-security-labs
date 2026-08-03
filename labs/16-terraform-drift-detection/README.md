@@ -67,12 +67,47 @@ portfolio's evidence contract:
   expected drift does not fail the check.
 - **Threshold** — `FAIL_SEVERITY` (default `high`): drift at or above it fails.
 
+## Assessor-ready evidence (assurance case)
+
+Detecting drift is only half the job — the evidence has to be defensible to an
+assessor. Each run emits an **assurance case**, not just a verdict:
+
+- **Provenance** binds the evidence to the exact change and collector:
+  `terraform_commit` (from the CI producer), `terraform_workspace`,
+  `collector_role`, account/region/partition, and `collected_at`.
+- **Integrity manifest** — `provenance.evidence_manifest_sha256` is a SHA-256
+  over the whole package (recomputable, so tampering is detectable).
+- **Objective mapping** — every SCF control maps to its real NIST 800-171 rev 3
+  (800-171A) and 800-53 rev 5 assessment objectives, with a `status` of
+  `SATISFIED` (clean plan) or `OTHER-THAN-SATISFIED` (drift), plus the
+  Organization-Defined Parameter ids it depends on.
+
+Supporting governance artifacts (adapted from the evidence-collection
+methodology this lab is built around):
+
+| File | Purpose |
+|------|---------|
+| [`governance/odp-register.yaml`](./governance/odp-register.yaml) | Approved ODP register the assurance case references (`A.03.04.02.ODP[01]`, …) — a governance artifact, not Terraform variables |
+| [`governance/collect-evidence.sh`](./governance/collect-evidence.sh) | Producer-side, **read-only** point-in-time AWS evidence collector (S3/KMS/CloudTrail/Config config, refresh-only drift plan, git provenance, SHA-256 manifest). Error files are evidence too. |
+| [`governance/policy/drift.rego`](./governance/policy/drift.rego) | OPA/Conftest gate: pre-deploy on the plan, post-deploy on the emitted evidence — each violation carries the objectives it maps to |
+
+Run policy on **both** sides — the plan before apply, and the emitted evidence
+after — so the intended change and the actual state are each gated. Terraform
+drift is surfaced with `terraform plan -refresh-only -detailed-exitcode`
+(exit `0` = none, `2` = drift, `1` = error).
+
+> **Design note:** AWS Audit Manager entered maintenance mode (no new-account
+> setup after 2026-04-30), so this lab builds the assurance case from AWS
+> Config, CloudTrail, read-only API collection, CI policy, and a controlled
+> evidence store rather than depending on Audit Manager.
+
 ## Lab layout
 
 ```
 16-terraform-drift-detection/
   README.md  RISK.md  SPEC.md  ASSESSMENT.md
   scf/            lab-spec.json, scf-mapping.generated.json, oscal-component.json
+  governance/     odp-register.yaml, collect-evidence.sh, policy/drift.rego
   infrastructure/ template.yaml (hardened SAM)
   src/            handler.py, lab_common.py (vendored)
   tests/          test_handler.py

@@ -154,6 +154,71 @@ def test_evidence_written(lambda_context):
     assert json.loads(result["body"])["evidence_uri"].startswith("s3://test-evidence-bucket/")
 
 
+def test_provenance_binds_terraform_commit_and_collector(lambda_context, monkeypatch):
+    monkeypatch.setenv("TERRAFORM_COMMIT", "abc123def")
+    monkeypatch.setenv("TERRAFORM_WORKSPACE", "prod")
+    monkeypatch.setenv("COLLECTOR_ROLE_ARN", "arn:aws:iam::123456789012:role/grc-evidence-reader")
+    result, *_ = _invoke({"plan": _plan()}, lambda_context)
+    prov = json.loads(result["body"])["provenance"]
+    assert prov["terraform_commit"] == "abc123def"
+    assert prov["terraform_workspace"] == "prod"
+    assert prov["collector_role"].endswith("role/grc-evidence-reader")
+    assert prov["account_id"] == "123456789012"
+
+
+def test_terraform_commit_from_event_overrides_env(lambda_context, monkeypatch):
+    monkeypatch.setenv("TERRAFORM_COMMIT", "from-env")
+    result, *_ = _invoke({"plan": _plan(), "terraform_commit": "from-event"}, lambda_context)
+    assert json.loads(result["body"])["provenance"]["terraform_commit"] == "from-event"
+
+
+def test_unknown_commit_is_honest(lambda_context):
+    result, *_ = _invoke({"plan": _plan()}, lambda_context)
+    assert json.loads(result["body"])["provenance"]["terraform_commit"] == "unknown"
+
+
+def test_evidence_manifest_sha256_present_and_binds_content(lambda_context):
+    result, *_ = _invoke({"plan": _plan()}, lambda_context)
+    body = json.loads(result["body"])
+    digest = body["provenance"]["evidence_manifest_sha256"]
+    assert isinstance(digest, str) and len(digest) == 64
+    # Recomputing over the package (with the manifest field nulled and the S3
+    # URI excluded) reproduces the digest — proving it seals the content.
+    mod = handler_mod
+    assert mod.evidence_manifest_sha256(body) == digest
+
+
+def test_manifest_changes_when_drift_changes(lambda_context):
+    clean, *_ = _invoke({"plan": _plan()}, lambda_context)
+    drifted, *_ = _invoke(
+        {"plan": _plan(_drift("aws_iam_policy.admin", after={"policy": "*"}))}, lambda_context)
+    d1 = json.loads(clean["body"])["provenance"]["evidence_manifest_sha256"]
+    d2 = json.loads(drifted["body"])["provenance"]["evidence_manifest_sha256"]
+    assert d1 != d2
+
+
+def test_assurance_case_maps_real_nist_objectives(lambda_context):
+    result, *_ = _invoke({"plan": _plan()}, lambda_context)
+    case = {c["scf_control"]: c for c in json.loads(result["body"])["assurance_case"]}
+    assert set(case) == set(handler_mod.SCF_CONTROLS)
+    assert case["CFG-01"]["nist_800_171_r3_objectives"] == ["03.04.01.a"]
+    assert "CM-03" in case["CHG-02"]["nist_800_53_r5_objectives"]
+    assert case["CFG-02"]["odp_references"] == ["A.03.04.02.ODP[01]"]
+
+
+def test_assurance_case_satisfied_when_clean(lambda_context):
+    result, *_ = _invoke({"plan": _plan()}, lambda_context)
+    case = json.loads(result["body"])["assurance_case"]
+    assert all(c["status"] == "SATISFIED" for c in case)
+
+
+def test_assurance_case_other_than_satisfied_when_drift(lambda_context):
+    plan = _plan(_drift("aws_security_group.web.ingress", after={"ingress": ["0.0.0.0/0"]}))
+    result, *_ = _invoke({"plan": plan}, lambda_context)
+    case = json.loads(result["body"])["assurance_case"]
+    assert all(c["status"] == "OTHER-THAN-SATISFIED" for c in case)
+
+
 def test_classify_severity_matrix():
     assert handler_mod.classify_severity("aws_security_group.web", ["update"], "ingress") == "critical"
     assert handler_mod.classify_severity("aws_iam_policy.admin", ["update"], "policy") == "critical"
