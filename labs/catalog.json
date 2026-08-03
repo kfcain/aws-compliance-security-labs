@@ -684,6 +684,51 @@
       "source_repo": "https://github.com/kfcain/lab-immutable-cicd-change-control",
       "pages": "https://kfcain.github.io/lab-immutable-cicd-change-control/",
       "status": "hardened"
+    },
+    {
+      "id": "16-terraform-drift-detection",
+      "title": "Terraform State Drift Detection & Remediation Governance",
+      "repo_name": "lab-terraform-drift-detection",
+      "path": "labs/16-terraform-drift-detection",
+      "summary": "Evaluate Terraform plan artifacts to detect out-of-band drift, classify it by severity (tfdrift-style), apply an ignore list, and emit fail-closed compliance evidence with Security Hub findings and SNS alerts.",
+      "primary_risk": "Out-of-band changes drift Terraform-managed infrastructure away from its declared baseline and evade change control",
+      "scf_controls": [
+        "CFG-01",
+        "CFG-02",
+        "CPL-01",
+        "MON-01",
+        "CHG-02"
+      ],
+      "ksi": [
+        "KSI-AFR-PVL",
+        "KSI-CNA-EIS",
+        "KSI-CMT-RMV",
+        "KSI-MLA-EVC"
+      ],
+      "frameworks": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "aws_services": [
+        "Lambda",
+        "EventBridge",
+        "S3",
+        "KMS",
+        "SNS",
+        "Security Hub",
+        "CloudWatch Logs"
+      ],
+      "external_services": [
+        "Terraform",
+        "CI runner"
+      ],
+      "source_repo": "https://github.com/kfcain/aws-compliance-security-labs",
+      "status": "hardened"
     }
   ]
 }

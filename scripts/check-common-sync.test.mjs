@@ -12,7 +12,7 @@ const vendored = join(root, 'labs/01-mfa-continuous-validation/src/lab_common.py
 describe('check-common-sync', () => {
   it('passes when all vendored copies match canonical', () => {
     const out = execFileSync(process.execPath, [script], { encoding: 'utf8' });
-    assert.match(out, /lab_common sync OK — 15 labs/);
+    assert.match(out, /lab_common sync OK — \d+ labs/);
   });
 
   it('fails on drift and repairs with --write', () => {

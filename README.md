@@ -1,6 +1,6 @@
 # AWS Compliance & Security Labs
 
-Combined monorepo for all `15` AWS compliance and security labs previously published as separate `lab-*` repositories under [`kfcain`](https://github.com/kfcain).
+Combined monorepo for `16` AWS compliance and security labs. Labs `01`–`15` were previously published as separate `lab-*` repositories under [`kfcain`](https://github.com/kfcain); lab `16` is new to this monorepo.
 
 Target frameworks: **NIST SP 800-171**, **NIST SP 800-53**, **ISO 27001**, **PCI DSS**, and **FedRAMP 20x / CR26 Key Security Indicators (KSIs)**.
 
@@ -45,6 +45,7 @@ Each lab includes `README.md`, `RISK.md`, `SPEC.md`, `scf/`, `diagrams/`, `infra
 | `13-boundary-asset-inventory` | [Authorization Boundary & Real-Time Asset Inventory](./labs/13-boundary-asset-inventory/) | Unknown or out-of-scope resources silently process federal data | [`lab-boundary-asset-inventory`](https://github.com/kfcain/lab-boundary-asset-inventory) |
 | `14-privileged-suspend-lifecycle` | [Privileged Suspend & Account Lifecycle Automation](./labs/14-privileged-suspend-lifecycle/) | Orphaned or compromised privileged access to federal systems | [`lab-privileged-suspend-lifecycle`](https://github.com/kfcain/lab-privileged-suspend-lifecycle) |
 | `15-immutable-cicd-change-control` | [Immutable CI/CD Change Control & Deployment Validation](./labs/15-immutable-cicd-change-control/) | Untracked production changes bypass review and corrupt federal workloads | [`lab-immutable-cicd-change-control`](https://github.com/kfcain/lab-immutable-cicd-change-control) |
+| `16-terraform-drift-detection` | [Terraform State Drift Detection & Remediation Governance](./labs/16-terraform-drift-detection/) | Out-of-band changes drift Terraform-managed infrastructure away from its declared baseline | — (new; drift model adapted from [`tfdrift`](https://github.com/sudarshan8417/tfdrift)) |
 
 ## Quick start
 

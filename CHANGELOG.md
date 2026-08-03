@@ -40,6 +40,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **Lab 16 — Terraform State Drift Detection & Remediation Governance** (new):
+  evaluates a `terraform show -json` plan artifact, classifies out-of-band
+  drift by severity, honors a `.tfdriftignore`-style ignore list, and emits
+  fail-closed evidence with Security Hub findings and SNS alerts. The severity
+  model and ignore/plan-parsing approach are adapted from the
+  [tfdrift](https://github.com/sudarshan8417/tfdrift) tool into the portfolio's
+  Lambda-evidence contract (terraform runs in CI; the function only reads plan
+  JSON from a hardened plan-artifact bucket and writes evidence). Full lab set:
+  hardened SAM stack, 14 handler tests, SCF crosswalk, OSCAL, assessment, and
+  risk-register entry.
 - Real `boto3` validation logic in labs 04–10 (previously `PASS_PLACEHOLDER`
   stubs): AWS Config compliance, GuardDuty posture and findings, KMS/Secrets
   rotation governance, CloudTrail + evidence immutability, VPC flow-log and

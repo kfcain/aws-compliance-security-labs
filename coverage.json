@@ -1,6 +1,6 @@
 {
   "ksi_overlay_version": "2026-08.1",
-  "lab_count": 15,
+  "lab_count": 16,
   "frameworks": [
     "general-nist-800-53-r5-2",
     "general-nist-800-171-r3",
@@ -1901,6 +1901,171 @@
         ]
       },
       "generated_at": "2026-08-01T19:09:54.211Z"
+    },
+    {
+      "lab_id": "16-terraform-drift-detection",
+      "scf_controls": [
+        "CFG-01",
+        "CFG-02",
+        "CPL-01",
+        "MON-01",
+        "CHG-02"
+      ],
+      "frameworks_requested": [
+        "general-nist-800-53-r5-2",
+        "general-nist-800-171-r3",
+        "general-iso-27001-2022",
+        "general-pci-dss-4-0-1",
+        "usa-federal-gsa-fedramp-5-mod",
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "mapped_control_counts": {
+        "general-nist-800-53-r5-2": 5,
+        "general-nist-800-171-r3": 5,
+        "general-iso-27001-2022": 1,
+        "general-pci-dss-4-0-1": 5,
+        "usa-federal-gsa-fedramp-5-mod": 5,
+        "general-nist-800-171-r2": 0,
+        "usa-federal-dow-cmmc-2-level-2": 0
+      },
+      "framework_control_ids": {
+        "general-nist-800-53-r5-2": [
+          "AU-01",
+          "CM-01",
+          "CM-02",
+          "CM-03",
+          "CM-06",
+          "CM-09",
+          "PL-01",
+          "PL-10",
+          "PM-08",
+          "PM-31",
+          "SA-08",
+          "SA-08(31)",
+          "SA-15(05)",
+          "SI-04"
+        ],
+        "general-nist-800-171-r3": [
+          "03.01.01.h",
+          "03.01.08.a",
+          "03.01.08.b",
+          "03.01.09",
+          "03.01.10.a",
+          "03.01.10.b",
+          "03.01.10.c",
+          "03.01.11",
+          "03.01.12.a",
+          "03.01.16.a",
+          "03.01.18.a",
+          "03.03.01.a",
+          "03.04.01.a",
+          "03.04.02.a",
+          "03.04.02.b",
+          "03.04.03.a",
+          "03.04.03.b",
+          "03.04.03.c",
+          "03.04.06.a",
+          "03.04.06.b",
+          "03.04.06.d",
+          "03.04.11.a",
+          "03.05.07.d",
+          "03.05.07.e",
+          "03.05.07.f",
+          "03.05.12.d",
+          "03.08.07.a",
+          "03.12.01",
+          "03.12.03",
+          "03.13.12.b",
+          "03.14.06.a"
+        ],
+        "general-iso-27001-2022": [
+          "4.1",
+          "9.1",
+          "9.2.1",
+          "9.2.2"
+        ],
+        "general-pci-dss-4-0-1": [
+          "1.1",
+          "1.2.1",
+          "1.2.2",
+          "1.2.6",
+          "10.1",
+          "10.2",
+          "10.2.1",
+          "10.2.1.1",
+          "10.2.1.2",
+          "10.2.1.3",
+          "10.2.1.4",
+          "10.2.1.5",
+          "10.2.1.6",
+          "10.2.1.7",
+          "10.2.2",
+          "10.4.3",
+          "10.6",
+          "10.6.1",
+          "10.6.2",
+          "10.6.3",
+          "10.7",
+          "10.7.1",
+          "10.7.2",
+          "10.7.3",
+          "11.2",
+          "12.4",
+          "12.4.2",
+          "2.1",
+          "2.2",
+          "2.2.1",
+          "6.5",
+          "6.5.1",
+          "6.5.6",
+          "8.3.2",
+          "8.5",
+          "A3.1",
+          "A3.1.1",
+          "A3.3.1",
+          "A3.5"
+        ],
+        "usa-federal-gsa-fedramp-5-mod": [
+          "AU-01",
+          "CM-01",
+          "CM-02",
+          "CM-03",
+          "CM-06",
+          "CM-09",
+          "PL-01",
+          "PL-10",
+          "PM-08",
+          "SA-08",
+          "SA-08(31)",
+          "SA-15(05)",
+          "SI-04"
+        ],
+        "general-nist-800-171-r2": [],
+        "usa-federal-dow-cmmc-2-level-2": []
+      },
+      "frameworks_without_hits": [
+        "general-nist-800-171-r2",
+        "usa-federal-dow-cmmc-2-level-2"
+      ],
+      "ksi_by_control": {
+        "CFG-01": [
+          "KSI-CNA-EIS"
+        ],
+        "CFG-02": [
+          "KSI-CNA-EIS"
+        ],
+        "CPL-01": [
+          "KSI-MLA-EVC"
+        ],
+        "MON-01": [
+          "KSI-AFR-PVL"
+        ],
+        "CHG-02": [
+          "KSI-CMT-RMV"
+        ]
+      },
+      "generated_at": "2026-08-01T19:09:53.496Z"
     }
   ],
   "portfolio": {
@@ -1980,19 +2145,22 @@
       ],
       "CFG-01": [
         "04-config-drift-compliance",
-        "15-immutable-cicd-change-control"
+        "15-immutable-cicd-change-control",
+        "16-terraform-drift-detection"
       ],
       "CFG-02": [
         "03-nhi-credential-rotation",
         "04-config-drift-compliance",
-        "06-kms-encryption-governance"
+        "06-kms-encryption-governance",
+        "16-terraform-drift-detection"
       ],
       "CHG-01": [
         "07-cloudtrail-evidence-pipeline",
         "15-immutable-cicd-change-control"
       ],
       "CHG-02": [
-        "15-immutable-cicd-change-control"
+        "15-immutable-cicd-change-control",
+        "16-terraform-drift-detection"
       ],
       "CHG-03": [
         "15-immutable-cicd-change-control"
@@ -2009,7 +2177,8 @@
       ],
       "CPL-01": [
         "04-config-drift-compliance",
-        "13-boundary-asset-inventory"
+        "13-boundary-asset-inventory",
+        "16-terraform-drift-detection"
       ],
       "CPL-02": [
         "04-config-drift-compliance",
@@ -2076,7 +2245,8 @@
         "04-config-drift-compliance",
         "05-guardduty-automated-response",
         "07-cloudtrail-evidence-pipeline",
-        "14-privileged-suspend-lifecycle"
+        "14-privileged-suspend-lifecycle",
+        "16-terraform-drift-detection"
       ],
       "MON-02": [
         "05-guardduty-automated-response",

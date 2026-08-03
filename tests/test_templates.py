@@ -73,8 +73,11 @@ def template(request):
     return request.param, _load(request.param)
 
 
-def test_fifteen_templates_exist():
-    assert len(TEMPLATES) == 15
+def test_all_lab_templates_exist():
+    # One hardened template per lab directory.
+    lab_count = len([p for p in (ROOT / "labs").iterdir() if p.is_dir()])
+    assert len(TEMPLATES) == lab_count
+    assert len(TEMPLATES) >= 16
 
 
 def test_no_hardcoded_aws_partition(template):

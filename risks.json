@@ -1,8 +1,8 @@
 {
-  "risk_count": 15,
+  "risk_count": 16,
   "band_summary": {
     "Major": 3,
-    "Moderate": 9,
+    "Moderate": 10,
     "Minor": 3
   },
   "risks": [
@@ -280,6 +280,30 @@
       "attack_techniques": [
         "T1195.002",
         "T1578"
+      ]
+    },
+    {
+      "risk_id": "RISK-16-01",
+      "lab": "16-terraform-drift-detection",
+      "owner": "Platform Engineering Lead",
+      "statement": "Out-of-band changes drift Terraform-managed infrastructure away from its declared baseline and evade change control",
+      "inherent": {
+        "likelihood": "High",
+        "impact": "High",
+        "band": "Severe"
+      },
+      "residual": {
+        "likelihood": "Medium",
+        "impact": "Medium",
+        "band": "Moderate"
+      },
+      "treatment": "Mitigate — automated by this lab's continuous validation",
+      "reviewed": "2026-08-03",
+      "next_review": "2027-02-03",
+      "attack_techniques": [
+        "T1578",
+        "T1562.007",
+        "T1098"
       ]
     },
     {

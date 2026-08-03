@@ -19,6 +19,7 @@ Rows are ordered by residual band (most severe first).
 | RISK-12-01 | `12-backup-recovery-rto-rpo` | Unproven backups leave federal missions unrestorable after ransomware or outage | Medium/Critical (Major) | Low/High (Moderate) | Resilience Lead | T1490, T1486 | 2027-02-03 |
 | RISK-14-01 | `14-privileged-suspend-lifecycle` | Orphaned or compromised privileged access to federal systems | High/Critical (Severe) | Low/High (Moderate) | Identity Engineering Lead | T1098, T1078.004 | 2027-02-03 |
 | RISK-15-01 | `15-immutable-cicd-change-control` | Untracked production changes bypass review and corrupt federal workloads | High/High (Severe) | Medium/Medium (Moderate) | DevSecOps Lead | T1195.002, T1578 | 2027-02-03 |
+| RISK-16-01 | `16-terraform-drift-detection` | Out-of-band changes drift Terraform-managed infrastructure away from its declared baseline and evade change control | High/High (Severe) | Medium/Medium (Moderate) | Platform Engineering Lead | T1578, T1562.007, T1098 | 2027-02-03 |
 | RISK-04-01 | `04-config-drift-compliance` | Silent configuration drift breaking baseline controls | Medium/High (Major) | Low/Medium (Minor) | Cloud Compliance Lead | T1578, T1562.007 | 2027-02-03 |
 | RISK-07-01 | `07-cloudtrail-evidence-pipeline` | Inability to prove who did what — audit failure and legal exposure | Medium/High (Major) | Low/Medium (Minor) | Security Operations Lead | T1562.008, T1070 | 2027-02-03 |
 | RISK-08-01 | `08-vpc-network-segmentation` | Flat networks enable lateral movement and PCI scope expansion | Medium/High (Major) | Low/Medium (Minor) | Network Security Lead | T1021, T1046 | 2027-02-03 |
@@ -29,7 +30,7 @@ Rows are ordered by residual band (most severe first).
 |------|-------|
 | Severe | 0 |
 | Major | 3 |
-| Moderate | 9 |
+| Moderate | 10 |
 | Minor | 3 |
 
 All entries are treated **Mitigate** — automated by the corresponding lab's
