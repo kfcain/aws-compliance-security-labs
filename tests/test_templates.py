@@ -56,7 +56,8 @@ _CfnLoader.add_multi_constructor("!", _multi)
 
 
 def _load(path: Path) -> dict:
-    return yaml.load(path.read_text(), Loader=_CfnLoader)
+    # _CfnLoader subclasses SafeLoader — only CFN short-form tags are added.
+    return yaml.load(path.read_text(), Loader=_CfnLoader)  # noqa: S506
 
 
 def _resources(template: dict, type_name: str) -> dict:
