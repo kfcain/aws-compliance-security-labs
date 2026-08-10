@@ -14,23 +14,23 @@ first pull).
 
 | Lab | NIST 800-53 r5 | NIST 800-171 r3 | NIST 800-171 r2 | ISO 27001:2022 | PCI DSS 4.0.1 | FedRAMP r5 Mod | CMMC 2.0 L2 |
 |-----|----|----|----|----|----|----|----|
-| `01-mfa-continuous-validation` | 4/4 | 4/4 | **0** | **0** | 4/4 | 4/4 | **0** |
-| `02-inspector-vdr` | 4/4 | 4/4 | **0** | **0** | 4/4 | 4/4 | **0** |
-| `03-nhi-credential-rotation` | 4/4 | 4/4 | **0** | **0** | 4/4 | 4/4 | **0** |
-| `04-config-drift-compliance` | 5/5 | 5/5 | **0** | 2/5 | 5/5 | 5/5 | **0** |
-| `05-guardduty-automated-response` | 5/5 | 5/5 | **0** | 1/5 | 5/5 | 5/5 | **0** |
-| `06-kms-encryption-governance` | 3/4 | 3/4 | **0** | **0** | 4/4 | 3/4 | **0** |
-| `07-cloudtrail-evidence-pipeline` | 4/4 | 4/4 | **0** | 2/4 | 4/4 | 4/4 | **0** |
-| `08-vpc-network-segmentation` | 3/4 | 3/4 | **0** | **0** | 4/4 | 3/4 | **0** |
-| `09-incident-response-automation` | 5/5 | 5/5 | **0** | **0** | 5/5 | 5/5 | **0** |
-| `10-supply-chain-sbom` | 5/5 | 5/5 | **0** | **0** | 4/5 | 5/5 | **0** |
-| `11-federal-data-deletion-residual` | 5/6 | 5/6 | **0** | **0** | 6/6 | 5/6 | **0** |
-| `12-backup-recovery-rto-rpo` | 6/6 | 3/6 | **0** | **0** | 3/6 | 6/6 | **0** |
-| `13-boundary-asset-inventory` | 6/6 | 6/6 | **0** | 2/6 | 6/6 | 6/6 | **0** |
-| `14-privileged-suspend-lifecycle` | 5/6 | 6/6 | **0** | 1/6 | 6/6 | 5/6 | **0** |
-| `15-immutable-cicd-change-control` | 6/6 | 6/6 | **0** | 1/6 | 6/6 | 6/6 | **0** |
-| `16-terraform-drift-detection` | 5/5 | 5/5 | **0** | 1/5 | 5/5 | 5/5 | **0** |
-| `17-terraform-dr-readiness` | 5/5 | 2/5 | **0** | **0** | 2/5 | 5/5 | **0** |
+| `01-mfa-continuous-validation` | 4/4 | 4/4 | 4/4 | **0** | 4/4 | 4/4 | 4/4 |
+| `02-inspector-vdr` | 4/4 | 4/4 | 4/4 | **0** | 4/4 | 4/4 | 4/4 |
+| `03-nhi-credential-rotation` | 4/4 | 4/4 | 4/4 | **0** | 4/4 | 4/4 | 4/4 |
+| `04-config-drift-compliance` | 5/5 | 5/5 | 5/5 | 2/5 | 5/5 | 5/5 | 3/5 |
+| `05-guardduty-automated-response` | 5/5 | 5/5 | 5/5 | 1/5 | 5/5 | 5/5 | 5/5 |
+| `06-kms-encryption-governance` | 3/4 | 3/4 | 4/4 | **0** | 4/4 | 3/4 | 4/4 |
+| `07-cloudtrail-evidence-pipeline` | 4/4 | 4/4 | 4/4 | 2/4 | 4/4 | 4/4 | 4/4 |
+| `08-vpc-network-segmentation` | 3/4 | 3/4 | 3/4 | **0** | 4/4 | 3/4 | 3/4 |
+| `09-incident-response-automation` | 5/5 | 5/5 | 4/5 | **0** | 5/5 | 5/5 | 2/5 |
+| `10-supply-chain-sbom` | 5/5 | 5/5 | 4/5 | **0** | 4/5 | 5/5 | 3/5 |
+| `11-federal-data-deletion-residual` | 5/6 | 5/6 | 6/6 | **0** | 6/6 | 5/6 | 6/6 |
+| `12-backup-recovery-rto-rpo` | 6/6 | 3/6 | 3/6 | **0** | 3/6 | 6/6 | 3/6 |
+| `13-boundary-asset-inventory` | 6/6 | 6/6 | 4/6 | 2/6 | 6/6 | 6/6 | 3/6 |
+| `14-privileged-suspend-lifecycle` | 5/6 | 6/6 | 5/6 | 1/6 | 6/6 | 5/6 | 5/6 |
+| `15-immutable-cicd-change-control` | 6/6 | 6/6 | 6/6 | 1/6 | 6/6 | 6/6 | 4/6 |
+| `16-terraform-drift-detection` | 5/5 | 5/5 | 5/5 | 1/5 | 5/5 | 5/5 | 3/5 |
+| `17-terraform-dr-readiness` | 5/5 | 2/5 | 2/5 | **0** | 2/5 | 5/5 | 1/5 |
 
 ## Portfolio rollup
 
@@ -38,11 +38,11 @@ first pull).
 |-----------|-----------------------------------|
 | NIST 800-53 r5 | 79 |
 | NIST 800-171 r3 | 118 |
-| NIST 800-171 r2 | 0 |
+| NIST 800-171 r2 | 46 |
 | ISO 27001:2022 | 29 |
 | PCI DSS 4.0.1 | 142 |
 | FedRAMP r5 Mod | 72 |
-| CMMC 2.0 L2 | 0 |
+| CMMC 2.0 L2 | 34 |
 
 ## SCF control → labs
 

@@ -1,7 +1,8 @@
 {
   "lab_id": "06-kms-encryption-governance",
-  "generated_at": "2026-08-01T19:09:53.592Z",
+  "generated_at": "2026-08-10T08:03:44.603Z",
   "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "ksi_overlay_version": "2026-08.1",
   "controls": [
     {
       "scf_control_id": "CRY-01",
@@ -34,13 +35,18 @@
           "SC-08(01)",
           "SC-08(02)",
           "SC-13"
+        ],
+        "general-nist-800-171-r2": [
+          "3.13.11"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "SCL2.-3.13.11"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-SVC-ENC": "Encryption at rest (alias)",
         "KSI-SVC-SNT": "Secure network traffic / encryption in transit (alias)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SVC-ENC": {
           "description": "Encryption at rest (alias)",
@@ -52,7 +58,8 @@
           "legacy": true,
           "alias_of": "KSI-SVC-SIN"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-01.json"
     },
     {
       "scf_control_id": "CRY-03",
@@ -84,19 +91,25 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "SC-08",
           "SC-08(01)"
+        ],
+        "general-nist-800-171-r2": [
+          "3.13.8"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "SCL2.-3.13.8"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-SVC-ENC": "Encryption at rest (alias)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-03.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SVC-ENC": {
           "description": "Encryption at rest (alias)",
           "legacy": true,
           "alias_of": "KSI-SVC-SIN"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-03.json"
     },
     {
       "scf_control_id": "CFG-02",
@@ -179,19 +192,29 @@
           "PL-10",
           "SA-08",
           "SA-15(05)"
+        ],
+        "general-nist-800-171-r2": [
+          "3.3.3",
+          "3.4.1",
+          "3.4.2"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "AUL2.-3.3.3",
+          "CML2.-3.4.1",
+          "CML2.-3.4.2"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-SVC-SEC": "Secrets management (alias)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-02.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SVC-SEC": {
           "description": "Secrets management (alias)",
           "legacy": true,
           "alias_of": "KSI-SVC-ASM"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-02.json"
     },
     {
       "scf_control_id": "CLD-01",
@@ -207,11 +230,18 @@
         "general-pci-dss-4-0-1": [
           "1.2.1",
           "12.8.1"
+        ],
+        "general-nist-800-171-r2": [
+          "3.1.22",
+          "NFO–PL-8"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.22"
         ]
       },
       "fedramp_20x_ksi": {},
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CLD-01.json",
-      "fedramp_20x_ksi_detail": {}
+      "fedramp_20x_ksi_detail": {},
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CLD-01.json"
     }
   ],
   "coverage_summary": {
@@ -220,19 +250,13 @@
       "general-nist-800-53-r5-2": 3,
       "general-nist-800-171-r3": 3,
       "general-pci-dss-4-0-1": 4,
-      "usa-federal-gsa-fedramp-5-mod": 3
+      "usa-federal-gsa-fedramp-5-mod": 3,
+      "general-nist-800-171-r2": 4,
+      "usa-federal-dow-cmmc-2-level-2": 4
     },
     "frameworks_requested_without_hits": [
       {
         "framework": "general-iso-27001-2022",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "general-nist-800-171-r2",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "usa-federal-dow-cmmc-2-level-2",
         "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
       }
     ],
@@ -245,6 +269,5 @@
       "general-nist-800-171-r2",
       "usa-federal-dow-cmmc-2-level-2"
     ]
-  },
-  "ksi_overlay_version": "2026-08.1"
+  }
 }

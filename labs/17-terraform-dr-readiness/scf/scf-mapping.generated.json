@@ -1,7 +1,8 @@
 {
   "lab_id": "17-terraform-dr-readiness",
-  "generated_at": "2026-08-01T19:09:53.983Z",
+  "generated_at": "2026-08-10T08:03:47.180Z",
   "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "ksi_overlay_version": "2026-08.1",
   "controls": [
     {
       "scf_control_id": "BCD-01",
@@ -29,7 +30,6 @@
           "PM-08"
         ]
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-01.json",
       "fedramp_20x_ksi": {
         "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
       },
@@ -37,7 +37,8 @@
         "KSI-CNA-OFA": {
           "description": "Optimizing for availability and rapid recovery"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-01.json"
     },
     {
       "scf_control_id": "BCD-02",
@@ -57,7 +58,6 @@
           "CP-02(08)"
         ]
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-02.json",
       "fedramp_20x_ksi": {
         "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)"
       },
@@ -65,7 +65,8 @@
         "KSI-RPL-RRO": {
           "description": "Reviewing recovery objectives (RTO/RPO)"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-02.json"
     },
     {
       "scf_control_id": "BCD-11",
@@ -96,9 +97,14 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "CP-09",
           "SC-28(02)"
+        ],
+        "general-nist-800-171-r2": [
+          "3.8.9"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "MPL2.-3.8.9"
         ]
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-11.json",
       "fedramp_20x_ksi": {
         "KSI-RPL-ABO": "Aligning backups with objectives"
       },
@@ -106,7 +112,8 @@
         "KSI-RPL-ABO": {
           "description": "Aligning backups with objectives"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-11.json"
     },
     {
       "scf_control_id": "BCD-12",
@@ -126,7 +133,6 @@
           "CP-10"
         ]
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-12.json",
       "fedramp_20x_ksi": {
         "KSI-RPL-ARP": "Aligning recovery plan with objectives"
       },
@@ -134,7 +140,8 @@
         "KSI-RPL-ARP": {
           "description": "Aligning recovery plan with objectives"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-12.json"
     },
     {
       "scf_control_id": "CFG-01",
@@ -163,9 +170,12 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "CM-01",
           "CM-09"
+        ],
+        "general-nist-800-171-r2": [
+          "NFO - CM-1",
+          "NFO - CM-9"
         ]
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-01.json",
       "fedramp_20x_ksi": {
         "KSI-CNA-EIS": "Enforcing intended state"
       },
@@ -173,7 +183,8 @@
         "KSI-CNA-EIS": {
           "description": "Enforcing intended state"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-01.json"
     }
   ],
   "coverage_summary": {
@@ -182,19 +193,13 @@
       "general-nist-800-53-r5-2": 5,
       "usa-federal-gsa-fedramp-5-mod": 5,
       "general-nist-800-171-r3": 2,
-      "general-pci-dss-4-0-1": 2
+      "general-pci-dss-4-0-1": 2,
+      "general-nist-800-171-r2": 2,
+      "usa-federal-dow-cmmc-2-level-2": 1
     },
     "frameworks_requested_without_hits": [
       {
         "framework": "general-iso-27001-2022",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "general-nist-800-171-r2",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "usa-federal-dow-cmmc-2-level-2",
         "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
       }
     ],
@@ -207,6 +212,5 @@
       "general-nist-800-171-r2",
       "usa-federal-dow-cmmc-2-level-2"
     ]
-  },
-  "ksi_overlay_version": "2026-08.1"
+  }
 }

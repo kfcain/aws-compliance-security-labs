@@ -1,7 +1,8 @@
 {
   "lab_id": "14-privileged-suspend-lifecycle",
-  "generated_at": "2026-08-01T19:09:54.126Z",
+  "generated_at": "2026-08-10T08:03:46.534Z",
   "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "ksi_overlay_version": "2026-08.1",
   "controls": [
     {
       "scf_control_id": "IAC-15",
@@ -46,17 +47,23 @@
         ],
         "usa-federal-gsa-fedramp-5-mod": [
           "AC-02"
+        ],
+        "general-nist-800-171-r2": [
+          "3.1.2"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.2"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-IAM-AAM": "Automating account management lifecycle and privileges"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-15.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-AAM": {
           "description": "Automating account management lifecycle and privileges"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-15.json"
     },
     {
       "scf_control_id": "IAC-16",
@@ -77,13 +84,18 @@
         "general-pci-dss-4-0-1": [
           "7.2.3",
           "7.2.5"
+        ],
+        "general-nist-800-171-r2": [
+          "3.1.5"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.5"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-IAM-SUS": "Responding to suspicious activity on privileged accounts",
         "KSI-IAM-APM": "Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-16.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-SUS": {
           "description": "Responding to suspicious activity on privileged accounts"
@@ -91,7 +103,8 @@
         "KSI-IAM-APM": {
           "description": "Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-16.json"
     },
     {
       "scf_control_id": "IAC-17",
@@ -128,12 +141,12 @@
       "fedramp_20x_ksi": {
         "KSI-IAM-JIT": "Authorizing just-in-time"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-17.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-JIT": {
           "description": "Authorizing just-in-time"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-17.json"
     },
     {
       "scf_control_id": "IAC-21",
@@ -183,17 +196,23 @@
         ],
         "usa-federal-gsa-fedramp-5-mod": [
           "AC-06"
+        ],
+        "general-nist-800-171-r2": [
+          "3.1.5"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.5"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-IAM-ELP": "Ensure least privilege"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-21.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-ELP": {
           "description": "Ensure least privilege"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-21.json"
     },
     {
       "scf_control_id": "MON-01",
@@ -231,11 +250,20 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "AU-01",
           "SI-04"
+        ],
+        "general-nist-800-171-r2": [
+          "3.3.3",
+          "3.14.6",
+          "NFO - AU-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "AUL2.-3.3.3",
+          "SIL2.-3.14.6"
         ]
       },
       "fedramp_20x_ksi": {},
-      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json",
-      "fedramp_20x_ksi_detail": {}
+      "fedramp_20x_ksi_detail": {},
+      "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json"
     },
     {
       "scf_control_id": "THR-03",
@@ -273,17 +301,25 @@
         ],
         "usa-federal-gsa-fedramp-5-mod": [
           "SI-05"
+        ],
+        "general-nist-800-171-r2": [
+          "3.12.3",
+          "3.14.3"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CAL2.-3.12.3",
+          "SIL2.-3.14.3"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-IAM-SUS": "Responding to suspicious activity on privileged accounts"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/THR-03.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-SUS": {
           "description": "Responding to suspicious activity on privileged accounts"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/THR-03.json"
     }
   ],
   "coverage_summary": {
@@ -293,18 +329,11 @@
       "general-nist-800-171-r3": 6,
       "general-pci-dss-4-0-1": 6,
       "usa-federal-gsa-fedramp-5-mod": 5,
+      "general-nist-800-171-r2": 5,
+      "usa-federal-dow-cmmc-2-level-2": 5,
       "general-iso-27001-2022": 1
     },
-    "frameworks_requested_without_hits": [
-      {
-        "framework": "general-nist-800-171-r2",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "usa-federal-dow-cmmc-2-level-2",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      }
-    ],
+    "frameworks_requested_without_hits": [],
     "frameworks_requested": [
       "general-nist-800-53-r5-2",
       "general-nist-800-171-r3",
@@ -314,6 +343,5 @@
       "general-nist-800-171-r2",
       "usa-federal-dow-cmmc-2-level-2"
     ]
-  },
-  "ksi_overlay_version": "2026-08.1"
+  }
 }
