@@ -34,8 +34,8 @@
         "general-iso-27001-2022": 0,
         "general-pci-dss-4-0-1": 4,
         "usa-federal-gsa-fedramp-5-mod": 4,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 4,
+        "usa-federal-dow-cmmc-2-level-2": 4
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -121,13 +121,26 @@
           "IA-02(02)",
           "SI-04"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.1.2",
+          "3.1.5",
+          "3.14.6",
+          "3.3.3",
+          "3.5.3",
+          "3.7.5",
+          "NFO - AU-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.2",
+          "ACL2.-3.1.5",
+          "AUL2.-3.3.3",
+          "IAL2.-3.5.3",
+          "MAL2.-3.7.5",
+          "SIL2.-3.14.6"
+        ]
       },
       "frameworks_without_hits": [
-        "general-iso-27001-2022",
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
+        "general-iso-27001-2022"
       ],
       "ksi_by_control": {
         "IAC-06": [
@@ -141,7 +154,7 @@
           "KSI-AFR-PVL"
         ]
       },
-      "generated_at": "2026-08-01T19:09:53.312Z"
+      "generated_at": "2026-08-17T07:15:33.790Z"
     },
     {
       "lab_id": "02-inspector-vdr",
@@ -166,8 +179,8 @@
         "general-iso-27001-2022": 0,
         "general-pci-dss-4-0-1": 4,
         "usa-federal-gsa-fedramp-5-mod": 4,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 4,
+        "usa-federal-dow-cmmc-2-level-2": 4
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -223,13 +236,24 @@
           "SI-03",
           "SI-04"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.12.3",
+          "3.14.1",
+          "3.14.3",
+          "3.14.6",
+          "3.3.3",
+          "NFO - AU-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "AUL2.-3.3.3",
+          "CAL2.-3.12.3",
+          "SIL2.-3.14.1",
+          "SIL2.-3.14.3",
+          "SIL2.-3.14.6"
+        ]
       },
       "frameworks_without_hits": [
-        "general-iso-27001-2022",
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
+        "general-iso-27001-2022"
       ],
       "ksi_by_control": {
         "VPM-01": [
@@ -244,7 +268,7 @@
         ],
         "THR-01": []
       },
-      "generated_at": "2026-08-01T19:09:53.386Z"
+      "generated_at": "2026-08-17T07:15:33.974Z"
     },
     {
       "lab_id": "03-nhi-credential-rotation",
@@ -269,8 +293,8 @@
         "general-iso-27001-2022": 0,
         "general-pci-dss-4-0-1": 4,
         "usa-federal-gsa-fedramp-5-mod": 4,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 4,
+        "usa-federal-dow-cmmc-2-level-2": 4
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -395,13 +419,25 @@
           "SC-08(02)",
           "SC-13"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.1.2",
+          "3.1.5",
+          "3.13.11",
+          "3.3.3",
+          "3.4.1",
+          "3.4.2"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.2",
+          "ACL2.-3.1.5",
+          "AUL2.-3.3.3",
+          "CML2.-3.4.1",
+          "CML2.-3.4.2",
+          "SCL2.-3.13.11"
+        ]
       },
       "frameworks_without_hits": [
-        "general-iso-27001-2022",
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
+        "general-iso-27001-2022"
       ],
       "ksi_by_control": {
         "IAC-15": [
@@ -417,7 +453,7 @@
           "KSI-SVC-SEC"
         ]
       },
-      "generated_at": "2026-08-01T19:09:53.437Z"
+      "generated_at": "2026-08-17T07:15:34.157Z"
     },
     {
       "lab_id": "04-config-drift-compliance",
@@ -443,8 +479,8 @@
         "general-iso-27001-2022": 2,
         "general-pci-dss-4-0-1": 5,
         "usa-federal-gsa-fedramp-5-mod": 5,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 5,
+        "usa-federal-dow-cmmc-2-level-2": 3
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -554,13 +590,28 @@
           "SA-15(05)",
           "SI-04"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.12.1",
+          "3.12.3",
+          "3.14.6",
+          "3.3.3",
+          "3.4.1",
+          "3.4.2",
+          "NFO - AU-1",
+          "NFO - CM-1",
+          "NFO - CM-9",
+          "NFO - PL-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "AUL2.-3.3.3",
+          "CAL2.-3.12.1",
+          "CAL2.-3.12.3",
+          "CML2.-3.4.1",
+          "CML2.-3.4.2",
+          "SIL2.-3.14.6"
+        ]
       },
-      "frameworks_without_hits": [
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
-      ],
+      "frameworks_without_hits": [],
       "ksi_by_control": {
         "CFG-01": [
           "KSI-CNA-EIS"
@@ -578,7 +629,7 @@
           "KSI-AFR-PVL"
         ]
       },
-      "generated_at": "2026-08-01T19:09:53.496Z"
+      "generated_at": "2026-08-17T07:15:34.348Z"
     },
     {
       "lab_id": "05-guardduty-automated-response",
@@ -604,8 +655,8 @@
         "general-iso-27001-2022": 1,
         "general-pci-dss-4-0-1": 5,
         "usa-federal-gsa-fedramp-5-mod": 5,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 5,
+        "usa-federal-dow-cmmc-2-level-2": 5
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -678,13 +729,35 @@
           "SI-04",
           "SI-05"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.12.3",
+          "3.14.3",
+          "3.14.6",
+          "3.3.1",
+          "3.3.3",
+          "3.3.5",
+          "3.3.6",
+          "3.3.8",
+          "3.3.9",
+          "3.6.1",
+          "3.6.2",
+          "NFO - AU-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "AUL2.-3.3.1",
+          "AUL2.-3.3.3",
+          "AUL2.-3.3.5",
+          "AUL2.-3.3.6",
+          "AUL2.-3.3.8",
+          "AUL2.-3.3.9",
+          "CAL2.-3.12.3",
+          "IRL2.-3.6.1",
+          "IRL2.-3.6.2",
+          "SIL2.-3.14.3",
+          "SIL2.-3.14.6"
+        ]
       },
-      "frameworks_without_hits": [
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
-      ],
+      "frameworks_without_hits": [],
       "ksi_by_control": {
         "THR-01": [
           "KSI-CNA-MAT"
@@ -700,7 +773,7 @@
           "KSI-INR-PRC"
         ]
       },
-      "generated_at": "2026-08-01T19:09:53.563Z"
+      "generated_at": "2026-08-17T07:15:34.627Z"
     },
     {
       "lab_id": "06-kms-encryption-governance",
@@ -725,8 +798,8 @@
         "general-iso-27001-2022": 0,
         "general-pci-dss-4-0-1": 4,
         "usa-federal-gsa-fedramp-5-mod": 3,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 4,
+        "usa-federal-dow-cmmc-2-level-2": 4
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -813,13 +886,26 @@
           "SC-08(02)",
           "SC-13"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.1.22",
+          "3.13.11",
+          "3.13.8",
+          "3.3.3",
+          "3.4.1",
+          "3.4.2",
+          "NFO–PL-8"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.22",
+          "AUL2.-3.3.3",
+          "CML2.-3.4.1",
+          "CML2.-3.4.2",
+          "SCL2.-3.13.11",
+          "SCL2.-3.13.8"
+        ]
       },
       "frameworks_without_hits": [
-        "general-iso-27001-2022",
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
+        "general-iso-27001-2022"
       ],
       "ksi_by_control": {
         "CRY-01": [
@@ -834,7 +920,7 @@
         ],
         "CLD-01": []
       },
-      "generated_at": "2026-08-01T19:09:53.592Z"
+      "generated_at": "2026-08-17T07:15:34.797Z"
     },
     {
       "lab_id": "07-cloudtrail-evidence-pipeline",
@@ -859,8 +945,8 @@
         "general-iso-27001-2022": 2,
         "general-pci-dss-4-0-1": 4,
         "usa-federal-gsa-fedramp-5-mod": 4,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 4,
+        "usa-federal-dow-cmmc-2-level-2": 4
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -921,13 +1007,33 @@
           "PM-14",
           "SI-04"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.12.1",
+          "3.12.3",
+          "3.14.6",
+          "3.3.1",
+          "3.3.3",
+          "3.3.5",
+          "3.3.6",
+          "3.3.8",
+          "3.3.9",
+          "3.4.3",
+          "NFO - AU-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "AUL2.-3.3.1",
+          "AUL2.-3.3.3",
+          "AUL2.-3.3.5",
+          "AUL2.-3.3.6",
+          "AUL2.-3.3.8",
+          "AUL2.-3.3.9",
+          "CAL2.-3.12.1",
+          "CAL2.-3.12.3",
+          "CML2.-3.4.3",
+          "SIL2.-3.14.6"
+        ]
       },
-      "frameworks_without_hits": [
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
-      ],
+      "frameworks_without_hits": [],
       "ksi_by_control": {
         "MON-01": [
           "KSI-MLA-OSM",
@@ -943,7 +1049,7 @@
           "KSI-CMT-CHG"
         ]
       },
-      "generated_at": "2026-08-01T19:09:53.616Z"
+      "generated_at": "2026-08-17T07:15:34.966Z"
     },
     {
       "lab_id": "08-vpc-network-segmentation",
@@ -968,8 +1074,8 @@
         "general-iso-27001-2022": 0,
         "general-pci-dss-4-0-1": 4,
         "usa-federal-gsa-fedramp-5-mod": 3,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 3,
+        "usa-federal-dow-cmmc-2-level-2": 3
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -1015,13 +1121,20 @@
           "SA-04(02)",
           "SC-01"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.1.22",
+          "3.1.3",
+          "3.13.1",
+          "NFO - SC-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.22",
+          "ACL2.-3.1.3",
+          "SCL2.-3.13.1"
+        ]
       },
       "frameworks_without_hits": [
-        "general-iso-27001-2022",
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
+        "general-iso-27001-2022"
       ],
       "ksi_by_control": {
         "NET-01": [
@@ -1036,7 +1149,7 @@
           "KSI-SVC-SNT"
         ]
       },
-      "generated_at": "2026-08-01T19:09:53.669Z"
+      "generated_at": "2026-08-17T07:15:35.133Z"
     },
     {
       "lab_id": "09-incident-response-automation",
@@ -1062,8 +1175,8 @@
         "general-iso-27001-2022": 0,
         "general-pci-dss-4-0-1": 5,
         "usa-federal-gsa-fedramp-5-mod": 5,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 4,
+        "usa-federal-dow-cmmc-2-level-2": 2
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -1123,13 +1236,31 @@
           "IR-08",
           "SI-04"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.3.1",
+          "3.3.3",
+          "3.3.5",
+          "3.3.6",
+          "3.3.8",
+          "3.3.9",
+          "3.6.1",
+          "3.6.2",
+          "NFO - IR-1",
+          "NFO - IR-8"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "AUL2.-3.3.1",
+          "AUL2.-3.3.3",
+          "AUL2.-3.3.5",
+          "AUL2.-3.3.6",
+          "AUL2.-3.3.8",
+          "AUL2.-3.3.9",
+          "IRL2.-3.6.1",
+          "IRL2.-3.6.2"
+        ]
       },
       "frameworks_without_hits": [
-        "general-iso-27001-2022",
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
+        "general-iso-27001-2022"
       ],
       "ksi_by_control": {
         "IRO-01": [
@@ -1148,7 +1279,7 @@
           "KSI-MLA-OSM"
         ]
       },
-      "generated_at": "2026-08-01T19:09:53.739Z"
+      "generated_at": "2026-08-17T07:15:35.340Z"
     },
     {
       "lab_id": "10-supply-chain-sbom",
@@ -1174,8 +1305,8 @@
         "general-iso-27001-2022": 0,
         "general-pci-dss-4-0-1": 4,
         "usa-federal-gsa-fedramp-5-mod": 5,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 4,
+        "usa-federal-dow-cmmc-2-level-2": 3
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -1242,13 +1373,21 @@
           "SR-02",
           "SR-02(01)"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.1.1",
+          "3.14.1",
+          "3.4.1",
+          "NFO - SA-4",
+          "NFO - SA-9"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.1",
+          "CML2.-3.4.1",
+          "SIL2.-3.14.1"
+        ]
       },
       "frameworks_without_hits": [
-        "general-iso-27001-2022",
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
+        "general-iso-27001-2022"
       ],
       "ksi_by_control": {
         "TPM-01": [
@@ -1265,7 +1404,7 @@
         ],
         "AST-02": []
       },
-      "generated_at": "2026-08-01T19:09:53.815Z"
+      "generated_at": "2026-08-17T07:15:35.605Z"
     },
     {
       "lab_id": "11-federal-data-deletion-residual",
@@ -1292,8 +1431,8 @@
         "general-iso-27001-2022": 0,
         "general-pci-dss-4-0-1": 6,
         "usa-federal-gsa-fedramp-5-mod": 5,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 6,
+        "usa-federal-dow-cmmc-2-level-2": 6
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -1344,13 +1483,29 @@
           "SC-28(01)",
           "SC-28(02)"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.1.22",
+          "3.13.16",
+          "3.7.3",
+          "3.8.1",
+          "3.8.3",
+          "3.8.6",
+          "3.8.9",
+          "NFO - MP-1",
+          "NFO–PL-8"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.22",
+          "MAL2.-3.7.3",
+          "MPL2.-3.8.1",
+          "MPL2.-3.8.3",
+          "MPL2.-3.8.6",
+          "MPL2.-3.8.9",
+          "SCL2.-3.13.16"
+        ]
       },
       "frameworks_without_hits": [
-        "general-iso-27001-2022",
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
+        "general-iso-27001-2022"
       ],
       "ksi_by_control": {
         "DCH-01": [
@@ -1373,7 +1528,7 @@
           "KSI-AFR-PVL"
         ]
       },
-      "generated_at": "2026-08-01T19:09:53.923Z"
+      "generated_at": "2026-08-17T07:15:35.853Z"
     },
     {
       "lab_id": "12-backup-recovery-rto-rpo",
@@ -1400,8 +1555,8 @@
         "general-iso-27001-2022": 0,
         "general-pci-dss-4-0-1": 3,
         "usa-federal-gsa-fedramp-5-mod": 6,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 3,
+        "usa-federal-dow-cmmc-2-level-2": 3
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -1460,13 +1615,21 @@
           "SC-28(01)",
           "SC-28(02)"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.13.16",
+          "3.4.1",
+          "3.8.6",
+          "3.8.9"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CML2.-3.4.1",
+          "MPL2.-3.8.6",
+          "MPL2.-3.8.9",
+          "SCL2.-3.13.16"
+        ]
       },
       "frameworks_without_hits": [
-        "general-iso-27001-2022",
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
+        "general-iso-27001-2022"
       ],
       "ksi_by_control": {
         "BCD-01": [
@@ -1487,7 +1650,7 @@
         ],
         "AST-02": []
       },
-      "generated_at": "2026-08-01T19:09:53.983Z"
+      "generated_at": "2026-08-17T07:15:36.089Z"
     },
     {
       "lab_id": "13-boundary-asset-inventory",
@@ -1514,8 +1677,8 @@
         "general-iso-27001-2022": 2,
         "general-pci-dss-4-0-1": 6,
         "usa-federal-gsa-fedramp-5-mod": 6,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 4,
+        "usa-federal-dow-cmmc-2-level-2": 3
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -1605,13 +1768,19 @@
           "SC-07(09)",
           "SC-07(11)"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.13.1",
+          "3.4.1",
+          "3.8.3",
+          "NFO - PL-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CML2.-3.4.1",
+          "MPL2.-3.8.3",
+          "SCL2.-3.13.1"
+        ]
       },
-      "frameworks_without_hits": [
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
-      ],
+      "frameworks_without_hits": [],
       "ksi_by_control": {
         "AST-01": [
           "KSI-PIY-GIV"
@@ -1632,7 +1801,7 @@
           "KSI-CNA-DFP"
         ]
       },
-      "generated_at": "2026-08-01T19:09:54.062Z"
+      "generated_at": "2026-08-17T07:15:36.260Z"
     },
     {
       "lab_id": "14-privileged-suspend-lifecycle",
@@ -1659,8 +1828,8 @@
         "general-iso-27001-2022": 1,
         "general-pci-dss-4-0-1": 6,
         "usa-federal-gsa-fedramp-5-mod": 5,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 5,
+        "usa-federal-dow-cmmc-2-level-2": 5
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -1762,13 +1931,25 @@
           "SI-04",
           "SI-05"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.1.2",
+          "3.1.5",
+          "3.12.3",
+          "3.14.3",
+          "3.14.6",
+          "3.3.3",
+          "NFO - AU-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "ACL2.-3.1.2",
+          "ACL2.-3.1.5",
+          "AUL2.-3.3.3",
+          "CAL2.-3.12.3",
+          "SIL2.-3.14.3",
+          "SIL2.-3.14.6"
+        ]
       },
-      "frameworks_without_hits": [
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
-      ],
+      "frameworks_without_hits": [],
       "ksi_by_control": {
         "IAC-15": [
           "KSI-IAM-AAM"
@@ -1788,7 +1969,7 @@
           "KSI-IAM-SUS"
         ]
       },
-      "generated_at": "2026-08-01T19:09:54.126Z"
+      "generated_at": "2026-08-17T07:15:36.416Z"
     },
     {
       "lab_id": "15-immutable-cicd-change-control",
@@ -1815,8 +1996,8 @@
         "general-iso-27001-2022": 1,
         "general-pci-dss-4-0-1": 6,
         "usa-federal-gsa-fedramp-5-mod": 6,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 6,
+        "usa-federal-dow-cmmc-2-level-2": 4
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -1873,13 +2054,21 @@
           "SA-08(31)",
           "SA-15"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.4.3",
+          "3.4.4",
+          "3.4.5",
+          "NFO - CM-1",
+          "NFO - CM-9",
+          "NFO - SA-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CML2.-3.4.3",
+          "CML2.-3.4.4",
+          "CML2.-3.4.5"
+        ]
       },
-      "frameworks_without_hits": [
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
-      ],
+      "frameworks_without_hits": [],
       "ksi_by_control": {
         "CHG-01": [
           "KSI-CMT-LMC"
@@ -1900,7 +2089,7 @@
           "KSI-CMT-VTD"
         ]
       },
-      "generated_at": "2026-08-01T19:09:54.211Z"
+      "generated_at": "2026-08-17T07:15:36.690Z"
     },
     {
       "lab_id": "16-terraform-drift-detection",
@@ -1926,8 +2115,8 @@
         "general-iso-27001-2022": 1,
         "general-pci-dss-4-0-1": 5,
         "usa-federal-gsa-fedramp-5-mod": 5,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 5,
+        "usa-federal-dow-cmmc-2-level-2": 3
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -2041,13 +2230,26 @@
           "SA-15(05)",
           "SI-04"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.14.6",
+          "3.3.3",
+          "3.4.1",
+          "3.4.2",
+          "3.4.3",
+          "NFO - AU-1",
+          "NFO - CM-1",
+          "NFO - CM-9",
+          "NFO - PL-1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "AUL2.-3.3.3",
+          "CML2.-3.4.1",
+          "CML2.-3.4.2",
+          "CML2.-3.4.3",
+          "SIL2.-3.14.6"
+        ]
       },
-      "frameworks_without_hits": [
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
-      ],
+      "frameworks_without_hits": [],
       "ksi_by_control": {
         "CFG-01": [
           "KSI-CNA-EIS"
@@ -2065,7 +2267,7 @@
           "KSI-CMT-RMV"
         ]
       },
-      "generated_at": "2026-08-01T19:09:53.496Z"
+      "generated_at": "2026-08-17T07:15:36.785Z"
     },
     {
       "lab_id": "17-terraform-dr-readiness",
@@ -2091,8 +2293,8 @@
         "general-iso-27001-2022": 0,
         "general-pci-dss-4-0-1": 2,
         "usa-federal-gsa-fedramp-5-mod": 5,
-        "general-nist-800-171-r2": 0,
-        "usa-federal-dow-cmmc-2-level-2": 0
+        "general-nist-800-171-r2": 2,
+        "usa-federal-dow-cmmc-2-level-2": 1
       },
       "framework_control_ids": {
         "general-nist-800-53-r5-2": [
@@ -2132,13 +2334,17 @@
           "PM-08",
           "SC-28(02)"
         ],
-        "general-nist-800-171-r2": [],
-        "usa-federal-dow-cmmc-2-level-2": []
+        "general-nist-800-171-r2": [
+          "3.8.9",
+          "NFO - CM-1",
+          "NFO - CM-9"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "MPL2.-3.8.9"
+        ]
       },
       "frameworks_without_hits": [
-        "general-iso-27001-2022",
-        "general-nist-800-171-r2",
-        "usa-federal-dow-cmmc-2-level-2"
+        "general-iso-27001-2022"
       ],
       "ksi_by_control": {
         "BCD-01": [
@@ -2157,7 +2363,7 @@
           "KSI-CNA-EIS"
         ]
       },
-      "generated_at": "2026-08-01T19:09:53.983Z"
+      "generated_at": "2026-08-17T07:15:36.978Z"
     }
   ],
   "portfolio": {
@@ -2390,11 +2596,11 @@
     "unique_framework_controls": {
       "general-nist-800-53-r5-2": 79,
       "general-nist-800-171-r3": 118,
-      "general-nist-800-171-r2": 0,
+      "general-nist-800-171-r2": 46,
       "general-iso-27001-2022": 29,
       "general-pci-dss-4-0-1": 142,
       "usa-federal-gsa-fedramp-5-mod": 72,
-      "usa-federal-dow-cmmc-2-level-2": 0
+      "usa-federal-dow-cmmc-2-level-2": 34
     },
     "framework_control_ids": {
       "general-nist-800-53-r5-2": [
@@ -2598,7 +2804,54 @@
         "03.17.03.a",
         "03.17.03.b"
       ],
-      "general-nist-800-171-r2": [],
+      "general-nist-800-171-r2": [
+        "3.1.1",
+        "3.1.2",
+        "3.1.22",
+        "3.1.3",
+        "3.1.5",
+        "3.12.1",
+        "3.12.3",
+        "3.13.1",
+        "3.13.11",
+        "3.13.16",
+        "3.13.8",
+        "3.14.1",
+        "3.14.3",
+        "3.14.6",
+        "3.3.1",
+        "3.3.3",
+        "3.3.5",
+        "3.3.6",
+        "3.3.8",
+        "3.3.9",
+        "3.4.1",
+        "3.4.2",
+        "3.4.3",
+        "3.4.4",
+        "3.4.5",
+        "3.5.3",
+        "3.6.1",
+        "3.6.2",
+        "3.7.3",
+        "3.7.5",
+        "3.8.1",
+        "3.8.3",
+        "3.8.6",
+        "3.8.9",
+        "NFO - AU-1",
+        "NFO - CM-1",
+        "NFO - CM-9",
+        "NFO - IR-1",
+        "NFO - IR-8",
+        "NFO - MP-1",
+        "NFO - PL-1",
+        "NFO - SA-1",
+        "NFO - SA-4",
+        "NFO - SA-9",
+        "NFO - SC-1",
+        "NFO–PL-8"
+      ],
       "general-iso-27001-2022": [
         "10.1",
         "4.1",
@@ -2848,7 +3101,42 @@
         "SR-02",
         "SR-02(01)"
       ],
-      "usa-federal-dow-cmmc-2-level-2": []
+      "usa-federal-dow-cmmc-2-level-2": [
+        "ACL2.-3.1.1",
+        "ACL2.-3.1.2",
+        "ACL2.-3.1.22",
+        "ACL2.-3.1.3",
+        "ACL2.-3.1.5",
+        "AUL2.-3.3.1",
+        "AUL2.-3.3.3",
+        "AUL2.-3.3.5",
+        "AUL2.-3.3.6",
+        "AUL2.-3.3.8",
+        "AUL2.-3.3.9",
+        "CAL2.-3.12.1",
+        "CAL2.-3.12.3",
+        "CML2.-3.4.1",
+        "CML2.-3.4.2",
+        "CML2.-3.4.3",
+        "CML2.-3.4.4",
+        "CML2.-3.4.5",
+        "IAL2.-3.5.3",
+        "IRL2.-3.6.1",
+        "IRL2.-3.6.2",
+        "MAL2.-3.7.3",
+        "MAL2.-3.7.5",
+        "MPL2.-3.8.1",
+        "MPL2.-3.8.3",
+        "MPL2.-3.8.6",
+        "MPL2.-3.8.9",
+        "SCL2.-3.13.1",
+        "SCL2.-3.13.11",
+        "SCL2.-3.13.16",
+        "SCL2.-3.13.8",
+        "SIL2.-3.14.1",
+        "SIL2.-3.14.3",
+        "SIL2.-3.14.6"
+      ]
     },
     "ksi_in_use": [
       "KSI-AFR-MAS",

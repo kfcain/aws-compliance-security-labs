@@ -1,7 +1,8 @@
 {
   "lab_id": "13-boundary-asset-inventory",
-  "generated_at": "2026-08-01T19:09:54.062Z",
+  "generated_at": "2026-08-17T07:15:36.260Z",
   "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "ksi_overlay_version": "2026-08.1",
   "controls": [
     {
       "scf_control_id": "AST-01",
@@ -32,17 +33,25 @@
         ],
         "usa-federal-gsa-fedramp-5-mod": [
           "PM-05"
+        ],
+        "general-nist-800-171-r2": [
+          "3.4.1",
+          "3.8.3"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CML2.-3.4.1",
+          "MPL2.-3.8.3"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-PIY-GIV": "Generating real-time inventories of information resources"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-PIY-GIV": {
           "description": "Generating real-time inventories of information resources"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-01.json"
     },
     {
       "scf_control_id": "AST-02",
@@ -79,17 +88,23 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "CM-08",
           "PM-05"
+        ],
+        "general-nist-800-171-r2": [
+          "3.4.1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CML2.-3.4.1"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-PIY-GIV": "Generating real-time inventories of information resources"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-02.json",
       "fedramp_20x_ksi_detail": {
         "KSI-PIY-GIV": {
           "description": "Generating real-time inventories of information resources"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-02.json"
     },
     {
       "scf_control_id": "AST-04",
@@ -127,13 +142,13 @@
       "fedramp_20x_ksi": {
         "KSI-AFR-MAS": "Minimum assessment scope / authorization boundary"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-04.json",
       "fedramp_20x_ksi_detail": {
         "KSI-AFR-MAS": {
           "description": "Minimum assessment scope / authorization boundary",
           "legacy": true
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/AST-04.json"
     },
     {
       "scf_control_id": "NET-03",
@@ -169,18 +184,24 @@
           "SC-07",
           "SC-07(09)",
           "SC-07(11)"
+        ],
+        "general-nist-800-171-r2": [
+          "3.13.1"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "SCL2.-3.13.1"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-AFR-MAS": "Minimum assessment scope / authorization boundary"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/NET-03.json",
       "fedramp_20x_ksi_detail": {
         "KSI-AFR-MAS": {
           "description": "Minimum assessment scope / authorization boundary",
           "legacy": true
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/NET-03.json"
     },
     {
       "scf_control_id": "CPL-01",
@@ -217,17 +238,20 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "PL-01",
           "PM-08"
+        ],
+        "general-nist-800-171-r2": [
+          "NFO - PL-1"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-MLA-LET": "Logging event types inventory"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CPL-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-MLA-LET": {
           "description": "Logging event types inventory"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CPL-01.json"
     },
     {
       "scf_control_id": "GOV-01",
@@ -279,12 +303,12 @@
       "fedramp_20x_ksi": {
         "KSI-CNA-DFP": "Defining functionality and privileges"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/GOV-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CNA-DFP": {
           "description": "Defining functionality and privileges"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/GOV-01.json"
     }
   ],
   "coverage_summary": {
@@ -294,18 +318,11 @@
       "general-nist-800-171-r3": 6,
       "general-pci-dss-4-0-1": 6,
       "usa-federal-gsa-fedramp-5-mod": 6,
+      "general-nist-800-171-r2": 4,
+      "usa-federal-dow-cmmc-2-level-2": 3,
       "general-iso-27001-2022": 2
     },
-    "frameworks_requested_without_hits": [
-      {
-        "framework": "general-nist-800-171-r2",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "usa-federal-dow-cmmc-2-level-2",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      }
-    ],
+    "frameworks_requested_without_hits": [],
     "frameworks_requested": [
       "general-nist-800-53-r5-2",
       "general-nist-800-171-r3",
@@ -315,6 +332,5 @@
       "general-nist-800-171-r2",
       "usa-federal-dow-cmmc-2-level-2"
     ]
-  },
-  "ksi_overlay_version": "2026-08.1"
+  }
 }

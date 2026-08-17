@@ -1,7 +1,8 @@
 {
   "lab_id": "15-immutable-cicd-change-control",
-  "generated_at": "2026-08-01T19:09:54.211Z",
+  "generated_at": "2026-08-17T07:15:36.690Z",
   "scf_api_base": "https://grcengclub.github.io/scf-api/api",
+  "ksi_overlay_version": "2026-08.1",
   "controls": [
     {
       "scf_control_id": "CHG-01",
@@ -34,17 +35,23 @@
         ],
         "usa-federal-gsa-fedramp-5-mod": [
           "CM-03"
+        ],
+        "general-nist-800-171-r2": [
+          "3.4.3"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CML2.-3.4.3"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-CMT-LMC": "Logging modifications to the CSO"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CMT-LMC": {
           "description": "Logging modifications to the CSO"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-01.json"
     },
     {
       "scf_control_id": "CHG-02",
@@ -78,17 +85,23 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "CM-03",
           "SA-08(31)"
+        ],
+        "general-nist-800-171-r2": [
+          "3.4.3"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CML2.-3.4.3"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-CMT-RVP": "Reviewing change procedures"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-02.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CMT-RVP": {
           "description": "Reviewing change procedures"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-02.json"
     },
     {
       "scf_control_id": "CHG-03",
@@ -117,17 +130,23 @@
         ],
         "usa-federal-gsa-fedramp-5-mod": [
           "CM-04"
+        ],
+        "general-nist-800-171-r2": [
+          "3.4.4"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CML2.-3.4.4"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-CMT-RMV": "Redeploying version-controlled resources vs direct modification"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-03.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CMT-RMV": {
           "description": "Redeploying version-controlled resources vs direct modification"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-03.json"
     },
     {
       "scf_control_id": "CHG-04",
@@ -153,18 +172,24 @@
         ],
         "usa-federal-gsa-fedramp-5-mod": [
           "CM-05"
+        ],
+        "general-nist-800-171-r2": [
+          "3.4.5"
+        ],
+        "usa-federal-dow-cmmc-2-level-2": [
+          "CML2.-3.4.5"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-AFR-SCN": "Significant change notification"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-04.json",
       "fedramp_20x_ksi_detail": {
         "KSI-AFR-SCN": {
           "description": "Significant change notification",
           "legacy": true
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-04.json"
     },
     {
       "scf_control_id": "CFG-01",
@@ -193,17 +218,21 @@
         "usa-federal-gsa-fedramp-5-mod": [
           "CM-01",
           "CM-09"
+        ],
+        "general-nist-800-171-r2": [
+          "NFO - CM-1",
+          "NFO - CM-9"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-CMT-RMV": "Redeploying version-controlled resources vs direct modification"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CMT-RMV": {
           "description": "Redeploying version-controlled resources vs direct modification"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-01.json"
     },
     {
       "scf_control_id": "TDA-06",
@@ -234,17 +263,20 @@
           "SA-01",
           "SA-04(03)",
           "SA-15"
+        ],
+        "general-nist-800-171-r2": [
+          "NFO - SA-1"
         ]
       },
       "fedramp_20x_ksi": {
         "KSI-CMT-VTD": "Validating throughout deployment (automated)"
       },
-      "source": "https://grcengclub.github.io/scf-api/api/controls/TDA-06.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CMT-VTD": {
           "description": "Validating throughout deployment (automated)"
         }
-      }
+      },
+      "source": "https://grcengclub.github.io/scf-api/api/controls/TDA-06.json"
     }
   ],
   "coverage_summary": {
@@ -254,18 +286,11 @@
       "general-nist-800-171-r3": 6,
       "general-iso-27001-2022": 1,
       "general-pci-dss-4-0-1": 6,
-      "usa-federal-gsa-fedramp-5-mod": 6
+      "usa-federal-gsa-fedramp-5-mod": 6,
+      "general-nist-800-171-r2": 6,
+      "usa-federal-dow-cmmc-2-level-2": 4
     },
-    "frameworks_requested_without_hits": [
-      {
-        "framework": "general-nist-800-171-r2",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      },
-      {
-        "framework": "usa-federal-dow-cmmc-2-level-2",
-        "reason": "no crosswalk hits in the current generated data; confirmed or backfilled by the scheduled scf-refresh regeneration"
-      }
-    ],
+    "frameworks_requested_without_hits": [],
     "frameworks_requested": [
       "general-nist-800-53-r5-2",
       "general-nist-800-171-r3",
@@ -275,6 +300,5 @@
       "general-nist-800-171-r2",
       "usa-federal-dow-cmmc-2-level-2"
     ]
-  },
-  "ksi_overlay_version": "2026-08.1"
+  }
 }
