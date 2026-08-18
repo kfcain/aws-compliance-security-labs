@@ -2,7 +2,7 @@
 (function () {
   const data = window.LEARN_DATA;
   const STORAGE_KEY = 'acf-labs-learn-v1';
-  const views = ['overview', 'path', 'labs', 'coverage', 'controls', 'risks'];
+  const views = ['overview', 'path', 'operate', 'labs', 'coverage', 'controls', 'risks'];
 
   const esc = (value) =>
     String(value ?? '')
@@ -10,6 +10,14 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+
+  const prettyOperateJson = (raw) => {
+    try {
+      return JSON.stringify(JSON.parse(raw), null, 2);
+    } catch {
+      return String(raw ?? '');
+    }
+  };
 
   const labById = Object.fromEntries(data.labs.map((lab) => [lab.id, lab]));
   const riskByLab = Object.fromEntries(data.risks.map((risk) => [risk.lab, risk]));
@@ -42,8 +50,8 @@
     document.querySelectorAll('[data-nav]').forEach((el) => {
       el.setAttribute('aria-current', el.getAttribute('data-nav') === activeView ? 'page' : 'false');
     });
-    const hash = selectedLab && activeView === 'labs'
-      ? `#labs/${selectedLab}`
+    const hash = selectedLab && (activeView === 'labs' || activeView === 'operate')
+      ? `#${activeView}/${selectedLab}`
       : `#${activeView}`;
     if (location.hash !== hash) history.replaceState(null, '', hash);
   };
@@ -138,6 +146,66 @@
         </article>`;
       })
       .join('');
+  };
+
+  const renderOperate = () => {
+    const select = document.getElementById('operate-lab');
+    const body = document.getElementById('operate-body');
+    const mdLink = document.getElementById('operate-md');
+    if (!select || !body) return;
+    if (!select.options.length) {
+      select.innerHTML = data.labs
+        .map((lab) => `<option value="${esc(lab.id)}">${esc(lab.id)} — ${esc(lab.title)}</option>`)
+        .join('');
+    }
+    if (!selectedLab || !labById[selectedLab]) selectedLab = data.labs[0].id;
+    select.value = selectedLab;
+    const lab = labById[selectedLab];
+    const op = data.operate[selectedLab];
+    if (mdLink && lab) mdLink.href = lab.walkthrough_href_md;
+    if (!op) {
+      body.innerHTML = '<div class="section"><p>No operator data for this lab.</p></div>';
+      return;
+    }
+    const params = (op.uniqueParameters || [])
+      .map(
+        (row) =>
+          `<tr><td class="mono">${esc(row.name)}</td><td>${esc(row.default)}</td><td>${esc(row.meaning)}</td></tr>`,
+      )
+      .join('');
+    const list = (items) =>
+      `<ul class="tight">${(items || []).map((item) => `<li>${esc(item)}</li>`).join('')}</ul>`;
+    const steps = (items) =>
+      `<ol>${(items || []).map((item) => `<li>${esc(item)}</li>`).join('')}</ol>`;
+    body.innerHTML = `
+      <article class="section">
+        <h2>${esc(lab.title)}</h2>
+        <p>${esc(op.checks)}</p>
+        <h3>1. Configure</h3>
+        ${list(op.prerequisites)}
+        ${
+          params
+            ? `<table><thead><tr><th>Parameter</th><th>Default</th><th>Meaning</th></tr></thead><tbody>${params}</tbody></table>`
+            : '<p class="meta">No extra CloudFormation parameters beyond the shared set.</p>'
+        }
+        ${steps(op.configure)}
+        ${
+          op.configureCli
+            ? `<h3>Lab-specific CLI</h3><pre class="payload">${esc(op.configureCli)}</pre>`
+            : ''
+        }
+        <h3>2. Collect evidence</h3>
+        <p>${esc(op.liveEvent.label)}</p>
+        <pre class="payload">${esc(prettyOperateJson(op.liveEvent.json))}</pre>
+        <p class="meta">Evidence object: <code class="mono">s3://&lt;EvidenceBucketName&gt;/${esc(lab.id)}/&lt;yyyy&gt;/&lt;mm&gt;/&lt;dd&gt;/&lt;run-id&gt;.json</code></p>
+        <p class="meta">Copy the invoke and package script from WALKTHROUGH.md. It writes payload.json, copies evidence_uri from S3, and builds evidence-package/.</p>
+        ${list(op.evidenceLooksAt)}
+        <h3>3. Document</h3>
+        ${list(op.documentNotes)}
+        <h3>Warnings</h3>
+        ${list(op.warnings)}
+        <p class="meta"><a href="${esc(data.playbook_href)}">Shared operator playbook</a> · <a href="${esc(lab.walkthrough_href_md)}">Full WALKTHROUGH.md</a></p>
+      </article>`;
   };
 
   const filteredLabs = () => {
@@ -249,6 +317,7 @@
           <a href="${esc(lab.spec_href)}">SPEC</a>
           <a href="${esc(lab.risk_href)}">RISK</a>
           <a href="${esc(lab.assessment_href)}">ASSESSMENT</a>
+          <a href="${esc(lab.walkthrough_href_md)}">WALKTHROUGH</a>
           <button type="button" data-done="${esc(lab.id)}">${done.has(lab.id) ? 'Mark as not complete' : 'Mark as complete'}</button>
         </div>
         ${cov?.generated_at ? `<p class="meta">Crosswalk snapshot: ${esc(cov.generated_at)}</p>` : ''}
@@ -381,9 +450,11 @@
   const onClick = (event) => {
     const nav = event.target.closest('[data-nav]');
     if (nav) {
-      selectedLab = null;
-      setView(nav.getAttribute('data-nav'));
+      const next = nav.getAttribute('data-nav');
+      if (next !== 'labs' && next !== 'operate') selectedLab = null;
+      setView(next);
       renderDrawer();
+      renderOperate();
       return;
     }
     const open = event.target.closest('[data-open-lab]');
@@ -433,11 +504,17 @@
     frameworkFilter = event.target.value;
     renderLabs();
   });
+  document.getElementById('operate-lab').addEventListener('change', (event) => {
+    selectedLab = event.target.value;
+    setView('operate');
+    renderOperate();
+  });
   window.addEventListener('hashchange', () => {
     parseHash();
     setView(activeView);
     renderLabs();
     renderDrawer();
+    renderOperate();
   });
 
   const fwSelect = document.getElementById('framework-filter');
@@ -459,5 +536,6 @@
   renderCoverage();
   renderControls();
   renderRisks();
+  renderOperate();
   setView(activeView);
 })();

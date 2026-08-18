@@ -58,6 +58,12 @@ node ../../shared/scf-mapper/src/cli.js ./scf/lab-spec.json --out ./scf/scf-mapp
   src/handler.py
 ```
 
+## Operator walkthrough
+
+Configure the stack, collect evidence, and assemble the assessor package:
+[WALKTHROUGH.md](./WALKTHROUGH.md). Shared steps:
+[operator playbook](../../docs/walkthroughs/00-operator-playbook.md).
+
 ## Quick start
 
 1. Work from `labs/14-privileged-suspend-lifecycle/` in this monorepo (or use the original `lab-privileged-suspend-lifecycle` repo).

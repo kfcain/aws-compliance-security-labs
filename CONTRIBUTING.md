@@ -20,13 +20,15 @@ are exactly on mission.
    the evidence artifact.
 4. **Generated artifacts are rebuilt, not hand-edited.** `scf-mapping.generated.json`,
    `oscal-component.json`, `COVERAGE.md`, `coverage.json`, `RISKS.md`, and
-   `docs/learn/index.html` are produced by scripts under `scripts/`; CI rejects
+   `docs/learn/index.html`, `docs/walkthroughs/00-operator-playbook.md`, and
+   `labs/*/WALKTHROUGH.md` are produced by scripts under `scripts/`; CI rejects
    drift. Regenerate with:
    ```bash
    node scripts/postprocess-mappings.mjs
    node scripts/build-coverage.mjs
    node scripts/build-oscal.mjs
    node scripts/build-risk-register.mjs
+   node scripts/build-walkthroughs.mjs
    node scripts/build-learn.mjs
    ```
 5. **No new runtime dependencies.** Node tooling is dependency-free by design.
