@@ -15,12 +15,19 @@ open docs/learn/index.html    # macOS
 xdg-open docs/learn/index.html  # Linux
 ```
 
-The page is generated from `labs/catalog.json`, `coverage.json`, and `risks.json`. It includes:
+The page is generated from `labs/catalog.json`, `coverage.json`, `risks.json`,
+and the operator playbooks. It includes:
 
 - a five-track learn path (identity → detect → change → evidence → resilience)
+- **Operate**: configure, collect evidence, and document for each lab
 - the shared data-source → detection → evidence architecture
 - a searchable catalog of all 17 labs, with walkthrough / README / SPEC / RISK / ASSESSMENT links
 - the control-coverage heatmap, SCF control map, and residual-risk matrix
+
+Markdown copies of the operator steps:
+
+- Shared playbook: [`docs/walkthroughs/00-operator-playbook.md`](./docs/walkthroughs/00-operator-playbook.md)
+- Per lab: `labs/<id>/WALKTHROUGH.md`
 
 Rebuild after catalog or GRC data changes: `npm run learn` (also part of `npm run grc:build`). CI gates drift with `npm run grc:check`.
 
@@ -42,9 +49,10 @@ shared/scf-mapper/    # Shared SCF crosswalk CLI
 shared/lambda-common/ # Vendored Lambda runtime (lab_common.py)
 scripts/              # Portfolio + GRC generators (map-all, coverage, oscal, learn hub, …)
 docs/learn/           # Generated interactive hub (open index.html in a browser)
+docs/walkthroughs/    # Shared operator playbook (configure, evidence, document)
 ```
 
-Each lab includes `README.md`, `RISK.md`, `SPEC.md`, `ASSESSMENT.md`, `scf/`, `infrastructure/template.yaml`, `src/handler.py`, and `tests/`. Labs `01`–`15` also ship `diagrams/architecture.tldr` and a walkthrough `index.html`; labs `16`–`17` use an inline mermaid diagram in their README instead.
+Each lab includes `README.md`, `WALKTHROUGH.md`, `RISK.md`, `SPEC.md`, `ASSESSMENT.md`, `scf/`, `infrastructure/template.yaml`, `src/handler.py`, and `tests/`. Labs `01`–`15` also ship `diagrams/architecture.tldr` and a walkthrough `index.html`; labs `16`–`17` use an inline mermaid diagram in their README instead.
 
 ## Labs
 

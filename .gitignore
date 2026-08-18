@@ -7,3 +7,6 @@ samconfig.toml
 .venv/
 dist/
 coverage/
+evidence-package/
+payload.json
+evidence.json

@@ -113,6 +113,12 @@ drift is surfaced with `terraform plan -refresh-only -detailed-exitcode`
   tests/          test_handler.py
 ```
 
+## Operator walkthrough
+
+Configure the stack, collect evidence, and assemble the assessor package:
+[WALKTHROUGH.md](./WALKTHROUGH.md). Shared steps:
+[operator playbook](../../docs/walkthroughs/00-operator-playbook.md).
+
 ## Quick start
 
 ```bash

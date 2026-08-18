@@ -37,8 +37,10 @@ describe('build-learn', () => {
     const pathIds = data.path.flatMap((track) => track.labs).sort();
     assert.deepEqual(pathIds, catalogIds);
     assert.equal(data.path.length, 5);
+    assert.deepEqual(Object.keys(data.operate).sort(), catalogIds);
     for (const lab of catalog.labs) {
       assert.equal(html.includes(lab.id), true, `missing ${lab.id}`);
+      JSON.parse(data.operate[lab.id].liveEvent.json);
     }
   });
 
@@ -77,6 +79,8 @@ describe('assemble-learn-site', () => {
       const hub = readFileSync(join(dest, 'index.html'), 'utf8');
       assert.match(hub, /labs\/01-mfa-continuous-validation\/index\.html/);
       assert.equal(existsSync(join(dest, 'labs/01-mfa-continuous-validation/index.html')), true);
+      assert.equal(existsSync(join(dest, 'labs/01-mfa-continuous-validation/WALKTHROUGH.md')), true);
+      assert.equal(existsSync(join(dest, 'walkthroughs/00-operator-playbook.md')), true);
       assert.equal(existsSync(join(dest, '.nojekyll')), true);
     } finally {
       rmSync(dest, { recursive: true, force: true });

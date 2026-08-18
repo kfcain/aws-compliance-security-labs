@@ -172,7 +172,11 @@ code, .mono { font-family: var(--mono); font-size: 0.86em; }
 }
 ul.tight { margin: 0; padding-left: 1.1rem; }
 ul.tight li { margin: 4px 0; }
-.footer { margin-top: 36px; color: var(--muted); font-size: 0.85rem; }
+pre.payload {
+  overflow-x: auto; background: #0b1220; border: 1px solid var(--stroke);
+  border-radius: 10px; padding: 12px; font-family: var(--mono); font-size: 0.8rem;
+  white-space: pre-wrap;
+}
 .note {
   border-left: 3px solid var(--accent); padding: 4px 0 4px 12px; color: var(--muted);
 }

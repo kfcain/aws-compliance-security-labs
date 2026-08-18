@@ -7,6 +7,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { LAB_OPS } from './lab-operator-data.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
@@ -98,6 +99,10 @@ function buildPayload(catalog, coverage, risks) {
       `LEARNING_PATH does not match catalog (missing=${missing} extra=${extra} dupes=${dupes})`,
     );
   }
+  const opMissing = catalog.labs.filter((lab) => !LAB_OPS[lab.id]).map((lab) => lab.id);
+  if (opMissing.length) {
+    throw new Error(`lab-operator-data missing labs: ${opMissing.join(', ')}`);
+  }
 
   const coverageByLab = Object.fromEntries(
     coverage.labs.map((lab) => [
@@ -132,6 +137,7 @@ function buildPayload(catalog, coverage, risks) {
       spec_href: rel(learnDir, `${lab.path}/SPEC.md`),
       risk_href: rel(learnDir, `${lab.path}/RISK.md`),
       assessment_href: rel(learnDir, `${lab.path}/ASSESSMENT.md`),
+      walkthrough_href_md: rel(learnDir, `${lab.path}/WALKTHROUGH.md`),
     };
   });
 
@@ -163,6 +169,23 @@ function buildPayload(catalog, coverage, risks) {
       attack_techniques: risk.attack_techniques,
     })),
     band_summary: risks.band_summary,
+    operate: Object.fromEntries(
+      catalog.labs.map((lab) => [
+        lab.id,
+        {
+          checks: LAB_OPS[lab.id].checks,
+          uniqueParameters: LAB_OPS[lab.id].uniqueParameters,
+          prerequisites: LAB_OPS[lab.id].prerequisites,
+          configure: LAB_OPS[lab.id].configure,
+          configureCli: LAB_OPS[lab.id].configureCli || '',
+          liveEvent: LAB_OPS[lab.id].liveEvent,
+          evidenceLooksAt: LAB_OPS[lab.id].evidenceLooksAt,
+          documentNotes: LAB_OPS[lab.id].documentNotes,
+          warnings: LAB_OPS[lab.id].warnings,
+        },
+      ]),
+    ),
+    playbook_href: rel('docs/learn', 'docs/walkthroughs/00-operator-playbook.md'),
   };
 }
 
@@ -235,6 +258,7 @@ ${css.trim()}
       <nav class="nav" aria-label="Hub sections">
         <button type="button" data-nav="overview">Overview</button>
         <button type="button" data-nav="path">Learn path</button>
+        <button type="button" data-nav="operate">Operate</button>
         <button type="button" data-nav="labs">Labs</button>
         <button type="button" data-nav="coverage">Coverage</button>
         <button type="button" data-nav="controls">Controls</button>
@@ -255,7 +279,8 @@ ${css.trim()}
         <h3>How to use this page</h3>
         <ol>
           <li>Open <strong>Learn path</strong> and complete the tracks in order.</li>
-          <li>Mark a lab complete after you read its walkthrough (or README for labs 16–17).</li>
+          <li>Open <strong>Operate</strong> for configure, evidence collection, and assessor documentation.</li>
+          <li>Mark a lab complete after you run the walkthrough (or read it for labs 16–17).</li>
           <li>Use <strong>Coverage</strong> and <strong>Controls</strong> when you need the GRC view.</li>
           <li>Use <strong>Risks</strong> when you need likelihood, impact, and ATT&amp;CK technique.</li>
         </ol>
@@ -273,7 +298,18 @@ ${css.trim()}
         <div id="path-tracks"></div>
       </section>
 
-      <section data-view="labs" id="labs" hidden>
+      <section data-view="operate" id="operate" hidden>
+        <div class="section">
+          <h2>Configure, collect evidence, document</h2>
+          <p>Shared stack steps: <a href="../walkthroughs/00-operator-playbook.md">operator playbook</a>. Select a lab for parameters, the live invoke payload, evidence fields, and the assessor package.</p>
+          <div class="toolbar">
+            <select id="operate-lab" aria-label="Select lab for operator walkthrough"></select>
+            <a id="operate-md" href="#">Open WALKTHROUGH.md</a>
+          </div>
+        </div>
+        <div id="operate-body"></div>
+      </section>
+
         <div class="section">
           <h2>Lab catalog</h2>
           <p>Search by title, SCF control, KSI, AWS service, or risk text. Open a card to see mapping density and source files.</p>
