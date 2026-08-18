@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Learn the AWS Compliance &amp; Security Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&amp;display=swap" rel="stylesheet"/>
+  <style>
+:root {
+  color-scheme: dark;
+  --bg: #070b14;
+  --panel: #121a2b;
+  --panel-2: #182235;
+  --stroke: #2a3548;
+  --text: #e8eef7;
+  --muted: #9aa8bc;
+  --accent: #7dd3fc;
+  --warn: #fb923c;
+  --ok: #34d399;
+  --crit: #f87171;
+  --link: #93c5fd;
+  --sans: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --serif: "Source Serif 4", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #14304f 0%, transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, #1a2f28 0%, transparent 50%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.55;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; }
+.skip {
+  position: absolute; left: -999px; top: 8px;
+}
+.skip:focus { left: 8px; background: var(--panel); padding: 8px 12px; z-index: 20; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 80px; }
+header.hero { margin-bottom: 18px; }
+.brand {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+.sub { color: var(--muted); max-width: 70ch; margin: 0; }
+.nav {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 16px 0 0;
+}
+.nav button, .icon-btn, .drawer-actions button {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.nav button[aria-current="page"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.progress {
+  display: flex; align-items: center; gap: 12px;
+  margin: 16px 0 8px;
+}
+.progress-track {
+  flex: 1; height: 8px; background: #0b1220;
+  border: 1px solid var(--stroke); border-radius: 999px; overflow: hidden;
+}
+#progress-fill { display: block; height: 100%; width: 0; background: var(--ok); }
+#progress-label { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
+.grid { display: grid; gap: 14px; }
+.cards { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.kpi .card { padding: 12px; }
+.kpi strong { display: block; font-size: 1.25rem; color: var(--accent); }
+.card {
+  background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+  border: 1px solid var(--stroke); border-radius: 14px; padding: 16px;
+}
+.lab-card { padding: 0; }
+.lab-card.selected { border-color: #3d8bfd; }
+.lab-card.complete { border-color: #14532d; }
+.card-hit {
+  display: block; width: 100%; text-align: left;
+  background: transparent; color: inherit; border: 0;
+  padding: 16px; cursor: pointer; border-radius: 14px;
+}
+.card h2, .lab-card h2 { font-size: 1.05rem; margin: 0 0 8px; font-family: var(--serif); }
+.meta { color: var(--muted); font-size: 0.85rem; margin: 0 0 8px; }
+.pillrow { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.pill {
+  font-size: 0.72rem; letter-spacing: 0.02em; text-transform: uppercase;
+  border: 1px solid var(--stroke); border-radius: 999px; padding: 3px 8px; color: var(--muted);
+}
+.pill.crit { color: var(--crit); border-color: #7f1d1d; }
+.pill.high { color: var(--warn); border-color: #9a3412; }
+.pill.ok { color: var(--ok); border-color: #14532d; }
+.section {
+  background: rgba(18,26,43,.9); border: 1px solid var(--stroke);
+  border-radius: 16px; padding: 20px; margin: 16px 0;
+}
+.section h2 { margin: 0 0 10px; font-family: var(--serif); font-size: 1.35rem; }
+.section h3 { margin: 16px 0 8px; font-size: 1rem; color: var(--accent); }
+.section p { margin: 0 0 10px; color: #d5deeb; }
+.diagram {
+  overflow-x: auto; border-radius: 12px; border: 1px solid var(--stroke);
+  background: #0b1220; margin-top: 10px;
+}
+.diagram svg { width: 100%; height: auto; display: block; min-width: 720px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.toolbar input, .toolbar select {
+  background: #0b1220; color: var(--text);
+  border: 1px solid var(--stroke); border-radius: 10px; padding: 8px 10px;
+}
+.toolbar input { min-width: min(100%, 280px); flex: 1; }
+.labs-layout { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 960px) {
+  .labs-layout { grid-template-columns: 1fr minmax(280px, 38%); align-items: start; }
+  #lab-drawer:not([hidden]) { position: sticky; top: 12px; }
+}
+#lab-drawer {
+  background: rgba(18,26,43,.95); border: 1px solid var(--stroke);
+  border-radius: 16px; padding: 16px;
+}
+.drawer-head { display: flex; justify-content: space-between; gap: 8px; align-items: start; }
+.drawer-head h2 { margin: 0; font-family: var(--serif); font-size: 1.2rem; }
+.drawer-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; align-items: center; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--stroke); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; }
+code, .mono { font-family: var(--mono); font-size: 0.86em; }
+.linkish {
+  background: none; border: 0; padding: 0; color: var(--link); cursor: pointer; text-align: left;
+}
+.linkish:hover { text-decoration: underline; }
+.path-list { list-style: none; margin: 0; padding: 0; }
+.path-item {
+  display: grid; grid-template-columns: auto auto 1fr; gap: 10px; align-items: start;
+  padding: 8px 0; border-bottom: 1px solid var(--stroke);
+}
+.step-num {
+  width: 1.6rem; height: 1.6rem; border-radius: 999px;
+  border: 1px solid var(--stroke); display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; color: var(--muted);
+}
+.bar { height: 8px; background: #0b1220; border-radius: 999px; overflow: hidden; min-width: 80px; }
+.bar span { display: block; height: 100%; background: var(--ok); }
+.bar span.high { background: var(--warn); }
+.bar span.crit { background: var(--crit); }
+.heat-0 { background: rgba(248,113,113,.18); }
+.heat-part { background: rgba(251,146,60,.18); }
+.heat-full { background: rgba(52,211,153,.18); }
+.heat-0 button, .heat-part button, .heat-full button {
+  background: none; border: 0; color: inherit; cursor: pointer; font-family: var(--mono);
+}
+.chip {
+  background: var(--panel); color: var(--text); border: 1px solid var(--stroke);
+  border-radius: 999px; padding: 4px 10px; cursor: pointer; margin: 0 6px 8px 0;
+}
+.chip span { color: var(--muted); font-size: 0.75em; }
+.chip.selected { border-color: var(--accent); color: var(--accent); }
+#control-cloud { margin: 8px 0 12px; }
+.heat-cell { min-width: 72px; height: 64px; }
+.heat-cell.crit { background: rgba(248,113,113,.16); }
+.heat-cell.high { background: rgba(251,146,60,.16); }
+.heat-cell.ok { background: rgba(52,211,153,.16); }
+.heat-lab {
+  background: none; border: 1px solid var(--stroke); color: var(--text);
+  border-radius: 6px; padding: 2px 6px; margin: 2px; cursor: pointer; font-family: var(--mono); font-size: 0.75rem;
+}
+ul.tight { margin: 0; padding-left: 1.1rem; }
+ul.tight li { margin: 4px 0; }
+.footer { margin-top: 36px; color: var(--muted); font-size: 0.85rem; }
+.note {
+  border-left: 3px solid var(--accent); padding: 4px 0 4px 12px; color: var(--muted);
+}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="hero">
+      <p class="brand">AWS Compliance &amp; Security Labs</p>
+      <p class="sub">One page to visualize and learn all 17 labs. Filter by framework, walk a guided path, and open each lab's walkthrough, risk, and assessment.</p>
+      <nav class="nav" aria-label="Hub sections">
+        <button type="button" data-nav="overview">Overview</button>
+        <button type="button" data-nav="path">Learn path</button>
+        <button type="button" data-nav="labs">Labs</button>
+        <button type="button" data-nav="coverage">Coverage</button>
+        <button type="button" data-nav="controls">Controls</button>
+        <button type="button" data-nav="risks">Risks</button>
+      </nav>
+      <div class="progress" aria-live="polite">
+        <div class="progress-track"><span id="progress-fill"></span></div>
+        <span id="progress-label"></span>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="section" data-view="overview" id="overview">
+        <h2>What this portfolio is</h2>
+        <p>Combined monorepo of modular AWS labs for NIST 800-171/800-53, ISO 27001, PCI DSS, and FedRAMP 20x (CR26) KSI automation</p>
+        <p class="note">Target frameworks: NIST SP 800-171, NIST SP 800-53, ISO 27001, PCI DSS, and FedRAMP 20x / CR26 KSIs. Crosswalks use the Secure Controls Framework static API.</p>
+        <div class="kpi" id="overview-kpis"></div>
+        <h3>How to use this page</h3>
+        <ol>
+          <li>Open <strong>Learn path</strong> and complete the tracks in order.</li>
+          <li>Mark a lab complete after you read its walkthrough (or README for labs 16–17).</li>
+          <li>Use <strong>Coverage</strong> and <strong>Controls</strong> when you need the GRC view.</li>
+          <li>Use <strong>Risks</strong> when you need likelihood, impact, and ATT&amp;CK technique.</li>
+        </ol>
+        <h3>Shared architecture</h3>
+        <p class="mono">Data sources → GuardDuty/Config/Inspector → Security Hub → EventBridge → Lambda → Evidence & Alerts</p>
+        <div class="diagram"><svg viewBox="0 0 1000 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Shared architecture pattern for all labs">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b6b82"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="280" fill="#0b1220"/>
+  <text x="40" y="28" fill="#7dd3fc" font-size="14" font-family="IBM Plex Sans, sans-serif">Shared pattern — data in, evidence out</text>
+  <rect x="40" y="48" width="280" height="36" rx="8" fill="#151d2e" stroke="#3d8bfd"/>
+  <text x="180" y="71" text-anchor="middle" fill="#e8eef7" font-size="13" font-family="IBM Plex Sans, sans-serif">1. Data sources</text>
+  <rect x="360" y="48" width="280" height="36" rx="8" fill="#151d2e" stroke="#34d399"/>
+  <text x="500" y="71" text-anchor="middle" fill="#e8eef7" font-size="13" font-family="IBM Plex Sans, sans-serif">2. Detection and aggregation</text>
+  <rect x="680" y="48" width="280" height="36" rx="8" fill="#151d2e" stroke="#fb923c"/>
+  <text x="820" y="71" text-anchor="middle" fill="#e8eef7" font-size="13" font-family="IBM Plex Sans, sans-serif">3. Automation and evidence</text>
+  <path d="M320,160 C340,160 340,160 360,160" fill="none" stroke="#5b6b82" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M640,160 C660,160 660,160 680,160" fill="none" stroke="#5b6b82" stroke-width="2" marker-end="url(#arrow)"/>
+  <g>
+    <rect x="40" y="108" width="280" height="48" rx="10" fill="#1e3a5f" stroke="#3d8bfd"/>
+    <text x="180" y="137" text-anchor="middle" fill="#e8eef7" font-size="12" font-family="IBM Plex Sans, sans-serif">CloudTrail · Config · Flow Logs</text>
+  </g>
+  <g>
+    <rect x="40" y="168" width="280" height="48" rx="10" fill="#1e3a5f" stroke="#3d8bfd"/>
+    <text x="180" y="197" text-anchor="middle" fill="#e8eef7" font-size="12" font-family="IBM Plex Sans, sans-serif">Inspector · IdP · Terraform plan</text>
+  </g>
+  <g>
+    <rect x="360" y="108" width="280" height="48" rx="10" fill="#1a4d3e" stroke="#34d399"/>
+    <text x="500" y="137" text-anchor="middle" fill="#e8eef7" font-size="12" font-family="IBM Plex Sans, sans-serif">GuardDuty · Config · Inspector</text>
+  </g>
+  <g>
+    <rect x="360" y="168" width="280" height="48" rx="10" fill="#1a4d3e" stroke="#34d399"/>
+    <text x="500" y="197" text-anchor="middle" fill="#e8eef7" font-size="12" font-family="IBM Plex Sans, sans-serif">Security Hub findings</text>
+  </g>
+  <g>
+    <rect x="680" y="108" width="280" height="48" rx="10" fill="#4a2c1a" stroke="#fb923c"/>
+    <text x="820" y="137" text-anchor="middle" fill="#e8eef7" font-size="12" font-family="IBM Plex Sans, sans-serif">EventBridge → Lambda</text>
+  </g>
+  <g>
+    <rect x="680" y="168" width="280" height="48" rx="10" fill="#4a2c1a" stroke="#fb923c"/>
+    <text x="820" y="197" text-anchor="middle" fill="#e8eef7" font-size="12" font-family="IBM Plex Sans, sans-serif">Evidence store · SNS alerts</text>
+  </g>
+  <text x="500" y="250" text-anchor="middle" fill="#9aa8bc" font-size="12" font-family="IBM Plex Sans, sans-serif">Every lab implements this pipeline for one control theme.</text>
+</svg></div>
+        <p class="meta">KSI overlay 2026-08.1. Generated from <code class="mono">labs/catalog.json</code>, <code class="mono">coverage.json</code>, and <code class="mono">risks.json</code>. Do not edit this HTML by hand.</p>
+      </section>
+
+      <section data-view="path" id="path" hidden>
+        <div class="section">
+          <h2>Guided learn path</h2>
+          <p>Complete the five tracks in order. The sequence starts with identity, then detection, then change control, then evidence, then resilience.</p>
+        </div>
+        <div id="path-tracks"></div>
+      </section>
+
+      <section data-view="labs" id="labs" hidden>
+        <div class="section">
+          <h2>Lab catalog</h2>
+          <p>Search by title, SCF control, KSI, AWS service, or risk text. Open a card to see mapping density and source files.</p>
+          <div class="toolbar">
+            <input id="lab-search" type="search" placeholder="Search labs, controls, services" aria-label="Search labs"/>
+            <select id="framework-filter" aria-label="Filter by framework"></select>
+            <span class="meta" id="lab-count"></span>
+          </div>
+        </div>
+        <div class="labs-layout">
+          <div class="grid cards" id="lab-grid"></div>
+          <aside id="lab-drawer" hidden></aside>
+        </div>
+      </section>
+
+      <section class="section" data-view="coverage" id="coverage" hidden>
+        <h2>Control coverage heatmap</h2>
+        <p>Each cell is mapped SCF controls / declared SCF controls for that lab and framework. Red is zero hits in the current crosswalk. Orange is partial. Green is complete.</p>
+        <div style="overflow:auto"><table id="coverage-table"></table></div>
+        <h3>Portfolio rollup</h3>
+        <ul class="tight" id="coverage-rollup"></ul>
+        <p class="meta">Source: <a href="../../COVERAGE.md">COVERAGE.md</a>. CMMC 2.0 L2 and NIST 800-171 r2 columns are pending the next live SCF refresh when they show zero.</p>
+      </section>
+
+      <section class="section" data-view="controls" id="controls" hidden>
+        <h2>SCF control map</h2>
+        <p>Select a control to see every lab that declares it. Chip size follows the number of labs.</p>
+        <div id="control-cloud"></div>
+        <div id="control-detail"></div>
+        <h3>FedRAMP 20x KSIs in use</h3>
+        <ul class="tight" id="ksi-list"></ul>
+      </section>
+
+      <section class="section" data-view="risks" id="risks" hidden>
+        <h2>Residual risk map</h2>
+        <p>Each lab has one residual rating after the lab controls are in place. Select a lab number to open its catalog card.</p>
+        <div class="kpi" id="risk-bands"></div>
+        <div style="overflow:auto"><table id="risk-heat"></table></div>
+        <h3>Register</h3>
+        <div style="overflow:auto"><table id="risk-table"></table></div>
+        <p class="meta">Source: <a href="../../RISKS.md">RISKS.md</a>. Scales: <a href="../RISK-METHODOLOGY.md">docs/RISK-METHODOLOGY.md</a>.</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      AWS Compliance &amp; Security Labs · SCF crosswalks · FedRAMP 20x / CR26 KSIs · Learning hub
+    </footer>
+  </div>
+  <script>window.LEARN_DATA = {"project":"aws-compliance-security-labs","version":"2.0.0","description":"Combined monorepo of modular AWS labs for NIST 800-171/800-53, ISO 27001, PCI DSS, and FedRAMP 20x (CR26) KSI automation","architecture_pattern":"Data sources → GuardDuty/Config/Inspector → Security Hub → EventBridge → Lambda → Evidence & Alerts","scf_api":"https://grcengclub.github.io/scf-api/","labs":[{"id":"01-mfa-continuous-validation","title":"Persistent MFA Validation (Okta / Descope)","summary":"Continuously validate phishing-resistant MFA enrollment and use for human identities via Okta or Descope, correlated with AWS IAM Identity Center and CloudTrail.","primary_risk":"Account takeover from missing or bypassed MFA","scf_controls":["IAC-06","IAC-15","IAC-21","MON-01"],"ksi":["KSI-IAM-MFA","KSI-IAM-ELP","KSI-AFR-PVL"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["IAM Identity Center","CloudTrail","EventBridge","Lambda","Security Hub","SNS","DynamoDB"],"external_services":["Okta","Descope"],"status":"hardened","pages":"https://kfcain.github.io/lab-mfa-continuous-validation/","has_walkthrough":true,"walkthrough_href":"../../labs/01-mfa-continuous-validation/index.html","readme_href":"../../labs/01-mfa-continuous-validation/README.md","spec_href":"../../labs/01-mfa-continuous-validation/SPEC.md","risk_href":"../../labs/01-mfa-continuous-validation/RISK.md","assessment_href":"../../labs/01-mfa-continuous-validation/ASSESSMENT.md"},{"id":"02-inspector-vdr","title":"Vulnerability Detection & Response (Inspector VDR)","summary":"Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1–N5 severity SLAs, Security Hub aggregation, and remediation evidence.","primary_risk":"Unpatched CVEs leading to breach and failed authorization","scf_controls":["VPM-01","VPM-02","MON-01","THR-01"],"ksi":["KSI-AFR-VDR","KSI-AFR-PVL","KSI-MLA-EVC"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["Inspector","Security Hub","EventBridge","Lambda","Systems Manager","S3","SNS"],"external_services":[],"status":"hardened","pages":"https://kfcain.github.io/lab-inspector-vdr/","has_walkthrough":true,"walkthrough_href":"../../labs/02-inspector-vdr/index.html","readme_href":"../../labs/02-inspector-vdr/README.md","spec_href":"../../labs/02-inspector-vdr/SPEC.md","risk_href":"../../labs/02-inspector-vdr/RISK.md","assessment_href":"../../labs/02-inspector-vdr/ASSESSMENT.md"},{"id":"03-nhi-credential-rotation","title":"Non-Human Identity Credential & Token Rotation","summary":"Discover, inventory, and rotate service accounts, IAM access keys, API tokens, and workload identities on a policy cadence with break-glass evidence.","primary_risk":"Long-lived machine credentials enabling lateral movement","scf_controls":["IAC-15","IAC-21","CRY-01","CFG-02"],"ksi":["KSI-IAM-ELP","KSI-IAM-JIT","KSI-SVC-SEC"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["IAM","Secrets Manager","KMS","EventBridge","Lambda","CloudTrail","DynamoDB","SNS"],"external_services":["Okta Machine Auth","Descope M2M"],"status":"hardened","pages":"https://kfcain.github.io/lab-nhi-credential-rotation/","has_walkthrough":true,"walkthrough_href":"../../labs/03-nhi-credential-rotation/index.html","readme_href":"../../labs/03-nhi-credential-rotation/README.md","spec_href":"../../labs/03-nhi-credential-rotation/SPEC.md","risk_href":"../../labs/03-nhi-credential-rotation/RISK.md","assessment_href":"../../labs/03-nhi-credential-rotation/ASSESSMENT.md"},{"id":"04-config-drift-compliance","title":"Continuous Config Drift & Control Status","summary":"Use AWS Config + Security Hub to persistently evaluate resource posture against SCF-mapped rules and emit pass/fail evidence for auditors.","primary_risk":"Silent configuration drift breaking baseline controls","scf_controls":["CFG-01","CFG-02","CPL-01","CPL-02","MON-01"],"ksi":["KSI-CNA-EIS","KSI-MLA-EVC","KSI-AFR-PVL"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["Config","Security Hub","EventBridge","Lambda","S3","SNS","Organizations"],"external_services":[],"status":"hardened","pages":"https://kfcain.github.io/lab-config-drift-compliance/","has_walkthrough":true,"walkthrough_href":"../../labs/04-config-drift-compliance/index.html","readme_href":"../../labs/04-config-drift-compliance/README.md","spec_href":"../../labs/04-config-drift-compliance/SPEC.md","risk_href":"../../labs/04-config-drift-compliance/RISK.md","assessment_href":"../../labs/04-config-drift-compliance/ASSESSMENT.md"},{"id":"05-guardduty-automated-response","title":"GuardDuty Threat Detection & Automated Response","summary":"Ingest VPC Flow Logs and CloudTrail into GuardDuty, centralize in Security Hub, and auto-contain via EventBridge → Lambda playbooks.","primary_risk":"Delayed response to active compromise increases blast radius","scf_controls":["THR-01","THR-03","MON-01","MON-02","IRO-02"],"ksi":["KSI-MLA-OSM","KSI-INR-PRC","KSI-CNA-MAT"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["VPC Flow Logs","CloudTrail","GuardDuty","Security Hub","EventBridge","Lambda","SNS","Step Functions"],"external_services":[],"status":"hardened","pages":"https://kfcain.github.io/lab-guardduty-automated-response/","has_walkthrough":true,"walkthrough_href":"../../labs/05-guardduty-automated-response/index.html","readme_href":"../../labs/05-guardduty-automated-response/README.md","spec_href":"../../labs/05-guardduty-automated-response/SPEC.md","risk_href":"../../labs/05-guardduty-automated-response/RISK.md","assessment_href":"../../labs/05-guardduty-automated-response/ASSESSMENT.md"},{"id":"06-kms-encryption-governance","title":"KMS Encryption & Secrets Governance","summary":"Enforce encryption at rest/in transit with customer-managed KMS keys, FIPS endpoints, key rotation, and Secrets Manager policy gates.","primary_risk":"Unencrypted data exposure and cryptographic non-conformance","scf_controls":["CRY-01","CRY-03","CFG-02","CLD-01"],"ksi":["KSI-SVC-ENC","KSI-SVC-SNT","KSI-SVC-SEC"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["KMS","Secrets Manager","Config","CloudTrail","Lambda","S3","ACM"],"external_services":[],"status":"hardened","pages":"https://kfcain.github.io/lab-kms-encryption-governance/","has_walkthrough":true,"walkthrough_href":"../../labs/06-kms-encryption-governance/index.html","readme_href":"../../labs/06-kms-encryption-governance/README.md","spec_href":"../../labs/06-kms-encryption-governance/SPEC.md","risk_href":"../../labs/06-kms-encryption-governance/RISK.md","assessment_href":"../../labs/06-kms-encryption-governance/ASSESSMENT.md"},{"id":"07-cloudtrail-evidence-pipeline","title":"Immutable Audit Evidence Pipeline","summary":"Build an org-wide CloudTrail → S3 (Object Lock) → Athena/Security Lake pipeline that packages machine-readable evidence for FedRAMP 20x persistent validation.","primary_risk":"Inability to prove who did what — audit failure and legal exposure","scf_controls":["MON-01","MON-02","CPL-02","CHG-01"],"ksi":["KSI-MLA-OSM","KSI-AFR-PVL","KSI-CMT-CHG"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["CloudTrail","S3 Object Lock","EventBridge","Lambda","Athena","Security Lake","Glue"],"external_services":[],"status":"hardened","pages":"https://kfcain.github.io/lab-cloudtrail-evidence-pipeline/","has_walkthrough":true,"walkthrough_href":"../../labs/07-cloudtrail-evidence-pipeline/index.html","readme_href":"../../labs/07-cloudtrail-evidence-pipeline/README.md","spec_href":"../../labs/07-cloudtrail-evidence-pipeline/SPEC.md","risk_href":"../../labs/07-cloudtrail-evidence-pipeline/RISK.md","assessment_href":"../../labs/07-cloudtrail-evidence-pipeline/ASSESSMENT.md"},{"id":"08-vpc-network-segmentation","title":"VPC Network Segmentation & Flow Visibility","summary":"Implement least-privilege network paths with Security Groups, NACLs, Network Firewall, and Flow Log analytics aligned to PCI DSS and FedRAMP CNA KSIs.","primary_risk":"Flat networks enable lateral movement and PCI scope expansion","scf_controls":["NET-01","NET-04","AST-04","CLD-06"],"ksi":["KSI-CNA-RNT","KSI-CNA-MAT","KSI-SVC-SNT"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["VPC","Security Groups","Network Firewall","VPC Flow Logs","Config","GuardDuty","Lambda"],"external_services":[],"status":"hardened","pages":"https://kfcain.github.io/lab-vpc-network-segmentation/","has_walkthrough":true,"walkthrough_href":"../../labs/08-vpc-network-segmentation/index.html","readme_href":"../../labs/08-vpc-network-segmentation/README.md","spec_href":"../../labs/08-vpc-network-segmentation/SPEC.md","risk_href":"../../labs/08-vpc-network-segmentation/RISK.md","assessment_href":"../../labs/08-vpc-network-segmentation/ASSESSMENT.md"},{"id":"09-incident-response-automation","title":"Incident Response Automation Playbooks","summary":"Codify IR playbooks as Step Functions + Lambda: detect, contain, notify stakeholders, preserve evidence, and produce after-action artifacts.","primary_risk":"Ad-hoc IR increases dwell time, cost, and regulatory penalties","scf_controls":["IRO-01","IRO-02","IRO-04","IRO-10","MON-02"],"ksi":["KSI-INR-IRP","KSI-INR-PRC","KSI-MLA-OSM"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["Security Hub","EventBridge","Step Functions","Lambda","SNS","SSM","S3","CloudWatch"],"external_services":["PagerDuty / Slack (optional)"],"status":"hardened","pages":"https://kfcain.github.io/lab-incident-response-automation/","has_walkthrough":true,"walkthrough_href":"../../labs/09-incident-response-automation/index.html","readme_href":"../../labs/09-incident-response-automation/README.md","spec_href":"../../labs/09-incident-response-automation/SPEC.md","risk_href":"../../labs/09-incident-response-automation/RISK.md","assessment_href":"../../labs/09-incident-response-automation/ASSESSMENT.md"},{"id":"10-supply-chain-sbom","title":"Supply Chain Risk, SBOM & Third-Party Monitoring","summary":"Generate and store SBOMs, scan container/images with Inspector, track third-party SaaS risk, and feed continuous evidence for FedRAMP KSI-SCR.","primary_risk":"Compromised dependencies or vendors introduce undetected risk","scf_controls":["TPM-01","TPM-03","TPM-04","VPM-01","AST-02"],"ksi":["KSI-SCR-SRA","KSI-SCR-TPM","KSI-AFR-VDR"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["Inspector","ECR","CodePipeline","S3","EventBridge","Lambda","Security Hub","DynamoDB"],"external_services":["Vendor risk questionnaire / GRC"],"status":"hardened","pages":"https://kfcain.github.io/lab-supply-chain-sbom/","has_walkthrough":true,"walkthrough_href":"../../labs/10-supply-chain-sbom/index.html","readme_href":"../../labs/10-supply-chain-sbom/README.md","spec_href":"../../labs/10-supply-chain-sbom/SPEC.md","risk_href":"../../labs/10-supply-chain-sbom/RISK.md","assessment_href":"../../labs/10-supply-chain-sbom/ASSESSMENT.md"},{"id":"11-federal-data-deletion-residual","title":"Federal Data Deletion & Residual-Data Proof (Class C)","summary":"Orchestrate agency-requested removal of federal customer data from live stores and backups, then persistently prove no residual copies remain (FedRAMP KSI-SVC-RUD / KSI-SVC-PRR).","primary_risk":"Federal customer data remains after offboarding or spill cleanup","scf_controls":["DCH-01","DCH-09","DCH-06","BCD-11","CRY-05","CLD-01"],"ksi":["KSI-SVC-RUD","KSI-SVC-PRR","KSI-SVC-SIN","KSI-AFR-PVL"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["S3","DynamoDB","RDS","AWS Backup","KMS","Step Functions","Lambda","EventBridge","Security Hub","SNS","Athena"],"external_services":["Agency deletion ticket / GRC case"],"status":"hardened","pages":"https://kfcain.github.io/lab-federal-data-deletion-residual/","has_walkthrough":true,"walkthrough_href":"../../labs/11-federal-data-deletion-residual/index.html","readme_href":"../../labs/11-federal-data-deletion-residual/README.md","spec_href":"../../labs/11-federal-data-deletion-residual/SPEC.md","risk_href":"../../labs/11-federal-data-deletion-residual/RISK.md","assessment_href":"../../labs/11-federal-data-deletion-residual/ASSESSMENT.md"},{"id":"12-backup-recovery-rto-rpo","title":"Backup Alignment & Recovery Testing (RTO/RPO)","summary":"Define RTO/RPO per critical federal workload, align AWS Backup plans and vault policy, run restore drills, and emit machine-readable evidence for KSI-RPL-* and KSI-CNA-OFA.","primary_risk":"Unproven backups leave federal missions unrestorable after ransomware or outage","scf_controls":["BCD-01","BCD-02","BCD-11","BCD-12","CRY-05","AST-02"],"ksi":["KSI-RPL-RRO","KSI-RPL-ARP","KSI-RPL-ABO","KSI-RPL-TRC","KSI-CNA-OFA"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["AWS Backup","Backup Vault Lock","KMS","EC2","RDS","DynamoDB","EventBridge","Lambda","Step Functions","S3","CloudWatch"],"external_services":[],"status":"hardened","pages":"https://kfcain.github.io/lab-backup-recovery-rto-rpo/","has_walkthrough":true,"walkthrough_href":"../../labs/12-backup-recovery-rto-rpo/index.html","readme_href":"../../labs/12-backup-recovery-rto-rpo/README.md","spec_href":"../../labs/12-backup-recovery-rto-rpo/SPEC.md","risk_href":"../../labs/12-backup-recovery-rto-rpo/RISK.md","assessment_href":"../../labs/12-backup-recovery-rto-rpo/ASSESSMENT.md"},{"id":"13-boundary-asset-inventory","title":"Authorization Boundary & Real-Time Asset Inventory","summary":"Persistently generate authoritative inventories of in-boundary information resources, map federal data flows, and flag shadow resources outside the Minimum Assessment Scope.","primary_risk":"Unknown or out-of-scope resources silently process federal data","scf_controls":["AST-01","AST-02","AST-04","NET-03","CPL-01","GOV-01"],"ksi":["KSI-PIY-GIV","KSI-AFR-MAS","KSI-CNA-DFP","KSI-MLA-LET"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["Config Aggregator","Resource Explorer","Security Hub","Organizations","Lambda","EventBridge","DynamoDB","S3","Athena","Tag Editor"],"external_services":["SSP / MAS document"],"status":"hardened","pages":"https://kfcain.github.io/lab-boundary-asset-inventory/","has_walkthrough":true,"walkthrough_href":"../../labs/13-boundary-asset-inventory/index.html","readme_href":"../../labs/13-boundary-asset-inventory/README.md","spec_href":"../../labs/13-boundary-asset-inventory/SPEC.md","risk_href":"../../labs/13-boundary-asset-inventory/RISK.md","assessment_href":"../../labs/13-boundary-asset-inventory/ASSESSMENT.md"},{"id":"14-privileged-suspend-lifecycle","title":"Privileged Suspend & Account Lifecycle Automation","summary":"Automate joiner/mover/leaver for human and privileged identities, and auto-disable or contain privileged access on suspicious activity (KSI-IAM-SUS / KSI-IAM-AAM).","primary_risk":"Orphaned or compromised privileged access to federal systems","scf_controls":["IAC-15","IAC-16","IAC-17","IAC-21","MON-01","THR-03"],"ksi":["KSI-IAM-SUS","KSI-IAM-AAM","KSI-IAM-ELP","KSI-IAM-JIT","KSI-IAM-APM"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["IAM","IAM Identity Center","CloudTrail","GuardDuty","EventBridge","Lambda","Step Functions","Security Hub","SNS","DynamoDB"],"external_services":["Okta","Descope"],"status":"hardened","pages":"https://kfcain.github.io/lab-privileged-suspend-lifecycle/","has_walkthrough":true,"walkthrough_href":"../../labs/14-privileged-suspend-lifecycle/index.html","readme_href":"../../labs/14-privileged-suspend-lifecycle/README.md","spec_href":"../../labs/14-privileged-suspend-lifecycle/SPEC.md","risk_href":"../../labs/14-privileged-suspend-lifecycle/RISK.md","assessment_href":"../../labs/14-privileged-suspend-lifecycle/ASSESSMENT.md"},{"id":"15-immutable-cicd-change-control","title":"Immutable CI/CD Change Control & Deployment Validation","summary":"Enforce redeploy-from-version-control over in-place modification, automate deployment validation gates, and log all CSO changes for KSI-CMT-RMV / KSI-CMT-VTD / KSI-CMT-LMC.","primary_risk":"Untracked production changes bypass review and corrupt federal workloads","scf_controls":["CHG-01","CHG-02","CHG-03","CHG-04","CFG-01","TDA-06"],"ksi":["KSI-CMT-RMV","KSI-CMT-VTD","KSI-CMT-LMC","KSI-CMT-RVP","KSI-AFR-SCN"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["CodePipeline","CodeBuild","CloudFormation / CDK","SCPs","CloudTrail","Config","EventBridge","Lambda","Security Hub","SNS","ECR"],"external_services":["GitHub / GitLab"],"status":"hardened","pages":"https://kfcain.github.io/lab-immutable-cicd-change-control/","has_walkthrough":true,"walkthrough_href":"../../labs/15-immutable-cicd-change-control/index.html","readme_href":"../../labs/15-immutable-cicd-change-control/README.md","spec_href":"../../labs/15-immutable-cicd-change-control/SPEC.md","risk_href":"../../labs/15-immutable-cicd-change-control/RISK.md","assessment_href":"../../labs/15-immutable-cicd-change-control/ASSESSMENT.md"},{"id":"16-terraform-drift-detection","title":"Terraform State Drift Detection & Remediation Governance","summary":"Evaluate Terraform plan artifacts to detect out-of-band drift, classify it by severity (tfdrift-style), apply an ignore list, and emit fail-closed compliance evidence with Security Hub findings and SNS alerts.","primary_risk":"Out-of-band changes drift Terraform-managed infrastructure away from its declared baseline and evade change control","scf_controls":["CFG-01","CFG-02","CPL-01","MON-01","CHG-02"],"ksi":["KSI-AFR-PVL","KSI-CNA-EIS","KSI-CMT-RMV","KSI-MLA-EVC"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["Lambda","EventBridge","S3","KMS","SNS","Security Hub","CloudWatch Logs"],"external_services":["Terraform","CI runner"],"status":"hardened","pages":null,"has_walkthrough":false,"walkthrough_href":"../../labs/16-terraform-drift-detection/index.html","readme_href":"../../labs/16-terraform-drift-detection/README.md","spec_href":"../../labs/16-terraform-drift-detection/SPEC.md","risk_href":"../../labs/16-terraform-drift-detection/RISK.md","assessment_href":"../../labs/16-terraform-drift-detection/ASSESSMENT.md"},{"id":"17-terraform-dr-readiness","title":"Terraform DR Readiness & State-Backend Resilience","summary":"Evaluate a DR-readiness descriptor derived from Terraform to prove recovery is possible: state-backend resilience (versioned/encrypted/replicated/locking) and DR architecture parity (recovery region, cross-region durable data, failover routing) against RTO/RPO targets, with an assessor-ready assurance case.","primary_risk":"A disaster is unrecoverable because the Terraform state backend or the declared architecture is not DR-ready","scf_controls":["BCD-01","BCD-02","BCD-11","BCD-12","CFG-01"],"ksi":["KSI-CNA-EIS","KSI-CNA-OFA","KSI-RPL-ABO","KSI-RPL-ARP","KSI-RPL-RRO"],"frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"aws_services":["Lambda","EventBridge","S3","KMS","SNS","Security Hub","CloudWatch Logs"],"external_services":["Terraform","CI runner"],"status":"hardened","pages":null,"has_walkthrough":false,"walkthrough_href":"../../labs/17-terraform-dr-readiness/index.html","readme_href":"../../labs/17-terraform-dr-readiness/README.md","spec_href":"../../labs/17-terraform-dr-readiness/SPEC.md","risk_href":"../../labs/17-terraform-dr-readiness/RISK.md","assessment_href":"../../labs/17-terraform-dr-readiness/ASSESSMENT.md"}],"path":[{"id":"identity","title":"Identity and access","why":"Start here. Identity is the primary control plane. MFA, credential rotation, and privileged suspend close the account-takeover path.","labs":["01-mfa-continuous-validation","03-nhi-credential-rotation","14-privileged-suspend-lifecycle"]},{"id":"detect","title":"Detect and respond","why":"A finding must become an action. Inspector, GuardDuty, and incident-response playbooks reduce dwell time.","labs":["02-inspector-vdr","05-guardduty-automated-response","09-incident-response-automation"]},{"id":"change","title":"Configuration and change","why":"The declared baseline must match reality. Config rules, Terraform drift checks, and CI/CD gates stop silent change.","labs":["04-config-drift-compliance","16-terraform-drift-detection","15-immutable-cicd-change-control"]},{"id":"evidence","title":"Evidence, inventory, and cryptography","why":"You must prove who did what. Immutable CloudTrail evidence, a live asset inventory, and KMS governance make the control assessable.","labs":["07-cloudtrail-evidence-pipeline","13-boundary-asset-inventory","06-kms-encryption-governance"]},{"id":"resilience","title":"Network, data, and resilience","why":"A control that cannot survive a breach or a disaster is incomplete. Segment the network, delete residual data, test backups, and prove DR.","labs":["08-vpc-network-segmentation","10-supply-chain-sbom","11-federal-data-deletion-residual","12-backup-recovery-rto-rpo","17-terraform-dr-readiness"]}],"coverage":{"ksi_overlay_version":"2026-08.1","frameworks":["general-nist-800-53-r5-2","general-nist-800-171-r3","general-nist-800-171-r2","general-iso-27001-2022","general-pci-dss-4-0-1","usa-federal-gsa-fedramp-5-mod","usa-federal-dow-cmmc-2-level-2"],"framework_labels":{"general-nist-800-53-r5-2":"NIST 800-53 r5","general-nist-800-171-r3":"NIST 800-171 r3","general-nist-800-171-r2":"NIST 800-171 r2","general-iso-27001-2022":"ISO 27001:2022","general-pci-dss-4-0-1":"PCI DSS 4.0.1","usa-federal-gsa-fedramp-5-mod":"FedRAMP r5 Mod","usa-federal-dow-cmmc-2-level-2":"CMMC 2.0 L2"},"labs":{"01-mfa-continuous-validation":{"mapped_control_counts":{"general-nist-800-53-r5-2":4,"general-nist-800-171-r3":4,"general-iso-27001-2022":0,"general-pci-dss-4-0-1":4,"usa-federal-gsa-fedramp-5-mod":4,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-iso-27001-2022","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.312Z"},"02-inspector-vdr":{"mapped_control_counts":{"general-nist-800-53-r5-2":4,"general-nist-800-171-r3":4,"general-iso-27001-2022":0,"general-pci-dss-4-0-1":4,"usa-federal-gsa-fedramp-5-mod":4,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-iso-27001-2022","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.386Z"},"03-nhi-credential-rotation":{"mapped_control_counts":{"general-nist-800-53-r5-2":4,"general-nist-800-171-r3":4,"general-iso-27001-2022":0,"general-pci-dss-4-0-1":4,"usa-federal-gsa-fedramp-5-mod":4,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-iso-27001-2022","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.437Z"},"04-config-drift-compliance":{"mapped_control_counts":{"general-nist-800-53-r5-2":5,"general-nist-800-171-r3":5,"general-iso-27001-2022":2,"general-pci-dss-4-0-1":5,"usa-federal-gsa-fedramp-5-mod":5,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.496Z"},"05-guardduty-automated-response":{"mapped_control_counts":{"general-nist-800-53-r5-2":5,"general-nist-800-171-r3":5,"general-iso-27001-2022":1,"general-pci-dss-4-0-1":5,"usa-federal-gsa-fedramp-5-mod":5,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.563Z"},"06-kms-encryption-governance":{"mapped_control_counts":{"general-nist-800-53-r5-2":3,"general-nist-800-171-r3":3,"general-iso-27001-2022":0,"general-pci-dss-4-0-1":4,"usa-federal-gsa-fedramp-5-mod":3,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-iso-27001-2022","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.592Z"},"07-cloudtrail-evidence-pipeline":{"mapped_control_counts":{"general-nist-800-53-r5-2":4,"general-nist-800-171-r3":4,"general-iso-27001-2022":2,"general-pci-dss-4-0-1":4,"usa-federal-gsa-fedramp-5-mod":4,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.616Z"},"08-vpc-network-segmentation":{"mapped_control_counts":{"general-nist-800-53-r5-2":3,"general-nist-800-171-r3":3,"general-iso-27001-2022":0,"general-pci-dss-4-0-1":4,"usa-federal-gsa-fedramp-5-mod":3,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-iso-27001-2022","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.669Z"},"09-incident-response-automation":{"mapped_control_counts":{"general-nist-800-53-r5-2":5,"general-nist-800-171-r3":5,"general-iso-27001-2022":0,"general-pci-dss-4-0-1":5,"usa-federal-gsa-fedramp-5-mod":5,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-iso-27001-2022","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.739Z"},"10-supply-chain-sbom":{"mapped_control_counts":{"general-nist-800-53-r5-2":5,"general-nist-800-171-r3":5,"general-iso-27001-2022":0,"general-pci-dss-4-0-1":4,"usa-federal-gsa-fedramp-5-mod":5,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-iso-27001-2022","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.815Z"},"11-federal-data-deletion-residual":{"mapped_control_counts":{"general-nist-800-53-r5-2":5,"general-nist-800-171-r3":5,"general-iso-27001-2022":0,"general-pci-dss-4-0-1":6,"usa-federal-gsa-fedramp-5-mod":5,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-iso-27001-2022","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.923Z"},"12-backup-recovery-rto-rpo":{"mapped_control_counts":{"general-nist-800-53-r5-2":6,"general-nist-800-171-r3":3,"general-iso-27001-2022":0,"general-pci-dss-4-0-1":3,"usa-federal-gsa-fedramp-5-mod":6,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-iso-27001-2022","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.983Z"},"13-boundary-asset-inventory":{"mapped_control_counts":{"general-nist-800-53-r5-2":6,"general-nist-800-171-r3":6,"general-iso-27001-2022":2,"general-pci-dss-4-0-1":6,"usa-federal-gsa-fedramp-5-mod":6,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:54.062Z"},"14-privileged-suspend-lifecycle":{"mapped_control_counts":{"general-nist-800-53-r5-2":5,"general-nist-800-171-r3":6,"general-iso-27001-2022":1,"general-pci-dss-4-0-1":6,"usa-federal-gsa-fedramp-5-mod":5,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:54.126Z"},"15-immutable-cicd-change-control":{"mapped_control_counts":{"general-nist-800-53-r5-2":6,"general-nist-800-171-r3":6,"general-iso-27001-2022":1,"general-pci-dss-4-0-1":6,"usa-federal-gsa-fedramp-5-mod":6,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:54.211Z"},"16-terraform-drift-detection":{"mapped_control_counts":{"general-nist-800-53-r5-2":5,"general-nist-800-171-r3":5,"general-iso-27001-2022":1,"general-pci-dss-4-0-1":5,"usa-federal-gsa-fedramp-5-mod":5,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.496Z"},"17-terraform-dr-readiness":{"mapped_control_counts":{"general-nist-800-53-r5-2":5,"general-nist-800-171-r3":2,"general-iso-27001-2022":0,"general-pci-dss-4-0-1":2,"usa-federal-gsa-fedramp-5-mod":5,"general-nist-800-171-r2":0,"usa-federal-dow-cmmc-2-level-2":0},"frameworks_without_hits":["general-iso-27001-2022","general-nist-800-171-r2","usa-federal-dow-cmmc-2-level-2"],"generated_at":"2026-08-01T19:09:53.983Z"}},"unique_scf_controls":["AST-01","AST-02","AST-04","BCD-01","BCD-02","BCD-11","BCD-12","CFG-01","CFG-02","CHG-01","CHG-02","CHG-03","CHG-04","CLD-01","CLD-06","CPL-01","CPL-02","CRY-01","CRY-03","CRY-05","DCH-01","DCH-06","DCH-09","GOV-01","IAC-06","IAC-15","IAC-16","IAC-17","IAC-21","IRO-01","IRO-02","IRO-04","IRO-10","MON-01","MON-02","NET-01","NET-03","NET-04","TDA-06","THR-01","THR-03","TPM-01","TPM-03","TPM-04","VPM-01","VPM-02"],"scf_control_labs":{"AST-01":["13-boundary-asset-inventory"],"AST-02":["10-supply-chain-sbom","12-backup-recovery-rto-rpo","13-boundary-asset-inventory"],"AST-04":["08-vpc-network-segmentation","13-boundary-asset-inventory"],"BCD-01":["12-backup-recovery-rto-rpo","17-terraform-dr-readiness"],"BCD-02":["12-backup-recovery-rto-rpo","17-terraform-dr-readiness"],"BCD-11":["11-federal-data-deletion-residual","12-backup-recovery-rto-rpo","17-terraform-dr-readiness"],"BCD-12":["12-backup-recovery-rto-rpo","17-terraform-dr-readiness"],"CFG-01":["04-config-drift-compliance","15-immutable-cicd-change-control","16-terraform-drift-detection","17-terraform-dr-readiness"],"CFG-02":["03-nhi-credential-rotation","04-config-drift-compliance","06-kms-encryption-governance","16-terraform-drift-detection"],"CHG-01":["07-cloudtrail-evidence-pipeline","15-immutable-cicd-change-control"],"CHG-02":["15-immutable-cicd-change-control","16-terraform-drift-detection"],"CHG-03":["15-immutable-cicd-change-control"],"CHG-04":["15-immutable-cicd-change-control"],"CLD-01":["06-kms-encryption-governance","11-federal-data-deletion-residual"],"CLD-06":["08-vpc-network-segmentation"],"CPL-01":["04-config-drift-compliance","13-boundary-asset-inventory","16-terraform-drift-detection"],"CPL-02":["04-config-drift-compliance","07-cloudtrail-evidence-pipeline"],"CRY-01":["03-nhi-credential-rotation","06-kms-encryption-governance"],"CRY-03":["06-kms-encryption-governance"],"CRY-05":["11-federal-data-deletion-residual","12-backup-recovery-rto-rpo"],"DCH-01":["11-federal-data-deletion-residual"],"DCH-06":["11-federal-data-deletion-residual"],"DCH-09":["11-federal-data-deletion-residual"],"GOV-01":["13-boundary-asset-inventory"],"IAC-06":["01-mfa-continuous-validation"],"IAC-15":["01-mfa-continuous-validation","03-nhi-credential-rotation","14-privileged-suspend-lifecycle"],"IAC-16":["14-privileged-suspend-lifecycle"],"IAC-17":["14-privileged-suspend-lifecycle"],"IAC-21":["01-mfa-continuous-validation","03-nhi-credential-rotation","14-privileged-suspend-lifecycle"],"IRO-01":["09-incident-response-automation"],"IRO-02":["05-guardduty-automated-response","09-incident-response-automation"],"IRO-04":["09-incident-response-automation"],"IRO-10":["09-incident-response-automation"],"MON-01":["01-mfa-continuous-validation","02-inspector-vdr","04-config-drift-compliance","05-guardduty-automated-response","07-cloudtrail-evidence-pipeline","14-privileged-suspend-lifecycle","16-terraform-drift-detection"],"MON-02":["05-guardduty-automated-response","07-cloudtrail-evidence-pipeline","09-incident-response-automation"],"NET-01":["08-vpc-network-segmentation"],"NET-03":["13-boundary-asset-inventory"],"NET-04":["08-vpc-network-segmentation"],"TDA-06":["15-immutable-cicd-change-control"],"THR-01":["02-inspector-vdr","05-guardduty-automated-response"],"THR-03":["05-guardduty-automated-response","14-privileged-suspend-lifecycle"],"TPM-01":["10-supply-chain-sbom"],"TPM-03":["10-supply-chain-sbom"],"TPM-04":["10-supply-chain-sbom"],"VPM-01":["02-inspector-vdr","10-supply-chain-sbom"],"VPM-02":["02-inspector-vdr"]},"unique_framework_controls":{"general-nist-800-53-r5-2":79,"general-nist-800-171-r3":118,"general-nist-800-171-r2":0,"general-iso-27001-2022":29,"general-pci-dss-4-0-1":142,"usa-federal-gsa-fedramp-5-mod":72,"usa-federal-dow-cmmc-2-level-2":0},"ksi_in_use":["KSI-AFR-MAS","KSI-AFR-PVL","KSI-AFR-SCN","KSI-AFR-VDR","KSI-CMT-CHG","KSI-CMT-LMC","KSI-CMT-RMV","KSI-CMT-RVP","KSI-CMT-VTD","KSI-CNA-DFP","KSI-CNA-EIS","KSI-CNA-MAT","KSI-CNA-OFA","KSI-CNA-RNT","KSI-IAM-AAM","KSI-IAM-APM","KSI-IAM-ELP","KSI-IAM-JIT","KSI-IAM-MFA","KSI-IAM-SUS","KSI-INR-IRP","KSI-INR-PRC","KSI-MLA-EVC","KSI-MLA-LET","KSI-MLA-OSM","KSI-PIY-GIV","KSI-RPL-ABO","KSI-RPL-ARP","KSI-RPL-RRO","KSI-RPL-TRC","KSI-SCR-SRA","KSI-SCR-TPM","KSI-SVC-ENC","KSI-SVC-PRR","KSI-SVC-RUD","KSI-SVC-SEC","KSI-SVC-SIN","KSI-SVC-SNT"]},"risks":[{"risk_id":"RISK-02-01","lab":"02-inspector-vdr","statement":"Unpatched CVEs leading to breach and failed authorization","residual":{"likelihood":"Medium","impact":"High","band":"Major"},"inherent":{"likelihood":"High","impact":"Critical","band":"Severe"},"owner":"Vulnerability Management Lead","attack_techniques":["T1190","T1195"]},{"risk_id":"RISK-05-01","lab":"05-guardduty-automated-response","statement":"Delayed response to active compromise increases blast radius","residual":{"likelihood":"Medium","impact":"High","band":"Major"},"inherent":{"likelihood":"Medium","impact":"Critical","band":"Major"},"owner":"SOC Lead","attack_techniques":["T1562.001","T1046"]},{"risk_id":"RISK-13-01","lab":"13-boundary-asset-inventory","statement":"Unknown or out-of-scope resources silently process federal data","residual":{"likelihood":"Medium","impact":"High","band":"Major"},"inherent":{"likelihood":"High","impact":"Critical","band":"Severe"},"owner":"GRC Engineering Lead","attack_techniques":["T1526","T1538"]},{"risk_id":"RISK-01-01","lab":"01-mfa-continuous-validation","statement":"Account takeover from missing or bypassed MFA","residual":{"likelihood":"Low","impact":"High","band":"Moderate"},"inherent":{"likelihood":"High","impact":"Critical","band":"Severe"},"owner":"Identity Engineering Lead","attack_techniques":["T1556.006","T1621","T1078.004"]},{"risk_id":"RISK-03-01","lab":"03-nhi-credential-rotation","statement":"Long-lived machine credentials enabling lateral movement","residual":{"likelihood":"Medium","impact":"Medium","band":"Moderate"},"inherent":{"likelihood":"High","impact":"High","band":"Severe"},"owner":"Platform Security Lead","attack_techniques":["T1552.001","T1078.004"]},{"risk_id":"RISK-06-01","lab":"06-kms-encryption-governance","statement":"Unencrypted data exposure and cryptographic non-conformance","residual":{"likelihood":"Low","impact":"High","band":"Moderate"},"inherent":{"likelihood":"Medium","impact":"Critical","band":"Major"},"owner":"Key Management Lead","attack_techniques":["T1552","T1486"]},{"risk_id":"RISK-09-01","lab":"09-incident-response-automation","statement":"Ad-hoc IR increases dwell time, cost, and regulatory penalties","residual":{"likelihood":"Medium","impact":"Medium","band":"Moderate"},"inherent":{"likelihood":"Medium","impact":"High","band":"Major"},"owner":"IR Program Lead","attack_techniques":["T1486","T1490"]},{"risk_id":"RISK-10-01","lab":"10-supply-chain-sbom","statement":"Compromised dependencies or vendors introduce undetected risk","residual":{"likelihood":"Medium","impact":"Medium","band":"Moderate"},"inherent":{"likelihood":"Medium","impact":"High","band":"Major"},"owner":"Supply Chain Risk Lead","attack_techniques":["T1195.002","T1525"]},{"risk_id":"RISK-11-01","lab":"11-federal-data-deletion-residual","statement":"Federal customer data remains after offboarding or spill cleanup","residual":{"likelihood":"Low","impact":"High","band":"Moderate"},"inherent":{"likelihood":"Medium","impact":"Critical","band":"Major"},"owner":"Data Governance Lead","attack_techniques":["T1530"]},{"risk_id":"RISK-12-01","lab":"12-backup-recovery-rto-rpo","statement":"Unproven backups leave federal missions unrestorable after ransomware or outage","residual":{"likelihood":"Low","impact":"High","band":"Moderate"},"inherent":{"likelihood":"Medium","impact":"Critical","band":"Major"},"owner":"Resilience Lead","attack_techniques":["T1490","T1486"]},{"risk_id":"RISK-14-01","lab":"14-privileged-suspend-lifecycle","statement":"Orphaned or compromised privileged access to federal systems","residual":{"likelihood":"Low","impact":"High","band":"Moderate"},"inherent":{"likelihood":"High","impact":"Critical","band":"Severe"},"owner":"Identity Engineering Lead","attack_techniques":["T1098","T1078.004"]},{"risk_id":"RISK-15-01","lab":"15-immutable-cicd-change-control","statement":"Untracked production changes bypass review and corrupt federal workloads","residual":{"likelihood":"Medium","impact":"Medium","band":"Moderate"},"inherent":{"likelihood":"High","impact":"High","band":"Severe"},"owner":"DevSecOps Lead","attack_techniques":["T1195.002","T1578"]},{"risk_id":"RISK-16-01","lab":"16-terraform-drift-detection","statement":"Out-of-band changes drift Terraform-managed infrastructure away from its declared baseline and evade change control","residual":{"likelihood":"Medium","impact":"Medium","band":"Moderate"},"inherent":{"likelihood":"High","impact":"High","band":"Severe"},"owner":"Platform Engineering Lead","attack_techniques":["T1578","T1562.007","T1098"]},{"risk_id":"RISK-17-01","lab":"17-terraform-dr-readiness","statement":"A disaster is unrecoverable because the Terraform state backend or the declared architecture is not DR-ready","residual":{"likelihood":"Low","impact":"High","band":"Moderate"},"inherent":{"likelihood":"Medium","impact":"Critical","band":"Major"},"owner":"Resilience Engineering Lead","attack_techniques":["T1490","T1485","T1486"]},{"risk_id":"RISK-04-01","lab":"04-config-drift-compliance","statement":"Silent configuration drift breaking baseline controls","residual":{"likelihood":"Low","impact":"Medium","band":"Minor"},"inherent":{"likelihood":"Medium","impact":"High","band":"Major"},"owner":"Cloud Compliance Lead","attack_techniques":["T1578","T1562.007"]},{"risk_id":"RISK-07-01","lab":"07-cloudtrail-evidence-pipeline","statement":"Inability to prove who did what — audit failure and legal exposure","residual":{"likelihood":"Low","impact":"Medium","band":"Minor"},"inherent":{"likelihood":"Medium","impact":"High","band":"Major"},"owner":"Security Operations Lead","attack_techniques":["T1562.008","T1070"]},{"risk_id":"RISK-08-01","lab":"08-vpc-network-segmentation","statement":"Flat networks enable lateral movement and PCI scope expansion","residual":{"likelihood":"Low","impact":"Medium","band":"Minor"},"inherent":{"likelihood":"Medium","impact":"High","band":"Major"},"owner":"Network Security Lead","attack_techniques":["T1021","T1046"]}],"band_summary":{"Major":3,"Moderate":11,"Minor":3}};</script>
+  <script>
+/* Inlined into docs/learn/index.html by scripts/build-learn.mjs. */
+(function () {
+  const data = window.LEARN_DATA;
+  const STORAGE_KEY = 'acf-labs-learn-v1';
+  const views = ['overview', 'path', 'labs', 'coverage', 'controls', 'risks'];
+
+  const esc = (value) =>
+    String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+
+  const labById = Object.fromEntries(data.labs.map((lab) => [lab.id, lab]));
+  const riskByLab = Object.fromEntries(data.risks.map((risk) => [risk.lab, risk]));
+
+  const loadDone = () => {
+    try {
+      const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      return new Set(Array.isArray(raw.done) ? raw.done : []);
+    } catch {
+      return new Set();
+    }
+  };
+
+  let done = loadDone();
+  let activeView = 'overview';
+  let selectedLab = null;
+  let query = '';
+  let frameworkFilter = '';
+  let selectedControl = '';
+
+  const saveDone = () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ done: [...done].sort() }));
+  };
+
+  const setView = (view) => {
+    activeView = views.includes(view) ? view : 'overview';
+    document.querySelectorAll('[data-view]').forEach((el) => {
+      el.hidden = el.getAttribute('data-view') !== activeView;
+    });
+    document.querySelectorAll('[data-nav]').forEach((el) => {
+      el.setAttribute('aria-current', el.getAttribute('data-nav') === activeView ? 'page' : 'false');
+    });
+    const hash = selectedLab && activeView === 'labs'
+      ? `#labs/${selectedLab}`
+      : `#${activeView}`;
+    if (location.hash !== hash) history.replaceState(null, '', hash);
+  };
+
+  const openLab = (id) => {
+    selectedLab = labById[id] ? id : null;
+    setView('labs');
+    renderLabs();
+    renderDrawer();
+    const card = document.getElementById(`lab-card-${id}`);
+    if (card) card.scrollIntoView({ block: 'nearest' });
+  };
+
+  const toggleDone = (id) => {
+    if (done.has(id)) done.delete(id);
+    else done.add(id);
+    saveDone();
+    renderProgress();
+    renderPath();
+    renderLabs();
+    renderDrawer();
+  };
+
+  const bandClass = (band) => {
+    if (band === 'Severe' || band === 'Major') return 'crit';
+    if (band === 'Moderate') return 'high';
+    return 'ok';
+  };
+
+  const coverageRatio = (lab, fw) => {
+    const cov = data.coverage.labs[lab.id];
+    if (!cov) return null;
+    const total = lab.scf_controls.length || 1;
+    const mapped = cov.mapped_control_counts[fw] ?? 0;
+    return { mapped, total, ratio: mapped / total };
+  };
+
+  const renderProgress = () => {
+    const total = data.labs.length;
+    const count = [...done].filter((id) => labById[id]).length;
+    const pct = Math.round((count / total) * 100);
+    const fill = document.getElementById('progress-fill');
+    const label = document.getElementById('progress-label');
+    if (fill) fill.style.width = `${pct}%`;
+    if (label) label.textContent = `${count} of ${total} labs marked complete`;
+  };
+
+  const renderOverview = () => {
+    const kpi = document.getElementById('overview-kpis');
+    if (kpi) {
+      kpi.innerHTML = [
+        ['Labs', data.labs.length],
+        ['SCF controls', data.coverage.unique_scf_controls.length],
+        ['FedRAMP 20x KSIs', data.coverage.ksi_in_use.length],
+        ['Frameworks', data.coverage.frameworks.length],
+      ]
+        .map(
+          ([label, value]) =>
+            `<div class="card"><strong>${esc(value)}</strong>${esc(label)}</div>`,
+        )
+        .join('');
+    }
+  };
+
+  const renderPath = () => {
+    const root = document.getElementById('path-tracks');
+    if (!root) return;
+    root.innerHTML = data.path
+      .map((track, index) => {
+        const complete = track.labs.filter((id) => done.has(id)).length;
+        const items = track.labs
+          .map((id, step) => {
+            const lab = labById[id];
+            if (!lab) return '';
+            const risk = riskByLab[id];
+            const checked = done.has(id) ? 'checked' : '';
+            return `<li class="path-item">
+              <input type="checkbox" data-done="${esc(id)}" ${checked} aria-label="Mark ${esc(lab.id)} complete"/>
+              <span class="step-num">${step + 1}</span>
+              <span>
+                <button type="button" class="linkish" data-open-lab="${esc(id)}">${esc(lab.title)}</button>
+                <span class="meta">${esc(lab.id)} · residual ${esc(risk?.residual.band ?? 'n/a')}</span>
+              </span>
+            </li>`;
+          })
+          .join('');
+        return `<article class="section track">
+          <h3>Track ${index + 1}. ${esc(track.title)}</h3>
+          <p>${esc(track.why)}</p>
+          <p class="meta">${complete} of ${track.labs.length} complete</p>
+          <ol class="path-list">${items}</ol>
+        </article>`;
+      })
+      .join('');
+  };
+
+  const filteredLabs = () => {
+    const q = query.trim().toLowerCase();
+    return data.labs.filter((lab) => {
+      if (frameworkFilter && !lab.frameworks.includes(frameworkFilter)) return false;
+      if (selectedControl && !lab.scf_controls.includes(selectedControl)) return false;
+      if (!q) return true;
+      const hay = [
+        lab.id,
+        lab.title,
+        lab.summary,
+        lab.primary_risk,
+        lab.scf_controls.join(' '),
+        lab.ksi.join(' '),
+        lab.aws_services.join(' '),
+        (lab.external_services || []).join(' '),
+      ]
+        .join(' ')
+        .toLowerCase();
+      return hay.includes(q);
+    });
+  };
+
+  const renderLabs = () => {
+    const root = document.getElementById('lab-grid');
+    if (!root) return;
+    const labs = filteredLabs();
+    document.getElementById('lab-count').textContent = `${labs.length} shown`;
+    root.innerHTML = labs
+      .map((lab) => {
+        const risk = riskByLab[lab.id];
+        const active = selectedLab === lab.id ? ' selected' : '';
+        const complete = done.has(lab.id) ? ' complete' : '';
+        return `<article class="card lab-card${active}${complete}" id="lab-card-${esc(lab.id)}">
+          <button type="button" class="card-hit" data-open-lab="${esc(lab.id)}" aria-expanded="${selectedLab === lab.id}">
+            <h2>${esc(lab.title)}</h2>
+            <p class="meta">${esc(lab.id)} · ${esc(lab.status)}</p>
+            <p>${esc(lab.primary_risk)}</p>
+            <div class="pillrow">
+              <span class="pill ${bandClass(risk?.residual.band)}">${esc(risk?.residual.band ?? 'risk')}</span>
+              <span class="pill">${lab.scf_controls.length} SCF</span>
+              <span class="pill">${lab.ksi.length} KSI</span>
+              ${done.has(lab.id) ? '<span class="pill ok">complete</span>' : ''}
+            </div>
+          </button>
+        </article>`;
+      })
+      .join('');
+  };
+
+  const renderDrawer = () => {
+    const drawer = document.getElementById('lab-drawer');
+    const lab = labById[selectedLab];
+    if (!drawer) return;
+    if (!lab) {
+      drawer.hidden = true;
+      drawer.innerHTML = '';
+      return;
+    }
+    const risk = riskByLab[lab.id];
+    const cov = data.coverage.labs[lab.id];
+    const walk = lab.has_walkthrough
+      ? `<a href="${esc(lab.walkthrough_href)}">Open walkthrough</a>`
+      : `<a href="${esc(lab.readme_href)}">Open README (no walkthrough page)</a>`;
+    const coverageRows = data.coverage.frameworks
+      .map((fw) => {
+        const cell = coverageRatio(lab, fw);
+        if (!cell) return '';
+        const width = Math.round(cell.ratio * 100);
+        const cls = cell.mapped === 0 ? 'crit' : cell.mapped < cell.total ? 'high' : 'ok';
+        return `<tr>
+          <td>${esc(data.coverage.framework_labels[fw] || fw)}</td>
+          <td class="mono">${cell.mapped}/${cell.total}</td>
+          <td><div class="bar"><span class="${cls}" style="width:${width}%"></span></div></td>
+        </tr>`;
+      })
+      .join('');
+    drawer.hidden = false;
+    drawer.innerHTML = `
+      <div class="drawer-inner">
+        <div class="drawer-head">
+          <h2>${esc(lab.title)}</h2>
+          <button type="button" class="icon-btn" data-close-drawer aria-label="Close lab detail">Close</button>
+        </div>
+        <p class="meta">${esc(lab.id)} · ${esc(lab.status)}</p>
+        <p>${esc(lab.summary)}</p>
+        <h3>Primary risk</h3>
+        <p>${esc(lab.primary_risk)}</p>
+        ${
+          risk
+            ? `<p class="meta">Residual: ${esc(risk.residual.likelihood)} likelihood × ${esc(risk.residual.impact)} impact (${esc(risk.residual.band)}). ATT&amp;CK: ${esc(risk.attack_techniques.join(', '))}.</p>`
+            : ''
+        }
+        <h3>Controls and services</h3>
+        <table>
+          <tbody>
+            <tr><th>SCF</th><td class="mono">${esc(lab.scf_controls.join(', '))}</td></tr>
+            <tr><th>KSI</th><td class="mono">${esc(lab.ksi.join(', '))}</td></tr>
+            <tr><th>AWS</th><td>${esc(lab.aws_services.join(', '))}</td></tr>
+            <tr><th>External</th><td>${esc((lab.external_services || []).join(', ') || 'None')}</td></tr>
+          </tbody>
+        </table>
+        <h3>Framework mapping density</h3>
+        <p class="meta">Mapped SCF controls / declared SCF controls. Zero means the current crosswalk has no hits.</p>
+        <table><thead><tr><th>Framework</th><th>Hits</th><th>Ratio</th></tr></thead><tbody>${coverageRows}</tbody></table>
+        <div class="drawer-actions">
+          ${walk}
+          <a href="${esc(lab.spec_href)}">SPEC</a>
+          <a href="${esc(lab.risk_href)}">RISK</a>
+          <a href="${esc(lab.assessment_href)}">ASSESSMENT</a>
+          <button type="button" data-done="${esc(lab.id)}">${done.has(lab.id) ? 'Mark as not complete' : 'Mark as complete'}</button>
+        </div>
+        ${cov?.generated_at ? `<p class="meta">Crosswalk snapshot: ${esc(cov.generated_at)}</p>` : ''}
+      </div>`;
+  };
+
+  const renderCoverage = () => {
+    const table = document.getElementById('coverage-table');
+    if (!table) return;
+    const headers = data.coverage.frameworks
+      .map((fw) => `<th>${esc(data.coverage.framework_labels[fw] || fw)}</th>`)
+      .join('');
+    const rows = data.labs
+      .map((lab) => {
+        const cells = data.coverage.frameworks
+          .map((fw) => {
+            const cell = coverageRatio(lab, fw);
+            if (!cell) return '<td>—</td>';
+            const cls = cell.mapped === 0 ? 'heat-0' : cell.mapped < cell.total ? 'heat-part' : 'heat-full';
+            return `<td class="${cls}"><button type="button" data-open-lab="${esc(lab.id)}">${cell.mapped}/${cell.total}</button></td>`;
+          })
+          .join('');
+        return `<tr><th scope="row"><button type="button" class="linkish" data-open-lab="${esc(lab.id)}">${esc(lab.id)}</button></th>${cells}</tr>`;
+      })
+      .join('');
+    const rollup = data.coverage.frameworks
+      .map((fw) => {
+        const n = data.coverage.unique_framework_controls[fw] ?? 0;
+        return `<li><span class="mono">${esc(data.coverage.framework_labels[fw] || fw)}</span> · ${n} unique controls</li>`;
+      })
+      .join('');
+    table.innerHTML = `<thead><tr><th>Lab</th>${headers}</tr></thead><tbody>${rows}</tbody>`;
+    document.getElementById('coverage-rollup').innerHTML = rollup;
+  };
+
+  const renderControls = () => {
+    const root = document.getElementById('control-cloud');
+    if (!root) return;
+    const max = Math.max(
+      ...Object.values(data.coverage.scf_control_labs).map((labs) => labs.length),
+      1,
+    );
+    root.innerHTML = data.coverage.unique_scf_controls
+      .map((control) => {
+        const labs = data.coverage.scf_control_labs[control] || [];
+        const weight = 0.75 + (labs.length / max) * 0.6;
+        const active = selectedControl === control ? ' selected' : '';
+        return `<button type="button" class="chip${active}" data-control="${esc(control)}" style="font-size:${weight}rem" title="${labs.length} labs">
+          ${esc(control)} <span>${labs.length}</span>
+        </button>`;
+      })
+      .join('');
+    const detail = document.getElementById('control-detail');
+    if (!selectedControl) {
+      detail.innerHTML = '<p class="meta">Select one SCF control to see the labs that implement it.</p>';
+    } else {
+      const labs = data.coverage.scf_control_labs[selectedControl] || [];
+      detail.innerHTML = `<h3>${esc(selectedControl)}</h3>
+        <p>${labs.length} lab(s) declare this control.</p>
+        <ul class="tight">${labs
+          .map((id) => {
+            const lab = labById[id];
+            return `<li><button type="button" class="linkish" data-open-lab="${esc(id)}">${esc(lab ? lab.title : id)}</button></li>`;
+          })
+          .join('')}</ul>`;
+    }
+    const ksiRoot = document.getElementById('ksi-list');
+    ksiRoot.innerHTML = data.coverage.ksi_in_use
+      .map((ksi) => `<li class="mono">${esc(ksi)}</li>`)
+      .join('');
+  };
+
+  const renderRisks = () => {
+    const heat = document.getElementById('risk-heat');
+    const table = document.getElementById('risk-table');
+    if (!heat || !table) return;
+    const likelihoods = ['Very Low', 'Low', 'Medium', 'High', 'Very High'];
+    const impacts = ['Critical', 'High', 'Medium', 'Low', 'Very Low'];
+    const cells = {};
+    for (const risk of data.risks) {
+      const key = `${risk.residual.likelihood}|${risk.residual.impact}`;
+      (cells[key] ??= []).push(risk);
+    }
+    const grid = impacts
+      .map(
+        (impact) =>
+          `<tr><th scope="row">${esc(impact)}</th>${likelihoods
+            .map((likelihood) => {
+              const list = cells[`${likelihood}|${impact}`] || [];
+              const cls = list.length ? bandClass(list[0].residual.band) : '';
+              const body = list
+                .map(
+                  (risk) =>
+                    `<button type="button" class="heat-lab" data-open-lab="${esc(risk.lab)}">${esc(risk.lab.split('-')[0])}</button>`,
+                )
+                .join('');
+              return `<td class="heat-cell ${cls}">${body || '<span class="meta">—</span>'}</td>`;
+            })
+            .join('')}</tr>`,
+      )
+      .join('');
+    heat.innerHTML = `<thead><tr><th>Impact \\ Likelihood</th>${likelihoods
+      .map((l) => `<th>${esc(l)}</th>`)
+      .join('')}</tr></thead><tbody>${grid}</tbody>`;
+    table.innerHTML = `<thead><tr><th>ID</th><th>Lab</th><th>Statement</th><th>Residual</th><th>ATT&amp;CK</th></tr></thead>
+      <tbody>${data.risks
+        .map(
+          (risk) => `<tr>
+            <td class="mono">${esc(risk.risk_id)}</td>
+            <td><button type="button" class="linkish" data-open-lab="${esc(risk.lab)}">${esc(risk.lab)}</button></td>
+            <td>${esc(risk.statement)}</td>
+            <td><span class="pill ${bandClass(risk.residual.band)}">${esc(risk.residual.band)}</span></td>
+            <td class="mono">${esc(risk.attack_techniques.join(', '))}</td>
+          </tr>`,
+        )
+        .join('')}</tbody>`;
+    const bands = document.getElementById('risk-bands');
+    bands.innerHTML = Object.entries(data.band_summary)
+      .map(([band, count]) => `<div class="card"><strong>${esc(count)}</strong>${esc(band)} residual</div>`)
+      .join('');
+  };
+
+  const parseHash = () => {
+    const raw = (location.hash || '#overview').slice(1);
+    const [view, lab] = raw.split('/');
+    if (views.includes(view)) activeView = view;
+    if (lab && labById[lab]) selectedLab = lab;
+  };
+
+  const onClick = (event) => {
+    const nav = event.target.closest('[data-nav]');
+    if (nav) {
+      selectedLab = null;
+      setView(nav.getAttribute('data-nav'));
+      renderDrawer();
+      return;
+    }
+    const open = event.target.closest('[data-open-lab]');
+    if (open) {
+      openLab(open.getAttribute('data-open-lab'));
+      return;
+    }
+    const doneBtn = event.target.closest('button[data-done]');
+    if (doneBtn) {
+      toggleDone(doneBtn.getAttribute('data-done'));
+      return;
+    }
+    const control = event.target.closest('[data-control]');
+    if (control) {
+      const id = control.getAttribute('data-control');
+      selectedControl = selectedControl === id ? '' : id;
+      renderControls();
+      renderLabs();
+      return;
+    }
+    if (event.target.closest('[data-close-drawer]')) {
+      selectedLab = null;
+      setView('labs');
+      renderLabs();
+      renderDrawer();
+    }
+  };
+
+  document.addEventListener('click', onClick);
+  document.addEventListener('change', (event) => {
+    const box = event.target.closest('input[type="checkbox"][data-done]');
+    if (!box) return;
+    const id = box.getAttribute('data-done');
+    if (box.checked) done.add(id);
+    else done.delete(id);
+    saveDone();
+    renderProgress();
+    renderPath();
+    renderLabs();
+    renderDrawer();
+  });
+  document.getElementById('lab-search').addEventListener('input', (event) => {
+    query = event.target.value;
+    renderLabs();
+  });
+  document.getElementById('framework-filter').addEventListener('change', (event) => {
+    frameworkFilter = event.target.value;
+    renderLabs();
+  });
+  window.addEventListener('hashchange', () => {
+    parseHash();
+    setView(activeView);
+    renderLabs();
+    renderDrawer();
+  });
+
+  const fwSelect = document.getElementById('framework-filter');
+  fwSelect.innerHTML =
+    '<option value="">All frameworks</option>' +
+    data.coverage.frameworks
+      .map(
+        (fw) =>
+          `<option value="${esc(fw)}">${esc(data.coverage.framework_labels[fw] || fw)}</option>`,
+      )
+      .join('');
+
+  parseHash();
+  renderOverview();
+  renderProgress();
+  renderPath();
+  renderLabs();
+  renderDrawer();
+  renderCoverage();
+  renderControls();
+  renderRisks();
+  setView(activeView);
+})();
+  </script>
+</body>
+</html>

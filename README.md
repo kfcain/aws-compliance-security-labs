@@ -6,6 +6,24 @@ Target frameworks: **NIST SP 800-171**, **NIST SP 800-53**, **ISO 27001**, **PCI
 
 Cross-framework mapping uses the [Secure Controls Framework (SCF) static JSON API](https://grcengclub.github.io/scf-api/).
 
+## Learn the portfolio
+
+Open the interactive hub (no build step; open the file in a browser):
+
+```bash
+open docs/learn/index.html    # macOS
+xdg-open docs/learn/index.html  # Linux
+```
+
+The page is generated from `labs/catalog.json`, `coverage.json`, and `risks.json`. It includes:
+
+- a five-track learn path (identity → detect → change → evidence → resilience)
+- the shared data-source → detection → evidence architecture
+- a searchable catalog of all 17 labs, with walkthrough / README / SPEC / RISK / ASSESSMENT links
+- the control-coverage heatmap, SCF control map, and residual-risk matrix
+
+Rebuild after catalog or GRC data changes: `npm run learn` (also part of `npm run grc:build`). CI gates drift with `npm run grc:check`.
+
 ## Architecture pattern
 
 ```
@@ -22,7 +40,8 @@ labs/                 # One folder per lab (01–17)
   catalog.json        # Machine-readable portfolio index
 shared/scf-mapper/    # Shared SCF crosswalk CLI
 shared/lambda-common/ # Vendored Lambda runtime (lab_common.py)
-scripts/              # Portfolio + GRC generators (map-all, coverage, oscal, …)
+scripts/              # Portfolio + GRC generators (map-all, coverage, oscal, learn hub, …)
+docs/learn/           # Generated interactive hub (open index.html in a browser)
 ```
 
 Each lab includes `README.md`, `RISK.md`, `SPEC.md`, `ASSESSMENT.md`, `scf/`, `infrastructure/template.yaml`, `src/handler.py`, and `tests/`. Labs `01`–`15` also ship `diagrams/architecture.tldr` and a walkthrough `index.html`; labs `16`–`17` use an inline mermaid diagram in their README instead.

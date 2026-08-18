@@ -7,8 +7,9 @@
   "scripts": {
     "scf:test": "node --test 'scripts/*.test.mjs' shared/scf-mapper/src/mapper.test.js",
     "scf:map:all": "node scripts/map-all-labs.mjs",
-    "grc:build": "node scripts/postprocess-mappings.mjs && node scripts/build-coverage.mjs && node scripts/build-oscal.mjs && node scripts/build-assessment.mjs && node scripts/build-risk-register.mjs",
-    "grc:check": "node scripts/validate-catalog.mjs && node scripts/check-common-sync.mjs && node scripts/postprocess-mappings.mjs --check && node scripts/build-coverage.mjs --check && node scripts/build-oscal.mjs --check && node scripts/build-assessment.mjs --check && node scripts/build-risk-register.mjs --check",
+    "grc:build": "node scripts/postprocess-mappings.mjs && node scripts/build-coverage.mjs && node scripts/build-oscal.mjs && node scripts/build-assessment.mjs && node scripts/build-risk-register.mjs && node scripts/build-learn.mjs",
+    "grc:check": "node scripts/validate-catalog.mjs && node scripts/check-common-sync.mjs && node scripts/postprocess-mappings.mjs --check && node scripts/build-coverage.mjs --check && node scripts/build-oscal.mjs --check && node scripts/build-assessment.mjs --check && node scripts/build-risk-register.mjs --check && node scripts/build-learn.mjs --check",
+    "learn": "node scripts/build-learn.mjs",
     "list-labs": "node -e \"import('node:fs').then(fs=>console.log(JSON.parse(fs.readFileSync('./labs/catalog.json')).labs.map(l=>l.id).join('\\n')))\""
   },
   "engines": {
