@@ -64,5 +64,5 @@ jobs:
           node-version: '22'
       # Catalog/spec/filesystem consistency, vendored-runtime sync, and
       # generated-artifact drift (crosswalk KSI blocks, coverage matrix, OSCAL,
-      # assessment procedures, risk register). Offline.
+      # assessment procedures, risk register, learning hub). Offline.
       - run: npm run grc:check

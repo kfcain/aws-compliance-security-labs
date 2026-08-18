@@ -19,13 +19,15 @@ are exactly on mission.
    `PASS`. Simulation data requires `{"mode": "simulation"}` and is stamped in
    the evidence artifact.
 4. **Generated artifacts are rebuilt, not hand-edited.** `scf-mapping.generated.json`,
-   `oscal-component.json`, `COVERAGE.md`, `coverage.json`, and `RISKS.md` are
-   produced by scripts under `scripts/`; CI rejects drift. Regenerate with:
+   `oscal-component.json`, `COVERAGE.md`, `coverage.json`, `RISKS.md`, and
+   `docs/learn/index.html` are produced by scripts under `scripts/`; CI rejects
+   drift. Regenerate with:
    ```bash
    node scripts/postprocess-mappings.mjs
    node scripts/build-coverage.mjs
    node scripts/build-oscal.mjs
    node scripts/build-risk-register.mjs
+   node scripts/build-learn.mjs
    ```
 5. **No new runtime dependencies.** Node tooling is dependency-free by design.
    Python handlers may use the stdlib and `boto3` (provided by the Lambda
