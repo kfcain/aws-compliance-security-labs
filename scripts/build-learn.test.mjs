@@ -1,8 +1,9 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdtempSync, rmSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -62,6 +63,23 @@ describe('build-learn', () => {
       );
     } finally {
       writeFileSync(out, original);
+    }
+  });
+});
+
+describe('assemble-learn-site', () => {
+  it('writes a root hub and copies lab walkthroughs', () => {
+    const dest = mkdtempSync(join(tmpdir(), 'learn-site-'));
+    try {
+      execFileSync(process.execPath, [join(root, 'scripts/assemble-learn-site.mjs'), dest], {
+        encoding: 'utf8',
+      });
+      const hub = readFileSync(join(dest, 'index.html'), 'utf8');
+      assert.match(hub, /labs\/01-mfa-continuous-validation\/index\.html/);
+      assert.equal(existsSync(join(dest, 'labs/01-mfa-continuous-validation/index.html')), true);
+      assert.equal(existsSync(join(dest, '.nojekyll')), true);
+    } finally {
+      rmSync(dest, { recursive: true, force: true });
     }
   });
 });
