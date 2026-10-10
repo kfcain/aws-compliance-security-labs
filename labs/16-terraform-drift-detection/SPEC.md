@@ -56,7 +56,7 @@ evidence with Security Hub findings and SNS alerts.
   "actionable_drift": [],
   "ignored_drift": [],
   "scf_controls": ["CFG-01","CFG-02","CPL-01","MON-01","CHG-02"],
-  "fedramp_20x_ksi": ["KSI-AFR-PVL","KSI-CNA-EIS","KSI-CMT-RMV","KSI-MLA-EVC"],
+  "fedramp_20x_ksi": ["KSI-MLA-EVC","KSI-CNA-EIS","KSI-CMT-RMV"],
   "provenance": {
     "collected_at": "ISO-8601",
     "collector_role": "arn:...:role/grc-evidence-reader",

@@ -37,7 +37,9 @@ Open the dark-mode tldraw diagram:
 | Kind | IDs |
 |------|-----|
 | SCF | `IRO-01`, `IRO-02`, `IRO-04`, `IRO-10`, `MON-02` |
-| FedRAMP 20x KSI | `KSI-INR-IRP`, `KSI-INR-PRC`, `KSI-MLA-OSM` |
+| FedRAMP 20x KSI | `KSI-INR-RIR`, `KSI-MLA-OSM` |
+
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
 
 Generate live crosswalks (NIST 800-53/171, ISO 27001, PCI DSS, FedRAMP Rev5):
 

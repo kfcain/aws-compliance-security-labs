@@ -4,7 +4,7 @@ Wire EventBridge (daily schedule) → this function → Security Hub / evidence
 store. The lab attests that the IR program's automation is actually deployable
 *right now* — not that a playbook document exists in a wiki:
 
-  1. Runbook presence (KSI-INR-IRP/PRC): every SSM document named in
+  1. Runbook presence (KSI-INR-RIR): every SSM document named in
      REQUIRED_RUNBOOKS must exist and be in ``Status == "Active"``. A missing
      or non-Active runbook means the containment/forensics automation cannot
      be invoked during an incident.
@@ -52,7 +52,7 @@ from lab_common import (
 
 LAB_ID = "09-incident-response-automation"
 SCF_CONTROLS = ["IRO-01", "IRO-02", "IRO-04", "IRO-10", "MON-02"]
-FEDRAMP_KSI = ["KSI-INR-IRP", "KSI-INR-PRC", "KSI-MLA-OSM"]
+FEDRAMP_KSI = ["KSI-INR-RIR", "KSI-MLA-OSM"]
 
 logger = get_logger(LAB_ID)
 
@@ -237,7 +237,7 @@ def handler(
                     f"{len(evidence['runbooks_missing'])} runbook(s) missing, "
                     f"{len(evidence['runbooks_inactive'])} inactive, "
                     f"{topic_check['subscriptions_confirmed']} confirmed escalation "
-                    "subscriber(s). Fails KSI-INR-IRP/PRC readiness."
+                    "subscriber(s). Fails KSI-INR-RIR readiness."
                 ),
                 severity="HIGH",
                 resource_type="Other",

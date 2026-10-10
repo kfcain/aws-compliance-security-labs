@@ -6,8 +6,7 @@
  * defect in the generated crosswalks are fixable from data already on disk:
  *
  *  1. Per-control KSI traceability — the original generator stamped the
- *     lab-level KSI list onto every control (producing assertions like
- *     MON-01 -> KSI-IAM-MFA). This rewrites each control's `fedramp_20x_ksi`
+ *     lab-level KSI list onto every control. This rewrites each control's `fedramp_20x_ksi`
  *     from the lab spec's `ksi_by_control` map and annotates legacy aliases.
  *  2. Silent framework gaps — requested frameworks with zero crosswalk hits
  *     (ISO 27001 in 9 labs; the CMMC/800-171 r2 chain until the scheduled

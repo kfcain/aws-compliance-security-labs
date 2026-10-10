@@ -1,4 +1,4 @@
-.PHONY: lint test iac check all
+.PHONY: lint test iac policy check all
 
 all: lint test iac check
 
@@ -13,6 +13,9 @@ iac:
 	cfn-lint
 	checkov --config-file .checkov.yaml
 
-check:
+policy:
+	bash scripts/policy-gate.sh
+
+check: policy
 	node scripts/validate-catalog.mjs
 	node scripts/check-common-sync.mjs

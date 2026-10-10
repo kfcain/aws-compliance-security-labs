@@ -476,7 +476,8 @@ aws ecr describe-repositories --query 'repositories[].{name:repositoryName,mutab
 terraform plan -refresh-only -out tfplan
 terraform show -json tfplan > plan.json
 aws s3 cp plan.json "s3://$PLAN_BUCKET/prod/tfplan.json"
-# Optional: conftest test --policy governance/policy plan.json`,
+# Gate the plan. The policy package is tfdrift.drift, not main.
+conftest test plan.json --policy governance/policy --namespace tfdrift.drift`,
     liveEvent: {
       label: 'Scheduled read of the latest plan object, or pass bucket/key in the event.',
       json: '{"plan_key":"prod/tfplan.json"}',
@@ -513,7 +514,9 @@ aws s3 cp plan.json "s3://$PLAN_BUCKET/prod/tfplan.json"
   --query "Stacks[0].Outputs[?OutputKey=='DescriptorBucketName'].OutputValue" --output text)
 # From labs/17-terraform-dr-readiness, derive then upload:
 #   ./governance/derive-descriptor.sh > descriptor.json
-aws s3 cp descriptor.json "s3://$DESC_BUCKET/prod/dr.json"`,
+aws s3 cp descriptor.json "s3://$DESC_BUCKET/prod/dr.json"
+# Gate the worker evidence. The policy package is tfdr.readiness, not main.
+conftest test evidence.json --policy governance/policy --namespace tfdr.readiness`,
     liveEvent: {
       label: 'Scheduled read of the latest descriptor, or pass key in the event.',
       json: '{"descriptor_key":"prod/dr.json"}',

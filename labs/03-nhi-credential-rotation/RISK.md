@@ -36,7 +36,7 @@ Non-human identities often outnumber humans 10:1+. Without inventory and rotatio
 
 ## Compliance impact
 
-SCF IAC-15/21, FedRAMP KSI-SVC-SEC / KSI-IAM-JIT, NIST IA/AC, PCI DSS 8.6.x key management expectations, ISO crypto and access themes.
+SCF IAC-15/21, FedRAMP KSI-SVC-ASM / KSI-IAM-JIT, NIST IA/AC, PCI DSS 8.6.x key management expectations, ISO crypto and access themes.
 
 ## Financial / business impact
 

@@ -37,12 +37,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CMT-LMC": "Logging modifications to the CSO"
+        "KSI-CMT-LMC": "Logging Changes"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CMT-LMC": {
-          "description": "Logging modifications to the CSO"
+          "description": "Logging Changes",
+          "statement": "Modifications to the cloud service offering are logged and monitored."
         }
       }
     },
@@ -81,12 +82,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CMT-RVP": "Reviewing change procedures"
+        "KSI-CMT-RVP": "Reviewing Change Procedures"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-02.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CMT-RVP": {
-          "description": "Reviewing change procedures"
+          "description": "Reviewing Change Procedures",
+          "statement": "The effectiveness of documented change management procedures is persistently reviewed."
         }
       }
     },
@@ -120,12 +122,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CMT-RMV": "Redeploying version-controlled resources vs direct modification"
+        "KSI-CMT-RMV": "Redeploying vs Modifying"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-03.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CMT-RMV": {
-          "description": "Redeploying version-controlled resources vs direct modification"
+          "description": "Redeploying vs Modifying",
+          "statement": "Changes to machine-based information resources are executed through the redeployment of version controlled resources rather than direct modification wherever reasonable."
         }
       }
     },
@@ -156,13 +159,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-AFR-SCN": "Significant change notification"
+        "SCN-CSO-EVA": "Evaluate Changes"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-04.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-AFR-SCN": {
-          "description": "Significant change notification",
-          "legacy": true
+        "SCN-CSO-EVA": {
+          "description": "Evaluate Changes",
+          "statement": "Providers MUST evaluate all potential significant changes to determine the type of significant change and follow the appropriate Significant Change Notification rules.",
+          "kind": "FRR"
         }
       }
     },
@@ -196,12 +200,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CMT-RMV": "Redeploying version-controlled resources vs direct modification"
+        "KSI-CMT-RMV": "Redeploying vs Modifying"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CMT-RMV": {
-          "description": "Redeploying version-controlled resources vs direct modification"
+          "description": "Redeploying vs Modifying",
+          "statement": "Changes to machine-based information resources are executed through the redeployment of version controlled resources rather than direct modification wherever reasonable."
         }
       }
     },
@@ -237,12 +242,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CMT-VTD": "Validating throughout deployment (automated)"
+        "KSI-CMT-VTD": "Validating Throughout Deployment"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/TDA-06.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CMT-VTD": {
-          "description": "Validating throughout deployment (automated)"
+          "description": "Validating Throughout Deployment",
+          "statement": "Persistent testing and validation of changes throughout deployment is automated."
         }
       }
     }
@@ -276,5 +282,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

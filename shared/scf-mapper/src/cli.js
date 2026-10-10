@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { mapLab, TARGET_FRAMEWORKS, FEDRAMP_20X_KSI, KSI_OVERLAY_VERSION } from './index.js';
+import {
+  mapLab,
+  TARGET_FRAMEWORKS,
+  FEDRAMP_20X_KSI,
+  CR26_RULES,
+  KSI_OVERLAY_SOURCE,
+  KSI_OVERLAY_VERSION,
+} from './index.js';
 
 function usage() {
   console.log(`Usage:
@@ -16,8 +23,8 @@ Lab spec shape:
   {
     "lab_id": "...",
     "scf_controls": ["IAC-06"],
-    "ksi_by_control": { "IAC-06": ["KSI-IAM-MFA"] },
-    "ksi": ["KSI-IAM-MFA"],          // union of ksi_by_control (legacy consumers)
+    "ksi_by_control": { "IAC-06": ["KSI-IAM-APM"] },
+    "ksi": ["KSI-IAM-APM"],          // union of ksi_by_control (legacy consumers)
     "frameworks": ["general-nist-800-53-r5-2"]
   }
 `);
@@ -34,7 +41,12 @@ async function main() {
     return;
   }
   if (args[0] === '--list-ksi') {
-    console.log(JSON.stringify({ version: KSI_OVERLAY_VERSION, ksi: FEDRAMP_20X_KSI }, null, 2));
+    console.log(JSON.stringify({
+      version: KSI_OVERLAY_VERSION,
+      source: KSI_OVERLAY_SOURCE,
+      ksi: FEDRAMP_20X_KSI,
+      rules: CR26_RULES,
+    }, null, 2));
     return;
   }
 

@@ -52,7 +52,7 @@ from lab_common import (
 
 LAB_ID = "03-nhi-credential-rotation"
 SCF_CONTROLS = ["IAC-15", "IAC-21", "CRY-01", "CFG-02"]
-FEDRAMP_KSI = ["KSI-IAM-ELP", "KSI-IAM-JIT", "KSI-SVC-SEC"]
+FEDRAMP_KSI = ["KSI-IAM-ELP", "KSI-IAM-JIT", "KSI-SVC-ASM"]
 
 logger = get_logger(LAB_ID)
 

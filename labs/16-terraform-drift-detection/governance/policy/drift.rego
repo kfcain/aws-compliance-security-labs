@@ -1,9 +1,12 @@
 # OPA / Conftest policy for the two-sided drift-control gate.
 #
-# Pre-deployment:  conftest test tfplan.json  --policy governance/policy
+# Pre-deployment:  conftest test tfplan.json --policy governance/policy --namespace tfdrift.drift
 #   (evaluates the intended `terraform show -json` plan before apply)
-# Post-deployment: conftest test evidence.json --policy governance/policy
+# Post-deployment: conftest test evidence.json --policy governance/policy --namespace tfdrift.drift
 #   (evaluates the Lambda's emitted evidence object after apply)
+# The package is tfdrift.drift. Conftest's default namespace is main, which
+# evaluates 0 rules and exits 0. Pass --namespace (or --all-namespaces).
+# Each deny object includes a string msg so --all-namespaces can report it.
 #
 # Each violation carries the assessment objectives it maps to, so a failing
 # gate produces the same objective-linked result shape as the handler's
@@ -33,8 +36,9 @@ deny contains result if {
 	some pattern in critical_patterns
 	startswith(change.type, pattern)
 	result := {
+		"msg": sprintf("S3-CUI-DRIFT-001: out-of-band drift on critical resource type %q", [change.type]),
 		"rule_id": "S3-CUI-DRIFT-001",
-		"resource": change.address,
+		"resource": object.get(change, "address", change.type),
 		"result": "FAIL",
 		"reason": sprintf("out-of-band drift on critical resource type %q", [change.type]),
 		"assessment_objectives": ["03.04.01.a", "03.04.02.a", "A.03.04.03.ODP[01]"],
@@ -46,11 +50,13 @@ deny contains result if {
 deny contains result if {
 	input.lab_id == "16-terraform-drift-detection"
 	input.status == "FAIL"
+	drift_count := object.get(input, "actionable_drift_count", 0)
 	result := {
+		"msg": sprintf("S3-CUI-DRIFT-002: %d actionable drift(s) at or above threshold", [drift_count]),
 		"rule_id": "S3-CUI-DRIFT-002",
 		"resource": "assurance_case",
 		"result": "FAIL",
-		"reason": sprintf("%d actionable drift(s) at or above threshold", [input.actionable_drift_count]),
+		"reason": sprintf("%d actionable drift(s) at or above threshold", [drift_count]),
 		"assessment_objectives": ["03.04.02.b", "03.12.03"],
 	}
 }
@@ -59,6 +65,7 @@ deny contains result if {
 	input.lab_id == "16-terraform-drift-detection"
 	not input.provenance.evidence_manifest_sha256
 	result := {
+		"msg": "S3-CUI-DRIFT-003: evidence package is not sealed with an integrity manifest",
 		"rule_id": "S3-CUI-DRIFT-003",
 		"resource": "provenance",
 		"result": "FAIL",

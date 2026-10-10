@@ -33,7 +33,7 @@ from lab_common import (
 
 LAB_ID = "05-guardduty-automated-response"
 SCF_CONTROLS = ["THR-01", "THR-03", "MON-01", "MON-02", "IRO-02"]
-FEDRAMP_KSI = ["KSI-MLA-OSM", "KSI-INR-PRC", "KSI-CNA-MAT"]
+FEDRAMP_KSI = ["KSI-MLA-OSM", "KSI-INR-RIR", "KSI-CNA-MAT"]
 
 logger = get_logger(LAB_ID)
 

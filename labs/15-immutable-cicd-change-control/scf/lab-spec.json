@@ -20,7 +20,7 @@
       "KSI-CMT-RMV"
     ],
     "CHG-04": [
-      "KSI-AFR-SCN"
+      "SCN-CSO-EVA"
     ],
     "CFG-01": [
       "KSI-CMT-RMV"
@@ -30,11 +30,11 @@
     ]
   },
   "ksi": [
-    "KSI-CMT-RMV",
-    "KSI-CMT-VTD",
     "KSI-CMT-LMC",
+    "KSI-CMT-RMV",
     "KSI-CMT-RVP",
-    "KSI-AFR-SCN"
+    "KSI-CMT-VTD",
+    "SCN-CSO-EVA"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

@@ -36,7 +36,7 @@ from lab_common import (
 
 LAB_ID = "07-cloudtrail-evidence-pipeline"
 SCF_CONTROLS = ["MON-01", "MON-02", "CPL-02", "CHG-01"]
-FEDRAMP_KSI = ["KSI-MLA-OSM", "KSI-AFR-PVL", "KSI-CMT-CHG"]
+FEDRAMP_KSI = ["KSI-MLA-OSM", "KSI-MLA-RVL", "KSI-CMT-LMC"]
 
 logger = get_logger(LAB_ID)
 

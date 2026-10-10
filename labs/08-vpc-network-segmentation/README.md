@@ -37,7 +37,9 @@ Open the dark-mode tldraw diagram:
 | Kind | IDs |
 |------|-----|
 | SCF | `NET-01`, `NET-04`, `AST-04`, `CLD-06` |
-| FedRAMP 20x KSI | `KSI-CNA-RNT`, `KSI-CNA-MAT`, `KSI-SVC-SNT` |
+| FedRAMP 20x KSI | `KSI-CNA-RNT`, `KSI-CNA-MAT`, `KSI-CNA-ULN` |
+
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
 
 Generate live crosswalks (NIST 800-53/171, ISO 27001, PCI DSS, FedRAMP Rev5):
 

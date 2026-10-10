@@ -14,7 +14,7 @@ Enforce encryption at rest/in transit with customer-managed KMS keys, FIPS endpo
 | Lens | Detail |
 |------|--------|
 | Security program | Cryptographic governance underpins confidentiality commitments and customer trust. |
-| Compliance | FedRAMP KSI-SVC-ENC/SNT; SCF CRY-01/03; NIST SC-13/SC-28; PCI DSS 3.x/4.x crypto; ISO 27001 crypto controls. |
+| Compliance | FedRAMP KSI-SVC-SIN; SCF CRY-01/03; NIST SC-13/SC-28; PCI DSS 3.x/4.x crypto; ISO 27001 crypto controls. |
 | Financial / $$ | Encryption failures trigger breach notification laws and contract liabilities. FIPS gaps block federal deals. |
 | Likelihood × Impact | Medium × Critical |
 
@@ -37,7 +37,9 @@ Open the dark-mode tldraw diagram:
 | Kind | IDs |
 |------|-----|
 | SCF | `CRY-01`, `CRY-03`, `CFG-02`, `CLD-01` |
-| FedRAMP 20x KSI | `KSI-SVC-ENC`, `KSI-SVC-SNT`, `KSI-SVC-SEC` |
+| FedRAMP 20x KSI | `KSI-SVC-SIN`, `KSI-SVC-ASM` |
+
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
 
 Generate live crosswalks (NIST 800-53/171, ISO 27001, PCI DSS, FedRAMP Rev5):
 

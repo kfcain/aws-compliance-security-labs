@@ -34,12 +34,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CNA-RNT": "Restricting network traffic"
+        "KSI-CNA-RNT": "Restricting Network Traffic"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/NET-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CNA-RNT": {
-          "description": "Restricting network traffic"
+          "description": "Restricting Network Traffic",
+          "statement": "Machine-based information resources are persistently reviewed to ensure they are appropriately configured to limit inbound and outbound network traffic."
         }
       }
     },
@@ -79,16 +80,18 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CNA-RNT": "Restricting network traffic",
-        "KSI-CNA-MAT": "Minimizing attack surface"
+        "KSI-CNA-RNT": "Restricting Network Traffic",
+        "KSI-CNA-MAT": "Minimizing Attack Surface"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/NET-04.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CNA-RNT": {
-          "description": "Restricting network traffic"
+          "description": "Restricting Network Traffic",
+          "statement": "Machine-based information resources are persistently reviewed to ensure they are appropriately configured to limit inbound and outbound network traffic."
         },
         "KSI-CNA-MAT": {
-          "description": "Minimizing attack surface"
+          "description": "Minimizing Attack Surface",
+          "statement": "Machine-based information resources are persistently reviewed to ensure they have a minimal attack surface and that lateral movement is minimized if compromised."
         }
       }
     },
@@ -147,14 +150,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-SNT": "Secure network traffic / encryption in transit (alias)"
+        "KSI-CNA-ULN": "Using Logical Networking"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CLD-06.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-SVC-SNT": {
-          "description": "Secure network traffic / encryption in transit (alias)",
-          "legacy": true,
-          "alias_of": "KSI-SVC-SIN"
+        "KSI-CNA-ULN": {
+          "description": "Using Logical Networking",
+          "statement": "Logical networking and related capabilities are used and persistently reviewed to enforce traffic flow controls."
         }
       }
     }
@@ -191,5 +193,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

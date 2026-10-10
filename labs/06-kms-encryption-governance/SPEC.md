@@ -35,7 +35,7 @@ Enforce encryption at rest/in transit with customer-managed KMS keys, FIPS endpo
   "checked_at": "ISO-8601",
   "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["CRY-01","CRY-03","CFG-02","CLD-01"],
-  "fedramp_20x_ksi": ["KSI-SVC-ENC","KSI-SVC-SNT","KSI-SVC-SEC"],
+  "fedramp_20x_ksi": ["KSI-SVC-SIN","KSI-SVC-ASM"],
   "artifacts": []
 }
 ```

@@ -49,12 +49,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-JIT": "Authorizing just-in-time"
+        "KSI-IAM-JIT": "Authorizing Just-in-Time"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-15.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-JIT": {
-          "description": "Authorizing just-in-time"
+          "description": "Authorizing Just-in-Time",
+          "statement": "A least-privileged, role and attribute-based, and just-in-time security authorization model is used and persistently reviewed for all user and non-user accounts and services."
         }
       }
     },
@@ -109,12 +110,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-ELP": "Ensure least privilege"
+        "KSI-IAM-ELP": "Ensuring Least Privilege"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-21.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-ELP": {
-          "description": "Ensure least privilege"
+          "description": "Ensuring Least Privilege",
+          "statement": "Identity and access management measures are used and persistently reviewed to ensure each user or device can only access the resources they need."
         }
       }
     },
@@ -152,14 +154,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-SEC": "Secrets management (alias)"
+        "KSI-SVC-ASM": "Automating Secret Management"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-01.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-SVC-SEC": {
-          "description": "Secrets management (alias)",
-          "legacy": true,
-          "alias_of": "KSI-SVC-ASM"
+        "KSI-SVC-ASM": {
+          "description": "Automating Secret Management",
+          "statement": "Management, protection, and regular rotation of digital keys, certificates, and other secrets is automated and persistently reviewed."
         }
       }
     },
@@ -247,14 +248,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-SEC": "Secrets management (alias)"
+        "KSI-SVC-ASM": "Automating Secret Management"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-02.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-SVC-SEC": {
-          "description": "Secrets management (alias)",
-          "legacy": true,
-          "alias_of": "KSI-SVC-ASM"
+        "KSI-SVC-ASM": {
+          "description": "Automating Secret Management",
+          "statement": "Management, protection, and regular rotation of digital keys, certificates, and other secrets is automated and persistently reviewed."
         }
       }
     }
@@ -291,5 +291,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

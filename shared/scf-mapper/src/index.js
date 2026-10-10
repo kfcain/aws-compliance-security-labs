@@ -8,13 +8,17 @@
  *    mirrors, but only with an https URL — the generated crosswalks ship in
  *    evidence packages, so a cleartext or attacker-chosen source is refused.
  *  - KSI assignments are PER CONTROL: `mapLab` consumes `ksi_by_control`
- *    ({ "IAC-06": ["KSI-IAM-MFA"], ... }). The legacy flat `ksi` array is
+ *    ({ "IAC-06": ["KSI-IAM-APM"], ... }). The legacy flat `ksi` array is
  *    still accepted but stamps every control identically (the defect that
- *    produced assertions like MON-01 -> KSI-IAM-MFA) and warns.
+ *    stamped one lab-level list onto every control) and warns.
  *  - Frameworks requested by a lab that yield zero crosswalk hits are
  *    reported loudly in `coverage_summary.frameworks_requested_without_hits`
  *    instead of silently disappearing.
  */
+
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const DEFAULT_API_BASE = 'https://grcengclub.github.io/scf-api/api';
 
@@ -55,111 +59,46 @@ export const TARGET_FRAMEWORKS = {
 };
 
 /**
- * FedRAMP 20x / CR26 Key Security Indicator overlay.
+ * FedRAMP CR26 Key Security Indicators, pinned to Consolidated Rules
+ * version 2026.10.08.01 (`cr26-2026.10.08.01.json`).
  *
- * These identifiers are PROJECT-LOCAL MNEMONICS for the FedRAMP 20x Phase One
- * KSI themes (https://www.fedramp.gov/20x/) — the SCF workbook does not carry
- * KSI crosswalks yet and FedRAMP's numbering may differ. The overlay is
- * versioned below; regenerate crosswalks after any change.
+ * Descriptions are the official indicator names. `resolveKsi` also returns
+ * the official statement. Retired ids are rejected. Where a retired AFR
+ * theme became a CR26 rule family, labs cite the rule id from this pin
+ * (`CR26_RULES`). Do not add an id that is not in the pin file.
  */
-export const KSI_OVERLAY_VERSION = '2026-08.1';
-export const KSI_OVERLAY_SOURCE = 'https://www.fedramp.gov/20x/ (project-local mnemonics)';
+const cr26Pin = JSON.parse(
+  readFileSync(join(dirname(fileURLToPath(import.meta.url)), 'cr26-2026.10.08.01.json'), 'utf8'),
+);
+
+export const KSI_OVERLAY_VERSION = cr26Pin.version;
+export const KSI_OVERLAY_SOURCE = `${cr26Pin.source} ${cr26Pin.version}`;
+
+/** @type {Record<string, string>} official KSI name by id */
+export const FEDRAMP_20X_KSI = Object.fromEntries(
+  Object.entries(cr26Pin.ksi).map(([id, entry]) => [id, entry.name]),
+);
 
 /**
- * Legacy identifiers kept for continuity with early labs. Where a clear
- * current equivalent exists it is recorded here and annotated in outputs as
- * `alias_of`; entries mapping to null are legacy-only concepts retained until
- * every lab spec migrates.
+ * CR26 rules cited where a retired KSI has no single KSI successor.
+ * @type {Record<string, string>}
+ */
+export const CR26_RULES = Object.fromEntries(
+  Object.entries(cr26Pin.rules).map(([id, entry]) => [id, entry.name]),
+);
+
+const CR26_CATALOG = { ...FEDRAMP_20X_KSI, ...CR26_RULES };
+
+function cr26Statement(id) {
+  const entry = cr26Pin.ksi[id] ?? cr26Pin.rules[id];
+  return entry?.statement ?? '';
+}
+
+/**
+ * Empty. Stale ids used to live here as aliases. They are rejected now.
  * @type {Record<string, string | null>}
  */
-export const KSI_ALIASES = {
-  'KSI-IAM-MFA': 'KSI-IAM-APM',
-  'KSI-SVC-SNT': 'KSI-SVC-SIN',
-  'KSI-SVC-ENC': 'KSI-SVC-SIN',
-  'KSI-SVC-SEC': 'KSI-SVC-ASM',
-  'KSI-RPL-BKP': 'KSI-RPL-ABO',
-  'KSI-CMT-CHG': null,
-  'KSI-INR-IRP': null,
-  'KSI-INR-PRC': null,
-  'KSI-SCR-SRA': null,
-  'KSI-SCR-TPM': null,
-  'KSI-AFR-VDR': null,
-  'KSI-AFR-SCN': null,
-  'KSI-AFR-PVL': null,
-  'KSI-AFR-MAS': null,
-};
-
-export const FEDRAMP_20X_KSI = {
-  // Identity
-  'KSI-IAM-MFA': 'Phishing-resistant multi-factor authentication (alias)',
-  'KSI-IAM-APM': 'Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA',
-  'KSI-IAM-ELP': 'Ensure least privilege',
-  'KSI-IAM-JIT': 'Authorizing just-in-time',
-  'KSI-IAM-AAM': 'Automating account management lifecycle and privileges',
-  'KSI-IAM-SNU': 'Securing non-user authentication',
-  'KSI-IAM-SUS': 'Responding to suspicious activity on privileged accounts',
-  // AFR legacy aliases used by early labs
-  'KSI-AFR-VDR': 'Vulnerability detection and response with N1–N5 severity SLAs',
-  'KSI-AFR-SCN': 'Significant change notification',
-  'KSI-AFR-PVL': 'Persistent validation cadence',
-  'KSI-AFR-MAS': 'Minimum assessment scope / authorization boundary',
-  // Cloud native
-  'KSI-CNA-RNT': 'Restricting network traffic',
-  'KSI-CNA-MAT': 'Minimizing attack surface',
-  'KSI-CNA-EIS': 'Enforcing intended state',
-  'KSI-CNA-OFA': 'Optimizing for availability and rapid recovery',
-  'KSI-CNA-RVP': 'Reviewing DoS and unwanted-activity protections',
-  'KSI-CNA-DFP': 'Defining functionality and privileges',
-  'KSI-CNA-IBP': 'Implementing provider best practices',
-  'KSI-CNA-ULN': 'Using logical networking',
-  // Service configuration (federal data–critical)
-  'KSI-SVC-SNT': 'Secure network traffic / encryption in transit (alias)',
-  'KSI-SVC-ENC': 'Encryption at rest (alias)',
-  'KSI-SVC-SEC': 'Secrets management (alias)',
-  'KSI-SVC-SIN': 'Securing information (encrypt or otherwise protect)',
-  'KSI-SVC-ASM': 'Automating secret management',
-  'KSI-SVC-ACM': 'Automating configuration management',
-  'KSI-SVC-VRI': 'Validating resource integrity',
-  'KSI-SVC-VCM': 'Validating communications authenticity/integrity (Class C)',
-  'KSI-SVC-PRR': 'Preventing residual risk after changes (Class C; federal customer data)',
-  'KSI-SVC-RUD': 'Removing unwanted federal customer data including backups (Class C)',
-  'KSI-SVC-EIS': 'Evaluating and improving security',
-  // Monitoring
-  'KSI-MLA-OSM': 'Operating SIEM capability',
-  'KSI-MLA-EVC': 'Evaluating configurations',
-  'KSI-MLA-ALA': 'Authorizing log access (Class C)',
-  'KSI-MLA-RVL': 'Reviewing logs',
-  'KSI-MLA-LET': 'Logging event types inventory',
-  // Change
-  'KSI-CMT-CHG': 'Change control (alias)',
-  'KSI-CMT-LMC': 'Logging modifications to the CSO',
-  'KSI-CMT-RMV': 'Redeploying version-controlled resources vs direct modification',
-  'KSI-CMT-VTD': 'Validating throughout deployment (automated)',
-  'KSI-CMT-RVP': 'Reviewing change procedures',
-  // Policy & inventory
-  'KSI-PIY-GIV': 'Generating real-time inventories of information resources',
-  'KSI-PIY-RSD': 'Reviewing security in the SDLC / Secure by Design',
-  'KSI-PIY-RVD': 'Reviewing vulnerability disclosures',
-  'KSI-PIY-RES': 'Reviewing executive support',
-  'KSI-PIY-RIS': 'Reviewing investments in security',
-  // Recovery
-  'KSI-RPL-BKP': 'Backup and recovery objectives (alias)',
-  'KSI-RPL-RRO': 'Reviewing recovery objectives (RTO/RPO)',
-  'KSI-RPL-ARP': 'Aligning recovery plan with objectives',
-  'KSI-RPL-ABO': 'Aligning backups with objectives',
-  'KSI-RPL-TRC': 'Testing recovery capabilities',
-  // Incident / supply chain
-  'KSI-INR-IRP': 'Incident response plan (alias)',
-  'KSI-INR-PRC': 'Incident response procedures (alias)',
-  'KSI-INR-AAR': 'Generating after-action reports',
-  'KSI-INR-RIR': 'Reviewing incident response procedures',
-  'KSI-INR-RPI': 'Reviewing past incidents for patterns',
-  'KSI-SCR-SRA': 'Supply chain risk assessment (alias)',
-  'KSI-SCR-TPM': 'Third-party monitoring (alias)',
-  'KSI-SCR-MIT': 'Mitigating supply chain risk',
-  'KSI-SCR-MON': 'Monitoring supply chain risk',
-  'KSI-CED-RAT': 'Reviewing all cybersecurity training',
-};
+export const KSI_ALIASES = {};
 
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
@@ -214,21 +153,20 @@ export async function getControl(controlId, opts = {}) {
 }
 
 /**
- * Resolve a KSI id to its output entry, annotating legacy aliases.
+ * Resolve a CR26 KSI or cited rule id.
  * Unknown ids are hard errors — a typo here would silently drop a compliance
  * claim from the generated evidence.
  * @param {string} id
  */
 export function resolveKsi(id) {
-  const description = FEDRAMP_20X_KSI[id];
-  if (!description || !Object.prototype.hasOwnProperty.call(FEDRAMP_20X_KSI, id)) {
-    throw new Error(`unknown FedRAMP 20x KSI id: ${id} (overlay ${KSI_OVERLAY_VERSION})`);
+  if (typeof id !== 'string' || !Object.prototype.hasOwnProperty.call(CR26_CATALOG, id)) {
+    throw new Error(`unknown FedRAMP CR26 identifier: ${id} (CR26 ${KSI_OVERLAY_VERSION})`);
   }
-  const entry = { description };
-  if (Object.prototype.hasOwnProperty.call(KSI_ALIASES, id)) {
-    entry.legacy = true;
-    if (KSI_ALIASES[id]) entry.alias_of = KSI_ALIASES[id];
-  }
+  const entry = {
+    description: CR26_CATALOG[id],
+    statement: cr26Statement(id),
+  };
+  if (Object.prototype.hasOwnProperty.call(CR26_RULES, id)) entry.kind = 'FRR';
   return entry;
 }
 

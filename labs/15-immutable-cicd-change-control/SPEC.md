@@ -12,7 +12,7 @@ CR26 Change Management:
 | `KSI-CMT-VTD` | Automate validation throughout deployment |
 | `KSI-CMT-LMC` | Log and monitor CSO modifications |
 | `KSI-CMT-RVP` | Persistently review change procedures |
-| `KSI-AFR-SCN` | Classify significant changes (routine / adaptive / transformative) |
+| `SCN-CSO-EVA` | Classify significant changes (routine / adaptive / transformative) |
 
 Underlying rules:
 

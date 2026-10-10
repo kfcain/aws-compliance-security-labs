@@ -1,6 +1,6 @@
 """Amazon Inspector → Security Hub → VDR orchestrator.
 
-Implements a FedRAMP 20x KSI-AFR-VDR style severity → SLA matrix (N1–N5)
+Implements FedRAMP CR26 VDR-TFR-PVR: remediation timeframes follow the Potential Agency Impact N-rating (N1–N5)
 and records remediation evidence timestamps.
 
 Event sources:
@@ -29,7 +29,7 @@ from lab_common import (
 
 LAB_ID = "02-inspector-vdr"
 SCF_CONTROLS = ["VPM-01", "VPM-02", "MON-01", "THR-01"]
-FEDRAMP_KSI = ["KSI-AFR-VDR", "KSI-AFR-PVL", "KSI-MLA-EVC"]
+FEDRAMP_KSI = ["VDR-CSO-DET", "VDR-TFR-PVR", "KSI-MLA-EVC"]
 
 logger = get_logger(LAB_ID)
 

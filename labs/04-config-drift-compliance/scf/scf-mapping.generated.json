@@ -33,12 +33,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CNA-EIS": "Enforcing intended state"
+        "KSI-CNA-EIS": "Enforcing Intended State"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CNA-EIS": {
-          "description": "Enforcing intended state"
+          "description": "Enforcing Intended State",
+          "statement": "Automated services are used to persistently assess the security of all machine-based information resources and automatically enforce their intended operational state."
         }
       }
     },
@@ -126,12 +127,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CNA-EIS": "Enforcing intended state"
+        "KSI-CNA-EIS": "Enforcing Intended State"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-02.json",
       "fedramp_20x_ksi_detail": {
         "KSI-CNA-EIS": {
-          "description": "Enforcing intended state"
+          "description": "Enforcing Intended State",
+          "statement": "Automated services are used to persistently assess the security of all machine-based information resources and automatically enforce their intended operational state."
         }
       }
     },
@@ -173,12 +175,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-MLA-EVC": "Evaluating configurations"
+        "KSI-MLA-EVC": "Evaluating Configurations"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CPL-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-MLA-EVC": {
-          "description": "Evaluating configurations"
+          "description": "Evaluating Configurations",
+          "statement": "The configuration of machine-based information resources, especially infrastructure as code, is persistently evaluated and tested."
         }
       }
     },
@@ -225,12 +228,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-MLA-EVC": "Evaluating configurations"
+        "KSI-MLA-EVC": "Evaluating Configurations"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CPL-02.json",
       "fedramp_20x_ksi_detail": {
         "KSI-MLA-EVC": {
-          "description": "Evaluating configurations"
+          "description": "Evaluating Configurations",
+          "statement": "The configuration of machine-based information resources, especially infrastructure as code, is persistently evaluated and tested."
         }
       }
     },
@@ -273,13 +277,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-AFR-PVL": "Persistent validation cadence"
+        "KSI-SVC-ACM": "Automating Configuration Management"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-AFR-PVL": {
-          "description": "Persistent validation cadence",
-          "legacy": true
+        "KSI-SVC-ACM": {
+          "description": "Automating Configuration Management",
+          "statement": "The configuration of machine-based information resources is managed using automation and persistently reviewed for drift."
         }
       }
     }
@@ -313,5 +317,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

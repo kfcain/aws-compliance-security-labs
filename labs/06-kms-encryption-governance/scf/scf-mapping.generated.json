@@ -37,20 +37,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-ENC": "Encryption at rest (alias)",
-        "KSI-SVC-SNT": "Secure network traffic / encryption in transit (alias)"
+        "KSI-SVC-SIN": "Securing Information"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-01.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-SVC-ENC": {
-          "description": "Encryption at rest (alias)",
-          "legacy": true,
-          "alias_of": "KSI-SVC-SIN"
-        },
-        "KSI-SVC-SNT": {
-          "description": "Secure network traffic / encryption in transit (alias)",
-          "legacy": true,
-          "alias_of": "KSI-SVC-SIN"
+        "KSI-SVC-SIN": {
+          "description": "Securing Information",
+          "statement": "Information is encrypted or otherwise secured from unwanted access or modification."
         }
       }
     },
@@ -87,14 +80,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-ENC": "Encryption at rest (alias)"
+        "KSI-SVC-SIN": "Securing Information"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-03.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-SVC-ENC": {
-          "description": "Encryption at rest (alias)",
-          "legacy": true,
-          "alias_of": "KSI-SVC-SIN"
+        "KSI-SVC-SIN": {
+          "description": "Securing Information",
+          "statement": "Information is encrypted or otherwise secured from unwanted access or modification."
         }
       }
     },
@@ -182,14 +174,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-SEC": "Secrets management (alias)"
+        "KSI-SVC-ASM": "Automating Secret Management"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CFG-02.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-SVC-SEC": {
-          "description": "Secrets management (alias)",
-          "legacy": true,
-          "alias_of": "KSI-SVC-ASM"
+        "KSI-SVC-ASM": {
+          "description": "Automating Secret Management",
+          "statement": "Management, protection, and regular rotation of digital keys, certificates, and other secrets is automated and persistently reviewed."
         }
       }
     },
@@ -246,5 +237,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

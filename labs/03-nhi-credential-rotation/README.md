@@ -14,7 +14,7 @@ Discover, inventory, and rotate service accounts, IAM access keys, API tokens, a
 | Lens | Detail |
 |------|--------|
 | Security program | Non-human identities often outnumber humans 10:1+. Without inventory and rotation, secrets sprawl defeats IAM hygiene. |
-| Compliance | SCF IAC-15/21, FedRAMP KSI-SVC-SEC / KSI-IAM-JIT, NIST IA/AC, PCI DSS 8.6.x key management expectations, ISO crypto and access themes. |
+| Compliance | SCF IAC-15/21, FedRAMP KSI-SVC-ASM / KSI-IAM-JIT, NIST IA/AC, PCI DSS 8.6.x key management expectations, ISO crypto and access themes. |
 | Financial / $$ | Leaked CI/CD tokens cause multi-environment compromise. Rotation automation reduces emergency key-revocation fire drills and insurance questionnaire findings. |
 | Likelihood × Impact | High × High |
 
@@ -37,7 +37,9 @@ Open the dark-mode tldraw diagram:
 | Kind | IDs |
 |------|-----|
 | SCF | `IAC-15`, `IAC-21`, `CRY-01`, `CFG-02` |
-| FedRAMP 20x KSI | `KSI-IAM-ELP`, `KSI-IAM-JIT`, `KSI-SVC-SEC` |
+| FedRAMP 20x KSI | `KSI-IAM-ELP`, `KSI-IAM-JIT`, `KSI-SVC-ASM` |
+
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
 
 Generate live crosswalks (NIST 800-53/171, ISO 27001, PCI DSS, FedRAMP Rev5):
 

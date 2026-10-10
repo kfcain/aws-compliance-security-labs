@@ -35,7 +35,7 @@ Ingest VPC Flow Logs and CloudTrail into GuardDuty, centralize in Security Hub, 
   "checked_at": "ISO-8601",
   "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["THR-01","THR-03","MON-01","MON-02","IRO-02"],
-  "fedramp_20x_ksi": ["KSI-MLA-OSM","KSI-INR-PRC","KSI-CNA-MAT"],
+  "fedramp_20x_ksi": ["KSI-MLA-OSM","KSI-INR-RIR","KSI-CNA-MAT"],
   "artifacts": []
 }
 ```

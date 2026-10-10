@@ -10,22 +10,22 @@
   "ksi_by_control": {
     "MON-01": [
       "KSI-MLA-OSM",
-      "KSI-AFR-PVL"
+      "KSI-MLA-RVL"
     ],
     "MON-02": [
       "KSI-MLA-OSM"
     ],
     "CPL-02": [
-      "KSI-AFR-PVL"
+      "KSI-MLA-RVL"
     ],
     "CHG-01": [
-      "KSI-CMT-CHG"
+      "KSI-CMT-LMC"
     ]
   },
   "ksi": [
+    "KSI-CMT-LMC",
     "KSI-MLA-OSM",
-    "KSI-AFR-PVL",
-    "KSI-CMT-CHG"
+    "KSI-MLA-RVL"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

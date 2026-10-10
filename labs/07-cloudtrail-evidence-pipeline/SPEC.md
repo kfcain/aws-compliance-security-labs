@@ -35,7 +35,7 @@ Build an org-wide CloudTrail → S3 (Object Lock) → Athena/Security Lake pipel
   "checked_at": "ISO-8601",
   "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["MON-01","MON-02","CPL-02","CHG-01"],
-  "fedramp_20x_ksi": ["KSI-MLA-OSM","KSI-AFR-PVL","KSI-CMT-CHG"],
+  "fedramp_20x_ksi": ["KSI-MLA-OSM","KSI-MLA-RVL","KSI-CMT-LMC"],
   "artifacts": []
 }
 ```

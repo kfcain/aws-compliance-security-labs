@@ -4,6 +4,8 @@ Combined monorepo for `17` AWS compliance and security labs. Labs `01`–`15` we
 
 Target frameworks: **NIST SP 800-171**, **NIST SP 800-53**, **ISO 27001**, **PCI DSS**, and **FedRAMP 20x / CR26 Key Security Indicators (KSIs)**.
 
+KSI and cited rule identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
+
 Cross-framework mapping uses the [Secure Controls Framework (SCF) static JSON API](https://grcengclub.github.io/scf-api/).
 
 ## Learn the portfolio
@@ -81,7 +83,7 @@ Each lab includes `README.md`, `WALKTHROUGH.md`, `RISK.md`, `SPEC.md`, `ASSESSME
 ```bash
 # Verify everything offline (Node 18+; Python dev tools from requirements-dev.txt)
 pip install -r requirements-dev.txt
-make lint test iac check     # ruff, pytest, node --test, cfn-lint, checkov, drift gates
+make lint test iac check     # ruff, pytest, node --test, cfn-lint, checkov, Conftest/OPA, drift gates
 
 # Deploy one lab (packages the real handler in src/ — python3.13 runtime)
 cd labs/04-config-drift-compliance

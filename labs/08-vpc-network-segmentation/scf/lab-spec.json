@@ -17,13 +17,13 @@
     ],
     "AST-04": [],
     "CLD-06": [
-      "KSI-SVC-SNT"
+      "KSI-CNA-ULN"
     ]
   },
   "ksi": [
-    "KSI-CNA-RNT",
     "KSI-CNA-MAT",
-    "KSI-SVC-SNT"
+    "KSI-CNA-RNT",
+    "KSI-CNA-ULN"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

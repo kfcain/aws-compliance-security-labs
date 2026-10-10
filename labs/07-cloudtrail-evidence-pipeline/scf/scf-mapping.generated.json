@@ -42,17 +42,18 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-MLA-OSM": "Operating SIEM capability",
-        "KSI-AFR-PVL": "Persistent validation cadence"
+        "KSI-MLA-OSM": "Operating SIEM Capability",
+        "KSI-MLA-RVL": "Reviewing Logs"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-MLA-OSM": {
-          "description": "Operating SIEM capability"
+          "description": "Operating SIEM Capability",
+          "statement": "A Security Information and Event Management (SIEM) or similar system(s) is used and persistently reviewed for centralized, tamper-resistant logging of events, activities, and changes."
         },
-        "KSI-AFR-PVL": {
-          "description": "Persistent validation cadence",
-          "legacy": true
+        "KSI-MLA-RVL": {
+          "description": "Reviewing Logs",
+          "statement": "Logs are persistently reviewed and audited."
         }
       }
     },
@@ -92,12 +93,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-MLA-OSM": "Operating SIEM capability"
+        "KSI-MLA-OSM": "Operating SIEM Capability"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/MON-02.json",
       "fedramp_20x_ksi_detail": {
         "KSI-MLA-OSM": {
-          "description": "Operating SIEM capability"
+          "description": "Operating SIEM Capability",
+          "statement": "A Security Information and Event Management (SIEM) or similar system(s) is used and persistently reviewed for centralized, tamper-resistant logging of events, activities, and changes."
         }
       }
     },
@@ -144,13 +146,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-AFR-PVL": "Persistent validation cadence"
+        "KSI-MLA-RVL": "Reviewing Logs"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CPL-02.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-AFR-PVL": {
-          "description": "Persistent validation cadence",
-          "legacy": true
+        "KSI-MLA-RVL": {
+          "description": "Reviewing Logs",
+          "statement": "Logs are persistently reviewed and audited."
         }
       }
     },
@@ -188,13 +190,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-CMT-CHG": "Change control (alias)"
+        "KSI-CMT-LMC": "Logging Changes"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CHG-01.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-CMT-CHG": {
-          "description": "Change control (alias)",
-          "legacy": true
+        "KSI-CMT-LMC": {
+          "description": "Logging Changes",
+          "statement": "Modifications to the cloud service offering are logged and monitored."
         }
       }
     }
@@ -228,5 +230,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

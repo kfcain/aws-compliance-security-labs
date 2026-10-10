@@ -567,6 +567,8 @@ Resources:
         - IpProtocol: tcp
           FromPort: 443
           ToPort: 443
+          # Teaching point: egress is TCP 443 only, and it is still 0.0.0.0/0.
+          # AWS-0104 flags that on purpose. Do not remove it. See .trivyignore.
           CidrIp: 0.0.0.0/0
           Description: TLS to AWS APIs only
       Tags:

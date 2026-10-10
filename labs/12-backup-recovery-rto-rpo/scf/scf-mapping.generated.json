@@ -30,16 +30,18 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-RPL-ARP": "Aligning recovery plan with objectives",
-        "KSI-CNA-OFA": "Optimizing for availability and rapid recovery"
+        "KSI-RPL-ARP": "Aligning Recovery Plan",
+        "KSI-CNA-OFA": "Optimizing for Availability"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-RPL-ARP": {
-          "description": "Aligning recovery plan with objectives"
+          "description": "Aligning Recovery Plan",
+          "statement": "The alignment of recovery plans with defined recovery objectives is persistently reviewed."
         },
         "KSI-CNA-OFA": {
-          "description": "Optimizing for availability and rapid recovery"
+          "description": "Optimizing for Availability",
+          "statement": "Machine-based information resources are persistently reviewed to ensure they are appropriately optimized for high availability and rapid recovery."
         }
       }
     },
@@ -62,12 +64,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-RPL-RRO": "Reviewing recovery objectives (RTO/RPO)"
+        "KSI-RPL-RRO": "Reviewing Recovery Objectives"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-02.json",
       "fedramp_20x_ksi_detail": {
         "KSI-RPL-RRO": {
-          "description": "Reviewing recovery objectives (RTO/RPO)"
+          "description": "Reviewing Recovery Objectives",
+          "statement": "The desired Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO) are defined and persistently reviewed for alignment with the provider's business needs and capabilities."
         }
       }
     },
@@ -103,12 +106,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-RPL-ABO": "Aligning backups with objectives"
+        "KSI-RPL-ABO": "Aligning Backups with Objectives"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-11.json",
       "fedramp_20x_ksi_detail": {
         "KSI-RPL-ABO": {
-          "description": "Aligning backups with objectives"
+          "description": "Aligning Backups with Objectives",
+          "statement": "The alignment of machine-based information resource backups with defined recovery objectives is persistently reviewed."
         }
       }
     },
@@ -131,12 +135,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-RPL-TRC": "Testing recovery capabilities"
+        "KSI-RPL-TRC": "Testing Recovery Capabilities"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-12.json",
       "fedramp_20x_ksi_detail": {
         "KSI-RPL-TRC": {
-          "description": "Testing recovery capabilities"
+          "description": "Testing Recovery Capabilities",
+          "statement": "The capability to recover from incidents and contingencies aligned with defined recovery objectives is persistently tested."
         }
       }
     },
@@ -174,12 +179,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-RPL-ABO": "Aligning backups with objectives"
+        "KSI-RPL-ABO": "Aligning Backups with Objectives"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-05.json",
       "fedramp_20x_ksi_detail": {
         "KSI-RPL-ABO": {
-          "description": "Aligning backups with objectives"
+          "description": "Aligning Backups with Objectives",
+          "statement": "The alignment of machine-based information resource backups with defined recovery objectives is persistently reviewed."
         }
       }
     },
@@ -257,5 +263,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

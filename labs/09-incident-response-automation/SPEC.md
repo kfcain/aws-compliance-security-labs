@@ -35,7 +35,7 @@ Codify IR playbooks as Step Functions + Lambda: detect, contain, notify stakehol
   "checked_at": "ISO-8601",
   "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["IRO-01","IRO-02","IRO-04","IRO-10","MON-02"],
-  "fedramp_20x_ksi": ["KSI-INR-IRP","KSI-INR-PRC","KSI-MLA-OSM"],
+  "fedramp_20x_ksi": ["KSI-INR-RIR","KSI-MLA-OSM"],
   "artifacts": []
 }
 ```

@@ -14,7 +14,7 @@ Continuously validate phishing-resistant MFA enrollment and use for human identi
 | Lens | Detail |
 |------|--------|
 | Security program | Identity is the primary control plane. Gaps in MFA break zero-trust and privileged access programs. |
-| Compliance | Required by NIST 800-171 03.05.03, NIST 800-53 IA-2(1)/(2), PCI DSS 8.4.x, FedRAMP KSI-IAM-MFA, and ISO 27001 Annex A access controls via SCF IAC-06. |
+| Compliance | Required by NIST 800-171 03.05.03, NIST 800-53 IA-2(1)/(2), PCI DSS 8.4.x, FedRAMP KSI-IAM-APM, and ISO 27001 Annex A access controls via SCF IAC-06. |
 | Financial / $$ | Average account-takeover breach cost often exceeds $4M+ (industry reports). Failed FedRAMP/CMMC/PCI assessments block revenue and contracts. Manual MFA audits burn GRC hours every quarter. |
 | Likelihood × Impact | High × Critical |
 
@@ -37,7 +37,9 @@ Open the dark-mode tldraw diagram:
 | Kind | IDs |
 |------|-----|
 | SCF | `IAC-06`, `IAC-15`, `IAC-21`, `MON-01` |
-| FedRAMP 20x KSI | `KSI-IAM-MFA`, `KSI-IAM-ELP`, `KSI-AFR-PVL` |
+| FedRAMP 20x KSI | `KSI-IAM-APM`, `KSI-IAM-ELP`, `KSI-MLA-RVL` |
+
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
 
 Generate live crosswalks (NIST 800-53/171, ISO 27001, PCI DSS, FedRAMP Rev5):
 

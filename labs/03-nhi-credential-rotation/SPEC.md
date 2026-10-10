@@ -35,7 +35,7 @@ Discover, inventory, and rotate service accounts, IAM access keys, API tokens, a
   "checked_at": "ISO-8601",
   "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["IAC-15","IAC-21","CRY-01","CFG-02"],
-  "fedramp_20x_ksi": ["KSI-IAM-ELP","KSI-IAM-JIT","KSI-SVC-SEC"],
+  "fedramp_20x_ksi": ["KSI-IAM-ELP","KSI-IAM-JIT","KSI-SVC-ASM"],
   "artifacts": []
 }
 ```

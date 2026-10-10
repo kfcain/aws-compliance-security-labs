@@ -10,23 +10,23 @@
   ],
   "ksi_by_control": {
     "TPM-01": [
-      "KSI-SCR-SRA"
+      "KSI-SCR-MIT"
     ],
     "TPM-03": [
-      "KSI-SCR-TPM"
+      "KSI-SCR-MON"
     ],
     "TPM-04": [
-      "KSI-SCR-TPM"
+      "KSI-SCR-MON"
     ],
     "VPM-01": [
-      "KSI-AFR-VDR"
+      "VDR-CSO-DET"
     ],
     "AST-02": []
   },
   "ksi": [
-    "KSI-SCR-SRA",
-    "KSI-SCR-TPM",
-    "KSI-AFR-VDR"
+    "KSI-SCR-MIT",
+    "KSI-SCR-MON",
+    "VDR-CSO-DET"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

@@ -36,7 +36,7 @@ Cryptographic governance underpins confidentiality commitments and customer trus
 
 ## Compliance impact
 
-FedRAMP KSI-SVC-ENC/SNT; SCF CRY-01/03; NIST SC-13/SC-28; PCI DSS 3.x/4.x crypto; ISO 27001 crypto controls.
+FedRAMP KSI-SVC-SIN; SCF CRY-01/03; NIST SC-13/SC-28; PCI DSS 3.x/4.x crypto; ISO 27001 crypto controls.
 
 ## Financial / business impact
 

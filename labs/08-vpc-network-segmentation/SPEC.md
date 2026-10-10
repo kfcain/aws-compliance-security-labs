@@ -35,7 +35,7 @@ Implement least-privilege network paths with Security Groups, NACLs, Network Fir
   "checked_at": "ISO-8601",
   "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["NET-01","NET-04","AST-04","CLD-06"],
-  "fedramp_20x_ksi": ["KSI-CNA-RNT","KSI-CNA-MAT","KSI-SVC-SNT"],
+  "fedramp_20x_ksi": ["KSI-CNA-RNT","KSI-CNA-MAT","KSI-CNA-ULN"],
   "artifacts": []
 }
 ```

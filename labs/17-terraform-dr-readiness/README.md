@@ -24,6 +24,8 @@ with assessor-ready evidence, that recovery-by-reapply is actually possible.
 | Likelihood × Impact | Medium × Critical (see [RISK.md](./RISK.md)) |
 | Control theme | Align recovery plan/backups with objectives (KSI-RPL-ARP/ABO/RRO); optimize for rapid recovery (KSI-CNA-OFA); enforce intended state (KSI-CNA-EIS) |
 
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
+
 ## Not a duplicate of lab 12
 
 [`12-backup-recovery-rto-rpo`](../12-backup-recovery-rto-rpo/) evaluates the
@@ -72,6 +74,12 @@ companions:
 | [`governance/dr-plan.yaml`](./governance/dr-plan.yaml) | Approved DR plan / ODP register: RTO/RPO targets, recovery region, critical-asset scope |
 | [`governance/derive-descriptor.sh`](./governance/derive-descriptor.sh) | Producer-side, **read-only** deriver that builds the DR descriptor from `terraform show -json` + the backend config, with a SHA-256 manifest |
 | [`governance/policy/dr.rego`](./governance/policy/dr.rego) | OPA/Conftest gate on the emitted evidence, each violation objective-linked |
+
+The package is `tfdr.readiness`. Pass `--namespace tfdr.readiness` (the default namespace is `main` and reports 0 tests):
+
+```bash
+conftest test evidence.json --policy governance/policy --namespace tfdr.readiness
+```
 
 ## Lab layout
 
