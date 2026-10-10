@@ -47,8 +47,10 @@ CI runner.
 | CFG-01 | Configuration Management Program | KSI-CNA-EIS |
 | CFG-02 | Secure Baseline Configurations | KSI-CNA-EIS |
 | CPL-01 | Statutory, Regulatory & Contractual Compliance | KSI-MLA-EVC |
-| MON-01 | Continuous Monitoring | KSI-AFR-PVL |
+| MON-01 | Continuous Monitoring | KSI-MLA-EVC |
 | CHG-02 | Configuration Change Control | KSI-CMT-RMV |
+
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
 
 Crosswalk: [`scf/scf-mapping.generated.json`](./scf/scf-mapping.generated.json);
 assessment procedures: [`ASSESSMENT.md`](./ASSESSMENT.md).
@@ -92,7 +94,16 @@ methodology this lab is built around):
 | [`governance/policy/drift.rego`](./governance/policy/drift.rego) | OPA/Conftest gate: pre-deploy on the plan, post-deploy on the emitted evidence — each violation carries the objectives it maps to |
 
 Run policy on **both** sides — the plan before apply, and the emitted evidence
-after — so the intended change and the actual state are each gated. Terraform
+after — so the intended change and the actual state are each gated. The package
+is `tfdrift.drift`. Pass `--namespace tfdrift.drift` (the default namespace is
+`main` and reports 0 tests):
+
+```bash
+conftest test plan.json --policy governance/policy --namespace tfdrift.drift
+conftest test evidence.json --policy governance/policy --namespace tfdrift.drift
+```
+
+Terraform
 drift is surfaced with `terraform plan -refresh-only -detailed-exitcode`
 (exit `0` = none, `2` = drift, `1` = error).
 

@@ -643,6 +643,8 @@ Resources:
       IsMultiRegionTrail: true
       EnableLogFileValidation: true
       IncludeGlobalServiceEvents: true
+      # CMK for the trail. CloudFormation property is KMSKeyId (LabKmsKey).
+      # Trivy AWS-0015 reads KmsKeyId, so it reports a false miss. See .trivyignore.
       KMSKeyId: !GetAtt LabKmsKey.Arn
       Tags:
         - { Key: project, Value: aws-compliance-security-labs }

@@ -5,7 +5,7 @@ FedRAMP CR26:
   KSI-CMT-VTD  automated validation throughout deployment
   KSI-CMT-LMC  log/monitor modifications to the CSO
   KSI-CMT-RVP  review change procedures
-  KSI-AFR-SCN  classify significant changes (routine/adaptive/transformative)
+  SCN-CSO-EVA  evaluate significant changes and classify the type (routine/adaptive/transformative)
 
 Detects forbidden in-place change paths and evaluates pipeline gate evidence.
 
@@ -53,7 +53,7 @@ from lab_common import (
 
 LAB_ID = "15-immutable-cicd-change-control"
 SCF_CONTROLS = ["CHG-01", "CHG-02", "CHG-03", "CHG-04", "CFG-01", "TDA-06"]
-FEDRAMP_KSI = ["KSI-CMT-RMV", "KSI-CMT-VTD", "KSI-CMT-LMC", "KSI-CMT-RVP", "KSI-AFR-SCN"]
+FEDRAMP_KSI = ["KSI-CMT-RMV", "KSI-CMT-VTD", "KSI-CMT-LMC", "KSI-CMT-RVP", "SCN-CSO-EVA"]
 
 logger = get_logger(LAB_ID)
 

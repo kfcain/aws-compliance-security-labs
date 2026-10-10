@@ -9,21 +9,20 @@
   ],
   "ksi_by_control": {
     "VPM-01": [
-      "KSI-AFR-VDR"
+      "VDR-CSO-DET"
     ],
     "VPM-02": [
-      "KSI-AFR-VDR"
+      "VDR-TFR-PVR"
     ],
     "MON-01": [
-      "KSI-AFR-PVL",
       "KSI-MLA-EVC"
     ],
     "THR-01": []
   },
   "ksi": [
-    "KSI-AFR-VDR",
-    "KSI-AFR-PVL",
-    "KSI-MLA-EVC"
+    "KSI-MLA-EVC",
+    "VDR-CSO-DET",
+    "VDR-TFR-PVR"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

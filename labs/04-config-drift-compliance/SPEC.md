@@ -35,7 +35,7 @@ Use AWS Config + Security Hub to persistently evaluate resource posture against 
   "checked_at": "ISO-8601",
   "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["CFG-01","CFG-02","CPL-01","CPL-02","MON-01"],
-  "fedramp_20x_ksi": ["KSI-CNA-EIS","KSI-MLA-EVC","KSI-AFR-PVL"],
+  "fedramp_20x_ksi": ["KSI-CNA-EIS","KSI-MLA-EVC","KSI-SVC-ACM"],
   "artifacts": []
 }
 ```

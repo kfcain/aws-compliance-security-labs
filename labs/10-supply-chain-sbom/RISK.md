@@ -36,7 +36,7 @@ SCRM and SBOM are now board-level and FedRAMP SCR theme requirements.
 
 ## Compliance impact
 
-SCF TPM/VPM/AST; FedRAMP KSI-SCR-SRA/TPM; NIST 800-161 themes; PCI third-party; ISO supplier relationships.
+SCF TPM/VPM/AST; FedRAMP KSI-SCR-MIT and KSI-SCR-MON; NIST 800-161 themes; PCI third-party; ISO supplier relationships.
 
 ## Financial / business impact
 

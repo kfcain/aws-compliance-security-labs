@@ -55,7 +55,7 @@ from lab_common import (
 
 LAB_ID = "16-terraform-drift-detection"
 SCF_CONTROLS = ["CFG-01", "CFG-02", "CPL-01", "MON-01", "CHG-02"]
-FEDRAMP_KSI = ["KSI-AFR-PVL", "KSI-CNA-EIS", "KSI-CMT-RMV", "KSI-MLA-EVC"]
+FEDRAMP_KSI = ["KSI-MLA-EVC", "KSI-CNA-EIS", "KSI-CMT-RMV"]
 
 # Assessment mapping for the assessor-ready assurance case. Objective IDs are
 # the real NIST 800-171 rev 3 (800-171A) and 800-53 rev 5 assessment

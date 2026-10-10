@@ -35,7 +35,7 @@ Generate and store SBOMs, scan container/images with Inspector, track third-part
   "checked_at": "ISO-8601",
   "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["TPM-01","TPM-03","TPM-04","VPM-01","AST-02"],
-  "fedramp_20x_ksi": ["KSI-SCR-SRA","KSI-SCR-TPM","KSI-AFR-VDR"],
+  "fedramp_20x_ksi": ["KSI-SCR-MIT","KSI-SCR-MON","VDR-CSO-DET"],
   "artifacts": []
 }
 ```

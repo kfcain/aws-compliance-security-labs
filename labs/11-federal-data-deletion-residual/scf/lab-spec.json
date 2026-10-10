@@ -27,14 +27,13 @@
       "KSI-SVC-SIN"
     ],
     "CLD-01": [
-      "KSI-AFR-PVL"
+      "KSI-SVC-PRR"
     ]
   },
   "ksi": [
-    "KSI-SVC-RUD",
     "KSI-SVC-PRR",
-    "KSI-SVC-SIN",
-    "KSI-AFR-PVL"
+    "KSI-SVC-RUD",
+    "KSI-SVC-SIN"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

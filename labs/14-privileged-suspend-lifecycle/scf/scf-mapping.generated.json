@@ -49,12 +49,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-AAM": "Automating account management lifecycle and privileges"
+        "KSI-IAM-AAM": "Automating Account Management"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-15.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-AAM": {
-          "description": "Automating account management lifecycle and privileges"
+          "description": "Automating Account Management",
+          "statement": "The lifecycle and privileges of all accounts, roles, and groups are securely managed using automation."
         }
       }
     },
@@ -80,16 +81,18 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-SUS": "Responding to suspicious activity on privileged accounts",
-        "KSI-IAM-APM": "Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA"
+        "KSI-IAM-SUS": "Responding to Suspicious Activity",
+        "KSI-IAM-APM": "Adopting Passwordless Methods"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-16.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-SUS": {
-          "description": "Responding to suspicious activity on privileged accounts"
+          "description": "Responding to Suspicious Activity",
+          "statement": "Accounts with privileged access are disabled or otherwise secured in response to suspicious activity."
         },
         "KSI-IAM-APM": {
-          "description": "Adopt passwordless methods; otherwise strong auth + phishing-resistant MFA"
+          "description": "Adopting Passwordless Methods",
+          "statement": "Secure passwordless methods are used for user authentication and authorization when feasible, otherwise strong passwords with phishing-resistant MFA is used."
         }
       }
     },
@@ -126,12 +129,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-JIT": "Authorizing just-in-time"
+        "KSI-IAM-JIT": "Authorizing Just-in-Time"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-17.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-JIT": {
-          "description": "Authorizing just-in-time"
+          "description": "Authorizing Just-in-Time",
+          "statement": "A least-privileged, role and attribute-based, and just-in-time security authorization model is used and persistently reviewed for all user and non-user accounts and services."
         }
       }
     },
@@ -186,12 +190,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-ELP": "Ensure least privilege"
+        "KSI-IAM-ELP": "Ensuring Least Privilege"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-21.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-ELP": {
-          "description": "Ensure least privilege"
+          "description": "Ensuring Least Privilege",
+          "statement": "Identity and access management measures are used and persistently reviewed to ensure each user or device can only access the resources they need."
         }
       }
     },
@@ -276,12 +281,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-SUS": "Responding to suspicious activity on privileged accounts"
+        "KSI-IAM-SUS": "Responding to Suspicious Activity"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/THR-03.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-SUS": {
-          "description": "Responding to suspicious activity on privileged accounts"
+          "description": "Responding to Suspicious Activity",
+          "statement": "Accounts with privileged access are disabled or otherwise secured in response to suspicious activity."
         }
       }
     }
@@ -315,5 +321,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

@@ -1,0 +1,13 @@
+{
+  "lab_id": "17-terraform-dr-readiness",
+  "state_backend_type": "s3",
+  "status": "PASS",
+  "findings": [
+    {
+      "code": "store-not-cross-region-durable"
+    }
+  ],
+  "provenance": {
+    "evidence_manifest_sha256": "abc"
+  }
+}

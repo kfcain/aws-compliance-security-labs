@@ -1,0 +1,10 @@
+{
+  "lab_id": "17-terraform-dr-readiness",
+  "state_backend_type": "s3",
+  "status": "FAIL",
+  "actionable_finding_count": 2,
+  "findings": [],
+  "provenance": {
+    "evidence_manifest_sha256": "abc"
+  }
+}

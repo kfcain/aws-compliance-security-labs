@@ -42,7 +42,8 @@ PLAN_BUCKET=$(aws cloudformation describe-stacks --stack-name aws-lab-16 \
 terraform plan -refresh-only -out tfplan
 terraform show -json tfplan > plan.json
 aws s3 cp plan.json "s3://$PLAN_BUCKET/prod/tfplan.json"
-# Optional: conftest test --policy governance/policy plan.json
+# Gate the plan. The policy package is tfdrift.drift, not main.
+conftest test plan.json --policy governance/policy --namespace tfdrift.drift
 ```
 
 ## 2. Collect evidence

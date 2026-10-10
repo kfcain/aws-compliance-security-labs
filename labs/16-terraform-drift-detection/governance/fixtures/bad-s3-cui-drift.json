@@ -1,0 +1,8 @@
+{
+  "resource_drift": [
+    {
+      "address": "aws_s3_bucket_policy.cui",
+      "type": "aws_s3_bucket_policy"
+    }
+  ]
+}

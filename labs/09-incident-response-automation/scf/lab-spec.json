@@ -10,24 +10,23 @@
   ],
   "ksi_by_control": {
     "IRO-01": [
-      "KSI-INR-IRP"
+      "KSI-INR-RIR"
     ],
     "IRO-02": [
-      "KSI-INR-PRC"
+      "KSI-INR-RIR"
     ],
     "IRO-04": [
-      "KSI-INR-PRC"
+      "KSI-INR-RIR"
     ],
     "IRO-10": [
-      "KSI-INR-IRP"
+      "KSI-INR-RIR"
     ],
     "MON-02": [
       "KSI-MLA-OSM"
     ]
   },
   "ksi": [
-    "KSI-INR-IRP",
-    "KSI-INR-PRC",
+    "KSI-INR-RIR",
     "KSI-MLA-OSM"
   ],
   "frameworks": [

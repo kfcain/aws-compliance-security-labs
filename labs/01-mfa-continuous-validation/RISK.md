@@ -37,7 +37,7 @@ Identity is the primary control plane. Gaps in MFA break zero-trust and privileg
 
 ## Compliance impact
 
-Required by NIST 800-171 03.05.03, NIST 800-53 IA-2(1)/(2), PCI DSS 8.4.x, FedRAMP KSI-IAM-MFA, and ISO 27001 Annex A access controls via SCF IAC-06.
+Required by NIST 800-171 03.05.03, NIST 800-53 IA-2(1)/(2), PCI DSS 8.4.x, FedRAMP KSI-IAM-APM, and ISO 27001 Annex A access controls via SCF IAC-06.
 
 ## Financial / business impact
 

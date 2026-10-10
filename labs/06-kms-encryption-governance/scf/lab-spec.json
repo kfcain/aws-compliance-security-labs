@@ -9,21 +9,19 @@
   ],
   "ksi_by_control": {
     "CRY-01": [
-      "KSI-SVC-ENC",
-      "KSI-SVC-SNT"
+      "KSI-SVC-SIN"
     ],
     "CRY-03": [
-      "KSI-SVC-ENC"
+      "KSI-SVC-SIN"
     ],
     "CFG-02": [
-      "KSI-SVC-SEC"
+      "KSI-SVC-ASM"
     ],
     "CLD-01": []
   },
   "ksi": [
-    "KSI-SVC-ENC",
-    "KSI-SVC-SNT",
-    "KSI-SVC-SEC"
+    "KSI-SVC-ASM",
+    "KSI-SVC-SIN"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

@@ -4,12 +4,12 @@ Wire EventBridge (daily schedule) → this function → Security Hub / evidence
 store. The lab attests the container supply-chain posture that SBOM/scan
 evidence depends on:
 
-  1. Inspector activation (KSI-SCR-SRA / KSI-AFR-VDR): Amazon Inspector v2
+  1. Inspector activation (KSI-SCR-MIT / VDR-CSO-DET): Amazon Inspector v2
      account scanning must be ENABLED for ec2 and ecr (and lambda/lambdaCode
      when those resource states are present in the account status shape) —
      otherwise CVEs in images and hosts go undetected and no SBOM-backed
      vulnerability evidence exists.
-  2. ECR registry hardening (KSI-SCR-TPM): every repository must scan on push
+  2. ECR registry hardening (KSI-SCR-MON): every repository must scan on push
      (``imageScanningConfiguration.scanOnPush``) and pin provenance with
      ``imageTagMutability == "IMMUTABLE"`` (a mutable tag lets a compromised
      push silently replace a vetted image). KMS CMK encryption is preferred;
@@ -53,7 +53,7 @@ from lab_common import (
 
 LAB_ID = "10-supply-chain-sbom"
 SCF_CONTROLS = ["TPM-01", "TPM-03", "TPM-04", "VPM-01", "AST-02"]
-FEDRAMP_KSI = ["KSI-SCR-SRA", "KSI-SCR-TPM", "KSI-AFR-VDR"]
+FEDRAMP_KSI = ["KSI-SCR-MIT", "KSI-SCR-MON", "VDR-CSO-DET"]
 
 logger = get_logger(LAB_ID)
 
@@ -314,7 +314,7 @@ def handler(
                     f"{evidence['inspector_violation_count']} Inspector scanning "
                     f"gap(s) and {evidence['repositories']['failing_count']} of "
                     f"{evidence['repositories']['count']} ECR repositories failing "
-                    "the registry floor. Fails KSI-SCR-SRA/TPM."
+                    "the registry floor. Fails KSI-SCR-MIT and KSI-SCR-MON."
                 ),
                 severity="HIGH",
                 resource_type="AwsEcrRepository",

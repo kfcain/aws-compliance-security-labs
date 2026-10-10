@@ -33,14 +33,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-MFA": "Phishing-resistant multi-factor authentication (alias)"
+        "KSI-IAM-APM": "Adopting Passwordless Methods"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-06.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-IAM-MFA": {
-          "description": "Phishing-resistant multi-factor authentication (alias)",
-          "legacy": true,
-          "alias_of": "KSI-IAM-APM"
+        "KSI-IAM-APM": {
+          "description": "Adopting Passwordless Methods",
+          "statement": "Secure passwordless methods are used for user authentication and authorization when feasible, otherwise strong passwords with phishing-resistant MFA is used."
         }
       }
     },
@@ -144,12 +143,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-IAM-ELP": "Ensure least privilege"
+        "KSI-IAM-ELP": "Ensuring Least Privilege"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/IAC-21.json",
       "fedramp_20x_ksi_detail": {
         "KSI-IAM-ELP": {
-          "description": "Ensure least privilege"
+          "description": "Ensuring Least Privilege",
+          "statement": "Identity and access management measures are used and persistently reviewed to ensure each user or device can only access the resources they need."
         }
       }
     },
@@ -192,13 +192,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-AFR-PVL": "Persistent validation cadence"
+        "KSI-MLA-RVL": "Reviewing Logs"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-AFR-PVL": {
-          "description": "Persistent validation cadence",
-          "legacy": true
+        "KSI-MLA-RVL": {
+          "description": "Reviewing Logs",
+          "statement": "Logs are persistently reviewed and audited."
         }
       }
     }
@@ -235,5 +235,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

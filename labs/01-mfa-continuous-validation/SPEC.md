@@ -35,7 +35,7 @@ Continuously validate phishing-resistant MFA enrollment and use for human identi
   "checked_at": "ISO-8601",
   "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["IAC-06","IAC-15","IAC-21","MON-01"],
-  "fedramp_20x_ksi": ["KSI-IAM-MFA","KSI-IAM-ELP","KSI-AFR-PVL"],
+  "fedramp_20x_ksi": ["KSI-IAM-APM","KSI-IAM-ELP","KSI-MLA-RVL"],
   "artifacts": []
 }
 ```

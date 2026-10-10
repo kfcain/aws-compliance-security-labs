@@ -45,7 +45,7 @@ from lab_common import (
 
 LAB_ID = "08-vpc-network-segmentation"
 SCF_CONTROLS = ["NET-01", "NET-04", "AST-04", "CLD-06"]
-FEDRAMP_KSI = ["KSI-CNA-RNT", "KSI-CNA-MAT", "KSI-SVC-SNT"]
+FEDRAMP_KSI = ["KSI-CNA-RNT", "KSI-CNA-MAT", "KSI-CNA-ULN"]
 
 logger = get_logger(LAB_ID)
 

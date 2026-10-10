@@ -21,9 +21,9 @@
         "MON-01"
       ],
       "ksi": [
-        "KSI-IAM-MFA",
+        "KSI-IAM-APM",
         "KSI-IAM-ELP",
-        "KSI-AFR-PVL"
+        "KSI-MLA-RVL"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -56,7 +56,7 @@
       "title": "Vulnerability Detection & Response (Inspector VDR)",
       "repo_name": "lab-inspector-vdr",
       "path": "labs/02-inspector-vdr",
-      "summary": "Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1\u2013N5 severity SLAs, Security Hub aggregation, and remediation evidence.",
+      "summary": "Automate FedRAMP CR26 VDR-CSO-DET and VDR-TFR-PVR: continuous scanning with Amazon Inspector, N1\u2013N5 severity SLAs, Security Hub aggregation, and remediation evidence.",
       "primary_risk": "Unpatched CVEs leading to breach and failed authorization",
       "scf_controls": [
         "VPM-01",
@@ -65,9 +65,9 @@
         "THR-01"
       ],
       "ksi": [
-        "KSI-AFR-VDR",
-        "KSI-AFR-PVL",
-        "KSI-MLA-EVC"
+        "KSI-MLA-EVC",
+        "VDR-CSO-DET",
+        "VDR-TFR-PVR"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -108,7 +108,7 @@
       "ksi": [
         "KSI-IAM-ELP",
         "KSI-IAM-JIT",
-        "KSI-SVC-SEC"
+        "KSI-SVC-ASM"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -154,7 +154,7 @@
       "ksi": [
         "KSI-CNA-EIS",
         "KSI-MLA-EVC",
-        "KSI-AFR-PVL"
+        "KSI-SVC-ACM"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -194,9 +194,9 @@
         "IRO-02"
       ],
       "ksi": [
-        "KSI-MLA-OSM",
-        "KSI-INR-PRC",
-        "KSI-CNA-MAT"
+        "KSI-CNA-MAT",
+        "KSI-INR-RIR",
+        "KSI-MLA-OSM"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -236,9 +236,8 @@
         "CLD-01"
       ],
       "ksi": [
-        "KSI-SVC-ENC",
-        "KSI-SVC-SNT",
-        "KSI-SVC-SEC"
+        "KSI-SVC-ASM",
+        "KSI-SVC-SIN"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -277,9 +276,9 @@
         "CHG-01"
       ],
       "ksi": [
+        "KSI-CMT-LMC",
         "KSI-MLA-OSM",
-        "KSI-AFR-PVL",
-        "KSI-CMT-CHG"
+        "KSI-MLA-RVL"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -318,9 +317,9 @@
         "CLD-06"
       ],
       "ksi": [
-        "KSI-CNA-RNT",
         "KSI-CNA-MAT",
-        "KSI-SVC-SNT"
+        "KSI-CNA-RNT",
+        "KSI-CNA-ULN"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -360,8 +359,7 @@
         "MON-02"
       ],
       "ksi": [
-        "KSI-INR-IRP",
-        "KSI-INR-PRC",
+        "KSI-INR-RIR",
         "KSI-MLA-OSM"
       ],
       "frameworks": [
@@ -405,9 +403,9 @@
         "AST-02"
       ],
       "ksi": [
-        "KSI-SCR-SRA",
-        "KSI-SCR-TPM",
-        "KSI-AFR-VDR"
+        "KSI-SCR-MIT",
+        "KSI-SCR-MON",
+        "VDR-CSO-DET"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -451,10 +449,9 @@
         "CLD-01"
       ],
       "ksi": [
-        "KSI-SVC-RUD",
         "KSI-SVC-PRR",
-        "KSI-SVC-SIN",
-        "KSI-AFR-PVL"
+        "KSI-SVC-RUD",
+        "KSI-SVC-SIN"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -550,10 +547,10 @@
         "GOV-01"
       ],
       "ksi": [
-        "KSI-PIY-GIV",
-        "KSI-AFR-MAS",
         "KSI-CNA-DFP",
-        "KSI-MLA-LET"
+        "KSI-MLA-LET",
+        "KSI-PIY-GIV",
+        "MAS-CSO-IIR"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -650,11 +647,11 @@
         "TDA-06"
       ],
       "ksi": [
-        "KSI-CMT-RMV",
-        "KSI-CMT-VTD",
         "KSI-CMT-LMC",
+        "KSI-CMT-RMV",
         "KSI-CMT-RVP",
-        "KSI-AFR-SCN"
+        "KSI-CMT-VTD",
+        "SCN-CSO-EVA"
       ],
       "frameworks": [
         "general-nist-800-53-r5-2",
@@ -700,9 +697,8 @@
         "CHG-02"
       ],
       "ksi": [
-        "KSI-AFR-PVL",
-        "KSI-CNA-EIS",
         "KSI-CMT-RMV",
+        "KSI-CNA-EIS",
         "KSI-MLA-EVC"
       ],
       "frameworks": [

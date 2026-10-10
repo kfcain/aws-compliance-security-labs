@@ -36,7 +36,7 @@ Inventory and boundary are prerequisites for every other control. You cannot mon
 
 ## Compliance impact
 
-FedRAMP KSI-PIY-GIV and Minimum Assessment Scope practice (KSI-AFR-MAS overlay); SCF AST-01/02/04, NET-03, CPL-01; NIST CM-8/CA-3; ISO asset management.
+FedRAMP KSI-PIY-GIV and Minimum Assessment Scope rule MAS-CSO-IIR; SCF AST-01/02/04, NET-03, CPL-01; NIST CM-8/CA-3; ISO asset management.
 
 ## Financial / business impact
 

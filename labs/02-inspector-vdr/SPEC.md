@@ -2,7 +2,7 @@
 
 ## Goal
 
-Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1–N5 severity SLAs, Security Hub aggregation, and remediation evidence.
+Automate FedRAMP CR26 VDR-CSO-DET and VDR-TFR-PVR: continuous scanning with Amazon Inspector, N1–N5 severity SLAs, Security Hub aggregation, and remediation evidence.
 
 ## Non-goals
 
@@ -35,7 +35,7 @@ Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1�
   "checked_at": "ISO-8601",
   "status": "PASS|FAIL|ERROR|CONFIG_ERROR|NOT_APPLICABLE",
   "scf_controls": ["VPM-01","VPM-02","MON-01","THR-01"],
-  "fedramp_20x_ksi": ["KSI-AFR-VDR","KSI-AFR-PVL","KSI-MLA-EVC"],
+  "fedramp_20x_ksi": ["VDR-CSO-DET","VDR-TFR-PVR","KSI-MLA-EVC"],
   "artifacts": []
 }
 ```

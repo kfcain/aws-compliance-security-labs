@@ -5,7 +5,7 @@
 
 ## Problem
 
-Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1–N5 severity SLAs, Security Hub aggregation, and remediation evidence.
+Automate FedRAMP CR26 VDR-CSO-DET and VDR-TFR-PVR: continuous scanning with Amazon Inspector, N1–N5 severity SLAs, Security Hub aggregation, and remediation evidence.
 
 **Primary risk:** Unpatched CVEs leading to breach and failed authorization
 
@@ -14,7 +14,7 @@ Automate FedRAMP 20x KSI-AFR-VDR: continuous scanning with Amazon Inspector, N1�
 | Lens | Detail |
 |------|--------|
 | Security program | Vulnerability management is a core continuous control. Without severity SLAs and evidence, the program cannot prove risk reduction. |
-| Compliance | FedRAMP 20x KSI-AFR-VDR requires N1–N5 severity ratings and remediation timelines. Maps to SCF VPM-01/02, NIST RA/SI families, PCI DSS 6.3.x, ISO 27001 A.8.8. |
+| Compliance | FedRAMP CR26 VDR-TFR-PVR requires mitigation within the timeframes for the current Potential Agency Impact N-rating. Maps to SCF VPM-01/02, NIST RA/SI families, PCI DSS 6.3.x, ISO 27001 A.8.8. |
 | Financial / $$ | Unpatched critical CVEs are a top breach vector. Authorization delays cost months of sales cycles. Automated VDR cuts scanner-to-ticket latency and auditor prep cost. |
 | Likelihood × Impact | High × Critical |
 
@@ -37,7 +37,9 @@ Open the dark-mode tldraw diagram:
 | Kind | IDs |
 |------|-----|
 | SCF | `VPM-01`, `VPM-02`, `MON-01`, `THR-01` |
-| FedRAMP 20x KSI | `KSI-AFR-VDR`, `KSI-AFR-PVL`, `KSI-MLA-EVC` |
+| FedRAMP 20x KSI | `VDR-CSO-DET`, `VDR-TFR-PVR`, `KSI-MLA-EVC` |
+
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
 
 Generate live crosswalks (NIST 800-53/171, ISO 27001, PCI DSS, FedRAMP Rev5):
 

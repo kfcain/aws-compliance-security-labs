@@ -15,7 +15,7 @@ node src/cli.js ../../labs/01-mfa-continuous-validation/scf/lab-spec.json --out 
 - `mapControl(controlId, { frameworks, ksi })`
 - `mapLab({ lab_id, scf_controls, ksi, frameworks })`
 - `reverseLookup(frameworkId, frameworkControlId)`
-- `FEDRAMP_20X_KSI` — CR26 / FedRAMP 20x overlay (not in the SCF Excel workbook)
+- `FEDRAMP_20X_KSI` — FedRAMP CR26 KSIs pinned to version 2026.10.08.01 (`src/cr26-2026.10.08.01.json`). `CR26_RULES` holds cited rule ids from that same file.
 
 ## Target frameworks (defaults)
 

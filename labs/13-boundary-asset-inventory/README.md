@@ -14,7 +14,7 @@ Persistently generate authoritative inventories of in-boundary information resou
 | Lens | Detail |
 |------|--------|
 | Security program | Inventory and boundary are prerequisites for every other control. You cannot monitor, encrypt, or delete what you do not know. |
-| Compliance | FedRAMP KSI-PIY-GIV and Minimum Assessment Scope practice (KSI-AFR-MAS overlay); SCF AST-01/02/04, NET-03, CPL-01; NIST CM-8/CA-3; ISO asset management. |
+| Compliance | FedRAMP KSI-PIY-GIV and Minimum Assessment Scope rule MAS-CSO-IIR; SCF AST-01/02/04, NET-03, CPL-01; NIST CM-8/CA-3; ISO asset management. |
 | Financial / $$ | Scope gaps cause 3PAO findings, rework, and delayed ATO. Undiscovered stores expand breach blast radius and discovery cost. |
 | Likelihood × Impact | High × Critical |
 
@@ -37,7 +37,9 @@ Open the dark-mode tldraw diagram:
 | Kind | IDs |
 |------|-----|
 | SCF | `AST-01`, `AST-02`, `AST-04`, `NET-03`, `CPL-01`, `GOV-01` |
-| FedRAMP 20x KSI | `KSI-PIY-GIV`, `KSI-AFR-MAS`, `KSI-CNA-DFP`, `KSI-MLA-LET` |
+| FedRAMP 20x KSI | `KSI-PIY-GIV`, `MAS-CSO-IIR`, `KSI-CNA-DFP`, `KSI-MLA-LET` |
+
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
 
 Generate live crosswalks (NIST 800-53/171, ISO 27001, PCI DSS, FedRAMP Rev5):
 

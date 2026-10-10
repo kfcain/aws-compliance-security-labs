@@ -43,6 +43,8 @@ DESC_BUCKET=$(aws cloudformation describe-stacks --stack-name aws-lab-17 \
 # From labs/17-terraform-dr-readiness, derive then upload:
 #   ./governance/derive-descriptor.sh > descriptor.json
 aws s3 cp descriptor.json "s3://$DESC_BUCKET/prod/dr.json"
+# Gate the worker evidence. The policy package is tfdr.readiness, not main.
+conftest test evidence.json --policy governance/policy --namespace tfdr.readiness
 ```
 
 ## 2. Collect evidence

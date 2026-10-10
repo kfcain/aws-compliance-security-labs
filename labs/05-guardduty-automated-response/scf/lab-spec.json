@@ -20,13 +20,13 @@
       "KSI-MLA-OSM"
     ],
     "IRO-02": [
-      "KSI-INR-PRC"
+      "KSI-INR-RIR"
     ]
   },
   "ksi": [
-    "KSI-MLA-OSM",
-    "KSI-INR-PRC",
-    "KSI-CNA-MAT"
+    "KSI-CNA-MAT",
+    "KSI-INR-RIR",
+    "KSI-MLA-OSM"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

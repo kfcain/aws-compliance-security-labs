@@ -37,7 +37,9 @@ Open the dark-mode tldraw diagram:
 | Kind | IDs |
 |------|-----|
 | SCF | `CHG-01`, `CHG-02`, `CHG-03`, `CHG-04`, `CFG-01`, `TDA-06` |
-| FedRAMP 20x KSI | `KSI-CMT-RMV`, `KSI-CMT-VTD`, `KSI-CMT-LMC`, `KSI-CMT-RVP`, `KSI-AFR-SCN` |
+| FedRAMP 20x KSI | `KSI-CMT-RMV`, `KSI-CMT-VTD`, `KSI-CMT-LMC`, `KSI-CMT-RVP`, `SCN-CSO-EVA` |
+
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
 
 Generate live crosswalks (NIST 800-53/171, ISO 27001, PCI DSS, FedRAMP Rev5):
 

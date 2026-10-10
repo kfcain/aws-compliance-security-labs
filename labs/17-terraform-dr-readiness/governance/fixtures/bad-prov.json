@@ -1,0 +1,7 @@
+{
+  "lab_id": "17-terraform-dr-readiness",
+  "state_backend_type": "s3",
+  "status": "PASS",
+  "findings": [],
+  "provenance": {}
+}

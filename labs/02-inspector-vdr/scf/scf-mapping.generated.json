@@ -36,13 +36,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs"
+        "VDR-CSO-DET": "Vulnerability Detection"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-01.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-AFR-VDR": {
-          "description": "Vulnerability detection and response with N1–N5 severity SLAs",
-          "legacy": true
+        "VDR-CSO-DET": {
+          "description": "Vulnerability Detection",
+          "statement": "Providers MUST systematically, persistently, and promptly discover and identify vulnerabilities within their cloud service offering using appropriate techniques such as assessment, scanning, threat intelligence, vulnerability disclosure mechanisms, bug bounties, penetration testing, incident response, automated control testing, supply chain monitoring, and other relevant capabilities; this process is called vulnerability detection. Vulnerability detection includes persistently verifying and validating that information resources and processes are operating as intended and documented for FedRAMP Practices.",
+          "kind": "FRR"
         }
       }
     },
@@ -85,13 +86,14 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-AFR-VDR": "Vulnerability detection and response with N1–N5 severity SLAs"
+        "VDR-TFR-PVR": "Mitigation and Remediation Expectations"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/VPM-02.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-AFR-VDR": {
-          "description": "Vulnerability detection and response with N1–N5 severity SLAs",
-          "legacy": true
+        "VDR-TFR-PVR": {
+          "description": "Mitigation and Remediation Expectations",
+          "statement": "Providers with Class C Certifications SHOULD partially mitigate vulnerabilities, fully mitigate vulnerabilities, or remediate vulnerabilities to a lower Potential Agency Impact N-rating within the timeframes from evaluation shown below, factoring for the current Potential Agency Impact N-rating as defined in VER-EVA-EPA (Estimate Potential Agency Impact), internet reachability, and likely exploitability:",
+          "kind": "FRR"
         }
       }
     },
@@ -134,17 +136,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-AFR-PVL": "Persistent validation cadence",
-        "KSI-MLA-EVC": "Evaluating configurations"
+        "KSI-MLA-EVC": "Evaluating Configurations"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/MON-01.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-AFR-PVL": {
-          "description": "Persistent validation cadence",
-          "legacy": true
-        },
         "KSI-MLA-EVC": {
-          "description": "Evaluating configurations"
+          "description": "Evaluating Configurations",
+          "statement": "The configuration of machine-based information resources, especially infrastructure as code, is persistently evaluated and tested."
         }
       }
     },
@@ -212,5 +210,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

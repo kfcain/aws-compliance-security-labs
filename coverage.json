@@ -1,5 +1,5 @@
 {
-  "ksi_overlay_version": "2026-08.1",
+  "ksi_overlay_version": "2026.10.08.01",
   "lab_count": 17,
   "frameworks": [
     "general-nist-800-53-r5-2",
@@ -131,14 +131,14 @@
       ],
       "ksi_by_control": {
         "IAC-06": [
-          "KSI-IAM-MFA"
+          "KSI-IAM-APM"
         ],
         "IAC-15": [],
         "IAC-21": [
           "KSI-IAM-ELP"
         ],
         "MON-01": [
-          "KSI-AFR-PVL"
+          "KSI-MLA-RVL"
         ]
       },
       "generated_at": "2026-08-01T19:09:53.312Z"
@@ -233,13 +233,12 @@
       ],
       "ksi_by_control": {
         "VPM-01": [
-          "KSI-AFR-VDR"
+          "VDR-CSO-DET"
         ],
         "VPM-02": [
-          "KSI-AFR-VDR"
+          "VDR-TFR-PVR"
         ],
         "MON-01": [
-          "KSI-AFR-PVL",
           "KSI-MLA-EVC"
         ],
         "THR-01": []
@@ -411,10 +410,10 @@
           "KSI-IAM-ELP"
         ],
         "CRY-01": [
-          "KSI-SVC-SEC"
+          "KSI-SVC-ASM"
         ],
         "CFG-02": [
-          "KSI-SVC-SEC"
+          "KSI-SVC-ASM"
         ]
       },
       "generated_at": "2026-08-01T19:09:53.437Z"
@@ -575,7 +574,7 @@
           "KSI-MLA-EVC"
         ],
         "MON-01": [
-          "KSI-AFR-PVL"
+          "KSI-SVC-ACM"
         ]
       },
       "generated_at": "2026-08-01T19:09:53.496Z"
@@ -697,7 +696,7 @@
           "KSI-MLA-OSM"
         ],
         "IRO-02": [
-          "KSI-INR-PRC"
+          "KSI-INR-RIR"
         ]
       },
       "generated_at": "2026-08-01T19:09:53.563Z"
@@ -823,14 +822,13 @@
       ],
       "ksi_by_control": {
         "CRY-01": [
-          "KSI-SVC-ENC",
-          "KSI-SVC-SNT"
+          "KSI-SVC-SIN"
         ],
         "CRY-03": [
-          "KSI-SVC-ENC"
+          "KSI-SVC-SIN"
         ],
         "CFG-02": [
-          "KSI-SVC-SEC"
+          "KSI-SVC-ASM"
         ],
         "CLD-01": []
       },
@@ -931,16 +929,16 @@
       "ksi_by_control": {
         "MON-01": [
           "KSI-MLA-OSM",
-          "KSI-AFR-PVL"
+          "KSI-MLA-RVL"
         ],
         "MON-02": [
           "KSI-MLA-OSM"
         ],
         "CPL-02": [
-          "KSI-AFR-PVL"
+          "KSI-MLA-RVL"
         ],
         "CHG-01": [
-          "KSI-CMT-CHG"
+          "KSI-CMT-LMC"
         ]
       },
       "generated_at": "2026-08-01T19:09:53.616Z"
@@ -1033,7 +1031,7 @@
         ],
         "AST-04": [],
         "CLD-06": [
-          "KSI-SVC-SNT"
+          "KSI-CNA-ULN"
         ]
       },
       "generated_at": "2026-08-01T19:09:53.669Z"
@@ -1133,16 +1131,16 @@
       ],
       "ksi_by_control": {
         "IRO-01": [
-          "KSI-INR-IRP"
+          "KSI-INR-RIR"
         ],
         "IRO-02": [
-          "KSI-INR-PRC"
+          "KSI-INR-RIR"
         ],
         "IRO-04": [
-          "KSI-INR-PRC"
+          "KSI-INR-RIR"
         ],
         "IRO-10": [
-          "KSI-INR-IRP"
+          "KSI-INR-RIR"
         ],
         "MON-02": [
           "KSI-MLA-OSM"
@@ -1252,16 +1250,16 @@
       ],
       "ksi_by_control": {
         "TPM-01": [
-          "KSI-SCR-SRA"
+          "KSI-SCR-MIT"
         ],
         "TPM-03": [
-          "KSI-SCR-TPM"
+          "KSI-SCR-MON"
         ],
         "TPM-04": [
-          "KSI-SCR-TPM"
+          "KSI-SCR-MON"
         ],
         "VPM-01": [
-          "KSI-AFR-VDR"
+          "VDR-CSO-DET"
         ],
         "AST-02": []
       },
@@ -1370,7 +1368,7 @@
           "KSI-SVC-SIN"
         ],
         "CLD-01": [
-          "KSI-AFR-PVL"
+          "KSI-SVC-PRR"
         ]
       },
       "generated_at": "2026-08-01T19:09:53.923Z"
@@ -1620,10 +1618,10 @@
           "KSI-PIY-GIV"
         ],
         "AST-04": [
-          "KSI-AFR-MAS"
+          "MAS-CSO-IIR"
         ],
         "NET-03": [
-          "KSI-AFR-MAS"
+          "MAS-CSO-IIR"
         ],
         "CPL-01": [
           "KSI-MLA-LET"
@@ -1891,7 +1889,7 @@
           "KSI-CMT-RMV"
         ],
         "CHG-04": [
-          "KSI-AFR-SCN"
+          "SCN-CSO-EVA"
         ],
         "CFG-01": [
           "KSI-CMT-RMV"
@@ -2059,7 +2057,7 @@
           "KSI-MLA-EVC"
         ],
         "MON-01": [
-          "KSI-AFR-PVL"
+          "KSI-MLA-EVC"
         ],
         "CHG-02": [
           "KSI-CMT-RMV"
@@ -2851,11 +2849,6 @@
       "usa-federal-dow-cmmc-2-level-2": []
     },
     "ksi_in_use": [
-      "KSI-AFR-MAS",
-      "KSI-AFR-PVL",
-      "KSI-AFR-SCN",
-      "KSI-AFR-VDR",
-      "KSI-CMT-CHG",
       "KSI-CMT-LMC",
       "KSI-CMT-RMV",
       "KSI-CMT-RVP",
@@ -2865,51 +2858,48 @@
       "KSI-CNA-MAT",
       "KSI-CNA-OFA",
       "KSI-CNA-RNT",
+      "KSI-CNA-ULN",
       "KSI-IAM-AAM",
       "KSI-IAM-APM",
       "KSI-IAM-ELP",
       "KSI-IAM-JIT",
-      "KSI-IAM-MFA",
       "KSI-IAM-SUS",
-      "KSI-INR-IRP",
-      "KSI-INR-PRC",
+      "KSI-INR-RIR",
       "KSI-MLA-EVC",
       "KSI-MLA-LET",
       "KSI-MLA-OSM",
+      "KSI-MLA-RVL",
       "KSI-PIY-GIV",
       "KSI-RPL-ABO",
       "KSI-RPL-ARP",
       "KSI-RPL-RRO",
       "KSI-RPL-TRC",
-      "KSI-SCR-SRA",
-      "KSI-SCR-TPM",
-      "KSI-SVC-ENC",
+      "KSI-SCR-MIT",
+      "KSI-SCR-MON",
+      "KSI-SVC-ACM",
+      "KSI-SVC-ASM",
       "KSI-SVC-PRR",
       "KSI-SVC-RUD",
-      "KSI-SVC-SEC",
-      "KSI-SVC-SIN",
-      "KSI-SVC-SNT"
+      "KSI-SVC-SIN"
+    ],
+    "rules_in_use": [
+      "MAS-CSO-IIR",
+      "SCN-CSO-EVA",
+      "VDR-CSO-DET",
+      "VDR-TFR-PVR"
     ],
     "ksi_defined_but_unused": [
       "KSI-CED-RAT",
       "KSI-CNA-IBP",
       "KSI-CNA-RVP",
-      "KSI-CNA-ULN",
       "KSI-IAM-SNU",
       "KSI-INR-AAR",
-      "KSI-INR-RIR",
       "KSI-INR-RPI",
       "KSI-MLA-ALA",
-      "KSI-MLA-RVL",
       "KSI-PIY-RES",
       "KSI-PIY-RIS",
       "KSI-PIY-RSD",
       "KSI-PIY-RVD",
-      "KSI-RPL-BKP",
-      "KSI-SCR-MIT",
-      "KSI-SCR-MON",
-      "KSI-SVC-ACM",
-      "KSI-SVC-ASM",
       "KSI-SVC-EIS",
       "KSI-SVC-VCM",
       "KSI-SVC-VRI"

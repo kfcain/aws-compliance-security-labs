@@ -1,0 +1,214 @@
+{
+  "version": "2026.10.08.01",
+  "title": "FedRAMP Consolidated Rules for 2026",
+  "last_updated": "2026-10-08",
+  "source": "FedRAMP Consolidated Rules for 2026 (CR26)",
+  "ksi": {
+    "KSI-CED-RAT": {
+      "name": "Reviewing All Training",
+      "statement": "The effectiveness of relevant cybersecurity education and training is persistently reviewed, including at least general training for all employees, role-specific training for employees in high risk roles, training for development and engineering staff on secure software delivery, and training for staff involved with incident response or disaster recovery."
+    },
+    "KSI-CMT-LMC": {
+      "name": "Logging Changes",
+      "statement": "Modifications to the cloud service offering are logged and monitored."
+    },
+    "KSI-CMT-RMV": {
+      "name": "Redeploying vs Modifying",
+      "statement": "Changes to machine-based information resources are executed through the redeployment of version controlled resources rather than direct modification wherever reasonable."
+    },
+    "KSI-CMT-RVP": {
+      "name": "Reviewing Change Procedures",
+      "statement": "The effectiveness of documented change management procedures is persistently reviewed."
+    },
+    "KSI-CMT-VTD": {
+      "name": "Validating Throughout Deployment",
+      "statement": "Persistent testing and validation of changes throughout deployment is automated."
+    },
+    "KSI-CNA-DFP": {
+      "name": "Defining Functionality and Privileges",
+      "statement": "The functionality and privileges for infrastructure and services are strictly defined."
+    },
+    "KSI-CNA-EIS": {
+      "name": "Enforcing Intended State",
+      "statement": "Automated services are used to persistently assess the security of all machine-based information resources and automatically enforce their intended operational state."
+    },
+    "KSI-CNA-IBP": {
+      "name": "Implementing Best Practices",
+      "statement": "The use and configuration of third-party machine-based information resources is persistently compared against the original provider's best practices and guidance."
+    },
+    "KSI-CNA-MAT": {
+      "name": "Minimizing Attack Surface",
+      "statement": "Machine-based information resources are persistently reviewed to ensure they have a minimal attack surface and that lateral movement is minimized if compromised."
+    },
+    "KSI-CNA-OFA": {
+      "name": "Optimizing for Availability",
+      "statement": "Machine-based information resources are persistently reviewed to ensure they are appropriately optimized for high availability and rapid recovery."
+    },
+    "KSI-CNA-RNT": {
+      "name": "Restricting Network Traffic",
+      "statement": "Machine-based information resources are persistently reviewed to ensure they are appropriately configured to limit inbound and outbound network traffic."
+    },
+    "KSI-CNA-RVP": {
+      "name": "Reviewing Protections",
+      "statement": "The effectiveness of protection against denial of service attacks and other unwanted activity for machine-based information resources is persistently reviewed."
+    },
+    "KSI-CNA-ULN": {
+      "name": "Using Logical Networking",
+      "statement": "Logical networking and related capabilities are used and persistently reviewed to enforce traffic flow controls."
+    },
+    "KSI-IAM-AAM": {
+      "name": "Automating Account Management",
+      "statement": "The lifecycle and privileges of all accounts, roles, and groups are securely managed using automation."
+    },
+    "KSI-IAM-APM": {
+      "name": "Adopting Passwordless Methods",
+      "statement": "Secure passwordless methods are used for user authentication and authorization when feasible, otherwise strong passwords with phishing-resistant MFA is used."
+    },
+    "KSI-IAM-ELP": {
+      "name": "Ensuring Least Privilege",
+      "statement": "Identity and access management measures are used and persistently reviewed to ensure each user or device can only access the resources they need."
+    },
+    "KSI-IAM-JIT": {
+      "name": "Authorizing Just-in-Time",
+      "statement": "A least-privileged, role and attribute-based, and just-in-time security authorization model is used and persistently reviewed for all user and non-user accounts and services."
+    },
+    "KSI-IAM-SNU": {
+      "name": "Securing Non-User Authentication",
+      "statement": "Appropriately secure authentication methods are used and persistently reviewed for non-user accounts and services."
+    },
+    "KSI-IAM-SUS": {
+      "name": "Responding to Suspicious Activity",
+      "statement": "Accounts with privileged access are disabled or otherwise secured in response to suspicious activity."
+    },
+    "KSI-INR-AAR": {
+      "name": "Generating After Action Reports",
+      "statement": "Incident after action reports are generated and lessons learned are persistently incorporated."
+    },
+    "KSI-INR-RIR": {
+      "name": "Reviewing Incident Response Procedures",
+      "statement": "The effectiveness of documented incident response procedures is persistently reviewed."
+    },
+    "KSI-INR-RPI": {
+      "name": "Reviewing Past Incidents",
+      "statement": "Past incidents are persistently reviewed for patterns or vulnerabilities that were not previously apparent or identified."
+    },
+    "KSI-MLA-ALA": {
+      "name": "Authorizing Log Access",
+      "statement": "A least-privileged, role and attribute-based, and just-in-time access authorization model is used and persistently reviewed for access to log data based on organizationally defined data sensitivity."
+    },
+    "KSI-MLA-EVC": {
+      "name": "Evaluating Configurations",
+      "statement": "The configuration of machine-based information resources, especially infrastructure as code, is persistently evaluated and tested."
+    },
+    "KSI-MLA-LET": {
+      "name": "Logging Event Types",
+      "statement": "A list of information resources and event types that will be logged, monitored, and audited is maintained and persistently reviewed to ensure these activities occur."
+    },
+    "KSI-MLA-OSM": {
+      "name": "Operating SIEM Capability",
+      "statement": "A Security Information and Event Management (SIEM) or similar system(s) is used and persistently reviewed for centralized, tamper-resistant logging of events, activities, and changes."
+    },
+    "KSI-MLA-RVL": {
+      "name": "Reviewing Logs",
+      "statement": "Logs are persistently reviewed and audited."
+    },
+    "KSI-PIY-GIV": {
+      "name": "Generating Inventories",
+      "statement": "Authoritative sources are used to automatically generate real-time inventories of all information resources when needed."
+    },
+    "KSI-PIY-RES": {
+      "name": "Reviewing Executive Support",
+      "statement": "Executive support for achieving the provider's security goals is persistently reviewed and demonstrated."
+    },
+    "KSI-PIY-RIS": {
+      "name": "Reviewing Investments in Security",
+      "statement": "The effectiveness of the provider's investments in achieving security goals is persistently reviewed."
+    },
+    "KSI-PIY-RSD": {
+      "name": "Reviewing Security in the SDLC",
+      "statement": "The effectiveness of building security and privacy considerations into the Software Development Lifecycle and aligning with CISA Secure By Design principles is persistently reviewed."
+    },
+    "KSI-PIY-RVD": {
+      "name": "Reviewing Vulnerability Disclosures",
+      "statement": "The effectiveness of the provider's vulnerability disclosure program is persistently reviewed."
+    },
+    "KSI-RPL-ABO": {
+      "name": "Aligning Backups with Objectives",
+      "statement": "The alignment of machine-based information resource backups with defined recovery objectives is persistently reviewed."
+    },
+    "KSI-RPL-ARP": {
+      "name": "Aligning Recovery Plan",
+      "statement": "The alignment of recovery plans with defined recovery objectives is persistently reviewed."
+    },
+    "KSI-RPL-RRO": {
+      "name": "Reviewing Recovery Objectives",
+      "statement": "The desired Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO) are defined and persistently reviewed for alignment with the provider's business needs and capabilities."
+    },
+    "KSI-RPL-TRC": {
+      "name": "Testing Recovery Capabilities",
+      "statement": "The capability to recover from incidents and contingencies aligned with defined recovery objectives is persistently tested."
+    },
+    "KSI-SCR-MIT": {
+      "name": "Mitigating Supply Chain Risk",
+      "statement": "Persistently identify, review, and mitigate potential supply chain risks."
+    },
+    "KSI-SCR-MON": {
+      "name": "Monitoring Supply Chain Risk",
+      "statement": "Third party software information resources are automatically monitored for upstream vulnerabilities using mechanisms that may include contractual notification requirements or active monitoring services."
+    },
+    "KSI-SVC-ACM": {
+      "name": "Automating Configuration Management",
+      "statement": "The configuration of machine-based information resources is managed using automation and persistently reviewed for drift."
+    },
+    "KSI-SVC-ASM": {
+      "name": "Automating Secret Management",
+      "statement": "Management, protection, and regular rotation of digital keys, certificates, and other secrets is automated and persistently reviewed."
+    },
+    "KSI-SVC-EIS": {
+      "name": "Evaluating and Improving Security",
+      "statement": "Information resources are persistently evaluated for opportunities to improve security and those improvements are persistently made."
+    },
+    "KSI-SVC-PRR": {
+      "name": "Preventing Residual Risk",
+      "statement": "Plans, procedures, and the state of information resources are persistently reviewed after making changes to limit and remove unwanted residual elements that would likely negatively affect the confidentiality, integrity, or availability of federal customer data."
+    },
+    "KSI-SVC-RUD": {
+      "name": "Removing Unwanted Data",
+      "statement": "Unwanted federal customer data is removed promptly when requested by an agency in alignment with customer agreements, including from backups if appropriate; this typically applies when a customer spills information or when a customer seeks to remove information from a service due to a change in usage."
+    },
+    "KSI-SVC-SIN": {
+      "name": "Securing Information",
+      "statement": "Information is encrypted or otherwise secured from unwanted access or modification."
+    },
+    "KSI-SVC-VCM": {
+      "name": "Validating Communications",
+      "statement": "The authenticity and integrity of communications between machine-based information resources is persistently validated using automation."
+    },
+    "KSI-SVC-VRI": {
+      "name": "Validating Resource Integrity",
+      "statement": "Use cryptographic methods to validate the integrity of machine-based information resources."
+    }
+  },
+  "rules": {
+    "MAS-CSO-IIR": {
+      "name": "Identify Information Resources",
+      "statement": "Providers MUST identify a set of information resources to assess for FedRAMP Certification that includes all information resources that are likely to handle federal customer data or likely to impact the confidentiality, integrity, or availability of federal customer data handled by the cloud service offering; this set of information resources is the cloud service offering."
+    },
+    "SCN-CSO-EVA": {
+      "name": "Evaluate Changes",
+      "statement": "Providers MUST evaluate all potential significant changes to determine the type of significant change and follow the appropriate Significant Change Notification rules."
+    },
+    "VDR-CSO-DET": {
+      "name": "Vulnerability Detection",
+      "statement": "Providers MUST systematically, persistently, and promptly discover and identify vulnerabilities within their cloud service offering using appropriate techniques such as assessment, scanning, threat intelligence, vulnerability disclosure mechanisms, bug bounties, penetration testing, incident response, automated control testing, supply chain monitoring, and other relevant capabilities; this process is called vulnerability detection. Vulnerability detection includes persistently verifying and validating that information resources and processes are operating as intended and documented for FedRAMP Practices."
+    },
+    "VDR-TFR-PDD": {
+      "name": "Persistent Drift Detection",
+      "statement": "Providers with Class C Certifications SHOULD persistently perform vulnerability detection on all information resources that are likely to drift, at least once every 14 days."
+    },
+    "VDR-TFR-PVR": {
+      "name": "Mitigation and Remediation Expectations",
+      "statement": "Providers with Class C Certifications SHOULD partially mitigate vulnerabilities, fully mitigate vulnerabilities, or remediate vulnerabilities to a lower Potential Agency Impact N-rating within the timeframes from evaluation shown below, factoring for the current Potential Agency Impact N-rating as defined in VER-EVA-EPA (Estimate Potential Agency Impact), internet reachability, and likely exploitability:"
+    }
+  }
+}

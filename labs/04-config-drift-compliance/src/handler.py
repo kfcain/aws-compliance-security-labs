@@ -35,7 +35,7 @@ from lab_common import (
 
 LAB_ID = "04-config-drift-compliance"
 SCF_CONTROLS = ["CFG-01", "CFG-02", "CPL-01", "CPL-02", "MON-01"]
-FEDRAMP_KSI = ["KSI-CNA-EIS", "KSI-MLA-EVC", "KSI-AFR-PVL"]
+FEDRAMP_KSI = ["KSI-CNA-EIS", "KSI-MLA-EVC", "KSI-SVC-ACM"]
 
 logger = get_logger(LAB_ID)
 

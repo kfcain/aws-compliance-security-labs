@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  CR26_RULES,
   FEDRAMP_20X_KSI,
   KSI_ALIASES,
   KSI_OVERLAY_VERSION,
@@ -43,21 +44,42 @@ describe('scf-mapper', () => {
     assert.ok(TARGET_FRAMEWORKS.cmmc_l2);
   });
 
-  it('lists FedRAMP 20x KSIs with a pinned overlay version', () => {
-    assert.match(FEDRAMP_20X_KSI['KSI-AFR-VDR'], /vulnerability/i);
-    assert.match(FEDRAMP_20X_KSI['KSI-IAM-MFA'], /multi-factor/i);
-    assert.match(KSI_OVERLAY_VERSION, /^\d{4}-\d{2}/);
+  it('lists FedRAMP CR26 KSIs pinned to 2026.10.08.01', () => {
+    assert.equal(KSI_OVERLAY_VERSION, '2026.10.08.01');
+    assert.match(FEDRAMP_20X_KSI['KSI-IAM-APM'], /Passwordless/);
+    assert.match(CR26_RULES['VDR-CSO-DET'], /Vulnerability Detection/);
+    const apm = resolveKsi('KSI-IAM-APM');
+    assert.match(apm.statement, /phishing-resistant MFA/);
+    assert.equal(apm.kind, undefined);
+    const rule = resolveKsi('VDR-CSO-DET');
+    assert.equal(rule.kind, 'FRR');
+    assert.match(rule.statement, /vulnerability detection/i);
   });
 
-  it('resolveKsi annotates legacy aliases and rejects unknown ids', () => {
-    const mfa = resolveKsi('KSI-IAM-MFA');
-    assert.equal(mfa.legacy, true);
-    assert.equal(mfa.alias_of, 'KSI-IAM-APM');
+  it('resolveKsi rejects retired ids and unknown ids', () => {
+    for (const retired of [
+      'KSI-IAM-MFA',
+      'KSI-AFR-PVL',
+      'KSI-AFR-VDR',
+      'KSI-AFR-MAS',
+      'KSI-AFR-SCN',
+      'KSI-SVC-SEC',
+      'KSI-SVC-SNT',
+      'KSI-SVC-ENC',
+      'KSI-SCR-SRA',
+      'KSI-SCR-TPM',
+      'KSI-CMT-CHG',
+      'KSI-INR-IRP',
+      'KSI-INR-PRC',
+      'KSI-RPL-BKP',
+    ]) {
+      assert.throws(() => resolveKsi(retired), /unknown FedRAMP CR26 identifier/);
+    }
     const current = resolveKsi('KSI-IAM-ELP');
     assert.equal(current.legacy, undefined);
-    assert.throws(() => resolveKsi('KSI-NOPE-XXX'), /unknown FedRAMP 20x KSI/);
+    assert.throws(() => resolveKsi('KSI-NOPE-XXX'), /unknown FedRAMP CR26 identifier/);
     // prototype keys must not resolve
-    assert.throws(() => resolveKsi('constructor'), /unknown FedRAMP 20x KSI/);
+    assert.throws(() => resolveKsi('constructor'), /unknown FedRAMP CR26 identifier/);
   });
 
   it('maps a control from fixtures (offline)', async () => {
@@ -67,7 +89,7 @@ describe('scf-mapper', () => {
         TARGET_FRAMEWORKS.iso_27001_2022,
         TARGET_FRAMEWORKS.pci_dss_4,
       ],
-      ksi: ['KSI-IAM-MFA'],
+      ksi: ['KSI-IAM-APM'],
       fetchImpl: fixtureFetch(),
     });
     assert.equal(result.scf_control_id, 'IAC-06');
@@ -77,8 +99,9 @@ describe('scf-mapper', () => {
     ]);
     // ISO has an empty crosswalk in the fixture -> omitted from mappings
     assert.equal(result.framework_mappings[TARGET_FRAMEWORKS.iso_27001_2022], undefined);
-    assert.equal(result.fedramp_20x_ksi['KSI-IAM-MFA'], FEDRAMP_20X_KSI['KSI-IAM-MFA']);
-    assert.equal(result.fedramp_20x_ksi_detail['KSI-IAM-MFA'].alias_of, 'KSI-IAM-APM');
+    assert.equal(result.fedramp_20x_ksi['KSI-IAM-APM'], FEDRAMP_20X_KSI['KSI-IAM-APM']);
+    assert.match(result.fedramp_20x_ksi_detail['KSI-IAM-APM'].statement, /phishing-resistant MFA/);
+    assert.equal(result.fedramp_20x_ksi_detail['KSI-IAM-APM'].kind, undefined);
   });
 
   it('per-control ksi applied via ksi_by_control (regression: lab-level stamping)', async () => {
@@ -87,19 +110,19 @@ describe('scf-mapper', () => {
         lab_id: 'test-lab',
         scf_controls: ['IAC-06', 'MON-01'],
         ksi_by_control: {
-          'IAC-06': ['KSI-IAM-MFA'],
-          'MON-01': ['KSI-AFR-PVL'],
+          'IAC-06': ['KSI-IAM-APM'],
+          'MON-01': ['KSI-MLA-EVC'],
         },
-        ksi: ['KSI-IAM-MFA', 'KSI-AFR-PVL'],
+        ksi: ['KSI-IAM-APM', 'KSI-MLA-EVC'],
         frameworks: [TARGET_FRAMEWORKS.nist_800_53_r5],
       },
       { fetchImpl: fixtureFetch() },
     );
     const byId = Object.fromEntries(mapping.controls.map((c) => [c.scf_control_id, c]));
     // Previously every control carried the identical lab-level KSI block,
-    // producing assertions like MON-01 -> KSI-IAM-MFA.
-    assert.deepEqual(Object.keys(byId['IAC-06'].fedramp_20x_ksi), ['KSI-IAM-MFA']);
-    assert.deepEqual(Object.keys(byId['MON-01'].fedramp_20x_ksi), ['KSI-AFR-PVL']);
+    // producing assertions like MON-01 -> KSI-IAM-APM.
+    assert.deepEqual(Object.keys(byId['IAC-06'].fedramp_20x_ksi), ['KSI-IAM-APM']);
+    assert.deepEqual(Object.keys(byId['MON-01'].fedramp_20x_ksi), ['KSI-MLA-EVC']);
     assert.equal(mapping.ksi_overlay_version, KSI_OVERLAY_VERSION);
   });
 
@@ -123,7 +146,7 @@ describe('scf-mapper', () => {
         validateLabSpec({
           lab_id: 'x',
           scf_controls: ['IAC-06'],
-          ksi_by_control: { 'MON-01': ['KSI-AFR-PVL'] },
+          ksi_by_control: { 'MON-01': ['KSI-MLA-EVC'] },
         }),
       /unknown control MON-01/,
     );
@@ -132,8 +155,8 @@ describe('scf-mapper', () => {
         validateLabSpec({
           lab_id: 'x',
           scf_controls: ['IAC-06'],
-          ksi_by_control: { 'IAC-06': ['KSI-IAM-MFA'] },
-          ksi: ['KSI-IAM-MFA', 'KSI-AFR-PVL'],
+          ksi_by_control: { 'IAC-06': ['KSI-IAM-APM'] },
+          ksi: ['KSI-IAM-APM', 'KSI-MLA-EVC'],
         }),
       /union/,
     );
@@ -144,7 +167,7 @@ describe('scf-mapper', () => {
           scf_controls: ['IAC-06'],
           ksi_by_control: { 'IAC-06': ['KSI-NOPE'] },
         }),
-      /unknown FedRAMP 20x KSI/,
+      /unknown FedRAMP CR26 identifier/,
     );
   });
 
@@ -154,11 +177,11 @@ describe('scf-mapper', () => {
       ['KSI-IAM-ELP'],
     );
     assert.deepEqual(
-      ksiForControl({ ksi_by_control: { 'IAC-06': ['KSI-IAM-MFA'] } }, 'IAC-06'),
-      ['KSI-IAM-MFA'],
+      ksiForControl({ ksi_by_control: { 'IAC-06': ['KSI-IAM-APM'] } }, 'IAC-06'),
+      ['KSI-IAM-APM'],
     );
     assert.deepEqual(
-      ksiForControl({ ksi_by_control: { 'IAC-06': ['KSI-IAM-MFA'] } }, 'MON-01'),
+      ksiForControl({ ksi_by_control: { 'IAC-06': ['KSI-IAM-APM'] } }, 'MON-01'),
       [],
     );
   });
@@ -182,10 +205,14 @@ describe('scf-mapper', () => {
     );
   });
 
-  it('every alias target is a defined KSI', () => {
-    for (const [alias, target] of Object.entries(KSI_ALIASES)) {
-      assert.ok(FEDRAMP_20X_KSI[alias], `alias ${alias} must be defined`);
-      if (target) assert.ok(FEDRAMP_20X_KSI[target], `alias target ${target} must be defined`);
+  it('every overlay id is in the CR26 pin and aliases are retired', () => {
+    assert.deepEqual(KSI_ALIASES, {});
+    for (const id of Object.keys(FEDRAMP_20X_KSI)) {
+      assert.match(id, /^KSI-[A-Z]+-[A-Z0-9]+$/);
+      assert.ok(resolveKsi(id).statement, id);
+    }
+    for (const id of Object.keys(CR26_RULES)) {
+      assert.equal(resolveKsi(id).kind, 'FRR');
     }
   });
 
@@ -199,11 +226,11 @@ describe('scf-mapper', () => {
         TARGET_FRAMEWORKS.pci_dss_4,
         TARGET_FRAMEWORKS.fedramp_mod,
       ],
-      ksi: ['KSI-IAM-MFA'],
+      ksi: ['KSI-IAM-APM'],
     });
     assert.equal(result.scf_control_id, 'IAC-06');
     assert.ok(result.framework_mappings[TARGET_FRAMEWORKS.nist_800_53_r5]?.length);
     assert.ok(result.framework_mappings[TARGET_FRAMEWORKS.pci_dss_4]?.length);
-    assert.equal(result.fedramp_20x_ksi['KSI-IAM-MFA'], FEDRAMP_20X_KSI['KSI-IAM-MFA']);
+    assert.equal(result.fedramp_20x_ksi['KSI-IAM-APM'], FEDRAMP_20X_KSI['KSI-IAM-APM']);
   });
 });

@@ -14,7 +14,7 @@ Generate and store SBOMs, scan container/images with Inspector, track third-part
 | Lens | Detail |
 |------|--------|
 | Security program | SCRM and SBOM are now board-level and FedRAMP SCR theme requirements. |
-| Compliance | SCF TPM/VPM/AST; FedRAMP KSI-SCR-SRA/TPM; NIST 800-161 themes; PCI third-party; ISO supplier relationships. |
+| Compliance | SCF TPM/VPM/AST; FedRAMP KSI-SCR-MIT and KSI-SCR-MON; NIST 800-161 themes; PCI third-party; ISO supplier relationships. |
 | Financial / $$ | Supply-chain incidents (dependency compromise) can halt releases and trigger customer exit clauses. SBOM automation reduces questionnaire turnaround time. |
 | Likelihood × Impact | Medium × High |
 
@@ -37,7 +37,9 @@ Open the dark-mode tldraw diagram:
 | Kind | IDs |
 |------|-----|
 | SCF | `TPM-01`, `TPM-03`, `TPM-04`, `VPM-01`, `AST-02` |
-| FedRAMP 20x KSI | `KSI-SCR-SRA`, `KSI-SCR-TPM`, `KSI-AFR-VDR` |
+| FedRAMP 20x KSI | `KSI-SCR-MIT`, `KSI-SCR-MON`, `VDR-CSO-DET` |
+
+Identifiers are pinned to FedRAMP Consolidated Rules for 2026, version 2026.10.08.01.
 
 Generate live crosswalks (NIST 800-53/171, ISO 27001, PCI DSS, FedRAMP Rev5):
 

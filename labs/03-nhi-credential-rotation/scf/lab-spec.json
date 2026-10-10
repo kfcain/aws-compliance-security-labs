@@ -15,16 +15,16 @@
       "KSI-IAM-ELP"
     ],
     "CRY-01": [
-      "KSI-SVC-SEC"
+      "KSI-SVC-ASM"
     ],
     "CFG-02": [
-      "KSI-SVC-SEC"
+      "KSI-SVC-ASM"
     ]
   },
   "ksi": [
     "KSI-IAM-ELP",
     "KSI-IAM-JIT",
-    "KSI-SVC-SEC"
+    "KSI-SVC-ASM"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

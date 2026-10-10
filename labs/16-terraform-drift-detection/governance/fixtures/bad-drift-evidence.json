@@ -1,0 +1,7 @@
+{
+  "lab_id": "16-terraform-drift-detection",
+  "status": "FAIL",
+  "provenance": {
+    "evidence_manifest_sha256": "abc"
+  }
+}

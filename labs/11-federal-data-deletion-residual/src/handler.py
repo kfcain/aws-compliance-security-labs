@@ -54,7 +54,7 @@ from lab_common import (
 
 LAB_ID = "11-federal-data-deletion-residual"
 SCF_CONTROLS = ["DCH-01", "DCH-09", "DCH-06", "BCD-11", "CRY-05", "CLD-01"]
-FEDRAMP_KSI = ["KSI-SVC-RUD", "KSI-SVC-PRR", "KSI-SVC-SIN", "KSI-AFR-PVL"]
+FEDRAMP_KSI = ["KSI-SVC-RUD", "KSI-SVC-PRR", "KSI-SVC-SIN"]
 
 logger = get_logger(LAB_ID)
 

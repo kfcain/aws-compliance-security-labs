@@ -9,20 +9,20 @@
   ],
   "ksi_by_control": {
     "IAC-06": [
-      "KSI-IAM-MFA"
+      "KSI-IAM-APM"
     ],
     "IAC-15": [],
     "IAC-21": [
       "KSI-IAM-ELP"
     ],
     "MON-01": [
-      "KSI-AFR-PVL"
+      "KSI-MLA-RVL"
     ]
   },
   "ksi": [
-    "KSI-IAM-MFA",
+    "KSI-IAM-APM",
     "KSI-IAM-ELP",
-    "KSI-AFR-PVL"
+    "KSI-MLA-RVL"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

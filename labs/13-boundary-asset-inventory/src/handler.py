@@ -2,7 +2,7 @@
 
 FedRAMP CR26 / overlays:
   KSI-PIY-GIV  authoritative real-time inventories
-  KSI-AFR-MAS  minimum assessment scope / boundary (program overlay)
+  MAS-CSO-IIR  identify information resources in the cloud service offering (minimum assessment scope)
   KSI-CNA-DFP  define functionality and privileges
   KSI-MLA-LET  maintain logged resource/event-type inventory
 
@@ -51,7 +51,7 @@ from lab_common import (
 
 LAB_ID = "13-boundary-asset-inventory"
 SCF_CONTROLS = ["AST-01", "AST-02", "AST-04", "NET-03", "CPL-01", "GOV-01"]
-FEDRAMP_KSI = ["KSI-PIY-GIV", "KSI-AFR-MAS", "KSI-CNA-DFP", "KSI-MLA-LET"]
+FEDRAMP_KSI = ["KSI-PIY-GIV", "MAS-CSO-IIR", "KSI-CNA-DFP", "KSI-MLA-LET"]
 
 logger = get_logger(LAB_ID)
 

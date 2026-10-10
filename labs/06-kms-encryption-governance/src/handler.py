@@ -36,7 +36,7 @@ from lab_common import (
 
 LAB_ID = "06-kms-encryption-governance"
 SCF_CONTROLS = ["CRY-01", "CRY-03", "CFG-02", "CLD-01"]
-FEDRAMP_KSI = ["KSI-SVC-ENC", "KSI-SVC-SNT", "KSI-SVC-SEC"]
+FEDRAMP_KSI = ["KSI-SVC-SIN", "KSI-SVC-ASM"]
 
 logger = get_logger(LAB_ID)
 

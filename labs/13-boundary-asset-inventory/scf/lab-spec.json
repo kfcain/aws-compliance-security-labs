@@ -17,10 +17,10 @@
       "KSI-PIY-GIV"
     ],
     "AST-04": [
-      "KSI-AFR-MAS"
+      "MAS-CSO-IIR"
     ],
     "NET-03": [
-      "KSI-AFR-MAS"
+      "MAS-CSO-IIR"
     ],
     "CPL-01": [
       "KSI-MLA-LET"
@@ -30,10 +30,10 @@
     ]
   },
   "ksi": [
-    "KSI-PIY-GIV",
-    "KSI-AFR-MAS",
     "KSI-CNA-DFP",
-    "KSI-MLA-LET"
+    "KSI-MLA-LET",
+    "KSI-PIY-GIV",
+    "MAS-CSO-IIR"
   ],
   "frameworks": [
     "general-nist-800-53-r5-2",

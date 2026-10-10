@@ -31,12 +31,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)"
+        "KSI-SVC-SIN": "Securing Information"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/DCH-01.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SVC-SIN": {
-          "description": "Securing information (encrypt or otherwise protect)"
+          "description": "Securing Information",
+          "statement": "Information is encrypted or otherwise secured from unwanted access or modification."
         }
       }
     },
@@ -69,16 +70,18 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-RUD": "Removing unwanted federal customer data including backups (Class C)",
-        "KSI-SVC-PRR": "Preventing residual risk after changes (Class C; federal customer data)"
+        "KSI-SVC-RUD": "Removing Unwanted Data",
+        "KSI-SVC-PRR": "Preventing Residual Risk"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/DCH-09.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SVC-RUD": {
-          "description": "Removing unwanted federal customer data including backups (Class C)"
+          "description": "Removing Unwanted Data",
+          "statement": "Unwanted federal customer data is removed promptly when requested by an agency in alignment with customer agreements, including from backups if appropriate; this typically applies when a customer spills information or when a customer seeks to remove information from a service due to a change in usage."
         },
         "KSI-SVC-PRR": {
-          "description": "Preventing residual risk after changes (Class C; federal customer data)"
+          "description": "Preventing Residual Risk",
+          "statement": "Plans, procedures, and the state of information resources are persistently reviewed after making changes to limit and remove unwanted residual elements that would likely negatively affect the confidentiality, integrity, or availability of federal customer data."
         }
       }
     },
@@ -111,12 +114,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)"
+        "KSI-SVC-SIN": "Securing Information"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/DCH-06.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SVC-SIN": {
-          "description": "Securing information (encrypt or otherwise protect)"
+          "description": "Securing Information",
+          "statement": "Information is encrypted or otherwise secured from unwanted access or modification."
         }
       }
     },
@@ -152,12 +156,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-RUD": "Removing unwanted federal customer data including backups (Class C)"
+        "KSI-SVC-RUD": "Removing Unwanted Data"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/BCD-11.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SVC-RUD": {
-          "description": "Removing unwanted federal customer data including backups (Class C)"
+          "description": "Removing Unwanted Data",
+          "statement": "Unwanted federal customer data is removed promptly when requested by an agency in alignment with customer agreements, including from backups if appropriate; this typically applies when a customer spills information or when a customer seeks to remove information from a service due to a change in usage."
         }
       }
     },
@@ -195,12 +200,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-SVC-SIN": "Securing information (encrypt or otherwise protect)"
+        "KSI-SVC-SIN": "Securing Information"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CRY-05.json",
       "fedramp_20x_ksi_detail": {
         "KSI-SVC-SIN": {
-          "description": "Securing information (encrypt or otherwise protect)"
+          "description": "Securing Information",
+          "statement": "Information is encrypted or otherwise secured from unwanted access or modification."
         }
       }
     },
@@ -221,13 +227,13 @@
         ]
       },
       "fedramp_20x_ksi": {
-        "KSI-AFR-PVL": "Persistent validation cadence"
+        "KSI-SVC-PRR": "Preventing Residual Risk"
       },
       "source": "https://grcengclub.github.io/scf-api/api/controls/CLD-01.json",
       "fedramp_20x_ksi_detail": {
-        "KSI-AFR-PVL": {
-          "description": "Persistent validation cadence",
-          "legacy": true
+        "KSI-SVC-PRR": {
+          "description": "Preventing Residual Risk",
+          "statement": "Plans, procedures, and the state of information resources are persistently reviewed after making changes to limit and remove unwanted residual elements that would likely negatively affect the confidentiality, integrity, or availability of federal customer data."
         }
       }
     }
@@ -264,5 +270,5 @@
       "usa-federal-dow-cmmc-2-level-2"
     ]
   },
-  "ksi_overlay_version": "2026-08.1"
+  "ksi_overlay_version": "2026.10.08.01"
 }

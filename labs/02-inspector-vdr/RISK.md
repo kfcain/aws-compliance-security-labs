@@ -36,7 +36,7 @@ Vulnerability management is a core continuous control. Without severity SLAs and
 
 ## Compliance impact
 
-FedRAMP 20x KSI-AFR-VDR requires N1–N5 severity ratings and remediation timelines. Maps to SCF VPM-01/02, NIST RA/SI families, PCI DSS 6.3.x, ISO 27001 A.8.8.
+FedRAMP CR26 VDR-TFR-PVR requires mitigation within the timeframes for the current Potential Agency Impact N-rating. Maps to SCF VPM-01/02, NIST RA/SI families, PCI DSS 6.3.x, ISO 27001 A.8.8.
 
 ## Financial / business impact
 

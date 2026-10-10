@@ -46,7 +46,7 @@ from lab_common import (
 
 LAB_ID = "01-mfa-continuous-validation"
 SCF_CONTROLS = ["IAC-06", "IAC-15", "IAC-21", "MON-01"]
-FEDRAMP_KSI = ["KSI-IAM-MFA", "KSI-IAM-ELP", "KSI-AFR-PVL"]
+FEDRAMP_KSI = ["KSI-IAM-APM", "KSI-IAM-ELP", "KSI-MLA-RVL"]
 
 logger = get_logger(LAB_ID)
 
@@ -356,7 +356,7 @@ def build_asff_findings(evidence: dict[str, Any], emitter: AsffEmitter) -> list[
                 description=(
                     f"IdP user {fail['user_id']} (source={fail['source']}) has active "
                     f"factors {fail['factors'] or 'none'} and does not satisfy the "
-                    "phishing-resistant MFA policy. Maps to SCF IAC-06 / FedRAMP KSI-IAM-MFA."
+                    "phishing-resistant MFA policy. Maps to SCF IAC-06 / FedRAMP KSI-IAM-APM."
                 ),
                 severity="HIGH",
                 resource_type="Other",
